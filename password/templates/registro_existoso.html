@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}registro exitoso{% endblock %}
+{% block content %}
+<body>
+    {% csrf_token %}
+    <h1 class="text-center">Se ha Registrado exitosamente</h1>
+    <a class="text-center" href="/login">Listo</a>
+</body>
+{% endblock %}

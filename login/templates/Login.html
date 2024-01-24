@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+   <form method="post" autocomplete="off" class="mt-5">
+            <!--esto sirve para que autenticar que el formulario es nuestro y no fue abierto de otro lado-->
+            {% csrf_token %}
+            
+            <form>
+              <h1 class="h3 mb-3 fw-normal text-center">Iniciar Sesión</h1>
+              <div class="mb-3 d-grid gap-2 col-6 mx-auto">
+                <input name="Usuario" type="text" class="form-control" placeholder="Nombre de Usuario" aria-label="Usuario" aria-describedby="addon-wrapping"> 
+              </div>  
+              <div  class="mb-3 d-grid gap-2 col-6 mx-auto">
+                <input name="Contraseña" type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="addon-wrapping">{{error}}
+                </div>
+                <div class="mb-3 form-check col-6 mx-auto">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>
+                <div class="mb-3 d-flex justify-content-between col-6 mx-auto">
+                <a href="/register"><b>¿No tienes una cuenta?</b></a> <a href="/recuperar"><b>¿Olvidaste tu contraseña?</b></a> 
+                </div>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                  <button type="submit" class="btn btn-primary">Ingresar</button><br> 
+                </div>
+              </form>
+        </form>
+{% endblock %}
