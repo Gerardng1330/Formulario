@@ -7,7 +7,7 @@ urlpatterns  = [
     path('login/', views.inicio_sesion,name='Login'),
     #path('register/', views.registro, name='Register'),
     path('logout/',views.signout, name='logout'),
-    path('form/', views.formulario,name='form'),
+    path('form/', views.formacion,name='form'),
 
 ]
 #si a la url del main le pongo un prefijo ya sea home/ le tengo que poner eso

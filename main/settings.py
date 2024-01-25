@@ -34,7 +34,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'formulario.urls'
+ROOT_URLCONF = 'main.urls'
 
 # settings.py
 
@@ -55,7 +55,7 @@ TEMPLATES = [
 ]
 
 
-WSGI_APPLICATION = 'formulario.wsgi.application'
+WSGI_APPLICATION = 'main.wsgi.application'
 
 DATABASES = {
        'default': {

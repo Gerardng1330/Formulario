@@ -12,7 +12,7 @@ from django.contrib.auth import views as auth_views
 def home(request ):
     return render (request, 'home.html')
 
-def formulario(request):
+def formacion(request):
     return render(request,'formulario.html')
 
 
