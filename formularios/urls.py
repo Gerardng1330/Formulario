@@ -4,7 +4,7 @@ from .views import *
 app_name = 'formularios'
 
 urlpatterns = [
-    #comentarios
+    #comentariosyhughgjhghjg
     path('', formulario, name='formulario'),
     path('exitoss/', formulario_view, name='formulario_view'),
     path('exito/', exito, name='exito'),
