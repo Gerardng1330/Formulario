@@ -9,14 +9,14 @@ from django.contrib.auth.decorators import login_required
 from .models import PoliticasAceptadas
 #Renderizar el formulario.html
 def home(request):
+    #trans es la palabra clave para asignarle la traduccion
     trans = translate(language='es')
     return render(request,'formulario.html',{'trans': trans})
 
 #Renderizar el exti.html(prueba)
 
 def exito(request):
-    
-    return render(request,'exito.html')
+    trans = translate(language='es')
     return render(request,'exito.html',{'trans': trans})
 
 #Renderizar el formulario.html(prueba)
@@ -30,6 +30,7 @@ def translate(language):
     cur_languaje = get_language()
     try:
         activate(language)
+        #prueba de traduccion
         text= gettext('Language')
        
 
@@ -54,4 +55,5 @@ def formulario_view(request):
         form = UsuarioForm()
 
     
-    return render(request, 'politicas.html', {'form': form})
+    return render(request, 'formularios.html', {'form': form})
+
