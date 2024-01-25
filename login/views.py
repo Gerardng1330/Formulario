@@ -13,7 +13,8 @@ def home(request ):
     return render (request, 'home.html')
 
 def formulario(request):
-    return render(request,'vistaform.html')
+    return render(request,'formulario.html')
+
 
 def inicio_sesion(request):#Funcion de inicio de sesion
     if request.user.is_authenticated:#nos aseguramos de que el usuario siempre tenga que iniciar sesion o la sesion no este iniciada
