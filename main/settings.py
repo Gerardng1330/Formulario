@@ -60,7 +60,7 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
        'default': {
            'ENGINE': 'django.db.backends.postgresql',
-           'NAME': 'formulariodb',
+           'NAME': 'FormularioF2F',
            'USER': 'manuel',
            'PASSWORD': '123',
            'HOST': '200.46.88.101',
