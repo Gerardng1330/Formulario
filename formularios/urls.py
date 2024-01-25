@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import *
+from .views import home, formulario_view,exito,formulario
 
 app_name = 'formularios'
 
