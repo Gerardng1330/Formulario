@@ -75,10 +75,10 @@
               {% get_language_info_list for LANGUAGES as languages %}
         
               
-              {% for exito in languages %}
+              {% for formularios in languages %}
               <li>
-                <a class="dropdown-item" href="/{{ exito.code}}/">
-                  {{ exito.name_local|lower }}
+                <a class="dropdown-item" href="/{{ formularios.code}}/">
+                  {{ formularios.name_local|lower }}
                 </a>
               </li>
               {% endfor%}
