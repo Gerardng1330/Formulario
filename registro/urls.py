@@ -1,9 +1,9 @@
+# urls.py
+
 from django.urls import path
-from . import views
+from .views import UserRegistrationView, UserValidationView
 
 urlpatterns = [
-    #path('register/', views.registro, name='register'),
-
-
-  
+    path('register/', UserRegistrationView.as_view(), name='user-registration'),
+    path('validate/<str:token>/', UserValidationView.as_view(), name='user-validation'),
 ]
