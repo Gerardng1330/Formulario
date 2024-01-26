@@ -9,6 +9,9 @@ urlpatterns = [
     path('',include('password.urls')),
     path('',include('registro.urls')),
     
+    #django browser reload
+    path("__reload__/", include("django_browser_reload.urls")),
+    
 ]
 urlpatterns += i18n_patterns(
     
