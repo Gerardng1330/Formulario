@@ -8,8 +8,7 @@ urlpatterns = [
     path('',include('login.urls')),
     path('',include('password.urls')),
     path('',include('registro.urls')),
-    path('en/', include('formularios.urls')),
-    path('es/', include('formularios.urls')),
+    
    
 
     
@@ -17,5 +16,6 @@ urlpatterns = [
 urlpatterns += i18n_patterns(
     
     path('', include('formularios.urls')),
-   
+   path('en/', include('formularios.urls')),
+    path('es/', include('formularios.urls')),
 )
