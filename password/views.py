@@ -40,7 +40,7 @@ def generar_token():
 
 def enviar_correo(destinatario, token):
     subject = "Token de Registro"
-    message = f"Felix te manda esto: {token}"
+    message = f"Su token de veificacion es: {token}"
     from_email = settings.EMAIL_HOST_USER
 
     try:
