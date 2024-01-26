@@ -8,14 +8,17 @@ urlpatterns = [
     path('',include('login.urls')),
     path('',include('password.urls')),
     path('',include('registro.urls')),
-    path('en/', include('formularios.urls')),
-    path('es/', include('formularios.urls')),
+    
    
 
+    
+    #django browser reload
+    path("__reload__/", include("django_browser_reload.urls")),
     
 ]
 urlpatterns += i18n_patterns(
     
     path('', include('formularios.urls')),
-   
+   path('en/', include('formularios.urls')),
+    path('es/', include('formularios.urls')),
 )

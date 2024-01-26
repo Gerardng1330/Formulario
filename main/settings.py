@@ -17,11 +17,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #Aplicaciones del proyecto
     'formularios',
     'login',
     'password',
     'registro',
+        #frontend
+        'tailwind',
+        'theme',
+        'django_browser_reload'
 ]
+
+#tailwind configuration
+TAILWIND_APP_NAME = 'theme' 
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd" #path de node.js en tu computadora. cmd -> where npm. prueba entre \ y /
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -32,6 +46,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #Middlewares del proyecto
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = 'main.urls'

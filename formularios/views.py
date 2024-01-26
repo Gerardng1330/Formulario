@@ -16,7 +16,8 @@ def home(request):
 #Renderizar el exti.html(prueba)
 
 def exito(request):
-    return render(request, 'exito.html')
+    trans = translate(language='es')
+    return render(request, 'exito.html',{'trans': trans})
 
 def cerrado(request):
     return render(request, 'cerrado.html')
