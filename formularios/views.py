@@ -18,6 +18,9 @@ def home(request):
 def exito(request):
     return render(request, 'exito.html')
 
+def cerrado(request):
+    return render(request, 'cerrado.html')
+
 #Renderizar el formulario.html(prueba)
 def render_formulario(request):
     trans = translate(language='es')
