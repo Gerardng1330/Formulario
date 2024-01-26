@@ -16,11 +16,13 @@ def home(request):
 #Renderizar el exti.html(prueba)
 
 def exito(request):
-    trans = translate(language='es')
-    return render(request,'exito.html',{'trans': trans})
+    return render(request, 'exito.html')
+
+def cerrado(request):
+    return render(request, 'cerrado.html')
 
 #Renderizar el formulario.html(prueba)
-def formulario(request):
+def render_formulario(request):
     trans = translate(language='es')
     return render(request,'formulario.html',{'trans': trans})
 
