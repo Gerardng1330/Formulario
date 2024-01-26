@@ -12,5 +12,5 @@ urlpatterns = [
 ]
 urlpatterns += i18n_patterns(
     
-    path('',include('formularios.urls'))
+    path(_('formulario/'), include('formularios.urls')),
 )

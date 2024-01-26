@@ -20,7 +20,7 @@ def exito(request):
     return render(request,'exito.html',{'trans': trans})
 
 #Renderizar el formulario.html(prueba)
-def formulario(request):
+def render_formulario(request):
     trans = translate(language='es')
     return render(request,'formulario.html',{'trans': trans})
 
