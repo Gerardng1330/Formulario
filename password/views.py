@@ -55,7 +55,7 @@ def registro(request):
         logout(request)
 
     if request.method == 'GET':
-        return render(request, 'Register.html')
+        return render(request, 'registro.html')
     else:#si es POST entonces compara las contraseñas ingresadas
         if request.POST['Contraseña'] == request.POST['Contraseña1']:
             #si las contraseñas son iguales entonces entra a el try
@@ -63,11 +63,11 @@ def registro(request):
                 validate_email(request.POST['Correo'])
 
                 if User.objects.filter(email=request.POST['Correo']).exists():
-                    return render(request, 'Register.html', {
+                    return render(request, 'registro.html', {
                         'error': 'Este correo electrónico ya está registrado.'
                     })
             except ValidationError:
-                return render(request, 'Register.html', {
+                return render(request, 'registro.html', {
                     'error': 'Correo electrónico no válido'
                 })
 
@@ -85,11 +85,11 @@ def registro(request):
                 return render(request, 'activacion.html', context)   
 
             except IntegrityError:
-                return render(request, 'Register.html',{
+                return render(request, 'registro.html',{
                     'error': 'Nombre de usuario existente'
                 })
         else:
-            return render(request, 'Register.html', {
+            return render(request, 'registro.html', {
                 'error': 'Las Contraseñas no coinciden'
             })
 
@@ -126,5 +126,5 @@ def validar_token(request):
             return render(request, 'validar_token.html', {'error': 'Error al validar el token'})
 
     # Si la solicitud no es de tipo POST, redirige a otra página o muestra un mensaje de error
-    return redirect('login')
+    return redirect('inicio')
 
