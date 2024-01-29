@@ -58,5 +58,5 @@ def formulario_view(request):
         form = UsuarioForm()
 
     
-    return render(request, 'formularios.html', {'form': form})
+    return render(request, 'formulario.html', {'form': form})
 
