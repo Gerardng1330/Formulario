@@ -60,12 +60,14 @@
             font-weight: bold;
         }
     </style>
+    
 </head>
 <body>
     
 
     <div class="container">
         <div class="dropdown">
+            
             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               {% translate "Change language"  %}
             </button>
@@ -75,10 +77,10 @@
               {% get_language_info_list for LANGUAGES as languages %}
         
               
-              {% for formularios in languages %}
+              {% for formulario in languages %}
               <li>
-                <a class="dropdown-item" href="/{{ formularios.code}}/">
-                  {{ formularios.name_local|lower }}
+                <a class="dropdown-item" href="/{{ formulario.code}}/">
+                  {{ formulario.name_local|lower }}
                 </a>
               </li>
               {% endfor%}
@@ -88,13 +90,50 @@
         <div class="success-icon">&#10004;</div>
         <h1>{% translate "Company Policies"  %}</h1>
         <p>Tu formulario se ha enviado correctamente.</p>
+
+        <form method="post" autocomplete="off" action="{% url 'formularios:render_formulario' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="d-grid gap-2 col-6 mx-auto">
+              <button type="submit" class="btn btn-primary btn-lg">{% translate "Apply now"  %}</button>
+            </div>
+        </form>
+        
+
         
     </div>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Manejar el cambio de idioma sin redireccionar solo en 'exito.html'
+            const isExitoPage = window.location.pathname.endsWith('/exito/');
+        
+            if (isExitoPage) {
+                document.querySelector(".change-language").addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const langCode = event.target.getAttribute("data-lang");
+        
+                    // Realizar una solicitud AJAX para cambiar el idioma
+                    const xhr = new XMLHttpRequest();
+                    xhr.open("GET", `?lang=${langCode}`);
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            // Recargar la página después de cambiar el idioma solo en 'exito.html'
+                            window.location.reload();
+                        }
+                    };
+                    xhr.send();
+                });
+            }
+        });
+        </script>
+        
+    
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-
 </body>
 </html>
+

@@ -41,7 +41,6 @@
     }
     
 
-
     .btn-primary {
         background-color: #007bff;
         border-color: #007bff;
@@ -173,7 +172,7 @@
   <div class="container">
     
     <center><h1>{% translate "Forms"  %}</h1></center>
-      <form method="post" autocomplete="off" action="{% url 'formularios:formulario_view' %}" enctype="multipart/form-data">
+      <form method="post" autocomplete="off" action="{% url 'formularios:render_formulario' %}" enctype="multipart/form-data">
         {% csrf_token %}<!--para que un hacker no se haga pasar por el usuario-->
         <img src="https://i0.wp.com/losalbaniles.com/wp-content/uploads/2021/11/chamba.jpg?fit=936%2C468&ssl=1" class="img-fluid" alt="...">
         
@@ -429,45 +428,14 @@
 
   </div>
 
-  <!--El modal popup para aceptar las politicas de la empresa-->
-  <div class="modal" id="politicasModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">{% translate "Success"  %}</h5>
-          
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              {% translate "Change language"  %}
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end">
-             {% get_current_language as LANGUAGE_CODE %} <!--obtener el idioma que esta, mostrar los disponibles y tenerlo en una lista-->
-              {% get_available_languages as LANGUAGES %}
-              {% get_language_info_list for LANGUAGES as languages %}
-        
-              
-              {% for formulario in languages %}
-              <li>
-                <a class="dropdown-item" href="/{{ formulario.code}}/">
-                  {{ formulario.name_local|lower }}
-                </a>
-              </li>
-              {% endfor%}
-            </ul>
-          </div>
-        </div>
-        <div class="modal-body">
-          <div class="container">
-            <div class="success-icon">&#10004;</div>
-            <h1>¡Éxito!</h1>
-            <p>Tu formulario se ha enviado correctamente.</p>
-            
-          </div>
-        </div>
-        
-      </div>
+  <form method="post" autocomplete="off" action="{% url 'formularios:exito' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <button type="submit" class="btn btn-primary btn-lg">{% translate "Apply now"  %}</button>
     </div>
-  </div>
+  </form>
+
+  
   
 
   <!--permite que en los campos telefono y codigo solo acepte numeros y no otros caracteres-->
@@ -488,21 +456,11 @@
     numeros('Codigo4');
     </script>
 
-  <!--Muestra el popup modal-->
-  <script>
-    $(document).ready(function() {
-      // Muestra el modal al cargar la página
-      $('#politicasModal').modal('show');
-      
-      // Cierra el modal cuando se hace clic en "Aceptar Políticas"
-      $('#aceptarPoliticas').click(function() {
-        $('#politicasModal').modal('hide');
-      });
-    });
-  </script>
+
+
   <!-- Agrega este script al final del cuerpo del documento -->
   
-
+  
 
   <!-- Bootstrap JS and dependencies -->
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -510,7 +468,6 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 
 
 
