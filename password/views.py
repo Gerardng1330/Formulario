@@ -82,7 +82,7 @@ def registro(request):
 
                 # Agrega el token al contexto para mostrarlo en la plantilla (opcional)
                 context = {'token': token}
-                return render(request, 'password_send.html', context)   
+                return render(request, 'activacion.html', context)   
 
             except IntegrityError:
                 return render(request, 'Register.html',{

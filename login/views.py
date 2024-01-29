@@ -82,7 +82,6 @@ def registro(request):#creo la funcion del registro
             'error': 'Las Contraseñas no coinciden'
         })
         
-
 def signout (request):
     logout(request)
     return redirect('Login')    

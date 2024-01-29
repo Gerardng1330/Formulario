@@ -22,10 +22,7 @@ INSTALLED_APPS = [
     'login',
     'password',
     'registro',
-        #frontend
-        'tailwind',
-        'theme',
-        'django_browser_reload'
+     
 ]
 
 #tailwind configuration
