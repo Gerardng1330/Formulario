@@ -20,7 +20,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.utils.datastructures import MultiValueDictKeyError
 
-
+#GG
 
 def recuperar_pass(request ):
     return render (request, 'recuperar.html')
