@@ -13,8 +13,12 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_protect
+from django.urls import reverse
 import random
 import smtplib
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.utils.datastructures import MultiValueDictKeyError
 
 
 
@@ -56,75 +60,107 @@ def registro(request):
 
     if request.method == 'GET':
         return render(request, 'registro.html')
-    else:#si es POST entonces compara las contraseñas ingresadas
-        if request.POST['Contraseña'] == request.POST['Contraseña1']:
-            #si las contraseñas son iguales entonces entra a el try
+    else:  # Si es POST, compara las contraseñas ingresadas
+        try:
+            contraseña = request.POST['Contraseña']
+            contraseña1 = request.POST['Contraseña1']
+        except MultiValueDictKeyError:
+            return render(request, 'registro.html', {'error': 'Las contraseñas no se proporcionaron correctamente'})
+
+        if contraseña == contraseña1:
+            print(contraseña,'y',contraseña1)
             try:
                 validate_email(request.POST['Correo'])
 
                 if User.objects.filter(email=request.POST['Correo']).exists():
-                    return render(request, 'registro.html', {
-                        'error': 'Este correo electrónico ya está registrado.'
-                    })
+                    return render(request, 'registro.html', {'error': 'Este correo electrónico ya está registrado.'})
             except ValidationError:
-                return render(request, 'registro.html', {
-                    'error': 'Correo electrónico no válido'
-                })
+                return render(request, 'registro.html', {'error': 'Correo electrónico no válido'})
 
             try:
+                
                 # Genera un token y lo envía por correo
                 token = generar_token()
                 enviar_correo(request.POST['Correo'], token)
 
                 # Almacena el correo y token en la sesión para usarlo en la validación
-                request.session['user_email'] = request.POST['Correo']
-                request.session['registration_token'] = token
+                request.session['correo-registro'] = request.POST['Correo']
+                request.session['token-registro'] = token
+                request.session['usuario-registro']= request.POST['Usuario']
+                request.session['contra-registro']= request.POST['Contraseña']
+                request.session['nombre-registro']= request.POST['Nombre']
+                request.session['apellido-registro']= request.POST['Apellido']
+
+
 
                 # Agrega el token al contexto para mostrarlo en la plantilla (opcional)
-                context = {'token': token}
-                return render(request, 'activacion.html', context)   
+                '''context = {'token': token}
+                print(context)'''
+                print(request.POST['Correo'],token,request.POST['Contraseña'],request.POST['Usuario'])
+                return redirect('activacion')
 
             except IntegrityError:
-                return render(request, 'registro.html',{
-                    'error': 'Nombre de usuario existente'
-                })
+                return render(request, 'registro.html', {'error': 'Nombre de usuario existente'})
         else:
-            return render(request, 'registro.html', {
-                'error': 'Las Contraseñas no coinciden'
-            })
+            return render(request, 'registro.html', {'error': 'Las contraseñas no coinciden'})
+
 
 
 def validar_token(request):
     if request.method == 'GET':
-        return render(request, 'validar_token.html')
-    if request.method == 'POST':
+        return render(request, 'activacion.html')
+    else: 
+        request.method == 'POST'
         token_ingresado = request.POST.get('token')
-        correo_ingresado = request.POST.get('Correo')
-
+        print("Tipo de token_ingresado:", type(token_ingresado))
         try:
-            # Verifica si el token es válido y si coincide con el correo proporcionado
-            stored_email = request.session.get('user_email')
-            stored_token = request.session.get('registration_token')
-
-            if correo_ingresado == stored_email and token_ingresado == stored_token:
-                # Autentica al usuario
-                user = authenticate(request, username=stored_email, password=request.POST.get('Contraseña'))
+            # Verifica si el token es válido
+            stored_token = request.session.get('token-registro')
+            print("Tipo de stored_token:", type(stored_token),stored_token,token_ingresado)
+            if token_ingresado == str(stored_token):
+                # Obtén el correo electrónico almacenado en la sesión
+                stored_email = request.session.get('correo-registro')
+                usuario_guardado = (request.session.get('usuario-registro'))
+                contra_guardado = (request.session.get('contra-registro'))
+                nombre_guardado = (request.session.get('nombre-registro'))
+                apellido_guardado = (request.session.get('apellido-registro'))
+                print(nombre_guardado,apellido_guardado,stored_email,usuario_guardado,contra_guardado)
+                # Verifica si el usuario ya existe en la base de datos
+                if not request.user.is_authenticated:
+                    if User.objects.filter(email=stored_email).exists():
+                        user = authenticate(request, username=usuario_guardado)
+                        login(request, user)
                 
-                if user is not None:
-                    # Loguea al usuario
-                    login(request, user)
-                    return redirect('registro_exitoso')
-                else:
-                    # Si el usuario no pudo ser autenticado, muestra un mensaje de error
-                    return render(request, 'validar_token.html', {'error': 'Error al autenticar al usuario'})
+                try:
+                    # Si el usuario no existe, crea un nuevo usuario y guárdalo en la base de datos
+                    user = User.objects.create_user(
+                        username=usuario_guardado,
+                        password=contra_guardado,
+                        email=stored_email
+                    )
+                    # Agregamos los datos adicionales al usuario
+                    user.first_name = nombre_guardado
+                    user.last_name = apellido_guardado
+                    user.save()
+                    
+                    # Autentica al nuevo usuario
+                    if not request.user.is_authenticated:
+                        login(request, user)
+
+                    return redirect('home')
+                except IntegrityError:#en tal caso el username ya este registrado en la bd le mostramos el error de nombre de usuario existente
+                #e un except epecifico
+                #renderizamos la pagina y mostramos el error
+                    return render(request, 'registro.html',{
+                        'error': 'Nombre de usuario existente'
+                    })
             else:
                 # Si el token no es válido, muestra un mensaje de error
-                return render(request, 'validar_token.html', {'error': 'Token no válido'})
+                return render(request, 'activacion.html', {'error': 'Token no válido'})
         except Exception as e:
             # Maneja cualquier otra excepción que pueda ocurrir
             print(f"Error al validar el token: {e}")
-            return render(request, 'validar_token.html', {'error': 'Error al validar el token'})
-
+            return render(request, 'activacion.html', {'error': 'Error al validar el token'})
     # Si la solicitud no es de tipo POST, redirige a otra página o muestra un mensaje de error
     return redirect('inicio')
 
