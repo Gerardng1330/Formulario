@@ -33,7 +33,7 @@ def recuperar_pass(request ):
         print(request.POST['Correo'])
         if user is None:
             return render(request, 'recuperar.html',{
-                    'error': 'El Correo no ha sido registrado en el sistema'
+                    'error': 'Este Correo electrónico no es válido'
                 })
         
         
@@ -59,6 +59,8 @@ def enviar_correo(destinatario, token):
     subject = "Token de Registro"
     message = f"Su token de veificacion es: {token}"
     from_email = settings.EMAIL_HOST_USER
+    print(subject,message,from_email,destinatario)
+    
 
     try:
         # Utiliza send_mail de Django para enviar el correo
@@ -86,15 +88,16 @@ def registro(request):
                 validate_email(request.POST['Correo'])
 
                 if User.objects.filter(email=request.POST['Correo']).exists():
-                    return render(request, 'registro.html', {'error': 'Este correo electrónico ya está registrado.'})
+                    return render(request, 'registro.html', {'error': 'Este Correo electrónico no es válido.'})
             except ValidationError:
-                return render(request, 'registro.html', {'error': 'Correo electrónico no válido'})
+                return render(request, 'registro.html', {'error': 'Este Correo electrónico no es válido.'})
 
             try:
                 
                 # Genera un token y lo envía por correo
                 token = generar_token()
                 enviar_correo(request.POST['Correo'], token)
+                print(enviar_correo)
 
                 # Almacena el correo y token en la sesión para usarlo en la validación
                 request.session['correo-registro'] = request.POST['Correo']
@@ -113,7 +116,7 @@ def registro(request):
                 return redirect('activacion')
 
             except IntegrityError:
-                return render(request, 'registro.html', {'error': 'Nombre de usuario existente'})
+                return render(request, 'registro.html', {'error': 'Nombre de usuario no es válido.'})
         else:
             return render(request, 'registro.html', {'error': 'Las contraseñas no coinciden'})
 
@@ -166,7 +169,7 @@ def validar_token(request):
                 #e un except epecifico
                 #renderizamos la pagina y mostramos el error
                     return render(request, 'registro.html',{
-                        'error': 'Nombre de usuario existente'
+                        'error': 'El nombre de usuario no es válido.'
                     })
             else:
                 # Si el token no es válido, muestra un mensaje de error
