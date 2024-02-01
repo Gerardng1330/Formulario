@@ -23,8 +23,20 @@ from django.utils.datastructures import MultiValueDictKeyError
 #GG
 
 def recuperar_pass(request ):
-    return render (request, 'recuperar.html')
-
+    if request.user.is_authenticated:#nos aseguramos de que el usuario siempre tenga que iniciar sesion o la sesion no este iniciada
+        logout(request)
+        
+    if request.method == 'GET':
+        return render(request, 'recuperar.html')
+    else:
+        user = authenticate(request, email=request.POST['Correo'])
+        print(request.POST['Correo'])
+        if user is None:
+            return render(request, 'recuperar.html',{
+                    'error': 'El Correo no ha sido registrado en el sistema'
+                })
+        
+        
 def password_send(request):
     return render (request, 'password_send.html')
 
@@ -37,7 +49,8 @@ def password_complete(request):
 def password_email(request):
     return render (request, 'password_email.html')
 def succefully(request):
-    return render (request, 'registro_exitoso.html')
+    return render (request, 'registro_existoso.html')
+
 def generar_token():
     # Genera un token numérico de 6 dígitos
     return random.randint(100000, 999999)
@@ -104,7 +117,7 @@ def registro(request):
         else:
             return render(request, 'registro.html', {'error': 'Las contraseñas no coinciden'})
 
-
+#datos introducidos son incorrectos
 
 def validar_token(request):
     if request.method == 'GET':
@@ -141,13 +154,14 @@ def validar_token(request):
                     # Agregamos los datos adicionales al usuario
                     user.first_name = nombre_guardado
                     user.last_name = apellido_guardado
+                    user.is_active = False
                     user.save()
                     
                     # Autentica al nuevo usuario
                     if not request.user.is_authenticated:
                         login(request, user)
 
-                    return redirect('home')
+                    return redirect('succefully')
                 except IntegrityError:#en tal caso el username ya este registrado en la bd le mostramos el error de nombre de usuario existente
                 #e un except epecifico
                 #renderizamos la pagina y mostramos el error
