@@ -134,3 +134,4 @@ EMAIL_USE_TLS = True
 EMAIL_SSL_VERIFICATION = False
 EMAIL_HOST_USER = 'noreply@arvcloud.com'
 EMAIL_HOST_PASSWORD = 'Jda108?jjadpa300' 
+

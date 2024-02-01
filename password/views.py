@@ -121,6 +121,7 @@ def registro(request):
             return render(request, 'registro.html', {'error': 'Las contraseñas no coinciden'})
 
 #datos introducidos son incorrectos
+#me equivoque de correo
 
 def validar_token(request):
     if request.method == 'GET':
