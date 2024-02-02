@@ -9,6 +9,10 @@ urlpatterns = [
     path('formulario_enviado/', views.formulario_view, name='envio_formulario'),#prueba
     path('exito/', views.exito, name='pagina_exito'),
     path('cerrado/', views.cerrado, name='pagina_cerrado}'),
+    path('validar-nombre/', views.validar_nombre, name='validar_nombre'),
+    path('prueba/', views.prueba, name='prueba'),
+
+
 
    
 
