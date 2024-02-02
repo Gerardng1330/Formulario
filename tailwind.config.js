@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./**/*.{html,js}"],
+  content: ["./**/*.{html,js}", "./node_modules/flowbite/**/*.js"],
   theme: {
     extend: {
       colors: {
@@ -9,13 +9,14 @@ module.exports = {
         black: "#101010",
         red: "#FF151F",
         blue: "#1D2269",
+        hoverblue: "#000986",
         sky: "#0596FF",
       },
       fontFamily: {
-        'kumbh_regular': ['kumbh_regular','sans-serif'],
-        'kumbh_bold': ['kumbh_bold','sans-serif']
+        kumbh_regular: ["kumbh_regular", "sans-serif"],
+        kumbh_bold: ["kumbh_bold", "sans-serif"],
       },
     },
   },
-  plugins: [],
+  plugins: [require("flowbite/plugin")],
 };
