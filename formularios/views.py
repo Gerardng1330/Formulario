@@ -6,7 +6,6 @@ from .forms import UsuarioForm
 from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .models import PoliticasAceptadas
 #Renderizar el formulario.html
 def home(request):
     #trans es la palabra clave para asignarle la traduccion
