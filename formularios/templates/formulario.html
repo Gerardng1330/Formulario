@@ -1,7 +1,7 @@
 {% load static %}<!-- Carga los archivos estáticos -->
 {% load i18n %}<!--me permite usar la etiquetas para traducir el texto ( internacionalización)-->
 <!doctype html>
-<html lang="es">
+<html lang="es" class="!scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -15,11 +15,42 @@
     <!-- Carga el archivo css -->
   </head>
 
-  <body class="font-kumbh_regular">
+  <body class="overflow-hidden font-kumbh_regular">
+    <!-- Modal Políticas y privacidad -->
+    <!-- Agregar en el JS que cuando el modal está activo: 
+      form-container tiene blur-sm 
+      body tiene overflow-hidden-->
+    <div class="fixed z-10 flex h-screen w-full items-center justify-center bg-black bg-opacity-50">
+      <!-- Modal -->
+      <div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="z-30 items-center justify-center overflow-hidden md:inset-0">
+        <div class="relative max-h-full w-full max-w-2xl p-4">
+          <!-- Modal content -->
+          <div class="relative rounded-lg bg-white shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex items-center justify-center rounded-t border-b p-4 dark:border-gray-600 md:p-5">
+              <h3 class="text-md font-kumbh_bold text-blue">{% translate "POLÍTICAS DE SEGURIDAD" %}</h3>
+            </div>
+            <!-- Modal body -->
+            <div class="space-y-4 p-4 text-black md:p-5">
+              <p class="text-sm leading-relaxed">{% translate "Antes de unirte a nuestro equipo, es importante que entiendas y aceptes nuestras políticas de empresa." %}</p>
+              <p class="text-sm leading-relaxed">{% translate "Estas políticas sirven como guías para nuestros empleados para garantizar un ambiente de trabajo positivo y seguro, así como para mantener el más alto nivel de profesionalismo y ética." %}</p>
+              <p class="text-sm leading-relaxed">{% translate "Al aceptar estas políticas, estás de acuerdo en cumplirlas en todo momento durante tu empleo con nosotros." %}</p>
+              <p class="text-sm leading-relaxed">{% translate "Si tienes alguna pregunta o inquietud, no dudes en contactarnos." %}</p>
+            </div>
+            <!-- Modal footer -->
+            <div class="flex items-center rounded-b border-t border-gray-200 p-4 dark:border-gray-600 md:p-5">
+              <button data-modal-hide="static-modal" type="button" class="bg-blue-700 hover:bg-blue-800 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 rounded-lg px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4">I accept</button>
+              <button data-modal-hide="static-modal" type="button" class="focus:ring-blue-300 ms-3 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:z-10 focus:outline-none focus:ring-4 dark:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-600">Decline</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- contenedor general -->
     <div class="flex h-full w-full flex-col items-center gap-5 bg-gradient-to-bl from-indigo-100 via-offwhite to-rose-100 p-14">
       <!-- contenedor barra superior (logo, idioma)-->
-      <div class="flex h-fit w-full items-start justify-between">
+      <div class="z-20 flex h-fit w-full items-start justify-between">
         <!-- logo f2f -->
         <img class="h-10" src="{% static 'img/f2f-logo.svg' %}" alt="" />
 
@@ -63,9 +94,9 @@
       </div>
 
       <!-- Contenedor del formulario -->
-      <div class="flex h-full w-1/2 flex-col items-center justify-start gap-2">
+      <div id="form-container" name="form-container" class="flex h-full w-1/2 flex-col items-center justify-start gap-2 blur-sm">
         <!-- Título del formulario -->
-        <h1 class="flex h-fit w-full flex-col items-center justify-center rounded-lg border border-gray-200 bg-blue p-3 font-kumbh_bold text-lg text-white shadow-sm">{% translate "FORMULARIO DE APLICANTES" %}</h1>
+        <h1 id="titulo-formulario" name="titulo-formulario" class="flex h-fit w-full flex-col items-center justify-center rounded-lg border border-gray-200 bg-blue p-3 font-kumbh_bold text-lg text-white shadow-sm">{% translate "FORMULARIO DE APLICANTES" %}</h1>
 
         <!-- Contenedor del logo / imagen -->
         <div class="flex h-fit w-full justify-center rounded-lg border border-gray-200 shadow-sm">
@@ -349,7 +380,7 @@
           </div>
 
           <!-- Botón Aplicar ahora -->
-          <button type="submit" class="hover:bg-blue-800 focus:ring-blue-300 hover:bg-hoverblue w-full rounded-lg border border-gray-300 bg-blue px-5 py-2.5 text-center font-kumbh_bold text-sm font-medium text-white shadow-sm transition ease-in-out hover:scale-105 focus:outline-none focus:ring-4 sm:w-auto">APLICAR AHORA</button>
+          <button type="submit" class="hover:bg-blue-800 focus:ring-blue-300 w-full rounded-lg border border-gray-300 bg-blue px-5 py-2.5 text-center font-kumbh_bold text-sm font-medium text-white shadow-sm transition ease-in-out hover:scale-[102%] focus:outline-none focus:ring-2 focus:ring-sky sm:w-auto">APLICAR AHORA</button>
         </form>
       </div>
 
@@ -357,10 +388,9 @@
       <p class="mt-6 text-xs text-black">COPYRIGHT © 2024 ARV SYSTEM CORP | ALL RIGHTS RESERVED.</p>
 
       <!-- Botón para subir al inicio -->
-      <a href="" class="hover:bg-hoverblue me-2 inline-flex items-center rounded-full bg-blue p-2.5 text-center text-sm font-medium text-white transition ease-in-out hover:scale-110 focus:outline-none focus:ring-4 focus:ring-sky">
+      <a href="#" id="scroll-up-button" name="scroll-up-button" class="fixed bottom-0 right-0 mx-14 my-10 rounded-full bg-blue p-2.5 text-center text-sm font-medium text-white opacity-0 transition-all delay-75 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-sky">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 18.75 7.5-7.5 7.5 7.5" />
-          <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 7.5-7.5 7.5 7.5" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
         </svg>
       </a>
     </div>
@@ -385,19 +415,24 @@
   </script> -->
 
     <!--Muestra el popup modal-->
-    <!--  <script>
-    $(document).ready(function() {
-      // Muestra el modal al cargar la página
-      $('#politicasModal').modal('show');
-      
-      // Cierra el modal cuando se hace clic en "Aceptar Políticas"
-      $('#aceptarPoliticas').click(function() {
-        $('#politicasModal').modal('hide');
-      });
-    });
-  </script> -->
+    <!--     <script>
+      $(document).ready(function () {
+        // Muestra el modal al cargar la página
+        $("#politicasModal").modal("show");
 
+        // Cierra el modal cuando se hace clic en "Aceptar Políticas"
+        $("#aceptarPoliticas").click(function () {
+          $("#politicasModal").modal("hide");
+        });
+      });
+    </script> -->
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- dropdown de cambio de idioma -->
     <script src="{% static 'js/toggle-idioma-dropdown.js' %}"></script>
+    <!-- Botón para scrollear el form hacia el inicio -->
+    <script src="{% static 'js/button-scroll-form-up.js' %}"></script>
+    <!-- CDN temporal del JS de Flowbite -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>
   </body>
