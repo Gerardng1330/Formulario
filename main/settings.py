@@ -73,7 +73,7 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
        'default': {
            'ENGINE': 'django.db.backends.postgresql',
-           'NAME': 'formulariof2f',
+           'NAME': 'manudb',
            'USER': 'manuel',
            'PASSWORD': '123',
            'HOST': '200.46.88.101',
@@ -135,3 +135,4 @@ EMAIL_SSL_VERIFICATION = False
 EMAIL_HOST_USER = 'noreply@arvcloud.com'
 EMAIL_HOST_PASSWORD = 'Jda108?jjadpa300' 
 
+AUTH_USER_MODEL = "registro.User"

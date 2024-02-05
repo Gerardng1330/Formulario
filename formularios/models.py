@@ -1,11 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-#Clase para ver unas politicas (Prueba)
-class PoliticasAceptadas(models.Model):
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
-    aceptadas = models.BooleanField(default=False)
-
 # Creamos el modelo para la bd
 class Usuario(models.Model):
     nombre = models.CharField(max_length=255,null=True, verbose_name='Nombre')

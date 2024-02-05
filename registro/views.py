@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm
 from django.contrib.auth.models import User
@@ -11,121 +12,60 @@ from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib import messages
 from django.views.decorators.csrf import csrf_protect
 from django.urls import reverse
 import random
 import smtplib
-import uuid
-from .models import Profile
-
-def success(request):
-    return render(request, 'success.html')
-
-def send_token(request):
-    return render(request, 'send_token.html')
-
-def registros(request):
-    if request.user.is_authenticated:
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.utils.datastructures import MultiValueDictKeyError
+# Create your views here.
+def registro(request):#creo la funcion del registro
+    if request.user.is_authenticated:#nos aseguramos de que el usuario siempre tenga que iniciar sesion o la sesion no este iniciada
         logout(request)
-    if request.method == 'POST':
-        username = request.POST['Usuario']
-        password = request.POST['Contraseña']
-        email = request.POST['Correo']
-
-        try:
-            if User.objects.filter(username=username).first():
-                return redirect('/registro1', {'error': 'Nombre de usuario existente'})
-
-            elif User.objects.filter(email=email).first():
-                return redirect('/registro1', {'error': 'Este correo electrónico ya está registrado.'})
-
-            user_obj = User.objects.create(username=username, email=email)
-            user_obj.set_password(password)
-
-            profile_obj = Profile.objects.create(user=user_obj, token=str(uuid.uuid4))
-            profile_obj.save()
-
-            send_mail_after_registration(email, profile_obj.token)
-
-            return redirect(reverse('send_token'))
-
-        except IntegrityError:
-            return redirect('/registro1', {'error': 'Error de integridad al crear usuario'})
-
-        except ValidationError:
-            return redirect('/registro1', {'error': 'Error de validación al crear usuario'})
-
-    return render(request, 'registro1.html')
-
-def verify(request, auth_token):
-    try:
-        profile_obj = Profile.objects.filter(auth_token=auth_token).first()
-        if profile_obj:
-            profile_obj.is_verified = True
-            profile_obj.save()
-            return redirect('/inicio', {'error': 'Tu cuenta ha sido verificada'})
-        else:
-            return redirect('/error')
-    except Exception as e:
-        print(e)
-
-def error_page(request):
-    return render(request, 'error.html')
-
-def send_mail_after_registration(email, token):
-    subject = "Tu cuenta necesita ser verificada"
-    message = f'Hola, pega este enlace para verificar tu cuenta: http://127.0.0.1:8000/verify/{token}'
-    email_from = settings.EMAIL_HOST_USER
-    recipient_list = [email]
-    send_mail(subject, message, email_from, recipient_list)
-
-def registros(request):
-    # Verifica si el usuario ya ha iniciado sesión y, en caso afirmativo, lo desconecta.
-    if request.user.is_authenticated:
-        logout(request)
-    
-    # Verifica si la solicitud es de tipo POST (es decir, se ha enviado un formulario).
-    if request.method == 'POST':
-        # Obtiene los datos del formulario (nombre de usuario, contraseña y correo electrónico).
-        username = request.POST['Usuario']
-        password = request.POST['Contraseña']
-        email = request.POST['Correo']
-
-        try:
-            # Verifica si ya existe un usuario con el mismo nombre de usuario.
-            if User.objects.filter(username=username).first():
-                # Redirige a la página de registro con un mensaje de error.
-                return redirect('/registro1', {'error': 'Nombre de usuario existente'})
-
-            # Verifica si ya existe un usuario con el mismo correo electrónico.
-            elif User.objects.filter(email=email).first():
-                # Redirige a la página de registro con un mensaje de error.
-                return render(request, 'registro1.html', {
+    #si el request es GET ose que necesita datos ingresados en la URL entonces renderiza la pagina
+    if request.method == 'GET':
+        return render(request, 'registro.html')
+    else:#si es POST entonces compara las contraseñas ingresadas
+        if request.POST['Contraseña'] == request.POST['Contraseña1']:
+            #si las contraseñas son iguales entonces entra a el try
+            try:
+                validate_email(request.POST['Correo'])
+                
+                if User.objects.filter(email=request.POST['Correo']).exists():
+                    return render(request, 'registro.html', {
                     'error': 'Este correo electrónico ya está registrado.'
                 })
+            except ValidationError:
+                return render(request, 'registro.html', {
+                    'error': 'Correo electrónico no válido'
+                })
+            try:#intentamos creal el usuario y guardarlo en los campos que le estamos dando
+                user = User.objects.create_user(
+                    username=request.POST['Usuario'], 
+                    password=request.POST['Contraseña'],
+                    email=request.POST['Correo']
+                )
+                #la funcion user.objects.create nos permite crear un usuario con username contraseña y email eliminamos el campo de email
+                #Agregamos 2 datos mas que pedimos en el Registro nombre y apellido
+                user.first_name = request.POST['Nombre']
+                user.last_name = request.POST['Apellido']
 
-            # Crea un nuevo objeto de usuario y lo guarda en la base de datos.
-            user_obj = User.objects.create(username=username, email=email)
-            # Establece la contraseña del usuario.
-            user_obj.set_password(password)
-
-            # Crea un objeto de perfil asociado al usuario y le asigna un token único.
-            profile_obj = Profile.objects.create(user=user_obj, token=str(uuid.uuid4))
-            profile_obj.save()
-
-            # Envía un correo electrónico para verificar la cuenta del usuario.
-            send_mail_after_registration(email, profile_obj.token)
-
-            # Redirige a la página para enviar el token de verificación.
-            return redirect('send-token')
-
-        except IntegrityError:
-            # Redirige a la página de registro con un mensaje de error.
-            return render('registro1.html', {'error': 'Error de integridad al crear usuario'})
-
-        except ValidationError:
-            # Redirige a la página de registro con un mensaje de error.
-            return render('registro1.html', {'error': 'Error de validación al crear usuario'})
-
-    # Si la solicitud no es de tipo POST, renderiza la página de registro.
-    return render(request, 'registro1.html')
+                #guardamos los datos en la base de datos
+                user.save()
+                #creo una cookie de sesion para el usuario con login y tomo el valor ingresado e usuario
+                #se utiliza para autenticar a un usuario en el sistema y establecer una sesión de usuario. 
+                login(request, user)
+                #redirecciono a la pantalla de login una vez pasa por el return no sigue el codigo hacia abajo
+                return redirect('home')
+            except IntegrityError:#en tal caso el username ya este registrado en la bd le mostramos el error de nombre de usuario existente
+                #e un except epecifico
+                #renderizamos la pagina y mostramos el error
+                return render(request, 'registro.html',{
+                    'error': 'Nombre de usuario existente'
+                })
+        #si las contraseñas no coinciden entoces le mostramos el error al usuario         
+        return render(request, 'registro.html',{
+            'error': 'Las Contraseñas no coinciden'
+        })
