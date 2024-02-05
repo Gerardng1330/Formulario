@@ -113,6 +113,7 @@
 </head>
 <body>
   <!--El modal popup para aceptar las politicas de la empresa-->
+  <!-- 
   <div class="modal" id="politicasModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -124,7 +125,7 @@
               {% translate "Change language"  %}
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
-             {% get_current_language as LANGUAGE_CODE %} <!--obtener el idioma que esta, mostrar los disponibles y tenerlo en una lista-->
+             {% get_current_language as LANGUAGE_CODE %} #obtener el idioma que esta, mostrar los disponibles y tenerlo en una lista
               {% get_available_languages as LANGUAGES %}
               {% get_language_info_list for LANGUAGES as languages %}
         
@@ -153,6 +154,7 @@
       </div>
     </div>
   </div>
+  -->
 
   <!--El dropdown para seleccionar el idioma-->
   <div class="dropdown">
@@ -207,6 +209,7 @@
             <div class="form-group">
               <label for="email">Email</label>
               <input type="email" class="form-control" id="email" name="email" placeholder="{% translate "Enter your email" %}"required>
+              <span class="error-message" id="email-error-message"></span>
             </div>
           </div>
           <div class="col-md-6">
@@ -258,6 +261,8 @@
         <div class="form-group">
           <label for="alergia">{% translate "Have a disability or allergy"  %}</label>
           <input type="text" class="form-control" id="alergia" name="alergia" placeholder="{% translate "Specify" %}" required>
+          <span class="error-message" id="alergia-error-message"></span>
+
         </div>
          
         <div class="mb-3">
@@ -285,7 +290,7 @@
             <div class="form-group">
               <label for="Telefono1">{% translate "Cellphone"  %}</label>
               <input type="tel" class="form-control" id="Telefono1" name="Telefono1" placeholder="{% translate "Enter your cellphone" %}"required>
-              <span class="error-message telefono-error-message" id="telefono-error-message"></span>
+              <span class="error-message" id="Telefono1-error-message"></span>
             </div>
           </div>
           <div class="col-md-2">
@@ -301,7 +306,7 @@
             <div class="form-group">
               <label for="Telefono2">{% translate "Cellphone"  %}</label>
               <input type="tel" class="form-control" id="Telefono2" name="Telefono2" placeholder="{% translate "Enter your cellphone" %}"required>
-              <span class="error-message telefono-error-message" id="telefono-error-message"></span>
+              <span class="error-message" id="Telefono2-error-message"></span>
             </div>
           </div>
           
@@ -321,7 +326,7 @@
             <div class="form-group">
               <label for="Telefono3">{% translate "Cellphone"  %}</label>
               <input type="tel" class="form-control" id="Telefono3" name="Telefono3" placeholder="{% translate "Enter your cellphone" %}"required>
-              <span class="error-message" id="telefono-error-message"></span>
+              <span class="error-message" id="Telefono3-error-message"></span>
             </div>
           </div>
           <div class="col-md-6">
@@ -337,7 +342,10 @@
         <div class="form-group">
           <label for="Direccion">{% translate "Direction"  %}</label>
           <input type="text" class="form-control" id="Direccion1" name="Direccion1" placeholder="{% translate "Main address" %}"required>
+          <span class="error-message" id="Direccion1-error-message"></span>
           <input type="text" class="form-control" id="Direccion2" name="Direccion2" placeholder="{% translate "Second address" %}"required>
+          <span class="error-message" id="Direccion2-error-message"></span>
+
 
           <div class="row">
             <div class="col-md-6">
@@ -422,6 +430,8 @@
         <div class="form-group">
           <label for="Referido">{% translate "Referred by"  %}</label>
           <input type="text" class="form-control" id="Referido" name="Referido" placeholder="{% translate "Answer"  %}" required>
+          <span class="error-message" id="Referido-error-message"></span>
+
         </div>
 
         <div class="d-grid gap-2 col-6 mx-auto">
