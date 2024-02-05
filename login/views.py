@@ -8,7 +8,10 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
 from django.contrib.auth import views as auth_views
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
+#GG
 def home(request ):
     return render (request, 'home.html')
 

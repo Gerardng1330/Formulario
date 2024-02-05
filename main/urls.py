@@ -15,12 +15,16 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     path(_('admin/'), admin.site.urls, name='admin django'),
-    path('login/', include('login.urls'), name='login'),
-    path('password/', include('password.urls'), name='password'),
-    path('registro/', include('registro.urls'), name='registro'),
+    path('', include('login.urls'), name='inicio'),
+    path('', include('password.urls'), name='password'),
+    path('', include('registro.urls'), name='registro'),
     path('', include('formularios.urls'), name='formularios'),
     
     path('', include('formularios.urls')),
     path('en/', include('formularios.urls')),
     path('es/', include('formularios.urls')),
 )
+if settings.DEBUG:
+    #No hacer esto en producción. Esto es solo para el manejo local de archivos estáticos.
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

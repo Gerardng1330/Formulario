@@ -22,8 +22,8 @@ INSTALLED_APPS = [
     'login',
     'password',
     'registro',
-        #frontend
-        'django_browser_reload'
+    #frontend
+    'django_browser_reload'
      
 ]
 
@@ -68,7 +68,7 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
        'default': {
            'ENGINE': 'django.db.backends.postgresql',
-           'NAME': 'manudb',
+           'NAME': 'formulariof2f',
            'USER': 'manuel',
            'PASSWORD': '123',
            'HOST': '200.46.88.101',
