@@ -297,25 +297,20 @@
                 <option value="nativo">{% translate "Nativo" %}</option>
               </select>
             </div>
-          </div>
-        </div>
-        
-        
-         
-        <div class="form-group">
-          <label for="Ingles">{% translate "English level"  %}</label>
-          <select class="form-control" name="Ingles" id="Ingles" required>
-            <option value="" disabled selected>{% translate "Select"  %}</option>
-            <option value="Avanzado">{% translate "Advance"  %}</option>
-            <option value="Intermedio">{% translate "Intermediate"  %}</option>
-            <option value="Principiante">{% translate "Beginner"  %}</option>
-          </select>
-        </div>
 
-        <div class="form-group">
-          <label for="Iniciar">{% translate "When can you start"  %}</label>
-          <input type="date" class="form-control" id="Iniciar" name="Iniciar" required>
-        </div>
+            <!-- Fila ¿Cuándo puede empezar? -->
+            <div class="relative flex h-full w-full flex-col">
+              <!-- Label -->
+              <label for="fecha_inicio" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% translate "¿Cuándo puede empezar?" %}</label>
+              <!-- ícono datepicker -->
+              <div class="pointer-events-none absolute inset-y-11 end-3 flex items-center">
+                <svg class="h-3.5 w-3.5 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                </svg>
+              </div>
+              <!-- datepicker input -->
+              <input datepicker id="fecha_inicio" name="fecha_inicio" type="text" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% translate 'dd/mm/aaaa'  %}" />
+            </div>
 
             <!-- Fila Transporte -->
             <div class="flex h-fit w-full flex-col">
