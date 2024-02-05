@@ -1,9 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.utils.translation import gettext_lazy as _
+
 # Creamos el modelo para la bd
 class Usuario(models.Model):
-    nombre = models.CharField(max_length=255,null=True, verbose_name='Nombre')
+    nombre = models.CharField(max_length=255, verbose_name='Nombre', default='nombre')
     apellido = models.CharField(max_length=255, null=True, verbose_name='Apellido')
     email = models.EmailField(max_length=255,null=True, verbose_name='Correo Electrónico')
     genero = models.CharField(max_length=255,null=True, choices=[('masculino', 'Masculino'), ('femenino', 'Femenino'), ('otros', 'Otros')], blank=True, verbose_name='Género')
