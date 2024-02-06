@@ -54,7 +54,7 @@
               <!--obtener el idioma que esta, mostrar los disponibles y tenerlo en una lista-->
               {% get_available_languages as LANGUAGES %} {% get_language_info_list for LANGUAGES as languages %} {% for formulario in languages %}
               <li>
-                <a href="/{{ formulario.code }}/formulario/" class="block px-4 py-2 hover:bg-gray-100"> {{ formulario.name_local|lower }} </a>
+                <a href="/{{ formulario.code }}/formulario/" class="block px-4 py-2 hover:bg-gray-100"> {{ formulario.name_local|upper }} </a>
               </li>
               {% endfor %}
             </ul>
@@ -82,7 +82,7 @@
             <!-- Fila Nombre-->
             <div class="h-fit w-full">
               <!-- Label Nombre -->
-              <label for="nombre" class="text-md mb-1 ml-1 flex h-fit w-full">{% translate "Nombre" %}</label>
+              <label for="nombre" class="text-md mb-1 ml-1 flex h-fit w-full">{% translate "Name" %}</label>
 
               <!-- Campos del nombre -->
               <div class="flex h-full w-full gap-4">

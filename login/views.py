@@ -16,7 +16,7 @@ def home(request ):
     return render (request, 'home.html')
 
 def formacion(request):
-    return render(request,'formulario.html')
+    return render(request,'activacion.html')
 
 
 def inicio_sesion(request):#Funcion de inicio de sesion
@@ -36,7 +36,7 @@ def inicio_sesion(request):#Funcion de inicio de sesion
             return redirect('home')
     
     
-'''def registro(request):#creo la funcion del registro
+def registro(request):#creo la funcion del registro
     if request.user.is_authenticated:#nos aseguramos de que el usuario siempre tenga que iniciar sesion o la sesion no este iniciada
         logout(request)
     #si el request es GET ose que necesita datos ingresados en la URL entonces renderiza la pagina
@@ -83,7 +83,7 @@ def inicio_sesion(request):#Funcion de inicio de sesion
         #si las contraseñas no coinciden entoces le mostramos el error al usuario         
         return render(request, 'registro.html',{
             'error': 'Las Contraseñas no coinciden'
-        })'''
+        })
         
 def signout (request):
     logout(request)

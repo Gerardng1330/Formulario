@@ -19,7 +19,7 @@
                 <input name="Contraseña" type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="addon-wrapping">{{error}}
                 </div>
                 <div class="mb-3 d-flex justify-content-between col-6 mx-auto">
-                <a href="/registro"><b>¿No tienes una cuenta?</b></a> <a href="/recuperar"><b>¿Olvidaste tu contraseña?</b></a> 
+                <a href="{%url 'registro'%}"><b>¿No tienes una cuenta?</b></a> <a href="{% url 'recuperar' %}"><b>¿Olvidaste tu contraseña?</b></a> 
                 </div>
                 <div class="d-grid gap-2 col-6 mx-auto">
                   <button type="submit" class="btn btn-primary">Ingresar</button><br> 

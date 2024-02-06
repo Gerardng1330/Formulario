@@ -14,10 +14,10 @@ urlpatterns = [
 
 
 urlpatterns += i18n_patterns(
-    path(_('admin/'), admin.site.urls, name='admin django'),
-    path('', include('login.urls'), name='inicio'),
-    path('', include('password.urls'), name='password'),
-    path('', include('registro.urls'), name='registro'),
+    path(_('adminpaneldjango/'), admin.site.urls, name='adminpaneldjango'),
+    path('adminlogin/', include('login.urls'), name='inicio'),
+    path('recovery/', include('password.urls'), name='password'),
+    path('register/', include('registro.urls'), name='registro'),
     path('', include('formularios.urls'), name='formularios'),
     
     path('', include('formularios.urls')),
