@@ -14,7 +14,7 @@ urlpatterns = [
 
 
 urlpatterns += i18n_patterns(
-    path(_('adminpaneldjango/'), admin.site.urls, name='adminpaneldjango'),
+    path(_('adminpaneldjango/'), admin.site.urls, name=''),
     path('adminlogin/', include('login.urls'), name='inicio'),
     path('recovery/', include('password.urls'), name='password'),
     path('register/', include('registro.urls'), name='registro'),
