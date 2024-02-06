@@ -20,9 +20,8 @@ urlpatterns += i18n_patterns(
     path('register/', include('registro.urls'), name='registro'),
     path('', include('formularios.urls'), name='formularios'),
     
-    path('', include('formularios.urls')),
-    path('en/', include('formularios.urls')),
-    path('es/', include('formularios.urls')),
+   
+   
 )
 if settings.DEBUG:
     #No hacer esto en producción. Esto es solo para el manejo local de archivos estáticos.

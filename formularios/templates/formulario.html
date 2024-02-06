@@ -65,7 +65,7 @@
       <!-- Contenedor del formulario -->
       <div class="flex h-full w-1/2 flex-col items-center justify-start gap-2">
         <!-- Título del formulario -->
-        <h1 class="flex h-fit w-full flex-col items-center justify-center rounded-lg border border-gray-200 bg-blue p-3 font-kumbh_bold text-lg text-white shadow-sm">{% translate "FORMULARIO DE APLICANTES" %}</h1>
+        <h1 class="flex h-fit w-full flex-col items-center justify-center rounded-lg border border-gray-200 bg-blue p-3 font-kumbh_bold text-lg text-white shadow-sm">{% blocktrans %}APPLICANT FORM{% endblocktrans %}</h1>
 
         <!-- Contenedor del logo / imagen -->
         <div class="flex h-fit w-full justify-center rounded-lg border border-gray-200 shadow-sm">
@@ -82,14 +82,14 @@
             <!-- Fila Nombre-->
             <div class="h-fit w-full">
               <!-- Label Nombre -->
-              <label for="nombre" class="text-md mb-1 ml-1 flex h-fit w-full">{% translate "Name" %}</label>
+              <label for="nombre" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Name{% endblocktrans %}</label>
 
               <!-- Campos del nombre -->
               <div class="flex h-full w-full gap-4">
                 <!-- Nombre -->
-                <input type="text" id="nombre" name="nombre" # aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% translate 'Primer nombre' %}" />
+                <input type="text" id="nombre" name="nombre" # aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}First name{% endblocktrans %}" />
                 <!-- Apellido -->
-                <input type="text" id="apellido" name="apellido" # aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% translate 'Primer apellido' %}" />
+                <input type="text" id="apellido" name="apellido" # aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Last name{% endblocktrans %}" />
               </div>
             </div>
 
@@ -97,18 +97,18 @@
             <div class="flex h-fit w-full flex-row gap-4">
               <!-- Email -->
               <div class="flex h-full w-full flex-col">
-                <label for="nombre" class="text-md mb-1 ml-1 flex h-fit w-full">{% translate "Correo" %}</label>
-                <input type="email" id="email" name="email" # aria-describedby="helper-text-explanation" class="w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% translate 'ejemplo@correo.com' %}"  />
+                <label for="nombre" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Email{% endblocktrans %}</label>
+                <input type="email" id="email" name="email" # aria-describedby="helper-text-explanation" class="w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}example@email.com{% endblocktrans %}"  />
               </div>
 
               <!-- Género -->
               <div class="flex h-full w-full flex-col">
-                <label for="genero" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% translate "Género" %}</label>
+                <label for="genero" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Gender{% endblocktrans %}</label>
                 <select id="genero" name="genero" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
-                  <option value="" disabled selected>{% translate "Seleccione" %}</option>
-                  <option value="Masculino">{% translate "Male" %}</option>
-                  <option value="Femenino">{% translate "Female" %}</option>
-                  <option value="Otro">{% translate "Other" %}</option>
+                  <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
+                  <option value="Masculino">{% blocktrans %}Male{% endblocktrans %}</option>
+                  <option value="Femenino">{% blocktrans %}Female{% endblocktrans %}</option>
+                  <option value="Otro">{% blocktrans %}Other{% endblocktrans %}</option>
                 </select>
               </div>
             </div>
@@ -117,9 +117,9 @@
             <div class="flex h-fit w-full flex-row gap-4">
               <!-- Nacionalidad -->
               <div class="flex h-full w-full flex-col">
-                <label for="nacionalidad" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% translate "Nacionalidad" %}</label>
+                <label for="nacionalidad" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Nationality{% endblocktrans %}</label>
                 <select id="nacionalidad" name="nacionalidad" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none focus:border-sky focus:ring-sky">
-                  <option value="" disabled selected>{% translate "Seleccione" %}</option>
+                  <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
                   <option value="Panama">Panamá</option>
                   <option value="Argentina">Argentina</option>
                   <option value="Chile">Chile</option>
@@ -142,7 +142,7 @@
               <!-- Nacimiento -->
               <div class="relative flex h-full w-full flex-col">
                 <!-- Label -->
-                <label for="fecha_nacimiento" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% translate "Fecha de nacimiento" %}</label>
+                <label for="fecha_nacimiento" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Birthdate{% endblocktrans %}</label>
                 <!-- ícono datepicker -->
                 <div class="pointer-events-none absolute inset-y-11 end-3 flex items-center">
                   <svg class="h-3.5 w-3.5 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -150,14 +150,14 @@
                   </svg>
                 </div>
                 <!-- datepicker input -->
-                <input datepicker type="text" id="fecha_nacimiento" name="fecha_nacimiento" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% translate 'dd/mm/aaaa'  %}" />
+                <input datepicker type="text" id="fecha_nacimiento" name="fecha_nacimiento" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Birthdate{% endblocktrans %}" />
               </div>
             </div>
 
             <!-- Fila Alergias -->
             <div class="h-fit w-full">
-              <label for="alergia" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% translate "¿Presenta alguna discapacidad o alergia?" %}</label>
-              <input type="text" id="alergia" name="alergia" # aria-describedby="helper-text-explanation" class="w-full rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm placeholder-gray-400 outline-none focus:border-sky focus:ring-sky" placeholder="{% translate 'Especifique' %}" />
+              <label for="alergia" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Do you have any allergies or disabilities?{% endblocktrans %}</label>
+              <input type="text" id="alergia" name="alergia" # aria-describedby="helper-text-explanation" class="w-full rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm placeholder-gray-400 outline-none focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Specify{% endblocktrans %}" />
             </div>
           </div>
 
@@ -165,13 +165,13 @@
           <div class="flex h-fit w-full flex-col gap-4">
             <!-- Fila ID-->
             <div class="h-fit w-full">
-              <label for="id_file" class="text-md mb-1 ml-1 flex h-fit w-full">{% translate "Identificación" %}</label>
+              <label for="id_file" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}ID{% endblocktrans %}</label>
               <input class="block h-fit w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm" id="id_file" name="id_file" type="file" accept="application/pdf" />
             </div>
 
             <!-- Fila CV -->
             <div class="h-fit w-full">
-              <label for="cv_file" class="text-md mb-1 ml-1 flex h-fit w-full">{% translate "Hoja de vida" %}</label>
+              <label for="cv_file" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Resume{% endblocktrans %}</label>
               <input class="block h-fit w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm" id="cv_file" name="cv_file" type="file" accept="application/pdf" />
             </div>
           </div>
@@ -182,27 +182,27 @@
             <div class="flex h-fit w-full flex-row gap-4">
               <!-- Teléfono1 -->
               <div class="flex h-full w-full flex-col">
-                <label for="telefono1" class="text-md mb-1 ml-1 flex h-fit w-full">{% translate "Teléfonos" %}</label>
+                <label for="telefono1" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Phone numbers{% endblocktrans %}</label>
                 <div class="flex h-fit w-full flex-row gap-2">
                   <select id="codigo1" name="codigo1" # class="w-1/2 cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
-                    <option value="" disabled selected>{% translate "código" %}</option>
+                    <option value="" disabled selected>{% blocktrans %}Code{% endblocktrans %}</option>
                     <option value="507">Panamá (+507)</option>
                     <option value="1">EEUU (+1)</option>
                   </select>
-                  <input type="tel" id="Telefono1" name="Telefono1"  class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% translate '0000-0000' %}"/>
+                  <input type="tel" id="Telefono1" name="Telefono1"  class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="00000000"/>
                 </div>
               </div>
 
               <!-- Contacto de emergencia (tlf)-->
               <div class="flex h-full w-full flex-col">
-                <label for="telefono-emergencia" class="text-md mb-1 ml-1 flex h-fit w-full">{% translate "Contacto de emergencia" %}</label>
+                <label for="telefono-emergencia" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Emergency contact{% endblocktrans %}</label>
                 <div class="flex h-fit w-full flex-row gap-2">
                   <select id="codigo3" name="codigo3"  class="w-1/2 cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
-                    <option value="" disabled selected>{% translate "código" %}</option>
+                    <option value="" disabled selected>{% blocktrans %}Code{% endblocktrans %}</option>
                     <option value="507">Panamá (+507)</option>
                     <option value="1">EEUU (+1)</option>
                   </select>
-                  <input type="tel" id="telefono_emergencia" name="telefono_emergencia"  class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% translate '0000-0000' %}"  />
+                  <input type="tel" id="telefono_emergencia" name="telefono_emergencia"  class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="00000000"  />
                 </div>
               </div>
             </div>
@@ -213,95 +213,97 @@
               <div class="flex h-full w-full flex-col">
                 <div class="flex h-fit w-full flex-row gap-2">
                   <select id="codigo2" name="codigo2" # class="w-1/2 cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
-                    <option value="" disabled selected>{% translate "código" %}</option>
+                    <option value="" disabled selected>{% blocktrans %}Code{% endblocktrans %}</option>
                     <option value="507">Panamá (+507)</option>
                     <option value="1">EEUU (+1)</option>
                   </select>
-                  <input type="tel" id="Telefono2" name="Telefono2" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% translate '0000-0000' %}"  />
+                  <input type="tel" id="Telefono2" name="Telefono2" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="00000000"  />
                 </div>
               </div>
 
               <!-- Contacto de emergencia (nombre)-->
               <div class="flex h-full w-full flex-col">
-                <input type="text" id="nombre_contacto" name="nombre_contacto" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% translate 'Primer nombre y apellido del contacto' %}" />
+                <input type="text" id="nombre_contacto" name="nombre_contacto" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Contact's first and last name{% endblocktrans %}" />
               </div>
             </div>
 
             <!-- Fila dirección principal -->
             <div class="h-fit w-full">
-              <label for="direccion-principal" class="text-md mb-1 ml-1 flex h-fit w-full">{% translate "Dirección" %}</label>
-              <input type="text" id="direccion_principal" name="direccion_principal" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% translate 'Dirección principal' %}" />
+              <label for="direccion-principal" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Address{% endblocktrans %}</label>
+              <input type="text" id="direccion_principal" name="direccion_principal" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Main address{% endblocktrans %}" />
             </div>
 
             <!-- Fila dirección secundaria -->
-            <input type="text" id="direccion_secundaria" name="direccion_secundaria" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% translate 'Dirección secundaria' %}" />
+            <input type="text" id="direccion_secundaria" name="direccion_secundaria" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Second address{% endblocktrans %}" />
 
             <!-- Fila Ciudad / Estado-Provincia -->
             <div class="flex h-fit w-full flex-row gap-4">
               <!-- Ciudad -->
-              <input type="text" id="ciudad" name="ciudad" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% translate 'Ciudad' %}" />
+              <input type="text" id="ciudad" name="ciudad" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}City{% endblocktrans %}" />
 
               <!-- Estado / Provincia -->
-              <input type="text" id="Estado_Provincia" name="Estado_Provincia" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% translate 'Estado / Provincia' %}" />
+              <input type="text" id="Estado_Provincia" name="Estado_Provincia" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}State/Province{% endblocktrans %}" />
             </div>
 
             <!-- Fila código postal -->
-            <input type="text" id="codigo_postal" name="codigo_postal" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% translate 'Código postal' %}" />
+            <input type="text" id="codigo_postal" name="codigo_postal" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Postal code{% endblocktrans %}" />
           </div>
 
           <!-- Grupo Empresa / Cargo -->
           <div class="flex h-fit w-full flex-col gap-4">
             <!-- Fila Cargos deseados-->
             <div class="flex h-fit w-full flex-col">
-              <label for="Cargo1" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% translate "Cargos deseados" %}</label>
+              <label for="Cargo1" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Desired position{% endblocktrans %}</label>
               <!-- Cargo dropdowns-->
               <div class="flex h-full w-full flex-row gap-4">
                 <select id="Cargo1" name="Cargo1" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
-                  <option value="" disabled selected>{% translate "Seleccione un cargo" %}</option>
-                  <option value="Limpieza">{% translate "Limpieza" %}</option>
-                  <option value="Mantenimiento">{% translate "Mantenimiento general" %}</option>
-                  <option value="Ayudante-cocina">{% translate "Ayudante de cocina" %}</option>
-                  <option value="Recepcion">{% translate "Recepción" %}</option>
+                  <option value="" disabled selected>{% blocktrans %}Desired position{% endblocktrans %}</option>
+                  <option value="Limpieza">{% blocktrans %}Cleaning{% endblocktrans %}</option>
+                  <option value="Mantenimiento">{% blocktrans %}General maintenance{% endblocktrans %}</option>
+                  <option value="Ayudante-cocina">{% blocktrans %}Kitchen assistant{% endblocktrans %}</option>
+                  <option value="Recepcion">{% blocktrans %}Receptionist{% endblocktrans %}</option>
                 </select>
                 <select id="Cargo2" name="Cargo2" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
-                  <option value="" disabled selected>{% translate "Seleccione un cargo" %}</option>
-                  <option value="Limpieza">{% translate "Limpieza" %}</option>
-                  <option value="Mantenimiento">{% translate "Mantenimiento general" %}</option>
-                  <option value="Ayudante-cocina">{% translate "Ayudante de cocina" %}</option>
-                  <option value="Recepcion">{% translate "Recepción" %}</option>
+                  <option value="" disabled selected>{% blocktrans %}Desired position{% endblocktrans %}</option>
+                  <option value="Limpieza">{% blocktrans %}Cleaning{% endblocktrans %}</option>
+                  <option value="Mantenimiento">{% blocktrans %}General maintenance{% endblocktrans %}</option>
+                  <option value="Ayudante-cocina">{% blocktrans %}Kitchen assistant{% endblocktrans %}</option>
+                  <option value="Recepcion">{% blocktrans %}Receptionist{% endblocktrans %}</option>
                 </select>
               </div>
             </div>
 
             <!-- Fila Turno deseado -->
             <div class="flex h-fit w-full flex-col">
-              <label for="turno" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% translate "Turno deseado" %}</label>
+              <label for="turno" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Desired shift{% endblocktrans %}</label>
               <select id="turno" name="turno" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
-                <option value="" disabled selected>{% translate "Seleccione" %}</option>
-                <option value="mañana">{% translate "Mañana" %}</option>
-                <option value="tarde">{% translate "Tarde" %}</option>
-                <option value="noche">{% translate "Noche" %}</option>
-                <option value="madrugada">{% translate "Madrugada" %}</option>
+                <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
+                <option value="mañana">{% blocktrans %}Morning{% endblocktrans %}</option>
+                <option value="tarde">{% blocktrans %}Afternoon{% endblocktrans %}</option>
+                <option value="noche">{% blocktrans %}Night{% endblocktrans %}</option>
+                <option value="madrugada">{% blocktrans %}Overnight{% endblocktrans %}</option>
+
               </select>
             </div>
 
             <!-- Fila Nivel de inglés -->
             <div class="flex h-fit w-full flex-col">
-              <label for="nivel_ingles" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% translate "Nivel de inglés" %}</label>
+              <label for="nivel_ingles" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}English level{% endblocktrans %} </label>
               <select id="nivel_ingles" name="nivel_ingles" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
-                <option value="" disabled selected>{% translate "Seleccione" %}</option>
-                <option value="nulo">{% translate "Nulo" %}</option>
-                <option value="basico">{% translate "Básico" %}</option>
-                <option value="medio">{% translate "Medio" %}</option>
-                <option value="avanzado">{% translate "Avanzado" %}</option>
-                <option value="nativo">{% translate "Nativo" %}</option>
+                <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
+                <option value="nulo">{% blocktrans %}Null{% endblocktrans %}</option>
+                <option value="basico">{% blocktrans %}Basic{% endblocktrans %}</option>
+                <option value="medio">{% blocktrans %}Intermediate{% endblocktrans %}</option>
+                <option value="avanzado">{% blocktrans %}Advanced{% endblocktrans %}</option>
+                <option value="nativo">{% blocktrans %}Native{% endblocktrans %}</option>
+
               </select>
             </div>
 
             <!-- Fila ¿Cuándo puede empezar? -->
             <div class="relative flex h-full w-full flex-col">
               <!-- Label -->
-              <label for="fecha_inicio" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% translate "¿Cuándo puede empezar?" %}</label>
+              <label for="fecha_inicio" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}When can you start?{% endblocktrans %}</label>
               <!-- ícono datepicker -->
               <div class="pointer-events-none absolute inset-y-11 end-3 flex items-center">
                 <svg class="h-3.5 w-3.5 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -309,18 +311,19 @@
                 </svg>
               </div>
               <!-- datepicker input -->
-              <input datepicker id="fecha_inicio" name="fecha_inicio" type="text" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% translate 'dd/mm/aaaa'  %}" />
+              <input datepicker id="fecha_inicio" name="fecha_inicio" type="text" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Date{% endblocktrans %}" />
             </div>
 
             <!-- Fila Transporte -->
             <div class="flex h-fit w-full flex-col">
-              <label for="Transporte" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% translate "Transporte que utiliza" %}</label>
+              <label for="Transporte" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}What transportation method do you use?{% endblocktrans %}</label>
               <select id="Transporte" name="Transporte" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
-                <option value="" disabled selected>{% translate "Seleccione" %}</option>
-                <option value="bus">{% translate "Bus" %}</option>
-                <option value="vehiculo-propio">{% translate "Vehículo propio" %}</option>
-                <option value="uber">{% translate "Uber" %}</option>
-                <option value="otro">{% translate "Otro" %}</option>
+                <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
+                <option value="bus">{% blocktrans %}Bus{% endblocktrans %}</option>
+                <option value="vehiculo-propio">{% blocktrans %}Own vehicle{% endblocktrans %}</option>
+                <option value="uber">{% blocktrans %}Uber{% endblocktrans %}</option>
+                <option value="otro">{% blocktrans %}Other{% endblocktrans %}</option>
+
               </select>
             </div>
           </div>
@@ -329,27 +332,28 @@
           <div class="flex h-fit w-full flex-col gap-4">
             <!-- Fila ¿Cómo nos conociste? -->
             <div class="flex h-fit w-full flex-col">
-              <label for="Conociste" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% translate "¿Cómo nos conociste?" %}</label>
+              <label for="Conociste" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}How did you hear about us?{% endblocktrans %}</label>
               <select id="Conociste" name="Conociste" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
-                <option value="" disabled selected>{% translate "Seleccione" %}</option>
-                <option value="referencia">{% translate "Refencia de un conocido" %}</option>
-                <option value="sticker-qr">{% translate "Sticker con QR" %}</option>
-                <option value="volante">{% translate "Volante" %}</option>
-                <option value="oficina">{% translate "Oficina" %}</option>
-                <option value="google">{% translate "Google" %}</option>
-                <option value="otro">{% translate "Otro" %}</option>
+                <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
+                <option value="referencia">{% blocktrans %}Reference from an acquaintance{% endblocktrans %}</option>
+                <option value="sticker-qr">{% blocktrans %}Sticker with QR{% endblocktrans %}</option>
+                <option value="volante">{% blocktrans %}Flyer{% endblocktrans %}</option>
+                <option value="oficina">{% blocktrans %}Office{% endblocktrans %}</option>
+                <option value="google">{% blocktrans %}Google{% endblocktrans %}</option>
+                <option value="otro">{% blocktrans %}Other{% endblocktrans %}</option>
+
               </select>
             </div>
 
             <!-- Fila Nombre-->
             <div class="h-fit w-full">
-              <label for="referencia" class="text-md mb-1 ml-1 flex h-fit w-full">{% translate "Referido por (si aplica)" %}</label>
-              <input type="text" id="referencia" name="referencia" aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% translate 'Referencia' %}" />
+              <label for="referencia" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Referred by (If it applies){% endblocktrans %}</label>
+              <input type="text" id="referencia" name="referencia" aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Reference{% endblocktrans %}" />
             </div>
           </div>
 
           <!-- Botón Aplicar ahora -->
-          <button type="submit" class="hover:bg-blue-800 focus:ring-blue-300 hover:bg-hoverblue w-full rounded-lg border border-gray-300 bg-blue px-5 py-2.5 text-center font-kumbh_bold text-sm font-medium text-white shadow-sm transition ease-in-out hover:scale-105 focus:outline-none focus:ring-4 sm:w-auto">APLICAR AHORA</button>
+          <button type="submit" class="hover:bg-blue-800 focus:ring-blue-300 hover:bg-hoverblue w-full rounded-lg border border-gray-300 bg-blue px-5 py-2.5 text-center font-kumbh_bold text-sm font-medium text-white shadow-sm transition ease-in-out hover:scale-105 focus:outline-none focus:ring-4 sm:w-auto">{% blocktrans %}APPLY NOW{% endblocktrans %}</button>
         </form>
       </div>
 
@@ -372,44 +376,17 @@
       {% endif %}
     </div>
 
-    <!-- Scripts -->
-    <!--Permite que en los campos teléfono y código solo acepte números y no otros caracteres-->
-    <!-- <script>
-    function numeros(elementId){
-      document.getElementById(elementId).addEventListener('input', function(event) {
-      // Eliminar caracteres no numéricos
-      var inputValue = event.target.value.replace(/\D/g, '');
-      // Limitar a 10 dígitos
-      inputValue = inputValue.substring(0, 10);
-      // Actualizar el valor del campo
-      event.target.value = inputValue;
-    });
-    }
-    numeros('Telefono1');
-    numeros('Telefono2');
-    numeros('Telefono3');
-    numeros('Codigo4');
-  </script> -->
-
-    <!--Muestra el popup modal-->
-    <!--  <script>
-    $(document).ready(function() {
-      // Muestra el modal al cargar la página
-      $('#politicasModal').modal('show');
-      
-      // Cierra el modal cuando se hace clic en "Aceptar Políticas"
-      $('#aceptarPoliticas').click(function() {
-        $('#politicasModal').modal('hide');
-      });
-    });
-  </script> -->
-
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- dropdown de cambio de idioma -->
     <script src="{% static 'js/toggle-idioma-dropdown.js' %}"></script>
+    <!-- Botón para scrollear el form hacia el inicio -->
+    <script src="{% static 'js/button-scroll-form-up.js' %}"></script>
+    <!-- CDN temporal del JS de Flowbite -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>
-    {% load static %}
+    
 
- <!-- Enlazar archivo JavaScript -->
- <script src="{% static 'js/verificacion.js' %}"></script>
+    <!-- Enlazar archivo JavaScript -->
+    <script src="{% static 'js/verificacion.js' %}"></script>
   </body>
 </html>
