@@ -57,23 +57,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   }
   
-  function validateEmail() {
-    var emailValue = emailInput.value.trim(); // Eliminar espacios en blanco al principio y al final
-    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (emailValue === '' || emailRegex.test(emailValue)) {
-      emailInput.setCustomValidity('');
-      emailErrorMessage.innerText = '';
-  } else {
-      emailInput.setCustomValidity('Por favor, ingrese una dirección de correo electrónico válida.');
-      emailErrorMessage.innerText = 'Por favor, ingrese una dirección de correo electrónico válida.';
-  }
-  }
+  
  
   // Obtener referencias a los elementos de referencia y comentario
-
-  var emailInput = document.getElementById("email");
-  var emailErrorMessage = document.getElementById("email-error-message");
 
   var nombreInput = document.getElementById("nombre");
   var nombreErrorMessage = document.getElementById("nombre-error-message");
@@ -103,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var direccion2ErrorMessage = document.getElementById("Direccion2-error-message")
 
   // Aplicar la lógica y mensajes de error a ambos campos
-  validateEmail(emailInput,emailErrorMessage);
+  
   validarCampo(nombreInput, nombreErrorMessage);
   validarCampo(apellidoInput, apellidoErrorMessage);
   validarCampo(alergiaInput, alergiaErrorMessage);
