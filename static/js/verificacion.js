@@ -15,15 +15,6 @@ function numeros(elementId) {
   numeros('telefono_emergencia');
   numeros('codigo_postal');
   
-  $(document).ready(function () {
-    // Muestra el modal al cargar la página
-    $('#politicasModal').modal('show');
-  
-    // Cierra el modal cuando se hace clic en "Aceptar Políticas"
-    $('#aceptarPoliticas').click(function () {
-        $('#politicasModal').modal('hide');
-    });
-  });
   
   document.addEventListener("DOMContentLoaded", function () {
     // Función reutilizable para validar campos
@@ -31,7 +22,7 @@ function numeros(elementId) {
         input.addEventListener("input", function () {
             var valor = input.value.trim(); // Eliminar espacios en blanco al principio y al final
             var longitud = valor.length;
-  
+            //verifica la longitud del input para que no se pase
             if (longitud > 2 && longitud <20) {
                 input.setCustomValidity('');
                 mensajeError.innerText = '';
@@ -64,8 +55,8 @@ function numeros(elementId) {
     var nombreInput = document.getElementById("nombre");
     var nombreErrorMessage = document.getElementById("nombre-error-message");
   
-    var apellidoInput = document.getElementById("Apellido");
-    var apellidoErrorMessage = document.getElementById("Apellido-error-message");
+    var apellidoInput = document.getElementById("apellido");
+    var apellidoErrorMessage = document.getElementById("apellido-error-message");
   
     var alergiaInput = document.getElementById("alergia");
     var alergiaErrorMessage = document.getElementById("alergia-error-message");
@@ -99,5 +90,36 @@ function numeros(elementId) {
     validarTelefonos(telefono1Input, telefono1ErrorMessage);
     validarTelefonos(telefono2Input, telefono2ErrorMessage);
     validarTelefonos(telefono3Input, telefono3ErrorMessage);
+
+    /*
+  // Mostrar el mensaje de error cuando se intente enviar el formulario
+  apellidoInput.addEventListener('invalid', function () {
+      if (apellidoInput.validity.valueMissing) {
+          apellidoInput.setCustomValidity('Este campo es obligatorio.');
+          apellidoErrorMessage.innerText = 'Este campo es obligatorio.';
+      }
+  });
+
+  telefonoInput.addEventListener('invalid', function () {
+      if (telefonoInput.validity.valueMissing) {
+          telefonoInput.setCustomValidity('Este campo es obligatorio.');
+          telefonoErrorMessage.innerText = 'Este campo es obligatorio.';
+      }
+  });
+
+  var form = document.querySelector('form');
+    form.addEventListener('submit', function (event) {
+        if (!apellidoInput.checkValidity()) {
+            event.preventDefault();
+        }
+    });
+  // Evitar que el formulario se envíe si el número de teléfono no es válido
+  var form = document.querySelector('form');
+    form.addEventListener('submit', function (event) {
+        if (!telefonoInput.checkValidity()) {
+            event.preventDefault();
+        }
+    });*/
+
   });
   
