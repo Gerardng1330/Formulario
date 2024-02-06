@@ -16,7 +16,7 @@ def home(request ):
     return render (request, 'home.html')
 
 def formacion(request):
-    return render(request,'formulario.html')
+    return render(request,'activacion.html')
 
 
 def inicio_sesion(request):#Funcion de inicio de sesion

@@ -52,7 +52,7 @@ def password_email(request):
 def succefully(request):
     return render (request, 'registro_existoso.html')
 
-def generar_token():
+'''def generar_token():
     # Genera un token numérico de 6 dígitos
     return random.randint(100000, 999999)
 
@@ -129,7 +129,7 @@ def registro(request):#creo la funcion del registro
             return render(request, 'registro.html', {'error': 'Las contraseñas no coinciden'})
 
 #datos introducidos son incorrectos
-#me equivoque de correo
+#me equivoque de correo'''
 
 def validar_token(request):
     if request.method == 'GET':
