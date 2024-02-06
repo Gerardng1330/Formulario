@@ -15,12 +15,12 @@
     <!-- Carga el archivo css -->
   </head>
 
-  <body class="overflow-hidden font-kumbh_regular">
+  <body class="font-kumbh_regular">
     <!-- Modal Políticas y privacidad -->
     <!-- Agregar en el JS que cuando el modal está activo: 
       form-container tiene blur-sm 
       body tiene overflow-hidden-->
-    <div class="fixed z-10 flex h-screen w-full items-center justify-center bg-black bg-opacity-50">
+    <div class="fixed z-10 hidden h-screen w-full items-center justify-center bg-black bg-opacity-50">
       <!-- Modal -->
       <div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="z-30 items-center justify-center overflow-hidden md:inset-0">
         <div class="relative max-h-full w-full max-w-2xl p-4">
@@ -94,7 +94,7 @@
       </div>
 
       <!-- Contenedor del formulario -->
-      <div id="form-container" name="form-container" class="flex h-full w-1/2 flex-col items-center justify-start gap-2 blur-sm">
+      <div id="form-container" name="form-container" class="flex h-full w-1/2 flex-col items-center justify-start gap-2">
         <!-- Título del formulario -->
         <h1 id="titulo-formulario" name="titulo-formulario" class="flex h-fit w-full flex-col items-center justify-center rounded-lg border border-gray-200 bg-blue p-3 font-kumbh_bold text-lg text-white shadow-sm">{% translate "FORMULARIO DE APLICANTES" %}</h1>
 

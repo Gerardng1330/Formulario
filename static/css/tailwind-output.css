@@ -2951,15 +2951,6 @@ input:checked + .toggle-bg {
   font-family: kumbh_regular, sans-serif;
 }
 
-.font-serif {
-  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-}
-
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1;
-}
-
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -3063,16 +3054,8 @@ input:checked + .toggle-bg {
   line-height: 2.25rem;
 }
 
-.leading-normal {
-  line-height: 1.5;
-}
-
 .leading-relaxed {
   line-height: 1.625;
-}
-
-.tracking-normal {
-  letter-spacing: 0em;
 }
 
 .text-\[\#336699\]\/\[\.35\] {
