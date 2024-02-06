@@ -6,7 +6,8 @@ from .forms import UsuarioForm
 from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .models import PoliticasAceptadas
+from .forms import UsuarioForm
+from django.http import JsonResponse
 #Renderizar el formulario.html
 def home(request):
     #trans es la palabra clave para asignarle la traduccion
@@ -52,11 +53,26 @@ def formulario_view(request):
             messages.success(request, 'El formulario se envió satisfactoriamente.')
             return render(request,'exito.html')
         else:
-            print(form.errors)
-            messages.error(request, 'Hubo un error en el formulario. Por favor, verifica los campos.')
+            # Manejar mensaje de error específico para el campo 'nombre'
+            if 'nombre' in form.errors:
+                messages.error(request, 'El nombre debe tener al menos 3 caracteres.')
+            else:
+                messages.error(request, 'Hubo un error en el formulario. Por favor, verifica los campos.')
+       
     else:
         form = UsuarioForm()
 
     
-    return render(request, 'formularios.html', {'form': form})
+    return render(request, 'formulario.html', {'form': form})
+
+
+def prueba(request):
+    return render('prueba.html')
+
+def validar_nombre(request):
+    
+    nombre = request.GET.get('nombre', '')
+    if len(nombre) < 3:
+        return JsonResponse({'error': 'El nombre debe tener al menos 3 caracteress.'})
+    return JsonResponse({'success': True})
 

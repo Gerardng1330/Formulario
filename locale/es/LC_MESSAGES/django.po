@@ -356,30 +356,30 @@ msgid "Select file"
 msgstr "Seleccionar archivo"
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2203
-msgid "IP address"
-msgstr ""
+msgid "¡Warning!"
+msgstr "¡Advertencia!"
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2296
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2297
 #, python-format
-msgid "“%(value)s” value must be either None, True or False."
-msgstr ""
+msgid "This form is not accepting responses."
+msgstr "Este formulario no esta acpetando respuestas"
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2299
-msgid "Boolean (Either True, False or None)"
-msgstr ""
+msgid "Please contact the administrator for more information."
+msgstr "Comuníquese con el administrador para obtener más información."
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2350
-msgid "Positive big integer"
-msgstr ""
+msgid "Success!"
+msgstr "¡Éxito!"
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2365
-msgid "Positive integer"
-msgstr ""
+msgid "Your form has been submitted successfully."
+msgstr "Tu formulario se ha enviado correctamente."
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2380
-msgid "Positive small integer"
-msgstr ""
+msgid "Sent"
+msgstr "Enviado"
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2396
 #, python-format

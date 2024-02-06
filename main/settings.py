@@ -23,14 +23,8 @@ INSTALLED_APPS = [
     'password',
     'registro',
     #frontend
-    'django_browser_reload',
-]
-
-#tailwind configuration
-TAILWIND_APP_NAME = 'theme' 
-
-INTERNAL_IPS = [
-    "127.0.0.1",
+    'django_browser_reload'
+     
 ]
 
 NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd" #path de node.js en tu computadora. cmd -> where npm. prueba entre \ y /
@@ -108,10 +102,17 @@ USE_L10N = True
 
 USE_TZ = True
 
+#Control de archivos estáticos (CSS, imágenes, JavaScript)
+#https://docs.djangoproject.com/en/5.0/howto/static-files/
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]
 
+STATIC_ROOT = BASE_DIR / "development-cdn" / "static" #Dónde queremos guardar los archivos
 
+#Internacionalización
 LANGUAGES = (
     ('en', _('English')),
     ('es', _('Spanish')),
@@ -135,3 +136,5 @@ EMAIL_USE_TLS = True
 EMAIL_SSL_VERIFICATION = False
 EMAIL_HOST_USER = 'noreply@arvcloud.com'
 EMAIL_HOST_PASSWORD = 'Jda108?jjadpa300' 
+
+AUTH_USER_MODEL = "registro.User"

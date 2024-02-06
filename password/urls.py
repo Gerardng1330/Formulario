@@ -3,8 +3,8 @@ from . import views
 
 urlpatterns  = [
     path('recuperar/', views.recuperar_pass,name='recuperar'),    
-    #path('register/', views.registro, name='register'),
-    path('validar-token/', views.validar_token, name='validartoken'),
+    path('registro/', views.registro, name='registro'),
+    path('activacion/', views.validar_token, name='activacion'),
     path('succefully/', views.succefully, name= 'succefully'),
     path('password-email/', views.password_email,name='passwordemail'),
     path('password-send/', views.password_send,name='passwordsend'),

@@ -1,14 +1,17 @@
 from django.urls import path
-from .views import home, formulario_view,exito,render_formulario,cerrado
+from . import views
 
 app_name = 'formularios'
 
 urlpatterns = [
     #comentariosyhughgjhghjg
-    path('formulario/', render_formulario, name='render_formulario'),
-    path('exitoss/', formulario_view, name='formulario_view'),#prueba
-    path('exito/', exito, name='exito'),
-    path('cerrado/', cerrado, name='cerrado'),
+    path('formulario/', views.render_formulario, name='ver_formulario'),
+    path('formulario_enviado/', views.formulario_view, name='envio_formulario'),#prueba
+    path('exito/', views.exito, name='pagina_exito'),
+    path('cerrado/', views.cerrado, name='pagina_cerrado}'),
+    path('validar-nombre/', views.validar_nombre, name='validar_nombre'),
+    path('prueba/', views.prueba, name='prueba'),
+
 
 
    
