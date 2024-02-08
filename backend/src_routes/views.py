@@ -163,8 +163,6 @@ def enviar_correo(destinatario, token):
     message = f"Su token de veificacion es: {token}"
     from_email = settings.EMAIL_HOST_USER
     print(subject,message,from_email,destinatario)
-    
-
     try:
         # Utiliza send_mail de Django para enviar el correo
         send_mail(subject, message, from_email, [destinatario], fail_silently=False)
