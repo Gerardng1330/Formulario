@@ -113,7 +113,6 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = BASE_DIR / "development-cdn" / "static" #Dónde queremos guardar los archivos
 
-print('Soy basedir:', BASE_DIR)
 #Internacionalización
 LANGUAGES = (
     ('en', _('English')),

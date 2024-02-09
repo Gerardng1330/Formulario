@@ -1,5 +1,8 @@
 from django.urls import path
 from . import views
+""" Para servir archivos estáticos en desarrollo """
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = 'src_routes'
 
@@ -28,3 +31,8 @@ urlpatterns = [
     path('password-complete/', views.password_complete,name='passwordcomplete'),
     path('verify/<str:token>/', views.password_send, name='passwordcambiado')
 ]
+
+if settings.DEBUG:
+    #No hacer esto en producción. Esto es solo para el manejo local de archivos estáticos.
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
