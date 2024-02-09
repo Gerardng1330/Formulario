@@ -1,40 +1,29 @@
 from django.utils.translation import gettext as _
-from django.utils.translation import get_language,activate,gettext
+from django.utils.translation import get_language, activate, gettext
 from django.shortcuts import render, redirect
 from backend.formularios.forms import UsuarioForm
 from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-
-from django.shortcuts import render,redirect
-from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm
+#from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.db import IntegrityError
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.contrib.auth import login, logout, authenticate, views as auth_views
-from django.contrib.auth import get_user_model
-
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.core.mail import send_mail
 from django.conf import settings
-from django.contrib import messages
 from django.views.decorators.csrf import csrf_protect
-from django.urls import reverse
 import random
+from django.http import JsonResponse
 import smtplib
 from django.utils.datastructures import MultiValueDictKeyError
-
-#Renderizar el formulario.html
-# def home(request):
-#     #trans es la palabra clave para asignarle la traduccion
-#     trans = translate(language='es')
-#     return render(request,'formulario.html',{'trans': trans})
-
-#Renderizar el exti.html(prueba)
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 def exito(request):
     trans = translate(language='es')
@@ -48,7 +37,6 @@ def render_formulario(request):
     transe = translate(language='en')
     return render(request,'formulario.html',{'transe': transe})
 
-
 # La funcion nos permite traducir el texto en pantalla
 def translate(language):
     cur_languaje = get_language()
@@ -56,8 +44,6 @@ def translate(language):
         activate(language)
         #prueba de traduccion
         text= gettext('Language')
-       
-
     finally:
         activate(cur_languaje)
     return text     
@@ -81,13 +67,10 @@ def formulario_view(request):
                 messages.error(request, 'El nombre debe tener al menos 3 caracteres.')
             else:
                 messages.error(request, 'Hubo un error en el formulario. Por favor, verifica los campos.')
-       
     else:
         form = UsuarioForm()
 
     return render(request, 'formulario.html', {'form': form})
-
-
 
 def prueba(request):
     return render('prueba.html')
@@ -99,16 +82,12 @@ def validar_nombre(request):
         return JsonResponse({'error': 'El nombre debe tener al menos 3 caracteress.'})
     return JsonResponse({'success': True})
 
-
-# Login
-User = get_user_model()
 def home(request ):
     return render (request, 'home.html')
 
 def formacion(request):
     return render(request,'activacion.html')
-
-
+#Login
 def inicio_sesion(request):#Funcion de inicio de sesion
     if request.user.is_authenticated:#nos aseguramos de que el usuario siempre tenga que iniciar sesion o la sesion no este iniciada
         logout(request)
@@ -124,7 +103,7 @@ def inicio_sesion(request):#Funcion de inicio de sesion
         else:
             login(request, user)
             return redirect('home')
-    
+   
 def recuperar_pass(request ):
     if request.user.is_authenticated:#nos aseguramos de que el usuario siempre tenga que iniciar sesion o la sesion no este iniciada
         logout(request)
@@ -138,27 +117,9 @@ def recuperar_pass(request ):
             return render(request, 'recuperar.html',{
                     'error': 'Este Correo electrónico no es válido'
                 })
-        
-        
-def password_send(request):
-    return render (request, 'password_send.html')
 
-def password_cambiado(request):
-    return render (request, 'password_cambiado.html')
-
-def password_complete(request):
-    return render (request, 'password_complete.html')
-
-def password_email(request):
-    return render (request, 'password_email.html')
-def succefully(request):
-    return render (request, 'registro_existoso.html')
-
-def generar_token():
-    # Genera un token numérico de 6 dígitos
-    return random.randint(100000, 999999)
-
-def enviar_correo(destinatario, token):
+def enviar_correo(destinatario):
+    token = "" # Genera un token UUID único
     subject = "Token de Registro"
     message = f"Su token de veificacion es: {token}"
     from_email = settings.EMAIL_HOST_USER
@@ -169,6 +130,7 @@ def enviar_correo(destinatario, token):
     except Exception as e:
         # Maneja cualquier excepción que pueda ocurrir al enviar el correo
         print(f"Error al enviar el correo: {e}")
+       
 
 def registro(request):#creo la funcion del registro
     if request.user.is_authenticated:#nos aseguramos de que el usuario siempre tenga que iniciar sesion o la sesion no este iniciada
@@ -181,6 +143,7 @@ def registro(request):#creo la funcion del registro
             #si las contraseñas son iguales entonces entra a el try
             try:
                 validate_email(request.POST['Correo'])
+                print(f'Email valido.')
                 
                 if User.objects.filter(email=request.POST['Correo']).exists():
                     return render(request, 'registro.html', {
@@ -200,34 +163,26 @@ def registro(request):#creo la funcion del registro
                 #Agregamos 2 datos mas que pedimos en el Registro nombre y apellido
                 user.first_name = request.POST['Nombre']
                 user.last_name = request.POST['Apellido']
-
-                #guardamos los datos en la base de datos}
-                user.is_active = False
-                
+                #guardamos los datos en la base de datos
                 user.save()
-            
+                #creo una cookie de sesion para el usuario con login y tomo el valor ingresado e usuario
+                #se utiliza para autenticar a un usuario en el sistema y establecer una sesión de usuario. 
                 
-                # Genera un token y lo envía por correo
-                token = generar_token()
-                enviar_correo(request.POST['Correo'], token)
+                enviar_correo(request.POST['Correo'])
                 print(enviar_correo)
-
-                # Almacena el correo y token en la sesión para usarlo en la validación
-                request.session['correo-registro'] = request.POST['Correo']
-                request.session['token-registro'] = token
-                request.session['usuario-registro']= request.POST['Usuario']
-                request.session['contra-registro']= request.POST['Contraseña']
-                request.session['nombre-registro']= request.POST['Nombre']
-                request.session['apellido-registro']= request.POST['Apellido']
                 # Agrega el token al contexto para mostrarlo en la plantilla (opcional)
-                print(request.POST['Correo'],token,request.POST['Contraseña'],request.POST['Usuario'])
-                return redirect('activacion')
-
-            except IntegrityError:
-                return render(request, 'registro.html', {'error': 'Nombre de usuario no es válido.'})
-        else:
-            return render(request, 'registro.html', {'error': 'Las contraseñas no coinciden'})
-
+                print(request.POST['Correo'],request.POST['Contraseña'],request.POST['Usuario'])
+                return redirect('src_routes:activacion')
+            except IntegrityError:#en tal caso el username ya este registrado en la bd le mostramos el error de nombre de usuario existente
+                #e un except epecifico
+                #renderizamos la pagina y mostramos el error
+                return render(request, 'registro.html',{
+                    'error': 'Nombre de usuario existente'
+                })
+        #si las contraseñas no coinciden entoces le mostramos el error al usuario         
+        return render(request, 'registro.html',{
+            'error': 'Las Contraseñas no coinciden'
+        })
 #datos introducidos son incorrectos
 #me equivoque de correo
 
@@ -237,13 +192,14 @@ def validar_token(request):
     else: 
         request.method == 'POST'
         token_ingresado = request.POST.get('token')
+        print(token_ingresado)
         
         try:
             # Verifica si el token es válido
-            stored_token = request.session.get('token-registro')
+            token_almacenado = user.token_user
             
-            if token_ingresado == str(stored_token):
-                print("Tipo de stored_token:", type(stored_token),stored_token,token_ingresado)
+            if token_ingresado == str(token_almacenado):
+                print("Tipo de stored_token:", type(token_almacenado),token_almacenado,token_ingresado)
                 # Obtén el correo electrónico almacenado en la sesión
                 stored_email = request.session.get('correo-registro')
                 usuario_guardado = (request.session.get('usuario-registro'))
@@ -263,7 +219,7 @@ def validar_token(request):
                                 return redirect('succefully')
                     #Si el usuario no existe, crea un nuevo usuario y guárdalo en la base de datos
                     else:
-                        print(f'algo')
+                       print(f'algo')
                         #Autentica al nuevo usuario
                 except IntegrityError:#en tal caso el username ya este registrado en la bd le mostramos el error de nombre de usuario existente
                 #e un except epecifico
@@ -278,8 +234,22 @@ def validar_token(request):
             # Maneja cualquier otra excepción que pueda ocurrir
             print(f"Error al validar el token: {e}")
             return render(request, 'activacion.html', {'error': 'Error al validar el token'})
-    # Si la solicitud no es de tipo POST, redirige a otra página o muestra un mensaje de error
+    # Si la solicitud no es de tipo POST, redirige a otra página o muestra un mensaje de error'''
 
 def signout (request):
     logout(request)
     return redirect('inicio')
+        
+def password_send(request):
+    return render (request, 'password_send.html')
+
+def password_cambiado(request):
+    return render (request, 'password_cambiado.html')
+
+def password_complete(request):
+    return render (request, 'password_complete.html')
+
+def password_email(request):
+    return render (request, 'password_email.html')
+def succefully(request):
+    return render (request, 'registro_existoso.html')

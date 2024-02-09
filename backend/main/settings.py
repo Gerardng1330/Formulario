@@ -113,7 +113,7 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = BASE_DIR / "development-cdn" / "static" #Dónde queremos guardar los archivos
 
-print('Soy basedir:', BASE_DIR)
+
 #Internacionalización
 LANGUAGES = (
     ('en', _('English')),
@@ -130,7 +130,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Custom user model
 
 #Correo al mandar
-
 EMAIL_BACKEND = 'password.backends.email_backend.EmailBackend'
 EMAIL_HOST = 'mail.arvcloud.com'
 EMAIL_PORT = 587
