@@ -37,16 +37,14 @@ from django.utils.datastructures import MultiValueDictKeyError
 #Renderizar el exti.html(prueba)
 
 def exito(request):
-    trans = translate(language='es')
-    return render(request, 'exito.html',{'trans': trans})
+    return render(request, 'exito.html')
 
 def cerrado(request):
     return render(request, 'cerrado.html')
 
 #Renderizar el formulario.html(prueba)
 def render_formulario(request):
-    transe = translate(language='en')
-    return render(request,'formulario.html',{'transe': transe})
+    return render(request,'formulario.html')
 
 
 # La funcion nos permite traducir el texto en pantalla
@@ -75,12 +73,7 @@ def formulario_view(request):
         else:
             # Imprimir errores del formulario en la consola del servidor
             print(form.errors)
-
-            # Manejar mensaje de error específico para el campo 'nombre'
-            if 'nombre' in form.errors:
-                messages.error(request, 'El nombre debe tener al menos 3 caracteres.')
-            else:
-                messages.error(request, 'Hubo un error en el formulario. Por favor, verifica los campos.')
+            messages.error(request, 'Hubo un error en el formulario. Por favor, verifica los campos.')
        
     else:
         form = UsuarioForm()
@@ -89,15 +82,7 @@ def formulario_view(request):
 
 
 
-def prueba(request):
-    return render('prueba.html')
 
-def validar_nombre(request):
-    
-    nombre = request.GET.get('nombre', '')
-    if len(nombre) < 3:
-        return JsonResponse({'error': 'El nombre debe tener al menos 3 caracteress.'})
-    return JsonResponse({'success': True})
 
 
 # Login
