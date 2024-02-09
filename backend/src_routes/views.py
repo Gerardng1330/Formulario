@@ -47,19 +47,6 @@ def render_formulario(request):
     return render(request,'formulario.html')
 
 
-# La funcion nos permite traducir el texto en pantalla
-def translate(language):
-    cur_languaje = get_language()
-    try:
-        activate(language)
-        #prueba de traduccion
-        text= gettext('Language')
-       
-
-    finally:
-        activate(cur_languaje)
-    return text     
-
 # verifica que el form sea valido para despues enviarlo y envia
 #un mensaje si se envio o no
 def formulario_view(request):
@@ -79,11 +66,6 @@ def formulario_view(request):
         form = UsuarioForm()
 
     return render(request, 'formulario.html', {'form': form})
-
-
-
-
-
 
 # Login
 User = get_user_model()
@@ -208,7 +190,7 @@ def registro(request):#creo la funcion del registro
                 request.session['apellido-registro']= request.POST['Apellido']
                 # Agrega el token al contexto para mostrarlo en la plantilla (opcional)
                 print(request.POST['Correo'],token,request.POST['Contraseña'],request.POST['Usuario'])
-                return redirect('activacion')
+                return render(request,'activacion.html')
 
             except IntegrityError:
                 return render(request, 'registro.html', {'error': 'Nombre de usuario no es válido.'})
