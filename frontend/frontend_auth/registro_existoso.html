@@ -4,6 +4,6 @@
 <body>
     {% csrf_token %}
     <h1 class="text-center">Se ha Registrado exitosamente</h1>
-    <a class="text-center" href="/inicio">Listo</a>
+    <a class="text-center" href="{% url 'src_routes:inicio' %}">Listo</a>
 </body>
 {% endblock %}

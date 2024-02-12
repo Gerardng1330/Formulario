@@ -118,10 +118,9 @@ def recuperar_pass(request ):
                     'error': 'Este Correo electrónico no es válido'
                 })
 
-def enviar_correo(destinatario):
-    token = "" # Genera un token UUID único
+def enviar_correo(destinatario,token):
     subject = "Token de Registro"
-    message = f"Su token de veificacion es: {token}"
+    message = f"Hola, Nanu:\nTu código es: {token} \nÚsalo para acceder a tu cuenta.\nSi no solicitaste esto, simplemente ignora este mensaje.\nSaludos,\nEl equipo de ARV System Corp."
     from_email = settings.EMAIL_HOST_USER
     print(subject,message,from_email,destinatario)
     try:
@@ -167,9 +166,10 @@ def registro(request):#creo la funcion del registro
                 user.save()
                 #creo una cookie de sesion para el usuario con login y tomo el valor ingresado e usuario
                 #se utiliza para autenticar a un usuario en el sistema y establecer una sesión de usuario. 
-                
-                enviar_correo(request.POST['Correo'])
+                token = user.token_user
+                enviar_correo(request.POST['Correo'],token)
                 print(enviar_correo)
+                
                 # Agrega el token al contexto para mostrarlo en la plantilla (opcional)
                 print(request.POST['Correo'],request.POST['Contraseña'],request.POST['Usuario'])
                 return redirect('src_routes:activacion')
@@ -189,67 +189,34 @@ def registro(request):#creo la funcion del registro
 def validar_token(request):
     if request.method == 'GET':
         return render(request, 'activacion.html')
-    else: 
-        request.method == 'POST'
+    else:
         token_ingresado = request.POST.get('token')
-        print(token_ingresado)
-        
         try:
-            # Verifica si el token es válido
-            token_almacenado = user.token_user
-            
-            if token_ingresado == str(token_almacenado):
-                print("Tipo de stored_token:", type(token_almacenado),token_almacenado,token_ingresado)
-                # Obtén el correo electrónico almacenado en la sesión
-                stored_email = request.session.get('correo-registro')
-                usuario_guardado = (request.session.get('usuario-registro'))
-                contra_guardado = (request.session.get('contra-registro'))
-                nombre_guardado = (request.session.get('nombre-registro'))
-                apellido_guardado = (request.session.get('apellido-registro'))
-                print(nombre_guardado,apellido_guardado,stored_email,usuario_guardado,contra_guardado)
-                # Verifica si el usuario ya existe en la base de datos
-                try:
-                    if not request.user.is_authenticated:
-                        if User.objects.filter(email=stored_email).exists():
-                            user = authenticate(request, username=usuario_guardado) 
-                            if user is None:
-                                print(user)
-                                return render(request, 'activacion.html', {'error': 'Error al validar el token'})
-                            else:
-                                return redirect('succefully')
-                    #Si el usuario no existe, crea un nuevo usuario y guárdalo en la base de datos
-                    else:
-                       print(f'algo')
-                        #Autentica al nuevo usuario
-                except IntegrityError:#en tal caso el username ya este registrado en la bd le mostramos el error de nombre de usuario existente
-                #e un except epecifico
-                #renderizamos la pagina y mostramos el error
-                    return render(request, 'registro.html',{
-                        'error': 'El nombre de usuario no es válido.'
-                    })
+            user = User.objects.get(token_user=token_ingresado)
+            print(token_ingresado)
+            if token_ingresado == user.token_user:
+                # Obtenemos el nombre de usuario y contraseña del usuario asociado al token
+                username = user.username
+                password = user.password
+                
+                # Autenticar al usuario utilizando el nombre de usuario y la contraseña
+                autenticacion = authenticate(request, username=username, password=password)
+                if autenticacion is not None:
+                    user.email_confirmed = True
+                    user.save()
+                    return redirect('email_activate')
+                else:
+                    return render(request, 'activacion.html', {'error': f'Error de autenticación'})
             else:
-                # Si el token no es válido, muestra un mensaje de error
-                return render(request, 'activacion.html', {'error': 'Token no válido'})
+                return render(request, 'activacion.html', {'error': f'Token no válido'})
+        except User.DoesNotExist as e:
+            return render(request, 'activacion.html', {'error': f'Usuario no encontrado: {e}'})
         except Exception as e:
-            # Maneja cualquier otra excepción que pueda ocurrir
-            print(f"Error al validar el token: {e}")
-            return render(request, 'activacion.html', {'error': 'Error al validar el token'})
-    # Si la solicitud no es de tipo POST, redirige a otra página o muestra un mensaje de error'''
+            return render(request, 'activacion.html', {'error': f'Error al validar el token: {e}'})
 
 def signout (request):
     logout(request)
     return redirect('inicio')
         
-def password_send(request):
-    return render (request, 'password_send.html')
-
-def password_cambiado(request):
-    return render (request, 'password_cambiado.html')
-
-def password_complete(request):
-    return render (request, 'password_complete.html')
-
-def password_email(request):
-    return render (request, 'password_email.html')
 def succefully(request):
     return render (request, 'registro_existoso.html')
