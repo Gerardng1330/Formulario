@@ -30,7 +30,7 @@ function numeros(elementId) {
                 input.setCustomValidity('');
                 mensajeError.innerText = '';
             } else {
-                input.setCustomValidity('{% blocktrans %}Gender{% endblocktrans %}');
+                input.setCustomValidity(mensajeCampoVacio);
                 mensajeError.innerText = mensajeCampoVacio;
             }            
         });
@@ -45,8 +45,8 @@ function numeros(elementId) {
             input.setCustomValidity('');
             mensajeError.innerText = '';
         } else {
-            input.setCustomValidity('{% blocktrans %}Por favor, ingrese un número de teléfono válido de 7 dígitos.{% endblocktrans %}');
-            mensajeError.innerText = 'Por favor, ingrese un número de teléfonooo válido de 7 dígitos.';
+            input.setCustomValidity(mensajeCampoTelefono);
+            mensajeError.innerText = mensajeCampoTelefono;
 
         }
     });

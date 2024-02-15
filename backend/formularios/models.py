@@ -41,7 +41,7 @@ class Usuario(models.Model):
     Codigo2= models.CharField(max_length=20,blank=True, null=True,choices=[('507','507'),('1','1')], verbose_name='Codigo2',default='507')
     Codigo3= models.CharField(max_length=20,blank=True, null=True, verbose_name='Codigo3',default='507')
     codigo_postal= models.CharField(max_length=20,blank=True, null=True, verbose_name='Codigo4',default='507')
-    Cargo1 = models.CharField(max_length=255, choices=[('Limpieza','Limpieza'), ('Mantenimiento','Mantenimiento'),('Ayudante-cocina','Ayudante-cocina'),('Recepcion','Recepcion')],  verbose_name='Cargo Deseado 1',default='nombre')
+    Cargo1 = models.CharField(max_length=255, choices=[('Limpieza','Limpieza'), ('Mantenimiento','Mantenimiento'),('Ayudante-cocina','Ayudante-cocina'),('Recepcion','Recepcion')],blank=True, null=True,  verbose_name='Cargo Deseado 1',default='nombre')
     Cargo2 = models.CharField(max_length=255, choices=[('Limpieza','Limpieza'), ('Mantenimiento','Mantenimiento'),('Ayudante-cocina','Ayudante-cocina'),('Recepcion','Recepcion')],  verbose_name='Cargo Deseado 2',default='nombre')
     turno = models.CharField(max_length=255,blank=True, null=True, choices=[('mañana','mañana'), ('Tarde','Tarde'),('Noche','Noche'),('Madrugada','Madrugada')],  verbose_name='Turno Deseado')
     nivel_ingles = models.CharField(max_length=255,blank=True, null=True, choices=[('nulo', 'nulo'),
