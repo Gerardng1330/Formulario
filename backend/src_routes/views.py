@@ -127,20 +127,6 @@ def recuperar_pass(request ):
                     'error': 'Este Correo electrónico no es válido'
                 })
 
-'''def enviar_correo(destinatario, token):
-    # Define el asunto del correo
-    subject = "Token de Registro"
-    # Define el cuerpo del correo con el token de activación
-    message = f"Hola,\n\nTu código de activación es: {token}\n\nÚsalo para activar tu cuenta.\n\nSaludos,\nEl equipo de ARV System Corp."
-    # Define el correo del remitente
-    from_email = settings.EMAIL_HOST_USER
-    try:
-        # Intenta enviar el correo utilizando la función send_mail de Django
-        send_mail(subject, message, from_email, [destinatario], fail_silently=False)
-    except Exception as e:
-        # Si ocurre un error al enviar el correo, imprime un mensaje de error
-        print(f"Error al enviar el correo: {e}")
-'''
 
 def generar_token():
     return uuid.uuid4().hex
@@ -210,46 +196,6 @@ def validar_token(request, token):
         return render(request, 'activacion.html', {'error': 'Usuario no encontrado'})
     except Exception as e:
         return render(request, 'activacion.html', {'error': f'Error al validar el token: {e}'})
-
-'''def validar_token(request):
-    if request.method == 'GET':
-        return render(request, 'activacion.html')
-    elif request.method == 'POST':
-        token_ingresado = request.POST.get('token')
-        try:
-            # Busca un usuario en la base de datos con el token de activación proporcionado
-            user = User.objects.get(token_user=token_ingresado)
-            if token_ingresado == user.token_user:
-                # Autentica al usuario utilizando su nombre de usuario y contraseña
-                autenticacion = authenticate(request, username=user.username, password=user.password)
-                print(autenticacion)
-                # Verifica si la autenticación fue exitosa
-                if autenticacion is not None:
-                    # Marca el correo electrónico como confirmado y activa la cuenta del usuario
-                    user.email_confirmed = True
-                    user.is_active = True
-                    user.save()
-                    # Inicia sesión en la cuenta del usuario
-                    login(request, user)
-                    # Redirecciona a la página de registro exitoso
-                    return render(request, 'registro_exitoso.html')
-                else:
-                    # Si la autenticación falla, muestra un mensaje de error
-                    return render(request, 'activacion.html', {'error': 'Credenciales inválidas'})
-            else:
-                # Si el token de activación no coincide, muestra un mensaje de error
-                return render(request, 'activacion.html', {'error': 'Token no válido'})
-        except User.DoesNotExist:
-            # Si no se encuentra ningún usuario con el token proporcionado, muestra un mensaje de error
-            return render(request, 'activacion.html', {'error': 'Usuario no encontrado'})
-        except Exception as e:
-            # Si ocurre algún otro error, muestra un mensaje de error
-            return render(request, 'activacion.html', {'error': f'Error al validar el token: {e}'})
-
-
-
-
-'''
 
 def signout (request):
     logout(request)
