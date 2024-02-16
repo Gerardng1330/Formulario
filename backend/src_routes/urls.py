@@ -20,7 +20,8 @@ urlpatterns = [
     
 #Recuperacion de usuario
     path('recuperar/', views.recuperar_pass,name='recuperar'),    
-    path('activacion/', views.validar_token, name='activacion'),
+    path('activacion/', views.activars, name='activacion'),
+    path('activar-cuenta/<str:token>/', views.validar_token, name='activar_cuenta'),
     path('registro_exitoso/', views.succefully, name='registro_exitoso'),
 
     

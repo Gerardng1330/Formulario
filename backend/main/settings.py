@@ -19,10 +19,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'backend.formularios',
     'backend.auth_users',
-    #Aplicaciones del proyecto
-    #'registro',
-    #frontend
-    'django_browser_reload'
+    'django_browser_reload',
+    
      
 ]
 
