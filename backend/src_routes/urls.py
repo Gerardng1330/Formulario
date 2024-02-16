@@ -21,7 +21,7 @@ urlpatterns = [
 #Recuperacion de usuario
     path('recuperar/', views.recuperar_pass,name='recuperar'),    
     path('activacion/', views.validar_token, name='activacion'),
-    path('email_activate/', views.succefully, name='email_activate'),
+    path('registro_exitoso/', views.succefully, name='registro_exitoso'),
 
     
 

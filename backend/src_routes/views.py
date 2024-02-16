@@ -82,7 +82,7 @@ def validar_nombre(request):
         return JsonResponse({'error': 'El nombre debe tener al menos 3 caracteress.'})
     return JsonResponse({'success': True})
 
-def home(request ):
+def home(request):
     return render (request, 'home.html')
 
 def formacion(request):
@@ -96,7 +96,7 @@ def inicio_sesion(request):#Funcion de inicio de sesion
         return render(request, 'inicio.html')
     else:
         user = authenticate(request, username=request.POST['Usuario'],password=request.POST['Contraseña'])
-        if user is None:
+        if user is not None:
             return render(request, 'inicio.html',{
                     'error': 'Nombre de usuario o contraseña incorrectos'
                 })
@@ -120,7 +120,7 @@ def recuperar_pass(request ):
 
 def enviar_correo(destinatario,token):
     subject = "Token de Registro"
-    message = f"Hola, Nanu:\nTu código es: {token} \nÚsalo para acceder a tu cuenta.\nSi no solicitaste esto, simplemente ignora este mensaje.\nSaludos,\nEl equipo de ARV System Corp."
+    message = f"Hola:\nTu código es: {token} \nÚsalo para acceder a tu cuenta.\nSi no solicitaste esto, simplemente ignora este mensaje.\nSaludos,\nEl equipo de ARV System Corp."
     from_email = settings.EMAIL_HOST_USER
     print(subject,message,from_email,destinatario)
     try:
@@ -193,20 +193,23 @@ def validar_token(request):
         token_ingresado = request.POST.get('token')
         try:
             user = User.objects.get(token_user=token_ingresado)
+            print(f'este es el token del usuario: {user}')
             print(token_ingresado)
             if token_ingresado == user.token_user:
                 # Obtenemos el nombre de usuario y contraseña del usuario asociado al token
                 username = user.username
                 password = user.password
-                
+                print(username,password)
                 # Autenticar al usuario utilizando el nombre de usuario y la contraseña
                 autenticacion = authenticate(request, username=username, password=password)
-                if autenticacion is not None:
-                    user.email_confirmed = True
-                    user.save()
-                    return redirect('email_activate')
-                else:
-                    return render(request, 'activacion.html', {'error': f'Error de autenticación'})
+                print(f'esto es una autenticacion: {autenticacion}')
+                try:
+                    if autenticacion is None:
+                        user.email_confirmed = True
+                        user.save()
+                        return render (request, 'registro_existoso.html')
+                except Exception as e:
+                        return render(request, 'activacion.html', {'error': f'Error al validar el token: {e}'})
             else:
                 return render(request, 'activacion.html', {'error': f'Token no válido'})
         except User.DoesNotExist as e:
