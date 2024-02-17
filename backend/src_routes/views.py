@@ -97,8 +97,10 @@ def home(request):
 def formacion(request):
     return render(request,'activacion.html')
 #Login
-def inicio_sesion(request):#Funcion de inicio de sesion
-    if request.user.is_authenticated:#nos aseguramos de que el usuario siempre tenga que iniciar sesion o la sesion no este iniciada
+def inicio_sesion(request):
+    # Funcion de inicio de sesion
+    # Nos aseguramos de que el usuario siempre tenga que iniciar sesion o la sesion no este iniciada
+    if request.user.is_authenticated:
         logout(request)
         
     if request.method == 'GET':
@@ -113,8 +115,10 @@ def inicio_sesion(request):#Funcion de inicio de sesion
             login(request, user)
             return redirect('home')
    
-def recuperar_pass(request ):
-    if request.user.is_authenticated:#nos aseguramos de que el usuario siempre tenga que iniciar sesion o la sesion no este iniciada
+def recuperar_pass(request):
+    # Funcion para recuperar la contraseña
+    # Nos aseguramos de que el usuario siempre tenga que iniciar sesion o la sesion no este iniciada
+    if request.user.is_authenticated:
         logout(request)
         
     if request.method == 'GET':
@@ -127,12 +131,12 @@ def recuperar_pass(request ):
                     'error': 'Este Correo electrónico no es válido'
                 })
 
-
 def generar_token():
+    # Funcion para generar un token
     return uuid.uuid4().hex
 
 def enviar_correo(destinatario, token):
-    
+    # Funcion para enviar un correo electrónico
     link_activacion = f"http://127.0.0.1:8000/activar-cuenta/{token}/"
     subject = "Token de Registro"
     message = f"Hola:\nhaz click en el siguiente enlace: {link_activacion} \nÚsalo para acceder a tu cuenta.\nSi no solicitaste esto, simplemente ignora este mensaje.\nSaludos,\nEl equipo de ARV System Corp."
@@ -145,27 +149,36 @@ def enviar_correo(destinatario, token):
         # Maneja cualquier excepción que pueda ocurrir al enviar el correo
         print(f"Error al enviar el correo: {e}")
         
-
+# Esta vista maneja el registro de usuarios.
 def registro(request):
+    # Verifica si el usuario está autenticado y lo desconecta si es así.
     if request.user.is_authenticated:
         logout(request)
-        
+    
+    # Si la solicitud es GET, renderiza la plantilla 'registro.html'.
+    # Si es POST, intenta registrar al usuario con los datos proporcionados.
     if request.method == 'GET':
         return render(request, 'registro.html')
     elif request.method == 'POST':
         try:
+            # Valida si el correo electrónico proporcionado es válido.
             validate_email(request.POST['Correo'])
+            
+            # Verifica si ya existe un usuario con el correo electrónico proporcionado.
             if User.objects.filter(email=request.POST['Correo']).exists():
                 return render(request, 'registro.html', {'error': 'Este correo electrónico ya está registrado.'})
         except ValidationError:
             return render(request, 'registro.html', {'error': 'Correo electrónico no válido'})
-
+        
+        # Comprueba si las contraseñas coinciden.
         if request.POST['Contraseña'] != request.POST['Contraseña1']:
             return render(request, 'registro.html', {'error': 'Las contraseñas no coinciden'})
+        
         try:
+            # Genera un token, crea un nuevo usuario con los datos proporcionados y guarda el token en la base de datos.
             token = generar_token()
             user = User.objects.create_user(
-                username=request.POST['Usuario'], 
+                username=request.POST['Usuario'],
                 password=request.POST['Contraseña'],
                 email=request.POST['Correo']
             )
@@ -174,18 +187,21 @@ def registro(request):
             user.token_user = token
             user.save()
             
-            token = user.token_user
-            enviar_correo(request.POST['Correo'],token) # Corregir aquí, pasando el destinatario y el token
+            # Envía un correo electrónico de activación al usuario con el token generado.
+            enviar_correo(request.POST['Correo'], token)  # Corregir aquí, pasando el destinatario y el token
+            
+            # Redirige al usuario a la página de activación.
             return redirect('src_routes:activacion')
         except IntegrityError:
             return render(request, 'registro.html', {'error': 'Nombre de usuario existente'})
         
-def activars(request):
-    return render (request, 'activacion.html')
-
+# Esta vista valida el token de activación proporcionado por el usuario.
 def validar_token(request, token):
     try:
+        # Busca al usuario con el token proporcionado en la base de datos.
         user = User.objects.get(token_user=token)
+        
+        # Si el token coincide, marca el correo electrónico como confirmado y redirige al usuario a la página de registro exitoso.
         if token == user.token_user:
             user.email_confirmed = True
             user.save()
@@ -197,9 +213,13 @@ def validar_token(request, token):
     except Exception as e:
         return render(request, 'activacion.html', {'error': f'Error al validar el token: {e}'})
 
+ # Esta vista renderiza la plantilla 'activacion.html'.
+def activars(request):
+    return render(request, 'activacion.html')   
+
 def signout (request):
     logout(request)
     return redirect('inicio')
         
 def succefully(request):
-    return render (request, 'registro_existoso.html')
+    return render (request, 'registro_existoso.html') 
