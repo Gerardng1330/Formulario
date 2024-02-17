@@ -91,30 +91,29 @@ def validar_nombre(request):
         return JsonResponse({'error': 'El nombre debe tener al menos 3 caracteress.'})
     return JsonResponse({'success': True})
 
-def home(request):
-    return render (request, 'home.html')
+
 
 def formacion(request):
-    return render(request,'activacion.html')
+    return render(request,'activacion_aviso.html')
 #Login
-def inicio_sesion(request):
-    # Funcion de inicio de sesion
-    # Nos aseguramos de que el usuario siempre tenga que iniciar sesion o la sesion no este iniciada
-    if request.user.is_authenticated:
+def inicio_sesion(request):#Funcion de inicio de sesion
+    if request.user.is_authenticated:#nos aseguramos de que el usuario siempre tenga que iniciar sesion o la sesion no este iniciada
         logout(request)
         
     if request.method == 'GET':
         return render(request, 'inicio.html')
     else:
         user = authenticate(request, username=request.POST['Usuario'],password=request.POST['Contraseña'])
-        if user is not None:
+        if user is None:
             return render(request, 'inicio.html',{
                     'error': 'Nombre de usuario o contraseña incorrectos'
                 })
         else:
             login(request, user)
-            return redirect('home')
-   
+            return redirect('src_routes:home')
+def home(request):
+    return render (request, 'home.html')  
+ 
 def recuperar_pass(request):
     # Funcion para recuperar la contraseña
     # Nos aseguramos de que el usuario siempre tenga que iniciar sesion o la sesion no este iniciada
@@ -160,6 +159,9 @@ def registro(request):
     if request.method == 'GET':
         return render(request, 'registro.html')
     elif request.method == 'POST':
+        # Comprueba si las contraseñas coinciden.
+        if request.POST['Contraseña'] != request.POST['Contraseña1']:
+            return render(request, 'registro.html', {'error': 'Las contraseñas no coinciden'})
         try:
             # Valida si el correo electrónico proporcionado es válido.
             validate_email(request.POST['Correo'])
@@ -170,9 +172,7 @@ def registro(request):
         except ValidationError:
             return render(request, 'registro.html', {'error': 'Correo electrónico no válido'})
         
-        # Comprueba si las contraseñas coinciden.
-        if request.POST['Contraseña'] != request.POST['Contraseña1']:
-            return render(request, 'registro.html', {'error': 'Las contraseñas no coinciden'})
+        
         
         try:
             # Genera un token, crea un nuevo usuario con los datos proporcionados y guarda el token en la base de datos.
@@ -191,7 +191,7 @@ def registro(request):
             enviar_correo(request.POST['Correo'], token)  # Corregir aquí, pasando el destinatario y el token
             
             # Redirige al usuario a la página de activación.
-            return redirect('src_routes:activacion')
+            return redirect('src_routes:activacion_aviso')
         except IntegrityError:
             return render(request, 'registro.html', {'error': 'Nombre de usuario existente'})
         
@@ -207,19 +207,23 @@ def validar_token(request, token):
             user.save()
             return redirect('src_routes:registro_exitoso')
         else:
-            return render(request, 'activacion.html', {'error': 'Token no válido'})
+            return render(request, 'activacion_aviso.html', {'error': 'Token no válido'})
     except User.DoesNotExist:
-        return render(request, 'activacion.html', {'error': 'Usuario no encontrado'})
+        return render(request, 'activacion_aviso.html', {'error': 'Usuario no encontrado'})
     except Exception as e:
-        return render(request, 'activacion.html', {'error': f'Error al validar el token: {e}'})
+        return render(request, 'activacion_aviso.html', {'error': f'Error al validar el token: {e}'})
+
 
  # Esta vista renderiza la plantilla 'activacion.html'.
 def activars(request):
-    return render(request, 'activacion.html')   
+    return render(request, 'activacion_aviso.html')   
 
 def signout (request):
     logout(request)
-    return redirect('inicio')
+    return redirect('src_routes:inicio')
         
 def succefully(request):
     return render (request, 'registro_existoso.html') 
+
+def activar_cuenta(request):
+    return render (request, 'activacion.html')
