@@ -20,3 +20,7 @@ input[type="file"]::file-selector-button {
   color: white;
   cursor: pointer;
 }
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #1d2269;
+}

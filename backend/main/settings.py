@@ -47,10 +47,9 @@ ROOT_URLCONF = 'backend.main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR.parent, 'frontend/frontend_auth'),
-            os.path.join(BASE_DIR.parent, 'frontend/frontend_formularios')
-        ],
+        'DIRS': [ BASE_DIR.parent / "frontend" /  "frontend_formularios",
+                 BASE_DIR.parent / "frontend" /  "frontend_auth",
+                 BASE_DIR.parent / "frontend" /  "custom_views"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -105,7 +104,7 @@ USE_TZ = True
 
 #Control de archivos estáticos (CSS, imágenes, JavaScript)
 #https://docs.djangoproject.com/en/5.0/howto/static-files/
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
     BASE_DIR.parent / "frontend" / "static"

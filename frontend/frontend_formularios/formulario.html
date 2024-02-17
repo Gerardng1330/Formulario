@@ -28,7 +28,7 @@
         </div>
 
         <!-- Acuerdo laboral title: Está acá afuera para permitir la indentación de los párrafos -->
-        <p class="text-ms my-3 inline-flex w-full items-center justify-between rounded-lg border border-gray-200 bg-white px-4 py-4 font-kumbh_bold font-medium text-blue shadow-sm">
+        <p class="text-ms my-3 inline-flex w-full items-center justify-between rounded-lg border border-gray-200 px-4 py-4 font-kumbh_bold font-medium text-blue shadow-sm">
           {% blocktrans %}ACUERDO LABORAL{% endblocktrans %}
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mt-2 h-5 w-5 animate-bounce">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
@@ -63,7 +63,7 @@
       </div>
       <!-- Modal footer -->
       <div class="flex flex-grow-[1] items-center justify-center rounded-b border-t border-gray-200 p-4">
-        <button id="aceptar_politicas_button" name="aceptar_politicas_button" type="button" class="w-full rounded-lg border border-gray-300 bg-blue px-5 py-2.5 text-center font-kumbh_bold text-sm text-white shadow-sm transition ease-in-out hover:bg-hoverblue focus:ring-2 focus:ring-sky" onclick="aceptarPoliticas()">ACEPTO LAS POLÍTICAS</button>
+        <button id="aceptar_politicas_button" name="aceptar_politicas_button" type="button" class="w-full rounded-lg border border-gray-300 bg-blue px-5 py-2.5 text-center font-kumbh_bold text-sm text-white shadow-sm transition ease-in-out hover:scale-y-105 hover:bg-hoverblue focus:ring-2 focus:ring-sky" onclick="aceptarPoliticas() ">ACEPTO LAS POLÍTICAS</button>
       </div>
     </div>
   </div>
@@ -81,7 +81,7 @@
   </div>
 
   <!-- Campos del formulario -->
-  <form method="post" autocomplete="off" action="{% url 'src_routes:envio_formulario' %}" enctype="multipart/form-data" class="mt-2 flex h-fit w-full flex-col gap-12 text-black">
+  <form id="form" method="post" autocomplete="off" action="{% url 'src_routes:envio_formulario' %}" enctype="multipart/form-data" class="mt-2 flex h-fit w-full flex-col gap-12 text-black">
     {% csrf_token %}<!--para que un hacker no se haga pasar por el usuario-->
 
     <!-- Grupo Datos personales generales -->
@@ -94,11 +94,16 @@
         <!-- Campos del nombre -->
         <div class="flex h-full w-full gap-4">
           <!-- Nombre -->
-          <input type="text" id="nombre" name="nombre" # aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}First name{% endblocktrans %}" />
-          <span class="error-message" id="nombre-error-message"></span>
+          <div class="input_control flex w-full flex-col gap-2">
+            <input type="text" id="nombre" name="nombre" # aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}First name{% endblocktrans %}" />
+            <span class="message ml-1 hidden text-xs">Mensaje</span>
+          </div>
+
           <!-- Apellido -->
-          <input type="text" id="apellido" name="apellido" # aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Last name{% endblocktrans %}" />
-          <span class="error-message" id="apellido-error-message"></span>
+          <div class="input_control flex w-full flex-col gap-2">
+            <input type="text" id="apellido" name="apellido" # aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Last name{% endblocktrans %}" />
+            <span class="message ml-1 hidden text-xs">Mensaje</span>
+          </div>
         </div>
       </div>
 
@@ -106,19 +111,25 @@
       <div class="flex h-fit w-full flex-row gap-4">
         <!-- Email -->
         <div class="flex h-full w-full flex-col">
-          <label for="nombre" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Email{% endblocktrans %}</label>
-          <input type="email" id="email" name="email" # aria-describedby="helper-text-explanation" class="w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}example@email.com{% endblocktrans %}" />
+          <label for="email" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Email{% endblocktrans %}</label>
+          <div class="input_control flex w-full flex-col gap-2">
+            <input type="email" id="email" name="email" # aria-describedby="helper-text-explanation" class="w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}example@email.com{% endblocktrans %}" />
+            <span class="message ml-1 text-xs">Mensaje</span>
+          </div>
         </div>
 
         <!-- Género -->
         <div class="flex h-full w-full flex-col">
           <label for="genero" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Gender{% endblocktrans %}</label>
-          <select id="genero" name="genero" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
-            <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
-            <option value="Masculino">{% blocktrans %}Male{% endblocktrans %}</option>
-            <option value="Femenino">{% blocktrans %}Female{% endblocktrans %}</option>
-            <option value="Otro">{% blocktrans %}Other{% endblocktrans %}</option>
-          </select>
+          <div class="input_control flex w-full flex-col gap-2">
+            <select id="genero" name="genero" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+              <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
+              <option value="Masculino">{% blocktrans %}Male{% endblocktrans %}</option>
+              <option value="Femenino">{% blocktrans %}Female{% endblocktrans %}</option>
+              <option value="Otro">{% blocktrans %}Other{% endblocktrans %}</option>
+            </select>
+            <span class="message ml-1 text-xs">Mensaje</span>
+          </div>
         </div>
       </div>
 
@@ -127,25 +138,28 @@
         <!-- Nacionalidad -->
         <div class="flex h-full w-full flex-col">
           <label for="nacionalidad" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Nationality{% endblocktrans %}</label>
-          <select id="nacionalidad" name="nacionalidad" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none focus:border-sky focus:ring-sky">
-            <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
-            <option value="Panama">Panamá</option>
-            <option value="Argentina">Argentina</option>
-            <option value="Chile">Chile</option>
-            <option value="Colombia">Colombia</option>
-            <option value="Cuba">Cuba</option>
-            <option value="Ecuador">Ecuador</option>
-            <option value="United-States">United States</option>
-            <option value="Guatemala">Guatemala</option>
-            <option value="Haiti">Haití</option>
-            <option value="Honduras">Honduras</option>
-            <option value="Jamaica">Jamaica</option>
-            <option value="Mexico">México</option>
-            <option value="Nicaragua">Nicaragua</option>
-            <option value="Peru">Perú</option>
-            <option value="Venezuela">Venezuela</option>
-            <option value="Otro">{% translate "Other" %}</option>
-          </select>
+          <div class="input_control flex w-full flex-col gap-2">
+            <select id="nacionalidad" name="nacionalidad" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none focus:border-sky focus:ring-sky">
+              <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
+              <option value="Panama">Panamá</option>
+              <option value="Argentina">Argentina</option>
+              <option value="Chile">Chile</option>
+              <option value="Colombia">Colombia</option>
+              <option value="Cuba">Cuba</option>
+              <option value="Ecuador">Ecuador</option>
+              <option value="United-States">United States</option>
+              <option value="Guatemala">Guatemala</option>
+              <option value="Haiti">Haití</option>
+              <option value="Honduras">Honduras</option>
+              <option value="Jamaica">Jamaica</option>
+              <option value="Mexico">México</option>
+              <option value="Nicaragua">Nicaragua</option>
+              <option value="Peru">Perú</option>
+              <option value="Venezuela">Venezuela</option>
+              <option value="Otro">{% translate "Other" %}</option>
+            </select>
+            <span class="message ml-1 text-xs">Mensaje</span>
+          </div>
         </div>
 
         <!-- Nacimiento -->
@@ -158,15 +172,21 @@
               <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
             </svg>
           </div>
-          <!-- datepicker input -->
-          <input datepicker type="text" id="fecha_nacimiento" name="fecha_nacimiento" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Birthdate{% endblocktrans %}" />
+          <div class="input_control flex w-full flex-col gap-2">
+            <!-- datepicker input -->
+            <input datepicker datepicker-autohide type="text" id="fecha_nacimiento" name="fecha_nacimiento" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Birthdate{% endblocktrans %}" />
+            <span class="message ml-1 text-xs">Mensaje</span>
+          </div>
         </div>
       </div>
 
       <!-- Fila Alergias -->
       <div class="h-fit w-full">
         <label for="alergia" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Do you have any allergies or disabilities?{% endblocktrans %}</label>
-        <input type="text" id="alergia" name="alergia" # aria-describedby="helper-text-explanation" class="w-full rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm placeholder-gray-400 outline-none focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Specify{% endblocktrans %}" />
+        <div class="input_control flex w-full flex-col gap-2">
+          <input type="text" id="alergia" name="alergia" # aria-describedby="helper-text-explanation" class="w-full rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm placeholder-gray-400 outline-none focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Specify{% endblocktrans %}" />
+          <span class="message ml-1 text-xs">Mensaje</span>
+        </div>
       </div>
     </div>
 
@@ -176,12 +196,14 @@
       <div class="h-fit w-full">
         <label for="id_file" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}ID{% endblocktrans %}</label>
         <input class="block h-fit w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm" id="id_file" name="id_file" type="file" accept="application/pdf" />
+        <span class="message ml-1 text-xs text-gray-400">{% blocktrans %}.pdf archives only{% endblocktrans %}</span>
       </div>
 
       <!-- Fila CV -->
       <div class="h-fit w-full">
         <label for="cv_file" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Resume{% endblocktrans %}</label>
         <input class="block h-fit w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm" id="cv_file" name="cv_file" type="file" accept="application/pdf" />
+        <span class="message ml-1 text-xs text-gray-400">{% blocktrans %}.pdf archives only{% endblocktrans %}</span>
       </div>
     </div>
 
@@ -192,27 +214,32 @@
         <!-- Teléfono1 -->
         <div class="flex h-full w-full flex-col">
           <label for="telefono1" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Phone numbers{% endblocktrans %}</label>
-          <div class="flex h-fit w-full flex-row gap-2">
-            <select id="codigo1" name="codigo1" # class="w-1/2 cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
-              <option value="" disabled selected>{% blocktrans %}Code{% endblocktrans %}</option>
-              <option value="507">Panamá (+507)</option>
-              <option value="1">EEUU (+1)</option>
-            </select>
-            <input type="tel" id="Telefono1" name="Telefono1" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="00000000" />
-            <span class="error-message absolute" id="Telefono1-error-message"></span>
+          <div class="input_control flex w-full flex-col gap-2">
+            <div class="flex h-fit w-full flex-row gap-2">
+              <select id="codigo1" name="codigo1" # class="w-1/2 cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+                <option value="" disabled selected>{% blocktrans %}Code{% endblocktrans %}</option>
+                <option value="507">Panamá (+507)</option>
+                <option value="1">EEUU (+1)</option>
+              </select>
+              <input type="tel" id="Telefono1" name="Telefono1" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="00000000" />
+            </div>
+            <span class="message ml-1 text-xs">Mensaje</span>
           </div>
         </div>
 
         <!-- Contacto de emergencia (tlf)-->
         <div class="flex h-full w-full flex-col">
           <label for="telefono-emergencia" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Emergency contact{% endblocktrans %}</label>
-          <div class="flex h-fit w-full flex-row gap-2">
-            <select id="codigo3" name="codigo3" class="w-1/2 cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
-              <option value="" disabled selected>{% blocktrans %}Code{% endblocktrans %}</option>
-              <option value="507">Panamá (+507)</option>
-              <option value="1">EEUU (+1)</option>
-            </select>
-            <input type="tel" id="telefono_emergencia" name="telefono_emergencia" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="00000000" />
+          <div class="input_control flex w-full flex-col gap-2">
+            <div class="flex h-fit w-full flex-row gap-2">
+              <select id="codigo3" name="codigo3" class="w-1/2 cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+                <option value="" disabled selected>{% blocktrans %}Code{% endblocktrans %}</option>
+                <option value="507">Panamá (+507)</option>
+                <option value="1">EEUU (+1)</option>
+              </select>
+              <input type="tel" id="telefono_emergencia" name="telefono_emergencia" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="00000000" />
+            </div>
+            <span class="message ml-1 text-xs">Mensaje</span>
           </div>
         </div>
       </div>
@@ -220,7 +247,7 @@
       <!-- Fila Teléfono2 / Contacto de emergencia (nombre) -->
       <div class="flex h-fit w-full flex-row gap-4">
         <!-- Teléfono2 -->
-        <div class="flex h-full w-full flex-col">
+        <div class="input_control flex h-full w-full flex-col gap-2">
           <div class="flex h-fit w-full flex-row gap-2">
             <select id="codigo2" name="codigo2" # class="w-1/2 cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
               <option value="" disabled selected>{% blocktrans %}Code{% endblocktrans %}</option>
@@ -228,36 +255,52 @@
               <option value="1">EEUU (+1)</option>
             </select>
             <input type="tel" id="Telefono2" name="Telefono2" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="00000000" />
-            <span class="error-message" id="Telefono2-error-message"></span>
           </div>
+          <span class="message ml-1 text-xs">Mensaje</span>
         </div>
 
         <!-- Contacto de emergencia (nombre)-->
-        <div class="flex h-full w-full flex-col">
+        <div class="input_control flex h-full w-full flex-col gap-2">
           <input type="text" id="nombre_contacto" name="nombre_contacto" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Contact's first and last name{% endblocktrans %}" />
+          <span class="message ml-1 text-xs">Mensaje</span>
         </div>
       </div>
 
       <!-- Fila dirección principal -->
       <div class="h-fit w-full">
         <label for="direccion-principal" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Address{% endblocktrans %}</label>
-        <input type="text" id="direccion_principal" name="direccion_principal" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Main address{% endblocktrans %}" />
+        <div class="input_control flex w-full flex-col gap-2">
+          <input type="text" id="direccion_principal" name="direccion_principal" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Main address{% endblocktrans %}" />
+          <span class="message ml-1 text-xs">Mensaje</span>
+        </div>
       </div>
 
       <!-- Fila dirección secundaria -->
-      <input type="text" id="direccion_secundaria" name="direccion_secundaria" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Second address{% endblocktrans %}" />
+      <div class="input_control flex w-full flex-col gap-2">
+        <input type="text" id="direccion_secundaria" name="direccion_secundaria" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Second address{% endblocktrans %}" />
+        <span class="message ml-1 text-xs">Mensaje</span>
+      </div>
 
       <!-- Fila Ciudad / Estado-Provincia -->
       <div class="flex h-fit w-full flex-row gap-4">
         <!-- Ciudad -->
-        <input type="text" id="ciudad" name="ciudad" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}City{% endblocktrans %}" />
+        <div class="input_control flex w-full flex-col gap-2">
+          <input type="text" id="ciudad" name="ciudad" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}City{% endblocktrans %}" />
+          <span class="message ml-1 text-xs">Mensaje</span>
+        </div>
 
         <!-- Estado / Provincia -->
-        <input type="text" id="Estado_Provincia" name="Estado_Provincia" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}State/Province{% endblocktrans %}" />
+        <div class="input_control flex w-full flex-col gap-2">
+          <input type="text" id="Estado_Provincia" name="Estado_Provincia" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}State/Province{% endblocktrans %}" />
+          <span class="message ml-1 text-xs">Mensaje</span>
+        </div>
       </div>
 
       <!-- Fila código postal -->
-      <input type="text" id="codigo_postal" name="codigo_postal" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Postal code{% endblocktrans %}" />
+      <div class="input_control flex w-full flex-col gap-2">
+        <input type="text" id="codigo_postal" name="codigo_postal" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Postal code{% endblocktrans %}" />
+        <span class="message ml-1 text-xs">Mensaje</span>
+      </div>
     </div>
 
     <!-- Grupo Empresa / Cargo -->
@@ -267,72 +310,90 @@
         <label for="Cargo1" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Desired position{% endblocktrans %}</label>
         <!-- Cargo dropdowns-->
         <div class="flex h-full w-full flex-row gap-4">
-          <select id="Cargo1" name="Cargo1" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
-            <option value="" disabled selected>{% blocktrans %}Desired position{% endblocktrans %}</option>
-            <option value="Limpieza">{% blocktrans %}Cleaning{% endblocktrans %}</option>
-            <option value="Mantenimiento">{% blocktrans %}General maintenance{% endblocktrans %}</option>
-            <option value="Ayudante-cocina">{% blocktrans %}Kitchen assistant{% endblocktrans %}</option>
-            <option value="Recepcion">{% blocktrans %}Receptionist{% endblocktrans %}</option>
-          </select>
-          <select id="Cargo2" name="Cargo2" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
-            <option value="" disabled selected>{% blocktrans %}Desired position{% endblocktrans %}</option>
-            <option value="Limpieza">{% blocktrans %}Cleaning{% endblocktrans %}</option>
-            <option value="Mantenimiento">{% blocktrans %}General maintenance{% endblocktrans %}</option>
-            <option value="Ayudante-cocina">{% blocktrans %}Kitchen assistant{% endblocktrans %}</option>
-            <option value="Recepcion">{% blocktrans %}Receptionist{% endblocktrans %}</option>
-          </select>
+          <div class="input_control flex w-full flex-col gap-2">
+            <select id="Cargo1" name="Cargo1" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+              <option value="" disabled selected>{% blocktrans %}Desired position{% endblocktrans %}</option>
+              <option value="Limpieza">{% blocktrans %}Cleaning{% endblocktrans %}</option>
+              <option value="Mantenimiento">{% blocktrans %}General maintenance{% endblocktrans %}</option>
+              <option value="Ayudante-cocina">{% blocktrans %}Kitchen assistant{% endblocktrans %}</option>
+              <option value="Recepcion">{% blocktrans %}Receptionist{% endblocktrans %}</option>
+            </select>
+            <span class="message ml-1 text-xs">Mensaje</span>
+          </div>
+          <div class="input_control flex w-full flex-col gap-2">
+            <select id="Cargo2" name="Cargo2" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+              <option value="" disabled selected>{% blocktrans %}Desired position{% endblocktrans %}</option>
+              <option value="Limpieza">{% blocktrans %}Cleaning{% endblocktrans %}</option>
+              <option value="Mantenimiento">{% blocktrans %}General maintenance{% endblocktrans %}</option>
+              <option value="Ayudante-cocina">{% blocktrans %}Kitchen assistant{% endblocktrans %}</option>
+              <option value="Recepcion">{% blocktrans %}Receptionist{% endblocktrans %}</option>
+            </select>
+            <span class="message ml-1 text-xs">Mensaje</span>
+          </div>
         </div>
       </div>
 
       <!-- Fila Turno deseado -->
       <div class="flex h-fit w-full flex-col">
         <label for="turno" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Desired shift{% endblocktrans %}</label>
-        <select id="turno" name="turno" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
-          <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
-          <option value="mañana">{% blocktrans %}Morning{% endblocktrans %}</option>
-          <option value="tarde">{% blocktrans %}Afternoon{% endblocktrans %}</option>
-          <option value="noche">{% blocktrans %}Night{% endblocktrans %}</option>
-          <option value="madrugada">{% blocktrans %}Overnight{% endblocktrans %}</option>
-        </select>
+        <div class="input_control flex w-full flex-col gap-2">
+          <select id="turno" name="turno" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+            <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
+            <option value="mañana">{% blocktrans %}Morning{% endblocktrans %}</option>
+            <option value="tarde">{% blocktrans %}Afternoon{% endblocktrans %}</option>
+            <option value="noche">{% blocktrans %}Night{% endblocktrans %}</option>
+            <option value="madrugada">{% blocktrans %}Overnight{% endblocktrans %}</option>
+          </select>
+          <span class="message ml-1 text-xs">Mensaje</span>
+        </div>
       </div>
 
       <!-- Fila Nivel de inglés -->
       <div class="flex h-fit w-full flex-col">
         <label for="nivel_ingles" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}English level{% endblocktrans %} </label>
-        <select id="nivel_ingles" name="nivel_ingles" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
-          <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
-          <option value="nulo">{% blocktrans %}Null{% endblocktrans %}</option>
-          <option value="basico">{% blocktrans %}Basic{% endblocktrans %}</option>
-          <option value="medio">{% blocktrans %}Intermediate{% endblocktrans %}</option>
-          <option value="avanzado">{% blocktrans %}Advanced{% endblocktrans %}</option>
-          <option value="nativo">{% blocktrans %}Native{% endblocktrans %}</option>
-        </select>
+        <div class="input_control flex w-full flex-col gap-2">
+          <select id="nivel_ingles" name="nivel_ingles" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+            <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
+            <option value="nulo">{% blocktrans %}Null{% endblocktrans %}</option>
+            <option value="basico">{% blocktrans %}Basic{% endblocktrans %}</option>
+            <option value="medio">{% blocktrans %}Intermediate{% endblocktrans %}</option>
+            <option value="avanzado">{% blocktrans %}Advanced{% endblocktrans %}</option>
+            <option value="nativo">{% blocktrans %}Native{% endblocktrans %}</option>
+          </select>
+          <span class="message ml-1 text-xs">Mensaje</span>
+        </div>
       </div>
 
       <!-- Fila ¿Cuándo puede empezar? -->
       <div class="relative flex h-full w-full flex-col">
         <!-- Label -->
         <label for="fecha_inicio" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}When can you start?{% endblocktrans %}</label>
-        <!-- ícono datepicker -->
-        <div class="pointer-events-none absolute inset-y-11 end-3 flex items-center">
-          <svg class="h-3.5 w-3.5 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-          </svg>
+        <div class="input_control flex w-full flex-col gap-2">
+          <!-- ícono datepicker -->
+          <div class="pointer-events-none absolute inset-y-11 end-3 flex items-center">
+            <svg class="h-3.5 w-3.5 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+            </svg>
+          </div>
+          <!-- datepicker input -->
+          <input datepicker datepicker-format="{% blocktrans %}mm/dd/yyyy{% endblocktrans %}" datepicker-autohide id="fecha_inicio" name="fecha_inicio" type="text" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Date{% endblocktrans %}" />
+          <span class="message ml-1 text-xs">Mensaje</span>
         </div>
-        <!-- datepicker input -->
-        <input datepicker id="fecha_inicio" name="fecha_inicio" type="text" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Date{% endblocktrans %}" />
       </div>
 
       <!-- Fila Transporte -->
       <div class="flex h-fit w-full flex-col">
         <label for="Transporte" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}What transportation method do you use?{% endblocktrans %}</label>
-        <select id="Transporte" name="Transporte" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
-          <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
-          <option value="bus">{% blocktrans %}Bus{% endblocktrans %}</option>
-          <option value="vehiculo-propio">{% blocktrans %}Own vehicle{% endblocktrans %}</option>
-          <option value="uber">{% blocktrans %}Uber{% endblocktrans %}</option>
-          <option value="otro">{% blocktrans %}Other{% endblocktrans %}</option>
-        </select>
+        <div class="input_control flex w-full flex-col gap-2">
+          <select id="Transporte" name="Transporte" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+            <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
+            <option value="bus">{% blocktrans %}Bus{% endblocktrans %}</option>
+            <option value="vehiculo-propio">{% blocktrans %}Own vehicle{% endblocktrans %}</option>
+            <option value="uber">{% blocktrans %}Uber{% endblocktrans %}</option>
+            <option value="otro">{% blocktrans %}Other{% endblocktrans %}</option>
+          </select>
+          <span class="message ml-1 text-xs">Mensaje</span>
+        </div>
       </div>
     </div>
 
@@ -341,26 +402,32 @@
       <!-- Fila ¿Cómo nos conociste? -->
       <div class="flex h-fit w-full flex-col">
         <label for="Conociste" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}How did you hear about us?{% endblocktrans %}</label>
-        <select id="Conociste" name="Conociste" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
-          <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
-          <option value="referencia">{% blocktrans %}Reference from an acquaintance{% endblocktrans %}</option>
-          <option value="sticker-qr">{% blocktrans %}Sticker with QR{% endblocktrans %}</option>
-          <option value="volante">{% blocktrans %}Flyer{% endblocktrans %}</option>
-          <option value="oficina">{% blocktrans %}Office{% endblocktrans %}</option>
-          <option value="google">{% blocktrans %}Google{% endblocktrans %}</option>
-          <option value="otro">{% blocktrans %}Other{% endblocktrans %}</option>
-        </select>
+        <div class="input_control flex w-full flex-col gap-2">
+          <select id="Conociste" name="Conociste" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+            <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
+            <option value="referencia">{% blocktrans %}Reference from an acquaintance{% endblocktrans %}</option>
+            <option value="sticker-qr">{% blocktrans %}Sticker with QR{% endblocktrans %}</option>
+            <option value="volante">{% blocktrans %}Flyer{% endblocktrans %}</option>
+            <option value="oficina">{% blocktrans %}Office{% endblocktrans %}</option>
+            <option value="google">{% blocktrans %}Google{% endblocktrans %}</option>
+            <option value="otro">{% blocktrans %}Other{% endblocktrans %}</option>
+          </select>
+          <span class="message ml-1 text-xs">Mensaje</span>
+        </div>
       </div>
 
-      <!-- Fila Nombre-->
+      <!-- Fila Referido por -->
       <div class="h-fit w-full">
         <label for="referencia" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Referred by (If it applies){% endblocktrans %}</label>
-        <input type="text" id="referencia" name="referencia" aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Reference{% endblocktrans %}" />
+        <div class="input_control flex w-full flex-col gap-2">
+          <input type="text" id="referencia" name="referencia" aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Reference{% endblocktrans %}" />
+          <span class="message ml-1 text-xs">Mensaje</span>
+        </div>
       </div>
     </div>
 
     <!-- Botón Aplicar ahora -->
-    <button type="submit" class="hover:bg-blue-800 focus:ring-blue-300 w-full rounded-lg border border-gray-300 bg-blue px-5 py-2.5 text-center font-kumbh_bold text-sm font-medium text-white shadow-sm transition ease-in-out hover:scale-105 hover:bg-hoverblue focus:outline-none focus:ring-4 sm:w-auto">{% blocktrans %}APPLY NOW{% endblocktrans %}</button>
+    <button type="submit" class="w-full rounded-lg border border-gray-300 bg-blue px-5 py-2.5 text-center font-kumbh_bold text-sm font-medium text-white shadow-sm transition ease-in-out hover:scale-y-105 hover:bg-hoverblue focus:outline-none focus:ring-4 sm:w-auto">{% blocktrans %}APPLY NOW{% endblocktrans %}</button>
   </form>
 </div>
 
@@ -372,16 +439,21 @@
 </a>
 
 <!-- Verifica los campos enviados del formulario -->
-{% if messages %}
+<!-- {% if messages %}
 <ul class="messages">
   {% for message in messages %}
   <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
   {% endfor %}
 </ul>
-{% endif %} {% endblock %}
+{% endif %} {% endblock %} -->
+
 <!-- Scripts del sitio -->
 {% block scripts %}
 <script src="{% static 'js/button-scroll-form-up.js' %}"></script>
-<script src="{% static 'js/verificacion.js' %}"></script>
+<!-- <script src="{% static 'js/verificacion.js' %}"></script> -->
 <script src="{% static 'js/aceptar_politicas_modal.js' %}"></script>
+<script defer src="{% static 'js/form_input_validation.js' %}"></script>
+<script>
+  const campo_requerido_mensaje = "{% blocktrans %}Campo requerido{% endblocktrans %}";
+</script>
 {% endblock %}
