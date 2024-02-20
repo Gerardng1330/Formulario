@@ -124,7 +124,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Custom user model
 
 #Correo al mandar
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'backend.main.email_backend.EmailBackend'
 EMAIL_HOST = 'mail.arvcloud.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
