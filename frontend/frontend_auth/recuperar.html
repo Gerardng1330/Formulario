@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Recuperar{% endblock %}
+{% block content %}
+   <form method="post" autocomplete="off">
+            <!--esto sirve para que autenticar que el formulario es nuestro y no fue abierto de otro lado-->
+            {% csrf_token %}
+            <h1 class="h3 mb-3 fw-normal text-center">Recuperar Contraseña</h1>
+              <div class="mb-3 d-grid gap-2 col-6 mx-auto">
+                <label for="exampleInputEmail1" class="form-label">Ingresa tu correo electrónico. Se te enviara un enlace para que vuelvas a acceder a tu cuenta</label>
+                <input name="Correo" value="" type="text" class="form-control" placeholder="Correo electrónico" aria-label="Correo" aria-describedby="addon-wrapping">{{error}}
+              </div>
+              <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" class="btn btn-primary">Listo</button><br>
+              </div>
+              <div class="mb-3 d-flex justify-content-between col-6 mx-auto">
+                <a href="/login"><b>Cancelar</b></a> <a href="{% url 'src_routes:activacion' %}"><b>No tengo el correo</b></a> <a href="/password-send"><b>Condiciones y politicas</b></a> 
+                </div> 
+            
+    </form>
+{% endblock %}
