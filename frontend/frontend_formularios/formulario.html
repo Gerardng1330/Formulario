@@ -96,13 +96,13 @@
           <!-- Nombre -->
           <div class="input_control flex w-full flex-col gap-2">
             <input type="text" id="nombre" name="nombre" # aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}First name{% endblocktrans %}" />
-            <span class="message ml-1 hidden text-xs">Mensaje</span>
+            <span class="message ml-1 hidden text-sm">Mensaje</span>
           </div>
 
           <!-- Apellido -->
           <div class="input_control flex w-full flex-col gap-2">
             <input type="text" id="apellido" name="apellido" # aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Last name{% endblocktrans %}" />
-            <span class="message ml-1 hidden text-xs">Mensaje</span>
+            <span class="message ml-1 hidden text-sm">Mensaje</span>
           </div>
         </div>
       </div>
@@ -113,8 +113,8 @@
         <div class="flex h-full w-full flex-col">
           <label for="email" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Email{% endblocktrans %}</label>
           <div class="input_control flex w-full flex-col gap-2">
-            <input type="email" id="email" name="email" # aria-describedby="helper-text-explanation" class="w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}example@email.com{% endblocktrans %}" />
-            <span class="message ml-1 hidden text-xs">Mensaje</span>
+            <input type="email" id="email" name="email" # aria-describedby="helper-text-explanation" class="w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}example@email.com{% endblocktrans %}" autocomplete="off" />
+            <span class="message ml-1 hidden text-sm">Mensaje</span>
           </div>
         </div>
 
@@ -122,13 +122,13 @@
         <div class="flex h-full w-full flex-col">
           <label for="genero" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Gender{% endblocktrans %}</label>
           <div class="input_control flex w-full flex-col gap-2">
-            <select contenteditable="true" id="genero" name="genero" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+            <select contenteditable="true" id="genero" name="genero" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
               <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
               <option value="Masculino">{% blocktrans %}Male{% endblocktrans %}</option>
               <option value="Femenino">{% blocktrans %}Female{% endblocktrans %}</option>
               <option value="Otro">{% blocktrans %}Other{% endblocktrans %}</option>
             </select>
-            <span class="message ml-1 hidden text-xs">Mensaje</span>
+            <span class="message ml-1 hidden text-sm">Mensaje</span>
           </div>
         </div>
       </div>
@@ -139,7 +139,7 @@
         <div class="flex h-full w-full flex-col">
           <label for="nacionalidad" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Nationality{% endblocktrans %}</label>
           <div class="input_control flex w-full flex-col gap-2">
-            <select id="nacionalidad" name="nacionalidad" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none focus:border-sky focus:ring-sky">
+            <select id="nacionalidad" name="nacionalidad" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none focus:border-sky focus:ring-sky">
               <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
               <option value="Panama">Panamá</option>
               <option value="Argentina">Argentina</option>
@@ -158,7 +158,7 @@
               <option value="Venezuela">Venezuela</option>
               <option value="Otro">{% translate "Other" %}</option>
             </select>
-            <span class="message ml-1 hidden text-xs">Mensaje</span>
+            <span class="message ml-1 hidden text-sm">Mensaje</span>
           </div>
         </div>
 
@@ -167,15 +167,15 @@
           <!-- Label -->
           <label for="fecha_nacimiento" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Birthdate{% endblocktrans %}</label>
           <!-- ícono datepicker -->
-          <div class="pointer-events-none absolute inset-y-11 end-3 flex items-center">
+          <!--           <div class="pointer-events-none absolute inset-y-11 end-3 flex items-center">
             <svg class="h-3.5 w-3.5 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
               <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
             </svg>
-          </div>
+          </div> -->
           <div class="input_control flex w-full flex-col gap-2">
             <!-- datepicker input -->
-            <input datepicker datepicker-autohide type="text" id="fecha_nacimiento" name="fecha_nacimiento" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Birthdate{% endblocktrans %}" />
-            <span class="message ml-1 hidden text-xs">Mensaje</span>
+            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 placeholder:text-gray-400 focus:border-sky focus:ring-sky" />
+            <span class="message ml-1 hidden text-sm">Mensaje</span>
           </div>
         </div>
       </div>
@@ -184,8 +184,8 @@
       <div class="h-fit w-full">
         <label for="alergia" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Do you have any allergies or disabilities?{% endblocktrans %}</label>
         <div class="input_control flex w-full flex-col gap-2">
-          <input type="text" id="alergia" name="alergia" # aria-describedby="helper-text-explanation" class="w-full rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm placeholder-gray-400 outline-none focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Specify{% endblocktrans %}" />
-          <span class="message ml-1 hidden text-xs">Mensaje</span>
+          <input type="text" id="alergia" name="alergia" # aria-describedby="helper-text-explanation" class="w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm placeholder-gray-400 outline-none focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Specify{% endblocktrans %}" />
+          <span class="message ml-1 hidden text-sm">Mensaje</span>
         </div>
       </div>
     </div>
@@ -195,14 +195,14 @@
       <!-- Fila ID-->
       <div class="h-fit w-full">
         <label for="id_file" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}ID{% endblocktrans %}</label>
-        <input class="block h-fit w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm" id="id_file" name="id_file" type="file" accept="application/pdf" />
+        <input class="block h-fit w-full cursor-pointer rounded-lg border border-gray-300 bg-white text-sm" id="id_file" name="id_file" type="file" accept="application/pdf" />
         <span class="message ml-1 hidden text-xs text-gray-400">{% blocktrans %}.pdf archives only{% endblocktrans %}</span>
       </div>
 
       <!-- Fila CV -->
       <div class="h-fit w-full">
         <label for="cv_file" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Resume{% endblocktrans %}</label>
-        <input class="block h-fit w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm" id="cv_file" name="cv_file" type="file" accept="application/pdf" />
+        <input class="block h-fit w-full cursor-pointer rounded-lg border border-gray-300 bg-white text-sm" id="cv_file" name="cv_file" type="file" accept="application/pdf" />
         <span class="message ml-1 hidden text-xs text-gray-400">{% blocktrans %}.pdf archives only{% endblocktrans %}</span>
       </div>
     </div>
@@ -214,32 +214,38 @@
         <!-- Teléfono1 -->
         <div class="flex h-full w-full flex-col">
           <label for="Telefono1" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Phone numbers{% endblocktrans %}</label>
-          <div class="input_control flex w-full flex-col gap-2">
-            <div class="flex h-fit w-full flex-row gap-2">
-              <select id="codigo1" name="codigo1" # class="w-1/2 cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+          <div class="flex h-fit w-full gap-2">
+            <div class="input_control flex h-fit w-full flex-col gap-2">
+              <select id="codigo1" contenteditable="true" name="codigo1" class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
                 <option value="" disabled selected>{% blocktrans %}Code{% endblocktrans %}</option>
                 <option value="507">Panamá (+507)</option>
                 <option value="1">EEUU (+1)</option>
               </select>
-              <input type="tel" id="Telefono1" name="Telefono1" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="00000000" />
+              <span class="message ml-1 hidden text-sm">Mensaje</span>
             </div>
-            <span class="message ml-1 hidden text-xs">Mensaje</span>
+            <div class="input_control flex h-fit w-full flex-col gap-2">
+              <input type="tel" id="Telefono1" name="Telefono1" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="00000000" />
+              <span class="message ml-1 hidden text-sm">Mensaje</span>
+            </div>
           </div>
         </div>
 
-        <!-- Contacto de emergencia (tlf)-->
+        <!-- Contacto de emergencia (tlf) -->
         <div class="flex h-full w-full flex-col">
-          <label for="telefono-emergencia" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Emergency contact{% endblocktrans %}</label>
-          <div class="input_control flex w-full flex-col gap-2">
-            <div class="flex h-fit w-full flex-row gap-2">
-              <select id="codigo3" name="codigo3" class="w-1/2 cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+          <label for="telefono_emergencia" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Emergency contact{% endblocktrans %}</label>
+          <div class="flex h-fit w-full gap-2">
+            <div class="input_control flex h-fit w-full flex-col gap-2">
+              <select id="codigo3" contenteditable="true" name="codigo3" class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
                 <option value="" disabled selected>{% blocktrans %}Code{% endblocktrans %}</option>
                 <option value="507">Panamá (+507)</option>
                 <option value="1">EEUU (+1)</option>
               </select>
-              <input type="tel" id="telefono_emergencia" name="telefono_emergencia" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="00000000" />
+              <span class="message ml-1 hidden text-sm">Mensaje</span>
             </div>
-            <span class="message ml-1 hidden text-xs">Mensaje</span>
+            <div class="input_control flex h-fit w-full flex-col gap-2">
+              <input type="tel" id="telefono_emergencia" name="telefono_emergencia" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="00000000" />
+              <span class="message ml-1 hidden text-sm">Mensaje</span>
+            </div>
           </div>
         </div>
       </div>
@@ -247,22 +253,25 @@
       <!-- Fila Teléfono2 / Contacto de emergencia (nombre) -->
       <div class="flex h-fit w-full flex-row gap-4">
         <!-- Teléfono2 -->
-        <div class="input_control flex h-full w-full flex-col gap-2">
-          <div class="flex h-fit w-full flex-row gap-2">
-            <select id="codigo2" name="codigo2" # class="w-1/2 cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+        <div class="flex h-fit w-full gap-2">
+          <div class="input_control flex h-fit w-full flex-col gap-2">
+            <select id="codigo2" contenteditable="true" name="codigo2" class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
               <option value="" disabled selected>{% blocktrans %}Code{% endblocktrans %}</option>
               <option value="507">Panamá (+507)</option>
               <option value="1">EEUU (+1)</option>
             </select>
-            <input type="tel" id="Telefono2" name="Telefono2" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="00000000" />
+            <span class="message ml-1 hidden text-sm">Mensaje</span>
           </div>
-          <span class="message ml-1 hidden text-xs">Mensaje</span>
+          <div class="input_control flex h-fit w-full flex-col gap-2">
+            <input type="tel" id="Telefono2" name="Telefono2" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="00000000" />
+            <span class="message ml-1 hidden text-sm">Mensaje</span>
+          </div>
         </div>
 
         <!-- Contacto de emergencia (nombre)-->
         <div class="input_control flex h-full w-full flex-col gap-2">
           <input type="text" id="nombre_contacto" name="nombre_contacto" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Contact's first and last name{% endblocktrans %}" />
-          <span class="message ml-1 hidden text-xs">Mensaje</span>
+          <span class="message ml-1 hidden text-sm">Mensaje</span>
         </div>
       </div>
 
@@ -271,14 +280,14 @@
         <label for="direccion_principal" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Address{% endblocktrans %}</label>
         <div class="input_control flex w-full flex-col gap-2">
           <input type="text" id="direccion_principal" name="direccion_principal" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Main address{% endblocktrans %}" />
-          <span class="message ml-1 hidden text-xs">Mensaje</span>
+          <span class="message ml-1 hidden text-sm">Mensaje</span>
         </div>
       </div>
 
       <!-- Fila dirección secundaria -->
       <div class="input_control flex w-full flex-col gap-2">
         <input type="text" id="direccion_secundaria" name="direccion_secundaria" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Second address{% endblocktrans %}" />
-        <span class="message ml-1 hidden text-xs">Mensaje</span>
+        <span class="message ml-1 hidden text-sm">Mensaje</span>
       </div>
 
       <!-- Fila Ciudad / Estado-Provincia -->
@@ -286,21 +295,21 @@
         <!-- Ciudad -->
         <div class="input_control flex w-full flex-col gap-2">
           <input type="text" id="ciudad" name="ciudad" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}City{% endblocktrans %}" />
-          <span class="message ml-1 hidden text-xs">Mensaje</span>
+          <span class="message ml-1 hidden text-sm">Mensaje</span>
         </div>
 
         <!-- Estado / Provincia -->
         <div class="input_control flex w-full flex-col gap-2">
           <input type="text" id="Estado_Provincia" name="Estado_Provincia" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}State/Province{% endblocktrans %}" />
-          <span class="message ml-1 hidden text-xs">Mensaje</span>
+          <span class="message ml-1 hidden text-sm">Mensaje</span>
         </div>
       </div>
 
       <!-- Fila código postal -->
-      <div class="input_control flex w-full flex-col gap-2">
+      <!--      <div class="input_control flex w-full flex-col gap-2">
         <input type="text" id="codigo_postal" name="codigo_postal" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Postal code{% endblocktrans %}" />
-        <span class="message ml-1 hidden text-xs">Mensaje</span>
-      </div>
+        <span class="message ml-1 hidden text-sm">Mensaje</span>
+      </div> -->
     </div>
 
     <!-- Grupo Empresa / Cargo -->
@@ -311,24 +320,24 @@
         <!-- Cargo dropdowns-->
         <div class="flex h-full w-full flex-row gap-4">
           <div class="input_control flex w-full flex-col gap-2">
-            <select id="Cargo1" name="Cargo1" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+            <select id="Cargo1" name="Cargo1" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
               <option value="" disabled selected>{% blocktrans %}Desired position{% endblocktrans %}</option>
               <option value="Limpieza">{% blocktrans %}Cleaning{% endblocktrans %}</option>
               <option value="Mantenimiento">{% blocktrans %}General maintenance{% endblocktrans %}</option>
               <option value="Ayudante-cocina">{% blocktrans %}Kitchen assistant{% endblocktrans %}</option>
               <option value="Recepcion">{% blocktrans %}Receptionist{% endblocktrans %}</option>
             </select>
-            <span class="message ml-1 hidden text-xs">Mensaje</span>
+            <span class="message ml-1 hidden text-sm">Mensaje</span>
           </div>
           <div class="input_control flex w-full flex-col gap-2">
-            <select id="Cargo2" name="Cargo2" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+            <select id="Cargo2" name="Cargo2" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
               <option value="" disabled selected>{% blocktrans %}Desired position{% endblocktrans %}</option>
               <option value="Limpieza">{% blocktrans %}Cleaning{% endblocktrans %}</option>
               <option value="Mantenimiento">{% blocktrans %}General maintenance{% endblocktrans %}</option>
               <option value="Ayudante-cocina">{% blocktrans %}Kitchen assistant{% endblocktrans %}</option>
               <option value="Recepcion">{% blocktrans %}Receptionist{% endblocktrans %}</option>
             </select>
-            <span class="message ml-1 hidden text-xs">Mensaje</span>
+            <span class="message ml-1 hidden text-sm">Mensaje</span>
           </div>
         </div>
       </div>
@@ -337,14 +346,14 @@
       <div class="flex h-fit w-full flex-col">
         <label for="turno" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Desired shift{% endblocktrans %}</label>
         <div class="input_control flex w-full flex-col gap-2">
-          <select id="turno" name="turno" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+          <select id="turno" name="turno" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
             <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
             <option value="mañana">{% blocktrans %}Morning{% endblocktrans %}</option>
             <option value="tarde">{% blocktrans %}Afternoon{% endblocktrans %}</option>
             <option value="noche">{% blocktrans %}Night{% endblocktrans %}</option>
             <option value="madrugada">{% blocktrans %}Overnight{% endblocktrans %}</option>
           </select>
-          <span class="message ml-1 hidden text-xs">Mensaje</span>
+          <span class="message ml-1 hidden text-sm">Mensaje</span>
         </div>
       </div>
 
@@ -352,7 +361,7 @@
       <div class="flex h-fit w-full flex-col">
         <label for="nivel_ingles" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}English level{% endblocktrans %} </label>
         <div class="input_control flex w-full flex-col gap-2">
-          <select id="nivel_ingles" name="nivel_ingles" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+          <select id="nivel_ingles" name="nivel_ingles" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
             <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
             <option value="nulo">{% blocktrans %}Null{% endblocktrans %}</option>
             <option value="basico">{% blocktrans %}Basic{% endblocktrans %}</option>
@@ -360,7 +369,7 @@
             <option value="avanzado">{% blocktrans %}Advanced{% endblocktrans %}</option>
             <option value="nativo">{% blocktrans %}Native{% endblocktrans %}</option>
           </select>
-          <span class="message ml-1 hidden text-xs">Mensaje</span>
+          <span class="message ml-1 hidden text-sm">Mensaje</span>
         </div>
       </div>
 
@@ -369,30 +378,40 @@
         <!-- Label -->
         <label for="fecha_inicio" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}When can you start?{% endblocktrans %}</label>
         <div class="input_control flex w-full flex-col gap-2">
-          <!-- ícono datepicker -->
+          <!-- datepicker input -->
+          <input type="date" name="fecha_inicio" id="fecha_inicio" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 placeholder:text-gray-400 focus:border-sky focus:ring-sky" />
+          <span class="message ml-1 hidden text-sm">Mensaje</span>
+        </div>
+      </div>
+
+      <!--       <div class="relative flex h-full w-full flex-col">
+
+        <label for="fecha_inicio" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}When can you start?{% endblocktrans %}</label>
+        <div class="input_control flex w-full flex-col gap-2">
+
           <div class="pointer-events-none absolute inset-y-11 end-3 flex items-center">
             <svg class="h-3.5 w-3.5 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
               <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
             </svg>
           </div>
-          <!-- datepicker input -->
-          <input datepicker datepicker-format="{% blocktrans %}mm/dd/yyyy{% endblocktrans %}" datepicker-autohide id="fecha_inicio" name="fecha_inicio" type="text" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Date{% endblocktrans %}" />
-          <span class="message ml-1 hidden text-xs">Mensaje</span>
+
+          <input datepicker datepicker-format="{% blocktrans %}mm/dd/yyyy{% endblocktrans %}" datepicker-autohide id="fecha_inicio" name="fecha_inicio" type="text" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}mm/dd/aaaa{% endblocktrans %}" />
+          <span class="message ml-1 hidden text-sm">Mensaje</span>
         </div>
-      </div>
+      </div> -->
 
       <!-- Fila Transporte -->
       <div class="flex h-fit w-full flex-col">
         <label for="Transporte" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}What transportation method do you use?{% endblocktrans %}</label>
         <div class="input_control flex w-full flex-col gap-2">
-          <select id="Transporte" name="Transporte" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+          <select id="Transporte" name="Transporte" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
             <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
             <option value="bus">{% blocktrans %}Bus{% endblocktrans %}</option>
             <option value="vehiculo-propio">{% blocktrans %}Own vehicle{% endblocktrans %}</option>
             <option value="uber">{% blocktrans %}Uber{% endblocktrans %}</option>
             <option value="otro">{% blocktrans %}Other{% endblocktrans %}</option>
           </select>
-          <span class="message ml-1 hidden text-xs">Mensaje</span>
+          <span class="message ml-1 hidden text-sm">Mensaje</span>
         </div>
       </div>
     </div>
@@ -403,7 +422,7 @@
       <div class="flex h-fit w-full flex-col">
         <label for="Conociste" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}How did you hear about us?{% endblocktrans %}</label>
         <div class="input_control flex w-full flex-col gap-2">
-          <select id="Conociste" name="Conociste" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+          <select id="Conociste" name="Conociste" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
             <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
             <option value="referencia">{% blocktrans %}Reference from an acquaintance{% endblocktrans %}</option>
             <option value="sticker-qr">{% blocktrans %}Sticker with QR{% endblocktrans %}</option>
@@ -412,7 +431,7 @@
             <option value="google">{% blocktrans %}Google{% endblocktrans %}</option>
             <option value="otro">{% blocktrans %}Other{% endblocktrans %}</option>
           </select>
-          <span class="message ml-1 hidden text-xs">Mensaje</span>
+          <span class="message ml-1 hidden text-sm">Mensaje</span>
         </div>
       </div>
 
@@ -421,7 +440,7 @@
         <label for="referencia" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Referred by (If it applies){% endblocktrans %}</label>
         <div class="input_control flex w-full flex-col gap-2">
           <input type="text" id="referencia" name="referencia" aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Reference{% endblocktrans %}" />
-          <span class="message ml-1 hidden text-xs">Mensaje</span>
+          <span class="message ml-1 hidden text-sm">Mensaje</span>
         </div>
       </div>
     </div>
@@ -455,9 +474,19 @@
 <script defer src="{% static 'js/form_input_validation.js' %}"></script>
 <script>
   const m_campo_requerido = "{% blocktrans %}Campo requerido.{% endblocktrans %}";
-  const m_longitud_min_max = "{% blocktrans %}Debe tener entre 3 y 20 caracteres.{% endblocktrans %}";
+  const m_longitud_min = "{% blocktrans %}Debe tener mínimo 3 caracteres{% endblocktrans %}";
+  const m_longitud_max = "{% blocktrans %}Máximo de caracteres alcanzado.{% endblocktrans %}";
   const m_nombre_formato = '{% blocktrans %}Ingrese su primer "Nombre" con formato válido.{% endblocktrans %}';
   const m_apellido_formato = '{% blocktrans %}Ingrese su primer "Apellido" con formato válido.{% endblocktrans %}';
   const m_email_formato = "{% blocktrans %}Ingrese un correo con formato válido.{% endblocktrans %}";
+  const m_edad_minima = "{% blocktrans %}La edad mínima permitida es 18 años.{% endblocktrans %}";
+  const m_fecha_futura = "{% blocktrans %}Ingrese una fecha de nacimiento válida.{% endblocktrans %}";
+  const m_letras_regex = "{% blocktrans %}Ingrese solo texto.{% endblocktrans %}";
+  const m_telefono_regex = "{% blocktrans %}Ingrese solo números.{% endblocktrans %}";
+  const m_telefono_formato = "{% blocktrans %}Ingrese un número de teléfono válido.{% endblocktrans %}";
+  const m_nombre_contacto_formato = "{% blocktrans %}Ingrese un nombre con formato válido 'Nombre Apellido'{% endblocktrans %}";
+  const m_ciudad_formato = "{% blocktrans %}Ingrese una ciudad con formato válido 'Ciudad'{% endblocktrans %}";
+  const m_provincia_formato = "{% blocktrans %}Ingrese una provincia con formato válido 'Provincia'{% endblocktrans %}";
+  const m_fecha_inicio = "{% blocktrans %}Ingrese una fecha de inicio válida{% endblocktrans %}";
 </script>
 {% endblock %}

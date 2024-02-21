@@ -2037,16 +2037,6 @@ input[type="file"]::file-selector-button:hover {
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
-.focus\:border-spacing-1:focus {
-  --tw-border-spacing-x: 0.25rem;
-  --tw-border-spacing-y: 0.25rem;
-  border-spacing: var(--tw-border-spacing-x) var(--tw-border-spacing-y);
-}
-
-.focus\:border:focus {
-  border-width: 1px;
-}
-
 .focus\:border-sky:focus {
   --tw-border-opacity: 1;
   border-color: rgb(5 150 255 / var(--tw-border-opacity));

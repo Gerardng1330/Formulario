@@ -67,12 +67,8 @@ WSGI_APPLICATION = 'backend.main.wsgi.application'
 
 DATABASES = {
        'default': {
-           'ENGINE': 'django.db.backends.postgresql',
-           'NAME': 'formulariof2f',
-           'USER': 'manuel',
-           'PASSWORD': '123',
-           'HOST': '200.46.88.101',
-           'PORT': '5432',
+           'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / "db.sqlite3",
        }
    }
 
@@ -107,7 +103,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR.parent / "frontend" / "static"
+    BASE_DIR.parent / "frontend" / "static",
+    BASE_DIR.parent / "node_modules" / "flowbite" / "dist",
 ]
 
 STATIC_ROOT = BASE_DIR / "development-cdn" / "static" #Dónde queremos guardar los archivos
