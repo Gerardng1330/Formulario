@@ -40,23 +40,6 @@ const nombreContactoRegex = /^[A-ZáéíóúÁÉÍÓÚüÜñÑ][a-záéíóúÁ�
 const ciudadEstadoRegex = /^[A-ZáéíóúÁÉÍÓÚüÜñÑ][a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]*$/;
 const longitud_max = 30;
 
-/* Previene que el form se envíe antes de validar los inputs.
-Se ejecuta cuando se da click al botón APLICAR AHORA */
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  /* Se agrega cada función para que la validación al hacer "submit" sea independiente a los eventos de validación a tiempo real */
-  validarNombre();
-  validarApellido();
-  validarEmail();
-  validarGenero();
-  validarNacionalidad();
-  validarFechaNacimientoVacia();
-  validarFechaNacimiento();
-  validarAlergia();
-  validarID();
-  validarCV();
-});
-
 /* Función que recibe un elemento html (el input) y un mensaje a mostrar (que se trae del html como variable, para permitir la internacionalización */
 function setError(element, message) {
   const input_control = element.parentElement; /* Referencia: div padre del input proporcionado */
@@ -84,7 +67,7 @@ function setSuccess(element, message) {
   element.classList.remove("border-red");
 }
 
-/* Función para validar selects, que no estén vacíos. Recibe el input. */
+/* Validation functions */
 function validarRequerido(input) {
   if (input.value.trim() === "") {
     /* Campo requerido */
@@ -94,7 +77,6 @@ function validarRequerido(input) {
   }
 }
 
-/* Función para validar números de teléfono */
 function validarTelefono(input) {
   if (input.value.trim() === "") {
     /* Campo requerido */
@@ -110,63 +92,203 @@ function validarTelefono(input) {
   }
 }
 
-/* Validaciones por campo */
+function validarNombre() {
+  if (nombre.value.trim() === "") {
+    /* Campo requerido */
+    setError(nombre, m_campo_requerido);
+  } else if (!nombreApellidoRegex.test(nombre.value.trim())) {
+    /* Inicia con mayúscula? */
+    setError(nombre, m_nombre_formato);
+  } else if (espacioRegex.test(nombre.value.trim())) {
+    /* Escribió más de un nombre? */
+    setError(nombre, m_nombre_formato);
+  } else if (nombre.value.trim().length < 3) {
+    /* Longitud mínima */
+    setError(nombre, m_longitud_min);
+  } else if (nombre.value.trim().length > longitud_max) {
+    /* Longitud máxima */
+    setError(nombre, m_longitud_max);
+  } else {
+    setSuccess(nombre, "");
+  }
+}
+
+function validarApellido() {
+  if (apellido.value.trim() === "") {
+    /* Campo requerido */
+    setError(apellido, m_campo_requerido);
+  } else if (!nombreApellidoRegex.test(apellido.value.trim())) {
+    /* Inicia con mayúscula? */
+    setError(apellido, m_apellido_formato);
+  } else if (espacioRegex.test(apellido.value.trim())) {
+    /* Escribió más de un apellido? */
+    setError(apellido, m_apellido_formato);
+  } else if (apellido.value.trim().length < 3) {
+    /* Longitud mínima */
+    setError(apellido, m_longitud_min);
+  } else if (apellido.value.trim().length > longitud_max) {
+    /* Longitud máxima */
+    setError(apellido, m_longitud_max);
+  } else {
+    setSuccess(apellido, "");
+  }
+}
+
+function validarEmail() {
+  if (email.value.trim() === "") {
+    /* Campo requerido */
+    setError(email, m_campo_requerido);
+  } else if (email.value.trim().length < 3 || email.value.trim().length > 30 || !emailRegex.test(email.value.trim())) {
+    /* Longitud mínima y máxima - Formato ejemplo@email.com */
+    setError(email, m_email_formato);
+  } else {
+    setSuccess(email, "");
+  }
+}
+
+function validarFechaVacia(input) {
+  if (input.value.trim() === "") {
+    /* Campo requerido */
+    setError(input, m_campo_requerido);
+  }
+}
+
+function validarFechaNacimiento() {
+  var fecha_actual = new Date();
+  var fecha_ingresada = new Date(fecha_nacimiento.value.trim());
+  var diferencia_dias = Math.floor((fecha_actual - fecha_ingresada) / (1000 * 60 * 60 * 24));
+  if (fecha_nacimiento.value.trim() === "") {
+    /* Campo requerido */
+    setError(fecha_nacimiento, m_campo_requerido);
+  } else if (diferencia_dias < 0) {
+    /* Fecha futura? */
+    setError(fecha_nacimiento, m_fecha_futura);
+  } else if (diferencia_dias < 6570) {
+    /* Debes tener mínimo 18 años */
+    setError(fecha_nacimiento, m_edad_minima);
+  } else {
+    setSuccess(fecha_nacimiento, "");
+  }
+}
+
+function validarAlergia() {
+  if (alergia.value.trim() === "") {
+    /* Campo requerido */
+    setError(alergia, m_campo_requerido);
+  } else if (!letrasRegex.test(alergia.value.trim())) {
+    /* Formato de texto */
+    setError(alergia, m_letras_regex);
+  } else if (alergia.value.trim().length > longitud_max) {
+    /* Longitud mínima */
+    setError(alergia, m_longitud_max);
+  } else {
+    setSuccess(alergia, "");
+  }
+}
+
+function validarNombreContacto() {
+  if (nombre_contacto.value.trim() === "") {
+    /* Campo requerido */
+    setError(nombre_contacto, m_campo_requerido);
+  } else if (!nombreContactoRegex.test(nombre_contacto.value.trim())) {
+    /* Está incorrecto el formato "Nombre Apellido"? */
+    setError(nombre_contacto, m_nombre_contacto_formato);
+  } else if (nombre_contacto.value.trim().length > longitud_max) {
+    /* Longitud máxima */
+    setError(nombre_contacto, m_longitud_max);
+  } else {
+    setSuccess(nombre_contacto, "");
+  }
+}
+
+function validarCiudad() {
+  if (ciudad.value.trim() === "") {
+    /* Campo requerido */
+    setError(ciudad, m_campo_requerido);
+  } else if (!ciudadEstadoRegex.test(ciudad.value.trim())) {
+    /* Validación del formato Ciudad */
+    setError(ciudad, m_ciudad_formato);
+  } else if (ciudad.value.trim().length < 3) {
+    /* Longitud mínima */
+    setError(ciudad, m_longitud_min);
+  } else if (ciudad.value.trim().length > longitud_max) {
+    /* Longitud máxima */
+    setError(ciudad, m_longitud_max);
+  } else {
+    setSuccess(ciudad, "");
+  }
+}
+
+function validarEstadoProvincia() {
+  if (Estado_Provincia.value.trim() === "") {
+    /* Campo requerido */
+    setError(Estado_Provincia, m_campo_requerido);
+  } else if (!ciudadEstadoRegex.test(Estado_Provincia.value.trim())) {
+    /* Validación del formato Ciudad */
+    setError(Estado_Provincia, m_provincia_formato);
+  } else if (Estado_Provincia.value.trim().length < 3) {
+    /* Longitud mínima */
+    setError(Estado_Provincia, m_longitud_min);
+  } else if (Estado_Provincia.value.trim().length > longitud_max) {
+    /* Longitud máxima */
+    setError(Estado_Provincia, m_longitud_max);
+  } else {
+    setSuccess(Estado_Provincia, "");
+  }
+}
+
+function validarFechaInicio() {
+  var fecha_actual = new Date();
+  var fecha_ingresada = new Date(fecha_inicio.value.trim());
+  var diferencia_dias = Math.floor((fecha_actual - fecha_ingresada) / (1000 * 60 * 60 * 24));
+  if (fecha_inicio.value.trim() === "") {
+    /* Campo requerido */
+    setError(fecha_inicio, m_campo_requerido);
+  } else if (diferencia_dias <= -365) {
+    /* Más de 1 año? */
+    setError(fecha_inicio, m_fecha_inicio);
+  } else if (diferencia_dias >= 0) {
+    /* Fecha pasada */
+    setError(fecha_inicio, m_fecha_inicio);
+  } else {
+    setSuccess(fecha_inicio, "");
+  }
+}
+
+function validarReferencia() {
+  if (referencia.value.trim() === "") {
+    /* La referencia no es requerida. Se regresa a como estaba. */
+    referencia.classList.remove("border-lime-500");
+    referencia.classList.remove("border-2");
+    referencia.classList.remove("border-red");
+    referencia.classList.add("border");
+    referencia.classList.add("border-gray-300");
+  } else if (!nombreContactoRegex.test(referencia.value.trim())) {
+    /* Está incorrecto el formato "Nombre Apellido"? */
+    setError(referencia, m_nombre_contacto_formato);
+  } else if (referencia.value.trim().length > longitud_max) {
+    /* Longitud máxima */
+    setError(referencia, m_longitud_max);
+  } else {
+    setSuccess(referencia, "");
+  }
+}
+
+/* Validaciones por campo en tiempo real*/
 document.addEventListener("DOMContentLoaded", function () {
   /* Validar nombre */
-  nombre.addEventListener("input", function validarNombre() {
-    if (nombre.value.trim() === "") {
-      /* Campo requerido */
-      setError(nombre, m_campo_requerido);
-    } else if (!nombreApellidoRegex.test(nombre.value.trim())) {
-      /* Inicia con mayúscula? */
-      setError(nombre, m_nombre_formato);
-    } else if (espacioRegex.test(nombre.value.trim())) {
-      /* Escribió más de un nombre? */
-      setError(nombre, m_nombre_formato);
-    } else if (nombre.value.trim().length < 3) {
-      /* Longitud mínima */
-      setError(nombre, m_longitud_min);
-    } else if (nombre.value.trim().length > longitud_max) {
-      /* Longitud máxima */
-      setError(nombre, m_longitud_max);
-    } else {
-      setSuccess(nombre, "");
-    }
+  nombre.addEventListener("input", function () {
+    validarNombre();
   });
 
   /* Validar apellido */
-  apellido.addEventListener("input", function validarApellido() {
-    if (apellido.value.trim() === "") {
-      /* Campo requerido */
-      setError(apellido, m_campo_requerido);
-    } else if (!nombreApellidoRegex.test(apellido.value.trim())) {
-      /* Inicia con mayúscula? */
-      setError(apellido, m_apellido_formato);
-    } else if (espacioRegex.test(apellido.value.trim())) {
-      /* Escribió más de un apellido? */
-      setError(apellido, m_apellido_formato);
-    } else if (apellido.value.trim().length < 3) {
-      /* Longitud mínima */
-      setError(apellido, m_longitud_min);
-    } else if (apellido.value.trim().length > longitud_max) {
-      /* Longitud máxima */
-      setError(apellido, m_longitud_max);
-    } else {
-      setSuccess(apellido, "");
-    }
+  apellido.addEventListener("input", function () {
+    validarApellido();
   });
 
   /* Validar email */
-  email.addEventListener("input", function validarEmail() {
-    if (email.value.trim() === "") {
-      /* Campo requerido */
-      setError(email, m_campo_requerido);
-    } else if (email.value.trim().length < 3 || email.value.trim().length > 30 || !emailRegex.test(email.value.trim())) {
-      /* Longitud mínima y máxima - Formato ejemplo@email.com */
-      setError(email, m_email_formato);
-    } else {
-      setSuccess(email, "");
-    }
+  email.addEventListener("input", function () {
+    validarEmail();
   });
 
   /* Validar género */
@@ -181,226 +303,154 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* Validar fecha_nacimiento */
   /* Si das click y no ingresas nada (vas a otro campo) */
-  fecha_nacimiento.addEventListener("blur", function validarFechaNacimientoVacia() {
-    if (fecha_nacimiento.value.trim() === "") {
-      /* Campo requerido */
-      setError(fecha_nacimiento, m_campo_requerido);
-    }
+  fecha_nacimiento.addEventListener("blur", function () {
+    validarFechaVacia(fecha_nacimiento);
   });
-
   /* Si los valores del input cambian */
-  fecha_nacimiento.addEventListener("input", function validarFechaNacimiento() {
-    var fecha_actual = new Date();
-    var fecha_ingresada = new Date(fecha_nacimiento.value.trim());
-    var diferencia_dias = Math.floor((fecha_actual - fecha_ingresada) / (1000 * 60 * 60 * 24));
-    console.log(diferencia_dias);
-    if (diferencia_dias < 0) {
-      /* Fecha futura? */
-      setError(fecha_nacimiento, m_fecha_futura);
-    } else if (diferencia_dias < 6570) {
-      /* Debes tener mínimo 18 años */
-      setError(fecha_nacimiento, m_edad_minima);
-    } else {
-      setSuccess(fecha_nacimiento, "");
-    }
+  fecha_nacimiento.addEventListener("input", function () {
+    validarFechaNacimiento();
   });
 
   /* Validar discapacidad / alergia */
-  alergia.addEventListener("input", function validarAlergia() {
-    if (alergia.value.trim() === "") {
-      /* Campo requerido */
-      setError(alergia, m_campo_requerido);
-    } else if (!letrasRegex.test(alergia.value.trim())) {
-      /* Formato de texto */
-      setError(alergia, m_letras_regex);
-    } else if (alergia.value.trim().length > longitud_max) {
-      /* Longitud mínima */
-      setError(alergia, m_longitud_max);
-    } else {
-      setSuccess(alergia, "");
-    }
+  alergia.addEventListener("input", function () {
+    validarAlergia();
   });
 
-  /* Validar id_file */
-  function validarID() {
-    if (id_file.value.trim() === "") {
-      /* Campo requerido */
-      setError(id_file, m_campo_requerido);
-    } else {
-      setSuccess(id_file, "");
-    }
-  }
+  /* id_file se valida al mandar el formulario */
 
-  /* Validar cv_file */
-  function validarCV() {
-    if (cv_file.value.trim() === "") {
-      /* Campo requerido */
-      setError(cv_file, m_campo_requerido);
-    } else {
-      setSuccess(cv_file, "");
-    }
-  }
+  /* cv_file se valida al mandar el formulario */
 
   /* Validar codigo1 */
-  codigo1.addEventListener("click", function validarCodigo1() {
+  codigo1.addEventListener("click", function () {
     validarRequerido(codigo1);
   });
 
   /* Validar Telefono1 */
-  Telefono1.addEventListener("input", function validarTelefono1() {
+  Telefono1.addEventListener("input", function () {
     validarTelefono(Telefono1);
   });
 
   /* Validar codigo3 */
-  codigo3.addEventListener("click", function validarCodigo3() {
+  codigo3.addEventListener("click", function () {
     validarRequerido(codigo3);
   });
 
   /* Validar telefono_emergencia */
-  telefono_emergencia.addEventListener("input", function validarTelefonoEmergencia() {
+  telefono_emergencia.addEventListener("input", function () {
     validarTelefono(telefono_emergencia);
   });
 
   /* Validar codigo2 */
-  codigo2.addEventListener("click", function validadCodigo2() {
+  codigo2.addEventListener("click", function () {
     validarRequerido(codigo2);
   });
 
   /* Validar Telefono2 */
-  Telefono2.addEventListener("input", function validarTelefono2() {
+  Telefono2.addEventListener("input", function () {
     validarTelefono(Telefono2);
   });
 
   /* Validar nombre_contacto */
-  nombre_contacto.addEventListener("input", function validarNombreContacto() {
-    if (nombre_contacto.value.trim() === "") {
-      /* Campo requerido */
-      setError(nombre_contacto, m_campo_requerido);
-    } else if (!nombreContactoRegex.test(nombre_contacto.value.trim())) {
-      /* Está incorrecto el formato "Nombre Apellido"? */
-      setError(nombre_contacto, m_nombre_contacto_formato);
-    } else if (nombre_contacto.value.trim().length > longitud_max) {
-      /* Longitud máxima */
-      setError(nombre_contacto, m_longitud_max);
-    } else {
-      setSuccess(nombre_contacto, "");
-    }
+  nombre_contacto.addEventListener("input", function () {
+    validarNombreContacto();
   });
 
   /* Validar direccion_principal */
-  direccion_principal.addEventListener("input", function validarDireccionPrincipal() {
+  direccion_principal.addEventListener("input", function () {
     validarRequerido(direccion_principal);
   });
 
   /* La dirección secundaria no es requerida */
 
   /* Validar Ciudad */
-  ciudad.addEventListener("input", function validarCiudad() {
-    if (ciudad.value.trim() === "") {
-      /* Campo requerido */
-      setError(ciudad, m_campo_requerido);
-    } else if (!ciudadEstadoRegex.test(ciudad.value.trim())) {
-      /* Validación del formato Ciudad */
-      setError(ciudad, m_ciudad_formato);
-    } else if (ciudad.value.trim().length < 3) {
-      /* Longitud mínima */
-      setError(ciudad, m_longitud_min);
-    } else if (ciudad.value.trim().length > longitud_max) {
-      /* Longitud máxima */
-      setError(ciudad, m_longitud_max);
-    } else {
-      setSuccess(ciudad, "");
-    }
+  ciudad.addEventListener("input", function () {
+    validarCiudad();
   });
 
   /* Validar Estado / Provincia */
-  Estado_Provincia.addEventListener("input", function validarEstadoProvincia() {
-    if (Estado_Provincia.value.trim() === "") {
-      /* Campo requerido */
-      setError(Estado_Provincia, m_campo_requerido);
-    } else if (!ciudadEstadoRegex.test(Estado_Provincia.value.trim())) {
-      /* Validación del formato Ciudad */
-      setError(Estado_Provincia, m_provincia_formato);
-    } else if (Estado_Provincia.value.trim().length < 3) {
-      /* Longitud mínima */
-      setError(Estado_Provincia, m_longitud_min);
-    } else if (Estado_Provincia.value.trim().length > longitud_max) {
-      /* Longitud máxima */
-      setError(Estado_Provincia, m_longitud_max);
-    } else {
-      setSuccess(Estado_Provincia, "");
-    }
+  Estado_Provincia.addEventListener("input", function () {
+    validarEstadoProvincia();
   });
 
   /* Validar Cargo1 */
-  Cargo1.addEventListener("click", function validarCargo1() {
+  Cargo1.addEventListener("click", function () {
     validarRequerido(Cargo1);
   });
 
   /* Validar Cargo2 */
-  Cargo2.addEventListener("click", function validarCargo2() {
+  Cargo2.addEventListener("click", function () {
     validarRequerido(Cargo2);
   });
 
   /* Validar turno */
-  turno.addEventListener("click", function validarTurno() {
+  turno.addEventListener("click", function () {
     validarRequerido(turno);
   });
 
   /* Validar nivel_ingles */
-  nivel_ingles.addEventListener("click", function validarNivelIngles() {
+  nivel_ingles.addEventListener("click", function () {
     validarRequerido(nivel_ingles);
   });
 
   /* Validar fecha_inicio */
   /* Si das click y no ingresas nada (vas a otro campo) */
-  fecha_inicio.addEventListener("blur", function validarFechaInicioVacia() {
-    if (fecha_inicio.value.trim() === "") {
-      /* Campo requerido */
-      setError(fecha_inicio, m_campo_requerido);
-    }
+  fecha_inicio.addEventListener("blur", function () {
+    validarFechaVacia(fecha_inicio);
   });
-
   /* Si los valores del input cambian */
-  fecha_inicio.addEventListener("input", function validarFechaInicio() {
-    var fecha_actual = new Date();
-    var fecha_ingresada = new Date(fecha_inicio.value.trim());
-    var diferencia_dias = Math.floor((fecha_actual - fecha_ingresada) / (1000 * 60 * 60 * 24));
-    console.log(diferencia_dias);
-    if (diferencia_dias <= -365) {
-      /* Más de 1 año? */
-      setError(fecha_inicio, m_fecha_inicio);
-    } else if (diferencia_dias >= 0) {
-      /* Fecha pasada */
-      setError(fecha_inicio, m_fecha_inicio);
-    } else {
-      setSuccess(fecha_inicio, "");
-    }
+  fecha_inicio.addEventListener("input", function () {
+    validarFechaInicio();
   });
 
   /* Validar transporte */
-  Transporte.addEventListener("click", function validarTransporte() {
+  Transporte.addEventListener("click", function () {
     validarRequerido(Transporte);
   });
 
   /* Validar Conociste */
-  Conociste.addEventListener("click", function validarConociste() {
+  Conociste.addEventListener("click", function () {
     validarRequerido(Conociste);
   });
 
   /* Validar referencia */
-  referencia.addEventListener("input", function validarReferencia() {
-    if (referencia.value.trim() === "") {
-      /* La referencia no es requerida */
-      setSuccess(referencia, "");
-    } else if (!nombreContactoRegex.test(referencia.value.trim())) {
-      /* Está incorrecto el formato "Nombre Apellido"? */
-      setError(referencia, m_nombre_contacto_formato);
-    } else if (referencia.value.trim().length > longitud_max) {
-      /* Longitud máxima */
-      setError(referencia, m_longitud_max);
-    } else {
-      setSuccess(referencia, "");
-    }
+  referencia.addEventListener("input", function () {
+    validarReferencia();
   });
+});
+
+/* Previene que el form se envíe antes de validar los inputs.
+Se ejecuta cuando se da click al botón APLICAR AHORA */
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  /* Se agrega cada función para que la validación al hacer "submit" sea independiente a los eventos de validación a tiempo real */
+  validarNombre();
+  validarApellido();
+  validarEmail();
+  validarRequerido(genero);
+  validarRequerido(nacionalidad);
+  validarFechaVacia(fecha_nacimiento);
+  validarFechaNacimiento();
+  validarAlergia();
+  validarRequerido(id_file);
+  validarRequerido(cv_file);
+  validarRequerido(codigo1);
+  validarTelefono(Telefono1);
+  validarRequerido(codigo3);
+  validarTelefono(telefono_emergencia);
+  validarRequerido(codigo2);
+  validarTelefono(Telefono2);
+  validarNombreContacto();
+  validarRequerido(direccion_principal);
+  /* Dirección secundaria no requerida */
+  validarCiudad();
+  validarEstadoProvincia();
+  validarRequerido(Cargo1);
+  validarRequerido(Cargo2);
+  validarRequerido(turno);
+  validarRequerido(nivel_ingles);
+  validarFechaVacia(fecha_inicio);
+  validarFechaInicio();
+  validarRequerido(Transporte);
+  validarRequerido(Conociste);
+  validarReferencia();
 });

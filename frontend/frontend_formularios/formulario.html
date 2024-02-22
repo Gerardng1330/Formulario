@@ -81,7 +81,7 @@
   </div>
 
   <!-- Campos del formulario -->
-  <form id="form" method="post" autocomplete="off" action="{% url 'src_routes:envio_formulario' %}" enctype="multipart/form-data" class="mt-2 flex h-fit w-full flex-col gap-12 text-black">
+  <form method="post" autocomplete="off" action="{% url 'src_routes:envio_formulario' %}" enctype="multipart/form-data" class="mt-2 flex h-fit w-full flex-col gap-12 text-black">
     {% csrf_token %}<!--para que un hacker no se haga pasar por el usuario-->
 
     <!-- Grupo Datos personales generales -->
@@ -458,13 +458,13 @@
 </a>
 
 <!-- Verifica los campos enviados del formulario -->
-<!-- {% if messages %}
-<ul class="messages">
-  {% for message in messages %}
-  <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-  {% endfor %}
-</ul>
-{% endif %} {% endblock %} -->
+{% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %} {% endblock %}
 
 <!-- Scripts del sitio -->
 {% block scripts %}
