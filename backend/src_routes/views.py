@@ -37,30 +37,15 @@ from django.utils.datastructures import MultiValueDictKeyError
 #Renderizar el exti.html(prueba)
 
 def exito(request):
-    trans = translate(language='es')
-    return render(request, 'exito.html',{'trans': trans})
+    return render(request, 'exito.html')
 
 def cerrado(request):
     return render(request, 'cerrado.html')
 
 #Renderizar el formulario.html(prueba)
 def render_formulario(request):
-    transe = translate(language='en')
-    return render(request,'formulario.html',{'transe': transe})
+    return render(request,'formulario.html')
 
-
-# La funcion nos permite traducir el texto en pantalla
-def translate(language):
-    cur_languaje = get_language()
-    try:
-        activate(language)
-        #prueba de traduccion
-        text= gettext('Language')
-       
-
-    finally:
-        activate(cur_languaje)
-    return text
 
 # verifica que el form sea valido para despues enviarlo y envia
 #un mensaje si se envio o no
@@ -85,17 +70,27 @@ def formulario_view(request):
 
     return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente})
 
-
 #prueba
 def prueba(request):
-    return render('prueba.html')
+    formulario_activo = True  # Puedes ajustar esta lógica según tus necesidades
+    enviado_correctamente = False
 
-def validar_nombre(request):
-    
-    nombre = request.GET.get('nombre', '')
-    if len(nombre) < 3:
-        return JsonResponse({'error': 'El nombre debe tener al menos 3 caracteress.'})
-    return JsonResponse({'success': True})
+    if request.method == 'POST' and formulario_activo:
+        form = UsuarioForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            enviado_correctamente = True
+
+            messages.success(request, 'El formulario se envió satisfactoriamente.')
+            return redirect('exito')  # Redirigir a la página de éxito (ajusta la URL según tu configuración)
+        else:
+            print(form.errors)
+            messages.error(request, 'Hubo un error en el formulario. Por favor, verifica los campos.')
+
+    else:
+        form = UsuarioForm()
+
+    return render(request, 'pruebaPagina.html', {'form': form, 'formulario_activo': formulario_activo,'enviado_correctamente':enviado_correctamente})
 
 
 # Login
@@ -221,7 +216,7 @@ def registro(request):#creo la funcion del registro
                 request.session['apellido-registro']= request.POST['Apellido']
                 # Agrega el token al contexto para mostrarlo en la plantilla (opcional)
                 print(request.POST['Correo'],token,request.POST['Contraseña'],request.POST['Usuario'])
-                return redirect('activacion')
+                return render(request,'activacion.html')
 
             except IntegrityError:
                 return render(request, 'registro.html', {'error': 'Nombre de usuario no es válido.'})

@@ -34,6 +34,7 @@ class Usuario(models.Model):
     telefono_emergencia = models.CharField(max_length=20,blank=True, null=True, verbose_name='Teléfono 3')
     nombre_contacto = models.CharField(max_length=255,blank=True, null=True, verbose_name='Nombre de Contacto')
     direccion_principal = models.CharField(max_length=255, blank=True, null=True,verbose_name='Dirección 1')
+    #no requerido
     direccion_secundaria = models.CharField(max_length=255, blank=True, null=True, verbose_name='Dirección 2')
     ciudad = models.CharField(max_length=255,blank=True,  verbose_name='Ciudad cliente',default='cid')
     Estado_Provincia = models.CharField(max_length=255,blank=True, null=True, verbose_name='Estado/Provincia')
@@ -41,7 +42,7 @@ class Usuario(models.Model):
     Codigo2= models.CharField(max_length=20,blank=True, null=True,choices=[('507','507'),('1','1')], verbose_name='Codigo2',default='507')
     Codigo3= models.CharField(max_length=20,blank=True, null=True, verbose_name='Codigo3',default='507')
     codigo_postal= models.CharField(max_length=20,blank=True, null=True, verbose_name='Codigo4',default='507')
-    Cargo1 = models.CharField(max_length=255, choices=[('Limpieza','Limpieza'), ('Mantenimiento','Mantenimiento'),('Ayudante-cocina','Ayudante-cocina'),('Recepcion','Recepcion')],  verbose_name='Cargo Deseado 1',default='nombre')
+    Cargo1 = models.CharField(max_length=255, choices=[('Limpieza','Limpieza'), ('Mantenimiento','Mantenimiento'),('Ayudante-cocina','Ayudante-cocina'),('Recepcion','Recepcion')],blank=True, null=True,  verbose_name='Cargo Deseado 1',default='nombre')
     Cargo2 = models.CharField(max_length=255, choices=[('Limpieza','Limpieza'), ('Mantenimiento','Mantenimiento'),('Ayudante-cocina','Ayudante-cocina'),('Recepcion','Recepcion')],  verbose_name='Cargo Deseado 2',default='nombre')
     turno = models.CharField(max_length=255,blank=True, null=True, choices=[('mañana','mañana'), ('Tarde','Tarde'),('Noche','Noche'),('Madrugada','Madrugada')],  verbose_name='Turno Deseado')
     nivel_ingles = models.CharField(max_length=255,blank=True, null=True, choices=[('nulo', 'nulo'),
@@ -50,11 +51,12 @@ class Usuario(models.Model):
     fecha_inicio = models.TextField(blank=True, null=True, verbose_name='Fecha de Inicio')
     Transporte = models.CharField(max_length=255,blank=True, null=True, choices=[('bus','bus'), ('vehiculo-propio','vehiculo-propio'),('uber','uber'),('OTRO','OTRO')],  verbose_name='Transporte Utilizado')
     Conociste = models.CharField(max_length=255, blank=True, null=True,choices=[('referencia','referencia'),('sticker-qr','sticker-qr'),('volante','volante'),('oficina','oficina'), ('google','google'),('otro','otro')],  verbose_name='Cómo nos Conociste')
+    #no requerido
     referencia = models.CharField(max_length=255,blank=True, null=True, verbose_name='Referido por')
 
     # Método que devuelve una representación en cadena del objeto
     def __str__(self):
-        return f"{self.nombre} {self.apellido}"
+        return f"{self.nombre}"
 
     # Configuración adicional del modelo (en este caso, nombre plural)
     class Meta:
