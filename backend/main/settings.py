@@ -109,7 +109,6 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = BASE_DIR / "development-cdn" / "static" #Dónde queremos guardar los archivos
 
-
 #Internacionalización
 LANGUAGES = (
     ('en', _('English')),
