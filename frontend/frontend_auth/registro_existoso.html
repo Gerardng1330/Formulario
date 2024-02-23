@@ -3,7 +3,7 @@
 {% block content %}
 <body>
     {% csrf_token %}
-    <h1 class="text-center">Se ha Registrado exitosamente</h1>
-    <a class="text-center" href="/inicio">Listo</a>
+    <h1 class="text-center">Cuenta Activada con exito</h1>
+    <a class="text-center mt-5" href="{% url 'src_routes:inicio' %}"><b>Ir a inicio</b></a>
 </body>
 {% endblock %}

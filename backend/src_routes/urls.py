@@ -24,14 +24,11 @@ urlpatterns = [
     path('form/', views.formacion,name='form'),
     
 #Recuperacion de usuario
-    path('recuperar/', views.recuperar_pass,name='recuperar'),    
-    path('registro/', views.registro, name='registro'),
-    path('activacion/', views.validar_token, name='activacion'),
-    path('succefully/', views.succefully, name= 'succefully'),
-    path('password-email/', views.password_email,name='passwordemail'),
-    path('password-send/', views.password_send,name='passwordsend'),
-    path('password-complete/', views.password_complete,name='passwordcomplete'),
-    path('verify/<str:token>/', views.password_send, name='passwordcambiado')
+ path('recuperar/', views.recuperar_pass,name='recuperar'),    
+    path('activacion/', views.activar_cuenta, name='activacion'),
+    path('activacion_aviso/', views.activars, name='activacion_aviso'),
+    path('activar-cuenta/<str:token>/', views.validar_token, name='activar_cuenta'),
+    path('registro_exitoso/', views.succefully, name='registro_exitoso'),
 ]
 
 if settings.DEBUG:
