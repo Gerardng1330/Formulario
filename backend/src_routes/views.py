@@ -50,13 +50,16 @@ def render_formulario(request):
 # verifica que el form sea valido para despues enviarlo y envia
 #un mensaje si se envio o no
 def formulario_view(request):
-    if request.method == 'POST':
+    form_activo = True
+    enviado_correctamente = False
+    if request.method == 'POST' and form_activo:
         form = UsuarioForm(request.POST, request.FILES)
-        print(request.POST)
+        print(request.POST) 
         if form.is_valid():
             form.save()
-            messages.success(request, 'El formulario se envió satisfactoriamente.')
-            return render(request, 'exito.html')
+            #messages.success(request, 'El formulario se envió satisfactoriamente.')
+            enviado_correctamente = True
+            #return render(request, 'exito.html')
         else:
             # Imprimir errores del formulario en la consola del servidor
             print(form.errors)
@@ -65,7 +68,30 @@ def formulario_view(request):
     else:
         form = UsuarioForm()
 
-    return render(request, 'formulario.html', {'form': form})
+    return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente})
+
+#prueba
+def prueba(request):
+    formulario_activo = True  # Puedes ajustar esta lógica según tus necesidades
+    enviado_correctamente = False
+
+    if request.method == 'POST' and formulario_activo:
+        form = UsuarioForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            enviado_correctamente = True
+
+            messages.success(request, 'El formulario se envió satisfactoriamente.')
+            return redirect('exito')  # Redirigir a la página de éxito (ajusta la URL según tu configuración)
+        else:
+            print(form.errors)
+            messages.error(request, 'Hubo un error en el formulario. Por favor, verifica los campos.')
+
+    else:
+        form = UsuarioForm()
+
+    return render(request, 'pruebaPagina.html', {'form': form, 'formulario_activo': formulario_activo,'enviado_correctamente':enviado_correctamente})
+
 
 # Login
 User = get_user_model()

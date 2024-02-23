@@ -67,15 +67,11 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.main.wsgi.application'
 
 DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.postgresql',
-           'NAME': 'formulariof2f',
-           'USER': 'manuel',
-           'PASSWORD': '123',
-           'HOST': '200.46.88.101',
-           'PORT': '5432',
-       }
-   }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / "db.sqlite3",
+    }
+}
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -113,7 +109,7 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = BASE_DIR / "development-cdn" / "static" #Dónde queremos guardar los archivos
 
-print('Soy basedir:', BASE_DIR)
+
 #Internacionalización
 LANGUAGES = (
     ('en', _('English')),
