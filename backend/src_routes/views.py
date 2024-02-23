@@ -60,35 +60,33 @@ def translate(language):
 
     finally:
         activate(cur_languaje)
-    return text     
+    return text
 
 # verifica que el form sea valido para despues enviarlo y envia
 #un mensaje si se envio o no
 def formulario_view(request):
-    if request.method == 'POST':
+    form_activo = True
+    enviado_correctamente = False
+    if request.method == 'POST' and form_activo:
         form = UsuarioForm(request.POST, request.FILES)
-        print(request.POST)
+        print(request.POST) 
         if form.is_valid():
             form.save()
-            messages.success(request, 'El formulario se envió satisfactoriamente.')
-            return render(request, 'exito.html')
+            #messages.success(request, 'El formulario se envió satisfactoriamente.')
+            enviado_correctamente = True
+            #return render(request, 'exito.html')
         else:
             # Imprimir errores del formulario en la consola del servidor
             print(form.errors)
-
-            # Manejar mensaje de error específico para el campo 'nombre'
-            if 'nombre' in form.errors:
-                messages.error(request, 'El nombre debe tener al menos 3 caracteres.')
-            else:
-                messages.error(request, 'Hubo un error en el formulario. Por favor, verifica los campos.')
+            messages.error(request, 'Hubo un error en el formulario. Por favor, verifica los campos.')
        
     else:
         form = UsuarioForm()
 
-    return render(request, 'formulario.html', {'form': form})
+    return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente})
 
 
-
+#prueba
 def prueba(request):
     return render('prueba.html')
 
