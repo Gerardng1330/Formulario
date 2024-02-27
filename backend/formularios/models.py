@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 
 from django.utils.translation import gettext_lazy as _
 
+# Modelo para las políticas
+class Politicas(models.Model):
+    parrafo = models.TextField()
+
 # Creamos el modelo para la bd
 class Usuario(models.Model):
     nombre = models.CharField(max_length=255, verbose_name='Nombre', default='nombre')

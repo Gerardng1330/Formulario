@@ -10,7 +10,7 @@
   <!-- Aviso mensaje de éxito -->
   <div class="flex h-1/3 w-1/3 flex-col items-center justify-center rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
     <!-- ícono de éxito -->
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="mb-4 h-1/2 w-1/2 animate-pulse text-sky">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="mb-4 h-1/4 w-1/4 animate-pulse text-sky">
       <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
     </svg>
 
@@ -31,19 +31,14 @@
         <h3 class="text-md font-kumbh_bold text-blue">{% blocktrans %}POLÍTICAS DE SEGURIDAD{% endblocktrans %}</h3>
       </div>
       <!-- Modal body -->
-      <div class="flex-grow-[3] space-y-4 overflow-y-scroll p-7 text-black">
+      <div class="flex-grow-[3] overflow-y-scroll p-7 text-black">
         <!-- Texto inicial -->
-        <div class="space-y-2 px-2 text-justify">
-          <p class="text-ms leading-relaxed">
-            {% blocktrans %}Antes de unirte a nuestro equipo, es importante que entiendas y aceptes nuestras políticas de empresa. <br /><br />
-            Estas políticas sirven como guías para nuestros empleados para garantizar un ambiente de trabajo positivo y seguro, así como para mantener el más alto nivel de profesionalismo y ética. <br /><br />
-            Al aceptar estas políticas, estás de acuerdo en cumplirlas en todo momento durante tu empleo con nosotros. <br /><br />
-            Si tienes alguna pregunta o inquietud, no dudes en contactarnos.{% endblocktrans %}
-          </p>
+        <div class="px-2 text-justify">
+          <p class="text-ms leading-relaxed">{% for parrafo in politicas|slice:":4" %}{{ parrafo.parrafo }}<br /><br />{% endfor %}</p>
         </div>
 
         <!-- Acuerdo laboral title: Está acá afuera para permitir la indentación de los párrafos -->
-        <p class="text-ms my-3 inline-flex w-full items-center justify-between rounded-lg border border-gray-200 px-4 py-4 font-kumbh_bold font-medium text-blue shadow-sm">
+        <p class="text-ms mb-6 inline-flex w-full items-center justify-between rounded-lg border border-gray-200 px-4 py-4 font-kumbh_bold font-medium text-blue shadow-sm">
           {% blocktrans %}ACUERDO LABORAL{% endblocktrans %}
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mt-2 h-5 w-5 animate-bounce">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
@@ -51,28 +46,12 @@
         </p>
 
         <!-- Acuerdo laboral text -->
-        <div class="space-y-3 px-2 text-justify">
-          <p class="text-ms leading-relaxed underline-offset-4">
-            {% blocktrans %}<b>I. Igualdad de oportunidades en el empleo:<br /><br /></b> Face To Face prohíbe la discriminación y el acoso de cualquier tipo. Somos una empresa que ofrece igualdad de oportunidades de empleo a todos los empleados y solicitantes de raza, color, religión, sexo, orientación sexual, origen nacional, edad, estado civil, discapacidad o cualquier otra característica protegida por la ley. <br /><br />
-            Face To Face cumple con todas las leyes estatales, federales y locales.
-            <br />
-            <br />
-            <b>II. Lugar de trabajo libre de drogas:<br /><br /></b>
-            En cumplimiento de la ley del lugar de trabajo libre de drogas de 1998, Face To Face se compromete a proporcionar un entorno de trabajo seguro productivo que este de acuerdo con los estándares de la comunidad en la que operamos la empresa. <br /><br />
-            El consumo, de sustancias como una droga o alcohol, representan un riesgo para la salud y la seguridad de nuestros empleados y de las instalaciones donde prestamos servicios. <br /><br />
-            Por esa razón, Face To Face prohíbe el consumo, transporte, compra y / o venta de cualquier tipo de medicamento. Al aceptar nuestros términos y continuar con el proceso de solicitud, usted entiende que es posible que se le pida que se haga una prueba de drogas antes de comenzar a trabajar o recibir una oferta de empleo. <br /><br />
-            Además, entiende que, si son contratados, nuestros empleados están sujetos a exámenes de drogas sin previo aviso basados en la aleatoriedad y / o sospecha razonable por parte de los supervisores en el lugar de trabajo, Face To Face puede rechazar las solicitudes y / o cancelar la contratación de aquellas personas cuyo resultado de la prueba de drogas haya dado positivo para una sustancia.
-            <br />
-            <br />
-            <b>III. No competencia:<br /><br /></b>
-            Al aceptar nuestros términos y continuar con el proceso de solicitud, usted acepta que si se convierte en empleado y durante un periodo mínimo de 12 meses después del último día en que sea empleado por nuestra Compañía, no estará directamente involucrado. <br /><br />
-            O indirectamente en actividades similares realizadas por nosotros, en cualquiera de las propiedades en las que Face To Face proporciona sus servicios. <br /><br />
-            Es decir, que el empleado acepta que durante un periodo mínimo de 1 año después de su último día de trabajo con Face To Face, no prestara servicios directamente a la propiedad en la que trabajo ni trabajara para ninguna compañía que preste servicios en la misma propiedad. <br /><br />
-            Del mismo modo, usted acepta que durante un periodo mínimo de 12 meses después de su último día de trabajo con Face To Face, no tomara ninguna medida para ayudar a otra compañía o actuar en contra de nuestra compañía, reconociendo la necesidad de proteger al empleador de su competencia. <br /><br />
-            Para cumplir con esto, usted acepta que las condiciones mencionadas anteriormente son razonables y necesarias para la protección de Face To Face y acepta no revelar la identidad de nuestros clientes ni ninguna información relacionada con nuestra compañía. <br /><br />
-            El solicitante acepta que cualquier violación de cualquiera de las condiciones mencionadas anteriormente permitirá al empleador solicitar una orden de restricción por lesiones, reconociendo que este será un derecho disponible para nuestra compañía por el incumplimiento de este acuerdo por parte del solicitante. <br /><br />
-            En los casos en los que la propiedad solicite el paso directo del empleado de la agencia a ellos, de ser notificado y previamente acordado entre las partes (agencia y cliente), considerando que dicho empleado debe haber prestado mínimo 90 días de servicio a 700 horas con la agencia.
-            <br />{% endblocktrans %}
+        <div class="px-2 text-justify">
+          <p class="text-ms leading-relaxed">
+            {% for parrafo in politicas|slice:"4:20" %} {% if forloop.counter == 1 or forloop.counter == 4 or forloop.counter == 9 %}
+            <b>{{ parrafo.parrafo }}</b><br /><br />
+            {% else %} {{ parrafo.parrafo }}<br /><br />
+            {% endif %} {% endfor %}
           </p>
         </div>
       </div>
@@ -96,7 +75,7 @@
   </div>
 
   <!-- Campos del formulario -->
-  <form method="post" autocomplete="off" action="{% url 'src_routes:envio_formulario' %}" enctype="multipart/form-data" class="mt-2 flex h-fit w-full flex-col gap-12 text-black">
+  <form method="post" autocomplete="off" id="form" action="{% url 'src_routes:envio_formulario' %}" enctype="multipart/form-data" class="mt-2 flex h-fit w-full flex-col gap-12 text-black">
     {% csrf_token %}<!--para que un hacker no se haga pasar por el usuario-->
 
     <!-- Grupo Datos personales generales -->
@@ -110,13 +89,13 @@
         <div class="flex h-full w-full gap-4">
           <!-- Nombre -->
           <div class="input_control flex w-full flex-col gap-2">
-            <input type="text" id="nombre" name="nombre" # aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}First name{% endblocktrans %}" />
+            <input type="text" id="nombre" name="nombre" # aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}First name{% endblocktrans %}" !! />
             <span class="message ml-1 hidden text-sm">Mensaje</span>
           </div>
 
           <!-- Apellido -->
           <div class="input_control flex w-full flex-col gap-2">
-            <input type="text" id="apellido" name="apellido" # aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Last name{% endblocktrans %}" />
+            <input type="text" id="apellido" name="apellido" # aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" !! placeholder="{% blocktrans %}Last name{% endblocktrans %}" />
             <span class="message ml-1 hidden text-sm">Mensaje</span>
           </div>
         </div>
@@ -128,7 +107,7 @@
         <div class="flex h-full w-full flex-col">
           <label for="email" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Email{% endblocktrans %}</label>
           <div class="input_control flex w-full flex-col gap-2">
-            <input type="email" id="email" name="email" # aria-describedby="helper-text-explanation" class="w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}example@email.com{% endblocktrans %}" autocomplete="off" />
+            <input type="email" id="email" name="email" # aria-describedby="helper-text-explanation" class="w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}example@email.com{% endblocktrans %}" !! autocomplete="off" />
             <span class="message ml-1 hidden text-sm">Mensaje</span>
           </div>
         </div>
@@ -137,7 +116,7 @@
         <div class="flex h-full w-full flex-col">
           <label for="genero" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Gender{% endblocktrans %}</label>
           <div class="input_control flex w-full flex-col gap-2">
-            <select contenteditable="true" id="genero" name="genero" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+            <select contenteditable="true" id="genero" name="genero" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" !!>
               <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
               <option value="Masculino">{% blocktrans %}Male{% endblocktrans %}</option>
               <option value="Femenino">{% blocktrans %}Female{% endblocktrans %}</option>
@@ -154,7 +133,7 @@
         <div class="flex h-full w-full flex-col">
           <label for="nacionalidad" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Nationality{% endblocktrans %}</label>
           <div class="input_control flex w-full flex-col gap-2">
-            <select id="nacionalidad" name="nacionalidad" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none focus:border-sky focus:ring-sky">
+            <select id="nacionalidad" name="nacionalidad" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none focus:border-sky focus:ring-sky" !!>
               <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
               <option value="Panama">Panamá</option>
               <option value="Argentina">Argentina</option>
@@ -189,7 +168,7 @@
               </div> -->
           <div class="input_control flex w-full flex-col gap-2">
             <!-- datepicker input -->
-            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 placeholder:text-gray-400 focus:border-sky focus:ring-sky" />
+            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 placeholder:text-gray-400 focus:border-sky focus:ring-sky" !! />
             <span class="message ml-1 hidden text-sm">Mensaje</span>
           </div>
         </div>
@@ -199,7 +178,7 @@
       <div class="h-fit w-full">
         <label for="alergia" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Do you have any allergies or disabilities?{% endblocktrans %}</label>
         <div class="input_control flex w-full flex-col gap-2">
-          <input type="text" id="alergia" name="alergia" # aria-describedby="helper-text-explanation" class="w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm placeholder-gray-400 outline-none focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Specify{% endblocktrans %}" />
+          <input type="text" id="alergia" name="alergia" # aria-describedby="helper-text-explanation" class="w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm placeholder-gray-400 outline-none focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Specify{% endblocktrans %}" !! />
           <span class="message ml-1 hidden text-sm">Mensaje</span>
         </div>
       </div>
@@ -210,14 +189,14 @@
       <!-- Fila ID-->
       <div class="h-fit w-full">
         <label for="id_file" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}ID{% endblocktrans %}</label>
-        <input class="block h-fit w-full cursor-pointer rounded-lg border border-gray-300 bg-white text-sm" id="id_file" name="id_file" type="file" accept="application/pdf" />
+        <input class="block h-fit w-full cursor-pointer rounded-lg border border-gray-300 bg-white text-sm" id="id_file" name="id_file" type="file" accept="application/pdf" !! />
         <span class="message ml-1 hidden text-xs text-gray-400">{% blocktrans %}.pdf archives only{% endblocktrans %}</span>
       </div>
 
       <!-- Fila CV -->
       <div class="h-fit w-full">
         <label for="cv_file" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Resume{% endblocktrans %}</label>
-        <input class="block h-fit w-full cursor-pointer rounded-lg border border-gray-300 bg-white text-sm" id="cv_file" name="cv_file" type="file" accept="application/pdf" />
+        <input class="block h-fit w-full cursor-pointer rounded-lg border border-gray-300 bg-white text-sm" id="cv_file" name="cv_file" type="file" accept="application/pdf" !! />
         <span class="message ml-1 hidden text-xs text-gray-400">{% blocktrans %}.pdf archives only{% endblocktrans %}</span>
       </div>
     </div>
@@ -231,7 +210,7 @@
           <label for="Telefono1" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Phone numbers{% endblocktrans %}</label>
           <div class="flex h-fit w-full gap-2">
             <div class="input_control flex h-fit w-full flex-col gap-2">
-              <select id="codigo1" contenteditable="true" name="codigo1" class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+              <select id="codigo1" contenteditable="true" name="codigo1" class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" !!>
                 <option value="" disabled selected>{% blocktrans %}Code{% endblocktrans %}</option>
                 <option value="507">Panamá (+507)</option>
                 <option value="1">EEUU (+1)</option>
@@ -239,7 +218,7 @@
               <span class="message ml-1 hidden text-sm">Mensaje</span>
             </div>
             <div class="input_control flex h-fit w-full flex-col gap-2">
-              <input type="tel" id="Telefono1" name="Telefono1" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="00000000" />
+              <input type="tel" id="Telefono1" name="Telefono1" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="00000000" !! />
               <span class="message ml-1 hidden text-sm">Mensaje</span>
             </div>
           </div>
@@ -250,7 +229,7 @@
           <label for="telefono_emergencia" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Emergency contact{% endblocktrans %}</label>
           <div class="flex h-fit w-full gap-2">
             <div class="input_control flex h-fit w-full flex-col gap-2">
-              <select id="codigo3" contenteditable="true" name="codigo3" class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+              <select id="codigo3" contenteditable="true" name="codigo3" class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" !!>
                 <option value="" disabled selected>{% blocktrans %}Code{% endblocktrans %}</option>
                 <option value="507">Panamá (+507)</option>
                 <option value="1">EEUU (+1)</option>
@@ -258,7 +237,7 @@
               <span class="message ml-1 hidden text-sm">Mensaje</span>
             </div>
             <div class="input_control flex h-fit w-full flex-col gap-2">
-              <input type="tel" id="telefono_emergencia" name="telefono_emergencia" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="00000000" />
+              <input type="tel" id="telefono_emergencia" name="telefono_emergencia" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" !! placeholder="00000000" />
               <span class="message ml-1 hidden text-sm">Mensaje</span>
             </div>
           </div>
@@ -270,7 +249,7 @@
         <!-- Teléfono2 -->
         <div class="flex h-fit w-full gap-2">
           <div class="input_control flex h-fit w-full flex-col gap-2">
-            <select id="codigo2" contenteditable="true" name="codigo2" class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+            <select id="codigo2" contenteditable="true" name="codigo2" class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" !!>
               <option value="" disabled selected>{% blocktrans %}Code{% endblocktrans %}</option>
               <option value="507">Panamá (+507)</option>
               <option value="1">EEUU (+1)</option>
@@ -278,14 +257,14 @@
             <span class="message ml-1 hidden text-sm">Mensaje</span>
           </div>
           <div class="input_control flex h-fit w-full flex-col gap-2">
-            <input type="tel" id="Telefono2" name="Telefono2" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="00000000" />
+            <input type="tel" id="Telefono2" name="Telefono2" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="00000000" !! />
             <span class="message ml-1 hidden text-sm">Mensaje</span>
           </div>
         </div>
 
         <!-- Contacto de emergencia (nombre)-->
         <div class="input_control flex h-full w-full flex-col gap-2">
-          <input type="text" id="nombre_contacto" name="nombre_contacto" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Contact's first and last name{% endblocktrans %}" />
+          <input type="text" id="nombre_contacto" name="nombre_contacto" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Contact's first and last name{% endblocktrans %}" !! />
           <span class="message ml-1 hidden text-sm">Mensaje</span>
         </div>
       </div>
@@ -294,7 +273,7 @@
       <div class="h-fit w-full">
         <label for="direccion_principal" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Address{% endblocktrans %}</label>
         <div class="input_control flex w-full flex-col gap-2">
-          <input type="text" id="direccion_principal" name="direccion_principal" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Main address{% endblocktrans %}" />
+          <input type="text" id="direccion_principal" name="direccion_principal" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Main address{% endblocktrans %}" !! />
           <span class="message ml-1 hidden text-sm">Mensaje</span>
         </div>
       </div>
@@ -309,13 +288,13 @@
       <div class="flex h-fit w-full flex-row gap-4">
         <!-- Ciudad -->
         <div class="input_control flex w-full flex-col gap-2">
-          <input type="text" id="ciudad" name="ciudad" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}City{% endblocktrans %}" />
+          <input type="text" id="ciudad" name="ciudad" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" !! placeholder="{% blocktrans %}City{% endblocktrans %}" />
           <span class="message ml-1 hidden text-sm">Mensaje</span>
         </div>
 
         <!-- Estado / Provincia -->
         <div class="input_control flex w-full flex-col gap-2">
-          <input type="text" id="Estado_Provincia" name="Estado_Provincia" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}State/Province{% endblocktrans %}" />
+          <input type="text" id="Estado_Provincia" name="Estado_Provincia" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}State/Province{% endblocktrans %}" !! />
           <span class="message ml-1 hidden text-sm">Mensaje</span>
         </div>
       </div>
@@ -335,7 +314,7 @@
         <!-- Cargo dropdowns-->
         <div class="flex h-full w-full flex-row gap-4">
           <div class="input_control flex w-full flex-col gap-2">
-            <select id="Cargo1" name="Cargo1" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+            <select id="Cargo1" name="Cargo1" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" !!>
               <option value="" disabled selected>{% blocktrans %}Desired position{% endblocktrans %}</option>
               <option value="Limpieza">{% blocktrans %}Cleaning{% endblocktrans %}</option>
               <option value="Mantenimiento">{% blocktrans %}General maintenance{% endblocktrans %}</option>
@@ -345,7 +324,7 @@
             <span class="message ml-1 hidden text-sm">Mensaje</span>
           </div>
           <div class="input_control flex w-full flex-col gap-2">
-            <select id="Cargo2" name="Cargo2" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+            <select id="Cargo2" name="Cargo2" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" !!>
               <option value="" disabled selected>{% blocktrans %}Desired position{% endblocktrans %}</option>
               <option value="Limpieza">{% blocktrans %}Cleaning{% endblocktrans %}</option>
               <option value="Mantenimiento">{% blocktrans %}General maintenance{% endblocktrans %}</option>
@@ -361,7 +340,7 @@
       <div class="flex h-fit w-full flex-col">
         <label for="turno" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Desired shift{% endblocktrans %}</label>
         <div class="input_control flex w-full flex-col gap-2">
-          <select id="turno" name="turno" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+          <select id="turno" name="turno" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" !!>
             <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
             <option value="mañana">{% blocktrans %}Morning{% endblocktrans %}</option>
             <option value="tarde">{% blocktrans %}Afternoon{% endblocktrans %}</option>
@@ -376,7 +355,7 @@
       <div class="flex h-fit w-full flex-col">
         <label for="nivel_ingles" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}English level{% endblocktrans %} </label>
         <div class="input_control flex w-full flex-col gap-2">
-          <select id="nivel_ingles" name="nivel_ingles" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+          <select id="nivel_ingles" name="nivel_ingles" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" !!>
             <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
             <option value="nulo">{% blocktrans %}Null{% endblocktrans %}</option>
             <option value="basico">{% blocktrans %}Basic{% endblocktrans %}</option>
@@ -394,7 +373,7 @@
         <label for="fecha_inicio" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}When can you start?{% endblocktrans %}</label>
         <div class="input_control flex w-full flex-col gap-2">
           <!-- datepicker input -->
-          <input type="date" name="fecha_inicio" id="fecha_inicio" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 placeholder:text-gray-400 focus:border-sky focus:ring-sky" />
+          <input type="date" name="fecha_inicio" id="fecha_inicio" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 placeholder:text-gray-400 focus:border-sky focus:ring-sky" !! />
           <span class="message ml-1 hidden text-sm">Mensaje</span>
         </div>
       </div>
@@ -419,7 +398,7 @@
       <div class="flex h-fit w-full flex-col">
         <label for="Transporte" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}What transportation method do you use?{% endblocktrans %}</label>
         <div class="input_control flex w-full flex-col gap-2">
-          <select id="Transporte" name="Transporte" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+          <select id="Transporte" name="Transporte" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" !!>
             <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
             <option value="bus">{% blocktrans %}Bus{% endblocktrans %}</option>
             <option value="vehiculo-propio">{% blocktrans %}Own vehicle{% endblocktrans %}</option>
@@ -437,7 +416,7 @@
       <div class="flex h-fit w-full flex-col">
         <label for="Conociste" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}How did you hear about us?{% endblocktrans %}</label>
         <div class="input_control flex w-full flex-col gap-2">
-          <select id="Conociste" name="Conociste" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+          <select id="Conociste" name="Conociste" # class="w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" !!>
             <option value="" disabled selected>{% blocktrans %}Select{% endblocktrans %}</option>
             <option value="referencia">{% blocktrans %}Reference from an acquaintance{% endblocktrans %}</option>
             <option value="sticker-qr">{% blocktrans %}Sticker with QR{% endblocktrans %}</option>
@@ -485,7 +464,7 @@
   <!-- Aviso mensaje de advertencia -->
   <div class="flex h-1/3 w-1/3 flex-col items-center justify-center rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
     <!-- ícono de advertencia -->
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="mb-4 h-1/2 w-1/2 animate-pulse text-red">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="mb-4 h-1/4 w-1/4 animate-pulse text-red">
       <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
     </svg>
 

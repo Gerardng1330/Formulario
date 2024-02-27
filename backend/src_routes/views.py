@@ -35,6 +35,7 @@ from django.shortcuts import render, redirect
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 import uuid
+from backend.formularios.models import Politicas
 User = get_user_model()
 
 def exito(request):
@@ -51,6 +52,9 @@ def render_formulario(request):
 # verifica que el form sea valido para despues enviarlo y envia
 #un mensaje si se envio o no
 def formulario_view(request):
+    # Fetch a los párrafos de la tabla Politicas
+    politicas = Politicas.objects.values('parrafo')
+    # Variables de estado
     form_activo = True
     enviado_correctamente = False
     if request.method == 'POST' and form_activo:
@@ -69,7 +73,7 @@ def formulario_view(request):
     else:
         form = UsuarioForm()
 
-    return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente})
+    return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente, 'politicas':politicas})
 
 #prueba
 def prueba(request):
