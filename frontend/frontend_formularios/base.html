@@ -51,7 +51,7 @@
             <!--obtener el idioma que esta, mostrar los disponibles y tenerlo en una lista-->
             {% get_available_languages as LANGUAGES %} {% get_language_info_list for LANGUAGES as languages %} {% for formulario in languages %}
             <li>
-              <a href="/{{ formulario.code }}" class="block px-4 py-2 hover:bg-gray-100"> {{ formulario.name_local|title }} </a>
+              <a href="{{ url_para_traduccion }}" class="block px-4 py-2 hover:bg-gray-100"> {{ formulario.name_local|title }} </a>
             </li>
             {% endfor %}
           </ul>
