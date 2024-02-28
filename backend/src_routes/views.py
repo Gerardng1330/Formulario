@@ -84,7 +84,7 @@ def formulario_view(request):
     else: 
         # Si no existe, genera un valor random para asignar a la cookie
         politicas_aceptadas_uuid = uuid.uuid4()
-
+    
     # Verificar enviado_correctamente
     if request.method == 'POST' and form_activo:
         form = UsuarioForm(request.POST, request.FILES)
@@ -93,10 +93,12 @@ def formulario_view(request):
             form.save()
             #messages.success(request, 'El formulario se envió satisfactoriamente.')
             enviado_correctamente = True
+            #return render(request, 'exito.html')
         else:
             # Imprimir errores del formulario en la consola del servidor
             print(form.errors)
             messages.error(request, 'Hubo un error en el formulario. Por favor, verifica los campos.')
+       
     else:
         form = UsuarioForm()
 

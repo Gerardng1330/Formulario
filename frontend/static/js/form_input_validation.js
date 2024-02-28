@@ -327,6 +327,19 @@ function validarReferencia() {
   }
 }
 
+function validarDireccionSecundaria() {
+  if (direccion_secundaria.value.trim() === "") {
+    /* La direccion_secundaria no es requerida. Se regresa a como estaba. */
+    direccion_secundaria.classList.remove("border-lime-500");
+    direccion_secundaria.classList.remove("border-2");
+    direccion_secundaria.classList.remove("border-red");
+    direccion_secundaria.classList.add("border");
+    direccion_secundaria.classList.add("border-gray-300");
+  } else {
+    setSuccess(direccion_secundaria, "");
+  }
+}
+
 /* Validaciones por campo en tiempo real*/
 document.addEventListener("DOMContentLoaded", function () {
   /* Validar nombre */
@@ -426,6 +439,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* La dirección secundaria no es requerida */
+  direccion_secundaria.addEventListener("input", function () {
+    validarDireccionSecundaria();
+  });
 
   /* Validar Ciudad */
   ciudad.addEventListener("input", function () {
