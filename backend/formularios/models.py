@@ -28,7 +28,7 @@ class Usuario(models.Model):
         ('Nicaragua', 'Nicaragua'),
         ('Peru', 'Peru'),
         ('Venezuela', 'Venezuela'),
-        ('Otros', 'Otros')], verbose_name='Nacionalidad')
+        ('Otro', 'Otro')], verbose_name='Nacionalidad')
     fecha_nacimiento = models.DateField(verbose_name='Fecha de Nacimiento')
     alergia = models.TextField(verbose_name='Alergia o Discapacidad')
     id_file = models.FileField(upload_to='archivos/',  verbose_name='Identificación/Pasaporte')
@@ -45,7 +45,7 @@ class Usuario(models.Model):
     direccion_secundaria = models.CharField(max_length=255, blank=True, null=True, verbose_name='Dirección secundaria')
     ciudad = models.CharField(max_length=255,  verbose_name='Ciudad ')
     Estado_Provincia = models.CharField(max_length=255,verbose_name='Estado/Provincia')
-    codigo_postal= models.CharField(max_length=20, verbose_name='Codigo postal',default='507')
+    #codigo_postal= models.CharField(max_length=20, verbose_name='Codigo postal',default='507')
     Cargo1 = models.CharField(max_length=255, choices=[('Limpieza','Limpieza'), ('Mantenimiento','Mantenimiento'),('Ayudante-cocina','Ayudante-cocina'),('Recepcion','Recepcion')],  verbose_name='Cargo Deseado 1')
     Cargo2 = models.CharField(max_length=255, choices=[('Limpieza','Limpieza'), ('Mantenimiento','Mantenimiento'),('Ayudante-cocina','Ayudante-cocina'),('Recepcion','Recepcion')],  verbose_name='Cargo Deseado 2')
     turno = models.CharField(max_length=255,choices=[('mañana','mañana'), ('Tarde','Tarde'),('Noche','Noche'),('Madrugada','Madrugada')],  verbose_name='Turno Deseado')

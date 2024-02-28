@@ -42,9 +42,6 @@ from django.utils.text import capfirst
 from backend.formularios.models import Usuario
 User = get_user_model()
 
-def exito(request):
-    return render(request, 'exito.html')
-
 def cerrado(request):
     return render(request, 'cerrado.html')
 
@@ -68,8 +65,7 @@ def traducir_paginas(request):
 
     return render(request, 'formulario.html', {'url_para_traduccion': url_para_traduccion})
 
-# verifica que el form sea valido para despues enviarlo y envia
-#un mensaje si se envio o no
+# Formulario. Verifica que el form sea valido para despues enviarlo y envia un mensaje si se envió o no
 def formulario_view(request):
     # Variables de estado
     form_activo = True
@@ -81,7 +77,7 @@ def formulario_view(request):
     politicas_table = Politicas.objects.values('parrafo')
 
     # Verifica si 'politicas_aceptadas_cookie' existe
-    if 'politicas_aceptadas_cookie' in request.COOKIES:
+    if 'pltc' in request.COOKIES:
         # Quita el modal de políticas y no lo vuelve a mostrar (ver formulario.html)
         politicas_aceptadas = True
     else: 
@@ -96,7 +92,6 @@ def formulario_view(request):
             form.save()
             #messages.success(request, 'El formulario se envió satisfactoriamente.')
             enviado_correctamente = True
-            #return render(request, 'exito.html')
         else:
             # Imprimir errores del formulario en la consola del servidor
             print(form.errors)
@@ -107,7 +102,7 @@ def formulario_view(request):
     return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente, 'politicas_table':politicas_table, 'politicas_aceptadas':politicas_aceptadas, 'politicas_aceptadas_uuid':politicas_aceptadas_uuid})
 
 #prueba
-def prueba(request):
+# def prueba(request):
     formulario_activo = True  # Puedes ajustar esta lógica según tus necesidades
     enviado_correctamente = False
 
@@ -128,6 +123,7 @@ def prueba(request):
 
     return render(request, 'pruebaPagina.html', {'form': form, 'formulario_activo': formulario_activo,'enviado_correctamente':enviado_correctamente})
 
+#Primera letra mayúscula a los campos de la bd.
 @receiver(pre_save, sender=Usuario)
 def normalize_fields(sender, instance, **kwargs):
     # Verifica si el campo 'nombre' existe y no es nulo
