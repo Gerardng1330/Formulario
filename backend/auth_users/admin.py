@@ -7,7 +7,10 @@ from backend.formularios.models import Usuario
 class usuarioInfo(admin.ModelAdmin):
     list_display=("nombre","apellido","email","fecha_nacimiento","nacionalidad","Telefono1","Cargo1")
     search_fields=("nombre","nacionalidad")
-    
+    list_filter=("nombre","fecha_nacimiento",)
+    date_hierarchy = "fecha_nacimiento"
+
+
 
 # Registra tu modelo de usuario personalizado
 admin.site.register(User, UserAdmin)

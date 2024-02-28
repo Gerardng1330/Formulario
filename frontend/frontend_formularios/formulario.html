@@ -96,7 +96,7 @@
   </div>
 
   <!-- Campos del formulario -->
-  <form method="post" autocomplete="off" action="{% url 'src_routes:envio_formulario' %}" enctype="multipart/form-data" class="mt-2 flex h-fit w-full flex-col gap-12 text-black">
+  <form method="post" autocomplete="off"  action="{% url 'src_routes:envio_formulario' %}" enctype="multipart/form-data" class="mt-2 flex h-fit w-full flex-col gap-12 text-black">
     {% csrf_token %}<!--para que un hacker no se haga pasar por el usuario-->
 
     <!-- Grupo Datos personales generales -->

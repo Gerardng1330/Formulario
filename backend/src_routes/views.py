@@ -35,6 +35,10 @@ from django.shortcuts import render, redirect
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 import uuid
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+from django.utils.text import capfirst
+from backend.formularios.models import Usuario
 User = get_user_model()
 
 def exito(request):
@@ -43,10 +47,25 @@ def exito(request):
 def cerrado(request):
     return render(request, 'cerrado.html')
 
+def prueba_page(request):
+    return render(request,'pruebaPagina.html')
+
 #Renderizar el formulario.html(prueba)
 def render_formulario(request):
     return render(request,'formulario.html')
 
+#Funcion para traducir las paginas
+def traducir_paginas(request):
+    #verifica el path para hacer la traducir la pagina correspondidad
+    current_path = request.path
+    if current_path == '/formulario_enviado/':
+        url_para_traduccion = '/formulario_enviado/'
+    elif current_path == '/prueba/':
+        url_para_traduccion = '/prueba/'
+    else:
+        url_para_traduccion = '/'  # Otra opción por defecto
+
+    return render(request, 'formulario.html', {'url_para_traduccion': url_para_traduccion})
 
 # verifica que el form sea valido para despues enviarlo y envia
 #un mensaje si se envio o no
@@ -92,6 +111,24 @@ def prueba(request):
         form = UsuarioForm()
 
     return render(request, 'pruebaPagina.html', {'form': form, 'formulario_activo': formulario_activo,'enviado_correctamente':enviado_correctamente})
+
+@receiver(pre_save, sender=Usuario)
+def normalize_fields(sender, instance, **kwargs):
+    # Verifica si el campo 'nombre' existe y no es nulo
+    print(f"Before normalization: {instance.apellido}")
+    if hasattr(instance, 'nombre') and instance.nombre and instance.apellido :
+        # Convierte el nombre a mayúsculas y luego aplica capitalización
+        print(f"Nombre before normalization: {instance.nombre}")
+        instance.nombre = capfirst(instance.nombre.lower())
+        instance.apellido = capfirst(instance.apellido.lower())
+        print(f"Ciudad after normalization: {instance.apellido}")
+
+        print(f"Nombre after normalization: {instance.nombre}")
+    # Verifica si el campo 'ciudad' existe y no es nulo
+    
+
+
+
 
 def validar_nombre(request):
     

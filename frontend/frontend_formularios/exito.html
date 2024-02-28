@@ -80,34 +80,16 @@
             <p class="text-sm mb-4"> {% translate "Gracias por tu tiempo, ¡estaremos en contacto!" %}</p>
           </div>
       </div>
+    </div>
+    
 
-    <!-- Script de cambio de idioma -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          // Manejar el cambio de idioma sin redireccionar solo en 'exito.html'
-          const isExitoPage = window.location.pathname.endsWith('/exito/');
-      
-          if (isExitoPage) {
-              document.querySelector(".change-language").addEventListener("click", function (event) {
-                  event.preventDefault();
-                  const langCode = event.target.getAttribute("data-lang");
-      
-                  // Realizar una solicitud AJAX para cambiar el idioma
-                  const xhr = new XMLHttpRequest();
-                  xhr.open("GET", `?lang=${langCode}`);
-                  xhr.onreadystatechange = function () {
-                      if (xhr.readyState === 4 && xhr.status === 200) {
-                          // Recargar la página después de cambiar el idioma solo en 'exito.html'
-                          window.location.reload();
-                      }
-                  };
-                  xhr.send();
-              });
-          }
-      });
-      </script>
-    <script src="{% static 'js/toggle-idioma-dropdown.js' %}"></script>
+    
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="{% static 'js/toggle-idioma-dropdown.js' %}"></script>
+    <script src="{% static 'js/toggle_idioma_dropdown.js' %}"></script>
+
+
   </body>
 </html>
 

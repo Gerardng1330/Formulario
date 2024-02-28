@@ -13,7 +13,7 @@ urlpatterns = [
     path('formulario_enviado/', views.formulario_view, name='envio_formulario'),#prueba
     path('exito/', views.exito, name='pagina_exito'),
     path('cerrado/', views.cerrado, name='pagina_cerrado}'),
-    path('prueba/', views.prueba, name='pagina_prueba'),
+    path('prueba/', views.prueba_page, name='pagina_prueba'),
 
 
 # Login views

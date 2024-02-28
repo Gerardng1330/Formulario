@@ -172,6 +172,8 @@ function validarFechaVacia(input) {
     /* Campo requerido */
     setError(input, m_campo_requerido);
     return false;
+  } else {
+    return true;
   }
 }
 
