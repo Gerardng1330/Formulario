@@ -92,9 +92,11 @@ def validar_nombre(request):
     return JsonResponse({'success': True})
 
 
-
 def formacion(request):
     return render(request,'activacion_aviso.html')
+
+
+
 #Login
 def inicio_sesion(request):#Funcion de inicio de sesion
     if request.user.is_authenticated:#nos aseguramos de que el usuario siempre tenga que iniciar sesion o la sesion no este iniciada
