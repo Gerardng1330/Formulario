@@ -20,51 +20,8 @@
   </div>
 </div>
 {% else %}
-<!-- Políticas y privacidad Modal Container: form-container tiene blur-sm, body tiene overflow-hidden -->
-<div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed z-10 flex h-screen w-full items-center justify-center bg-black bg-opacity-50 md:inset-0">
-  <!-- Modal content container: Aquí se cambia el tamaño y padding del modal -->
-  <div class="relative h-4/5 w-1/2 p-4">
-    <!-- Modal content -->
-    <div class="relative flex h-full flex-col rounded-lg bg-white shadow">
-      <!-- Modal header -->
-      <div class="flex flex-grow-[1] items-center justify-center rounded-t border-b p-4">
-        <h3 class="text-md font-kumbh_bold text-blue">{% blocktrans %}POLÍTICAS DE SEGURIDAD{% endblocktrans %}</h3>
-      </div>
-      <!-- Modal body -->
-      <div class="flex-grow-[3] overflow-y-scroll p-7 text-black">
-        <!-- Texto inicial -->
-        <div class="px-2 text-justify">
-          <p class="text-ms leading-relaxed">{% for parrafo in politicas|slice:":4" %}{{ parrafo.parrafo }}<br /><br />{% endfor %}</p>
-        </div>
-
-        <!-- Acuerdo laboral title: Está acá afuera para permitir la indentación de los párrafos -->
-        <p class="text-ms mb-6 inline-flex w-full items-center justify-between rounded-lg border border-gray-200 px-4 py-4 font-kumbh_bold font-medium text-blue shadow-sm">
-          {% blocktrans %}ACUERDO LABORAL{% endblocktrans %}
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mt-2 h-5 w-5 animate-bounce">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
-          </svg>
-        </p>
-
-        <!-- Acuerdo laboral text -->
-        <div class="px-2 text-justify">
-          <p class="text-ms leading-relaxed">
-            {% for parrafo in politicas|slice:"4:20" %} {% if forloop.counter == 1 or forloop.counter == 4 or forloop.counter == 9 %}
-            <b>{{ parrafo.parrafo }}</b><br /><br />
-            {% else %} {{ parrafo.parrafo }}<br /><br />
-            {% endif %} {% endfor %}
-          </p>
-        </div>
-      </div>
-      <!-- Modal footer -->
-      <div class="flex flex-grow-[1] items-center justify-center rounded-b border-t border-gray-200 p-4">
-        <button id="aceptar_politicas_button" name="aceptar_politicas_button" type="button" class="w-full rounded-lg border border-gray-300 bg-blue px-5 py-2.5 text-center font-kumbh_bold text-sm text-white shadow-sm transition ease-in-out hover:scale-y-105 hover:bg-hoverblue focus:ring-2 focus:ring-sky" onclick="aceptarPoliticas() ">ACEPTO LAS POLÍTICAS</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- Contenedor del formulario -->
-<div id="form_container" class="flex h-full w-1/2 flex-col items-center justify-start gap-2 blur-sm">
+<div id="form_container" class="flex h-full w-1/2 flex-col items-center justify-start gap-2">
   <!-- Título del formulario -->
   <h1 class="flex h-fit w-full flex-col items-center justify-center rounded-lg border border-gray-200 bg-blue p-3 font-kumbh_bold text-lg text-white shadow-sm">{% blocktrans %}APPLICANT FORM{% endblocktrans %}</h1>
 
@@ -162,10 +119,10 @@
           <label for="fecha_nacimiento" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}Birthdate{% endblocktrans %}</label>
           <!-- ícono datepicker -->
           <!--           <div class="pointer-events-none absolute inset-y-11 end-3 flex items-center">
-                <svg class="h-3.5 w-3.5 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                </svg>
-              </div> -->
+                          <svg class="h-3.5 w-3.5 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                          </svg>
+                        </div> -->
           <div class="input_control flex w-full flex-col gap-2">
             <!-- datepicker input -->
             <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm text-gray-400 placeholder:text-gray-400 focus:border-sky focus:ring-sky" !! />
@@ -301,9 +258,9 @@
 
       <!-- Fila código postal -->
       <!--      <div class="input_control flex w-full flex-col gap-2">
-            <input type="text" id="codigo_postal" name="codigo_postal" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Postal code{% endblocktrans %}" />
-            <span class="message ml-1 hidden text-sm">Mensaje</span>
-          </div> -->
+                      <input type="text" id="codigo_postal" name="codigo_postal" # class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}Postal code{% endblocktrans %}" />
+                      <span class="message ml-1 hidden text-sm">Mensaje</span>
+                    </div> -->
     </div>
 
     <!-- Grupo Empresa / Cargo -->
@@ -380,19 +337,19 @@
 
       <!--       <div class="relative flex h-full w-full flex-col">
 
-            <label for="fecha_inicio" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}When can you start?{% endblocktrans %}</label>
-            <div class="input_control flex w-full flex-col gap-2">
+                      <label for="fecha_inicio" class="text-md mb-1 ml-1 flex h-fit w-full text-black">{% blocktrans %}When can you start?{% endblocktrans %}</label>
+                      <div class="input_control flex w-full flex-col gap-2">
 
-              <div class="pointer-events-none absolute inset-y-11 end-3 flex items-center">
-                <svg class="h-3.5 w-3.5 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                </svg>
-              </div>
+                        <div class="pointer-events-none absolute inset-y-11 end-3 flex items-center">
+                          <svg class="h-3.5 w-3.5 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                          </svg>
+                        </div>
 
-              <input datepicker datepicker-format="{% blocktrans %}mm/dd/yyyy{% endblocktrans %}" datepicker-autohide id="fecha_inicio" name="fecha_inicio" type="text" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}mm/dd/aaaa{% endblocktrans %}" />
-              <span class="message ml-1 hidden text-sm">Mensaje</span>
-            </div>
-          </div> -->
+                        <input datepicker datepicker-format="{% blocktrans %}mm/dd/yyyy{% endblocktrans %}" datepicker-autohide id="fecha_inicio" name="fecha_inicio" type="text" class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-white p-1.5 text-sm placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}mm/dd/aaaa{% endblocktrans %}" />
+                        <span class="message ml-1 hidden text-sm">Mensaje</span>
+                      </div>
+                    </div> -->
 
       <!-- Fila Transporte -->
       <div class="flex h-fit w-full flex-col">
@@ -458,6 +415,60 @@
   <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
   {% endfor %}
 </ul>
+{% endif %} {% if not politicas_aceptadas %}
+<!-- Si no ha aceptado políticas -->
+<script>
+  /* form-container tiene blur-sm, body tiene overflow-hidden */
+  const body = document.querySelector("#body");
+  const form_container = document.querySelector("#form_container");
+  /* Traemos el valor random desde views.py */
+  var politicas_aceptadas_uuid = "{{ politicas_aceptadas_uuid }}";
+  console.log(politicas_aceptadas_uuid);
+  body.classList.add("overflow-hidden");
+  form_container.classList.add("blur-sm");
+</script>
+<!-- Políticas y privacidad Modal Container.-->
+<div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed z-10 flex h-screen w-full items-center justify-center bg-black bg-opacity-50 md:inset-0">
+  <!-- Modal content container: Aquí se cambia el tamaño y padding del modal -->
+  <div class="relative h-4/5 w-1/2 p-4">
+    <!-- Modal content -->
+    <div class="relative flex h-full flex-col rounded-lg bg-white shadow">
+      <!-- Modal header -->
+      <div class="flex flex-grow-[1] items-center justify-center rounded-t border-b p-4">
+        <h3 class="text-md font-kumbh_bold text-blue">{% blocktrans %}POLÍTICAS DE SEGURIDAD{% endblocktrans %}</h3>
+      </div>
+      <!-- Modal body -->
+      <div class="flex-grow-[3] overflow-y-scroll p-7 text-black">
+        <!-- Texto inicial -->
+        <div class="px-2 text-justify">
+          <p class="text-ms leading-relaxed">{% for parrafo in politicas_table|slice:":4" %}{{ parrafo.parrafo }}<br /><br />{% endfor %}</p>
+        </div>
+
+        <!-- Acuerdo laboral title: Está acá afuera para permitir la indentación de los párrafos -->
+        <p class="text-ms mb-6 inline-flex w-full items-center justify-between rounded-lg border border-gray-200 px-4 py-4 font-kumbh_bold font-medium text-blue shadow-sm">
+          {% blocktrans %}ACUERDO LABORAL{% endblocktrans %}
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mt-2 h-5 w-5 animate-bounce">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
+          </svg>
+        </p>
+
+        <!-- Acuerdo laboral text -->
+        <div class="px-2 text-justify">
+          <p class="text-ms leading-relaxed">
+            {% for parrafo in politicas_table|slice:"4:20" %} {% if forloop.counter == 1 or forloop.counter == 4 or forloop.counter == 9 %}
+            <b>{{ parrafo.parrafo }}</b><br /><br />
+            {% else %} {{ parrafo.parrafo }}<br /><br />
+            {% endif %} {% endfor %}
+          </p>
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="flex flex-grow-[1] items-center justify-center rounded-b border-t border-gray-200 p-4">
+        <button id="aceptar_politicas_button" name="aceptar_politicas_button" type="button" class="w-full rounded-lg border border-gray-300 bg-blue px-5 py-2.5 text-center font-kumbh_bold text-sm text-white shadow-sm transition ease-in-out hover:scale-y-105 hover:bg-hoverblue focus:ring-2 focus:ring-sky">ACEPTO LAS POLÍTICAS</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endif %} {% endif %} {% else %}
 <!-- Contenedor del mensaje de advertencia -->
 <div class="flex h-full w-full items-center justify-center">
@@ -479,7 +490,7 @@
 {% block scripts %}
 <script src="{% static 'js/button_scroll_form_up.js' %}"></script>
 <!-- <script src="{% static 'js/verificacion.js' %}"></script> -->
-<script src="{% static 'js/aceptar_politicas_modal.js' %}"></script>
+<script type="module" src="{% static 'js/aceptar_politicas_modal.js' %}"></script>
 <script defer src="{% static 'js/form_input_validation.js' %}"></script>
 <script>
   const m_campo_requerido = "{% blocktrans %}Campo requerido.{% endblocktrans %}";

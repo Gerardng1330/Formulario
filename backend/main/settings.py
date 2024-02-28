@@ -102,7 +102,7 @@ STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
     BASE_DIR.parent / "frontend" / "static",
-    BASE_DIR.parent / "node_modules" / "flowbite" / "dist",
+    BASE_DIR.parent / "node_modules" / "flowbite" / "dist"
 ]
 
 STATIC_ROOT = BASE_DIR / "development-cdn" / "static" #Dónde queremos guardar los archivos

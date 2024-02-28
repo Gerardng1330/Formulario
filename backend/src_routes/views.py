@@ -49,14 +49,26 @@ def render_formulario(request):
     return render(request,'formulario.html')
 
 
-# verifica que el form sea valido para despues enviarlo y envia
-#un mensaje si se envio o no
+# Formulario
 def formulario_view(request):
-    # Fetch a los párrafos de la tabla Politicas
-    politicas = Politicas.objects.values('parrafo')
     # Variables de estado
     form_activo = True
     enviado_correctamente = False
+    politicas_aceptadas = False
+    politicas_aceptadas_uuid = None
+
+    # Fetch a la BD. Párrafos de la tabla Politicas
+    politicas_table = Politicas.objects.values('parrafo')
+
+    # Verifica si 'politicas_aceptadas_cookie' existe
+    if 'politicas_aceptadas_cookie' in request.COOKIES:
+        # Quita el modal de políticas y no lo vuelve a mostrar (ver formulario.html)
+        politicas_aceptadas = True
+    else: 
+        # Si no existe, genera un valor random para asignar a la cookie
+        politicas_aceptadas_uuid = uuid.uuid4()
+
+    # Verificar enviado_correctamente
     if request.method == 'POST' and form_activo:
         form = UsuarioForm(request.POST, request.FILES)
         print(request.POST) 
@@ -69,11 +81,10 @@ def formulario_view(request):
             # Imprimir errores del formulario en la consola del servidor
             print(form.errors)
             messages.error(request, 'Hubo un error en el formulario. Por favor, verifica los campos.')
-       
     else:
         form = UsuarioForm()
 
-    return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente, 'politicas':politicas})
+    return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente, 'politicas_table':politicas_table, 'politicas_aceptadas':politicas_aceptadas, 'politicas_aceptadas_uuid':politicas_aceptadas_uuid})
 
 #prueba
 def prueba(request):

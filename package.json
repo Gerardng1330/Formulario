@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "flowbite": "^2.3.0",
-    "flowbite-datepicker": "^1.2.6"
+    "flowbite-datepicker": "^1.2.6",
+    "uuid": "^9.0.1"
   }
 }
