@@ -23,5 +23,5 @@ class User(AbstractUser):
 
     @classmethod
     def limpiar_tokens(cls):
-        limite_tiempo = timezone.now() - timedelta(minutes=1)
+        limite_tiempo = timezone.now() - timedelta(minutes=2)
         cls.objects.filter(token_user__isnull=False, created_at__lte=limite_tiempo).delete()
