@@ -194,7 +194,6 @@ def registro(request):
             user.last_name = request.POST['Apellido']
             user.token_user = token
             user.save()
-            
             # Envía un correo electrónico de activación al usuario con el token generado.
             enviar_correo(request.POST['Correo'], token)  # Corregir aquí, pasando el destinatario y el token
             
@@ -205,22 +204,27 @@ def registro(request):
         
 # Esta vista valida el token de activación proporcionado por el usuario.
 def validar_token(request, token):
+    # Busca al usuario con el token proporcionado en la base de datos.
+    user = User.objects.get(token_user=token)
     try:
-        # Busca al usuario con el token proporcionado en la base de datos.
-        user = User.objects.get(token_user=token)
-        
-        # Si el token coincide, marca el correo electrónico como confirmado y redirige al usuario a la página de registro exitoso.
-        if token == user.token_user:
-            user.email_confirmed = True
-            user.save()
-            return redirect('src_routes:registro_exitoso')
-        else:
-            return render(request, 'activacion_aviso.html', {'error': 'Token no válido'})
-    except User.DoesNotExist:
-        return render(request, 'activacion_aviso.html', {'error': 'Usuario no encontrado'})
+        if user.token_user == None:
+            return render (request,'registro_existoso.html',{'email_confirmed':user.email_confirmed,'error': f'Este Token ya ha caducado.'})
+        if user.email_confirmed == True:
+            return render (request,'registro_existoso.html',{'email_confirmed':user.email_confirmed,'error': f'Este Token ya ha sido utilizado.'})
+        try:
+                # Si el token coincide, marca el correo electrónico como confirmado y redirige al usuario a la página de registro exitoso.
+            if token == user.token_user:
+                user.email_confirmed = True
+                user.save()
+                return redirect('src_routes:registro_exitoso')
+            else:
+                return render(request, 'activacion_aviso.html', {'error': 'Token no válido'})
+        except User.DoesNotExist:
+                return render(request, 'activacion_aviso.html', {'error': 'Usuario no encontrado'})
+        except Exception as e:
+                return render(request, 'activacion_aviso.html', {'error': f'Error al validar el token: {e}'})
     except Exception as e:
-        return render(request, 'activacion_aviso.html', {'error': f'Error al validar el token: {e}'})
-
+            return render(request, 'activacion_aviso.html', {'error': f'Error al validar el token: {e}'}) 
 
  # Esta vista renderiza la plantilla 'activacion.html'.
 
@@ -237,14 +241,13 @@ def activar_cuenta(request):
             tiempo_transcurrido = timezone.now() - ultima_llamada
             if tiempo_transcurrido.total_seconds() < 60:
                 return render(request, 'activacion.html', {'error': 'Solamente se puede enviar el token una vez por minuto. Por favor, inténtelo de nuevo más tarde.'})
-
         correo = request.POST.get('Correo')
         try:
             # Valida si el correo electrónico proporcionado es válido.
             validate_email(correo)
         except ValidationError:
             return render(request, 'activacion.html', {'error': 'Correo electrónico no válido'})
-
+        
         try:
             # Verifica si el correo electrónico está asociado a una cuenta
             usuario = User.objects.get(email=correo)
