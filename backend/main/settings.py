@@ -45,10 +45,9 @@ ROOT_URLCONF = 'backend.main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR.parent, 'frontend/frontend_auth'),
-            os.path.join(BASE_DIR.parent, 'frontend/frontend_formularios')
-        ],
+        'DIRS': [ BASE_DIR.parent / "frontend" /  "frontend_formularios",
+                 BASE_DIR.parent / "frontend" /  "frontend_auth",
+                 BASE_DIR.parent / "frontend" /  "custom_views"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -65,11 +64,11 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.main.wsgi.application'
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / "db.sqlite3",
-    }
-}
+       'default': {
+           'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / "db.sqlite3",
+       }
+   }
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -99,14 +98,14 @@ USE_TZ = True
 
 #Control de archivos estáticos (CSS, imágenes, JavaScript)
 #https://docs.djangoproject.com/en/5.0/howto/static-files/
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR.parent / "frontend" / "static"
+    BASE_DIR.parent / "frontend" / "static",
+    BASE_DIR.parent / "node_modules" / "flowbite" / "dist",
 ]
 
 STATIC_ROOT = BASE_DIR / "development-cdn" / "static" #Dónde queremos guardar los archivos
-
 
 #Internacionalización
 LANGUAGES = (
@@ -124,7 +123,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Custom user model
 
 #Correo al mandar
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'backend.main.email_backend.EmailBackend'
 EMAIL_HOST = 'mail.arvcloud.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True

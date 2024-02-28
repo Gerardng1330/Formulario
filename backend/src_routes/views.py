@@ -25,64 +25,74 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 import datetime
+from django.shortcuts import render, redirect
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 import uuid
+from django.core.cache import cache
+from django.utils import timezone
 User = get_user_model()
 
 def exito(request):
-    trans = translate(language='es')
-    return render(request, 'exito.html',{'trans': trans})
+    return render(request, 'exito.html')
 
 def cerrado(request):
     return render(request, 'cerrado.html')
 
 #Renderizar el formulario.html(prueba)
 def render_formulario(request):
-    transe = translate(language='en')
-    return render(request,'formulario.html',{'transe': transe})
+    return render(request,'formulario.html')
 
-# La funcion nos permite traducir el texto en pantalla
-def translate(language):
-    cur_languaje = get_language()
-    try:
-        activate(language)
-        #prueba de traduccion
-        text= gettext('Language')
-    finally:
-        activate(cur_languaje)
-    return text     
 
 # verifica que el form sea valido para despues enviarlo y envia
 #un mensaje si se envio o no
 def formulario_view(request):
-    if request.method == 'POST':
+    form_activo = True
+    enviado_correctamente = False
+    if request.method == 'POST' and form_activo:
         form = UsuarioForm(request.POST, request.FILES)
-        print(request.POST)
+        print(request.POST) 
         if form.is_valid():
             form.save()
-            messages.success(request, 'El formulario se envió satisfactoriamente.')
-            return render(request, 'exito.html')
+            #messages.success(request, 'El formulario se envió satisfactoriamente.')
+            enviado_correctamente = True
+            #return render(request, 'exito.html')
         else:
             # Imprimir errores del formulario en la consola del servidor
             print(form.errors)
-
-            # Manejar mensaje de error específico para el campo 'nombre'
-            if 'nombre' in form.errors:
-                messages.error(request, 'El nombre debe tener al menos 3 caracteres.')
-            else:
-                messages.error(request, 'Hubo un error en el formulario. Por favor, verifica los campos.')
+            messages.error(request, 'Hubo un error en el formulario. Por favor, verifica los campos.')
+       
     else:
         form = UsuarioForm()
 
-    return render(request, 'formulario.html', {'form': form})
+    return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente})
 
+#prueba
 def prueba(request):
-    return render('prueba.html')
+    formulario_activo = True  # Puedes ajustar esta lógica según tus necesidades
+    enviado_correctamente = False
+
+    if request.method == 'POST' and formulario_activo:
+        form = UsuarioForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            enviado_correctamente = True
+
+            messages.success(request, 'El formulario se envió satisfactoriamente.')
+            return redirect('exito')  # Redirigir a la página de éxito (ajusta la URL según tu configuración)
+        else:
+            print(form.errors)
+            messages.error(request, 'Hubo un error en el formulario. Por favor, verifica los campos.')
+
+    else:
+        form = UsuarioForm()
+
+    return render(request, 'pruebaPagina.html', {'form': form, 'formulario_activo': formulario_activo,'enviado_correctamente':enviado_correctamente})
 
 def validar_nombre(request):
     
@@ -155,7 +165,6 @@ def registro(request):
     # Verifica si el usuario está autenticado y lo desconecta si es así.
     if request.user.is_authenticated:
         logout(request)
-    
     # Si la solicitud es GET, renderiza la plantilla 'registro.html'.
     # Si es POST, intenta registrar al usuario con los datos proporcionados.
     if request.method == 'GET':
@@ -173,9 +182,6 @@ def registro(request):
                 return render(request, 'registro.html', {'error': 'Este correo electrónico ya está registrado.'})
         except ValidationError:
             return render(request, 'registro.html', {'error': 'Correo electrónico no válido'})
-        
-        
-        
         try:
             # Genera un token, crea un nuevo usuario con los datos proporcionados y guarda el token en la base de datos.
             token = generar_token()
@@ -217,6 +223,48 @@ def validar_token(request, token):
 
 
  # Esta vista renderiza la plantilla 'activacion.html'.
+
+
+def activar_cuenta(request):
+    if request.user.is_authenticated:
+        logout(request)
+    if request.method == 'GET':
+        return render(request, 'activacion.html')
+    elif request.method == 'POST':
+        # Verifica si la función se ha llamado recientemente
+        ultima_llamada = cache.get('activar_cuenta_ultima_llamada')
+        if ultima_llamada is not None:
+            tiempo_transcurrido = timezone.now() - ultima_llamada
+            if tiempo_transcurrido.total_seconds() < 60:
+                return render(request, 'activacion.html', {'error': 'Solamente se puede enviar el token una vez por minuto. Por favor, inténtelo de nuevo más tarde.'})
+
+        correo = request.POST.get('Correo')
+        try:
+            # Valida si el correo electrónico proporcionado es válido.
+            validate_email(correo)
+        except ValidationError:
+            return render(request, 'activacion.html', {'error': 'Correo electrónico no válido'})
+
+        try:
+            # Verifica si el correo electrónico está asociado a una cuenta
+            usuario = User.objects.get(email=correo)
+            # Genera un nuevo token
+            User.limpiar_tokens()
+            token = generar_token()
+            # Guarda el nuevo token en la base de datos
+            usuario.token_user = token
+            usuario.save()
+            # Envía el correo electrónico con el nuevo token
+            enviar_correo(correo, token)
+            # Guarda la marca de tiempo de la última llamada
+            cache.set('activar_cuenta_ultima_llamada', timezone.now(), timeout=60)  # Guarda la marca de tiempo durante 60 segundos
+            # Redirige a la página de aviso de reenvío de token
+            return redirect('src_routes:activacion_aviso')
+        except User.DoesNotExist:
+            return render(request, 'activacion.html', {'error': 'No se encontró ninguna cuenta asociada a este correo electrónico'})
+
+        
+
 def activars(request):
     return render(request, 'activacion_aviso.html')   
 
@@ -226,6 +274,3 @@ def signout (request):
         
 def succefully(request):
     return render (request, 'registro_existoso.html') 
-
-def activar_cuenta(request):
-    return render (request, 'activacion.html')

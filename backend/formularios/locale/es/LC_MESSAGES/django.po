@@ -447,12 +447,12 @@ msgid "%(model)s instance with %(field)s %(value)r does not exist."
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\related.py:941
-msgid "Foreign Key (type determined by related field)"
-msgstr ""
+msgid "Please fill out this field"
+msgstr "Por favor, debe llenar este campo"
 
 #: .\venv\Lib\site-packages\django\db\models\fields\related.py:1235
-msgid "One-to-one relationship"
-msgstr ""
+msgid "Please enter a valid 7-digit phone number"
+msgstr "Por favor, ingrese un número de teléfono válido de 7 dígitos"
 
 #: .\venv\Lib\site-packages\django\db\models\fields\related.py:1292
 #, python-format
