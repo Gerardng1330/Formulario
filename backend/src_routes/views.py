@@ -207,8 +207,6 @@ def validar_token(request, token):
     # Busca al usuario con el token proporcionado en la base de datos.
     user = User.objects.get(token_user=token)
     try:
-        if user.token_user == None:
-            return render (request,'registro_existoso.html',{'email_confirmed':user.email_confirmed,'error': f'Este Token ya ha caducado.'})
         if user.email_confirmed == True:
             return render (request,'registro_existoso.html',{'email_confirmed':user.email_confirmed,'error': f'Este Token ya ha sido utilizado.'})
         try:
@@ -217,8 +215,6 @@ def validar_token(request, token):
                 user.email_confirmed = True
                 user.save()
                 return redirect('src_routes:registro_exitoso')
-            else:
-                return render(request, 'activacion_aviso.html', {'error': 'Token no válido'})
         except User.DoesNotExist:
                 return render(request, 'activacion_aviso.html', {'error': 'Usuario no encontrado'})
         except Exception as e:
@@ -247,7 +243,6 @@ def activar_cuenta(request):
             validate_email(correo)
         except ValidationError:
             return render(request, 'activacion.html', {'error': 'Correo electrónico no válido'})
-        
         try:
             # Verifica si el correo electrónico está asociado a una cuenta
             usuario = User.objects.get(email=correo)
