@@ -237,6 +237,17 @@ function validarNombreContacto() {
   }
 }
 
+function validarDireccionSecundaria() {
+  if (direccion_secundaria.value.trim() !== "") {
+    /* La direccion_secundaria no es requerida. */
+    setSuccess(direccion_secundaria, "");
+    return true;
+  } else {
+    setSuccess(direccion_secundaria, "");
+    return true;
+  }
+}
+
 function validarCiudad() {
   if (ciudad.value.trim() === "") {
     /* Campo requerido */
@@ -307,12 +318,9 @@ function validarFechaInicio() {
 
 function validarReferencia() {
   if (referencia.value.trim() === "") {
-    /* La referencia no es requerida. Se regresa a como estaba. */
-    referencia.classList.remove("border-lime-500");
-    referencia.classList.remove("border-2");
-    referencia.classList.remove("border-red");
-    referencia.classList.add("border");
-    referencia.classList.add("border-gray-300");
+    /* La referencia no es requerida. */
+    setSuccess(referencia, "");
+    return true;
   } else if (!nombreContactoRegex.test(referencia.value.trim())) {
     /* Está incorrecto el formato "Nombre Apellido"? */
     setError(referencia, m_nombre_contacto_formato);
@@ -324,19 +332,6 @@ function validarReferencia() {
   } else {
     setSuccess(referencia, "");
     return true;
-  }
-}
-
-function validarDireccionSecundaria() {
-  if (direccion_secundaria.value.trim() === "") {
-    /* La direccion_secundaria no es requerida. Se regresa a como estaba. */
-    direccion_secundaria.classList.remove("border-lime-500");
-    direccion_secundaria.classList.remove("border-2");
-    direccion_secundaria.classList.remove("border-red");
-    direccion_secundaria.classList.add("border");
-    direccion_secundaria.classList.add("border-gray-300");
-  } else {
-    setSuccess(direccion_secundaria, "");
   }
 }
 
@@ -438,7 +433,7 @@ document.addEventListener("DOMContentLoaded", function () {
     validarRequerido(direccion_principal);
   });
 
-  /* La dirección secundaria no es requerida */
+  /* Validar direccion_secundaria. No es requerida */
   direccion_secundaria.addEventListener("input", function () {
     validarDireccionSecundaria();
   });
@@ -493,7 +488,7 @@ document.addEventListener("DOMContentLoaded", function () {
     validarRequerido(Conociste);
   });
 
-  /* Validar referencia */
+  /* Validar referencia. No es requerida */
   referencia.addEventListener("input", function () {
     validarReferencia();
   });
@@ -506,7 +501,7 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   /* Se asigna cada función que retorna true or false a una variable de validación general.*/
-  const esFormularioValido = validarNombre() && validarApellido() && validarEmail() && validarRequerido(genero) && validarRequerido(nacionalidad) && validarFechaVacia(fecha_nacimiento) && validarFechaNacimiento() && validarAlergia() && validarRequerido(id_file) && validarRequerido(cv_file) && validarRequerido(codigo1) && validarTelefono(Telefono1) && validarRequerido(codigo3) && validarTelefono(telefono_emergencia) && validarRequerido(codigo2) && validarTelefono(Telefono2) && validarNombreContacto() && validarRequerido(direccion_principal) && validarCiudad() && validarEstadoProvincia() && validarRequerido(Cargo1) && validarRequerido(Cargo2) && validarRequerido(turno) && validarRequerido(nivel_ingles) && validarFechaVacia(fecha_inicio) && validarFechaInicio() && validarRequerido(Transporte) && validarRequerido(Conociste) && validarReferencia();
+  const esFormularioValido = validarNombre() && validarApellido() && validarEmail() && validarRequerido(genero) && validarRequerido(nacionalidad) && validarFechaVacia(fecha_nacimiento) && validarFechaNacimiento() && validarAlergia() && validarRequerido(id_file) && validarRequerido(cv_file) && validarRequerido(codigo1) && validarTelefono(Telefono1) && validarRequerido(codigo3) && validarTelefono(telefono_emergencia) && validarRequerido(codigo2) && validarTelefono(Telefono2) && validarNombreContacto() && validarRequerido(direccion_principal) && validarDireccionSecundaria() && validarCiudad() && validarEstadoProvincia() && validarRequerido(Cargo1) && validarRequerido(Cargo2) && validarRequerido(turno) && validarRequerido(nivel_ingles) && validarFechaVacia(fecha_inicio) && validarFechaInicio() && validarRequerido(Transporte) && validarRequerido(Conociste) && validarReferencia();
 
   /* Si el formulario es válido, lo envía */
   console.log(esFormularioValido);
