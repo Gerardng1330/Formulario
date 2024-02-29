@@ -34,26 +34,70 @@ from django.shortcuts import render, redirect
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 import uuid
+from backend.formularios.models import Politicas
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+from django.utils.text import capfirst
+from backend.formularios.models import Usuario
 from django.core.cache import cache
 from django.utils import timezone
 User = get_user_model()
 
-def exito(request):
-    return render(request, 'exito.html')
-
 def cerrado(request):
     return render(request, 'cerrado.html')
+
+def prueba_page(request):
+    return render(request,'pruebaPagina.html')
 
 #Renderizar el formulario.html(prueba)
 def render_formulario(request):
     return render(request,'formulario.html')
 
+#Funcion para traducir las paginas
+def traducir_paginas(request):
+    #verifica el path para hacer la traducir la pagina correspondidad
+    current_path = request.path
+    if current_path == '/formulario_enviado/':
+        url_para_traduccion = '/formulario_enviado/'
+    elif current_path == '/prueba/':
+        url_para_traduccion = '/prueba/'
+    else:
+        url_para_traduccion = '/'  # Otra opción por defecto
 
-# verifica que el form sea valido para despues enviarlo y envia
-#un mensaje si se envio o no
+    return render(request, 'formulario.html', {'url_para_traduccion': url_para_traduccion})
+
+def verificar_correo(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')  # Asegúrate de reemplazar 'email' con el nombre real del campo en tu formulario.
+        print("Correo electrónico:", email)
+
+        if Usuario.objects.filter(email=email).exists():
+            print("Este correo electrónico ya está registrado.")
+            return render(request, 'formulario.html', {'error': 'Este correo electrónico ya está registrado.'})
+
+    # Resto de la lógica del formulario o redirección si no hay error
+    return render(request, 'formulario.html', {})
+        
+# Formulario. Verifica que el form sea valido para despues enviarlo y envia un mensaje si se envió o no
 def formulario_view(request):
+    # Variables de estado
     form_activo = True
     enviado_correctamente = False
+    politicas_aceptadas = False
+    politicas_aceptadas_uuid = None
+
+    # Fetch a la BD. Párrafos de la tabla Politicas
+    politicas_table = Politicas.objects.values('parrafo')
+
+    # Verifica si 'politicas_aceptadas_cookie' existe
+    if 'pltc' in request.COOKIES:
+        # Quita el modal de políticas y no lo vuelve a mostrar (ver formulario.html)
+        politicas_aceptadas = True
+    else: 
+        # Si no existe, genera un valor random para asignar a la cookie
+        politicas_aceptadas_uuid = uuid.uuid4()
+    
+    # Verificar enviado_correctamente
     if request.method == 'POST' and form_activo:
         form = UsuarioForm(request.POST, request.FILES)
         print(request.POST) 
@@ -70,10 +114,10 @@ def formulario_view(request):
     else:
         form = UsuarioForm()
 
-    return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente})
+    return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente, 'politicas_table':politicas_table, 'politicas_aceptadas':politicas_aceptadas, 'politicas_aceptadas_uuid':politicas_aceptadas_uuid})
 
 #prueba
-def prueba(request):
+# def prueba(request):
     formulario_activo = True  # Puedes ajustar esta lógica según tus necesidades
     enviado_correctamente = False
 
@@ -94,6 +138,19 @@ def prueba(request):
 
     return render(request, 'pruebaPagina.html', {'form': form, 'formulario_activo': formulario_activo,'enviado_correctamente':enviado_correctamente})
 
+#Primera letra mayúscula a los campos de la bd.
+@receiver(pre_save, sender=Usuario)
+def normalize_fields(sender, instance, **kwargs):
+    # Verifica si los campos existen y no son nulos
+    fields_to_capitalize = ['nombre', 'apellido', 'alergia', 'nombre_contacto', 'direccion_principal', 'direccion_secundaria', 'ciudad', 'Estado_Provincia', 'referencia']
+
+    for field in fields_to_capitalize:
+        if hasattr(instance, field) and getattr(instance, field):
+            # Aplica capitalización a cada palabra en el campo
+            setattr(instance, field, getattr(instance, field).title())
+
+
+        
 def validar_nombre(request):
     
     nombre = request.GET.get('nombre', '')

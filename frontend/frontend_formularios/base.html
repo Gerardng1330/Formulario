@@ -1,6 +1,6 @@
 {% load static %} {% load i18n %}
 <!doctype html>
-<html lang="en" class="!scroll-smooth">
+<html lang="en" class="min-h-screen w-full !scroll-smooth">
   <head>
     <title>{% block title %}{% endblock %}</title>
     <!-- Required meta tags -->
@@ -14,67 +14,64 @@
     <link rel="icon" type="image/x-icon" href="{% static 'img/f2f-favicon.svg' %}" />
   </head>
 
-  <body id="body" class="overflow-hidden font-kumbh_regular">
-    <!-- contenedor general -->
-    <div class="flex h-full w-full flex-col items-center gap-5 bg-gradient-to-bl from-indigo-100 via-offwhite to-rose-100 p-14">
-      <!-- contenedor barra superior (logo, idioma)-->
-      <div class="z-20 flex h-fit w-full items-start justify-between">
-        <!-- logo f2f -->
-        <img class="h-12" src="{% static 'img/f2f-logo.svg' %}" alt="" />
+  <body id="body" class="flex min-h-screen w-full flex-col items-center justify-between gap-5 bg-gradient-to-bl from-indigo-100 via-offwhite to-rose-100 p-14 font-kumbh_regular">
+    <!-- contenedor barra superior (logo, idioma)-->
+    <div class="z-20 flex h-fit w-full items-start justify-between">
+      <!-- logo f2f -->
+      <img class="h-12" src="{% static 'img/f2f-logo.svg' %}" alt="" />
 
-        <!-- contenedor idioma dropdown -->
-        <div class="relative flex flex-col gap-2">
-          <!-- idiomas dropdown button -->
-          <button id="buttonIdiomaDropdown" class="inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-gray-100" type="button" onclick="toggleIdiomaDropdown()">
-            <span class="w-5">
-              <!-- Espaciado para el icono a la izquierda -->
-              <!-- ícono mundo -->
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="{1.5}" stroke="currentColor" className="w-6 h-6 text-gray-500">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
-              </svg>
-            </span>
+      <!-- contenedor idioma dropdown -->
+      <div class="relative flex flex-col gap-2">
+        <!-- idiomas dropdown button -->
+        <button id="buttonIdiomaDropdown" class="inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-gray-100" type="button" onclick="toggleIdiomaDropdown()">
+          <span class="w-5">
+            <!-- Espaciado para el icono a la izquierda -->
+            <!-- ícono mundo -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="{1.5}" stroke="currentColor" className="w-6 h-6 text-gray-500">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+            </svg>
+          </span>
 
-            <!-- Texto del botón -->
-            {% translate "Change language" %}
+          <!-- Texto del botón -->
+          {% translate "Change language" %}
 
-            <span class="w-5">
-              <!-- Espaciado para el icono a la derecha -->
-              <!-- ícono flecha hacia abajo -->
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="{1.5}" stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-              </svg>
-            </span>
-          </button>
+          <span class="w-5">
+            <!-- Espaciado para el icono a la derecha -->
+            <!-- ícono flecha hacia abajo -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="{1.5}" stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+            </svg>
+          </span>
+        </button>
 
-          <!-- idiomas dropdown menu -->
-          <div id="dropdownIdiomas" class="absolute top-12 z-10 hidden w-full items-center justify-center divide-y rounded-lg bg-white text-center shadow">
-            <ul class="py-2 text-sm" aria-labelledby="dropdownDefaultButton">
-              {% get_current_language as LANGUAGE_CODE %}
-              <!--obtener el idioma que esta, mostrar los disponibles y tenerlo en una lista-->
-              {% get_available_languages as LANGUAGES %} {% get_language_info_list for LANGUAGES as languages %} {% for formulario in languages %}
-              <li>
-                <a href="/{{ formulario.code }}" class="block px-4 py-2 hover:bg-gray-100"> {{ formulario.name_local|title }} </a>
-              </li>
-              {% endfor %}
-            </ul>
-          </div>
+        <!-- idiomas dropdown menu -->
+        <div id="dropdownIdiomas" class="absolute top-12 z-10 hidden w-full items-center justify-center divide-y rounded-lg bg-white text-center shadow">
+          <ul class="py-2 text-sm" aria-labelledby="dropdownDefaultButton">
+            {% get_current_language as LANGUAGE_CODE %}
+            <!--obtener el idioma que esta, mostrar los disponibles y tenerlo en una lista-->
+            {% get_available_languages as LANGUAGES %} {% get_language_info_list for LANGUAGES as languages %} {% for formulario in languages %}
+            <li>
+              <a href="/{{ formulario.code }}/prueba" class="block px-4 py-2 hover:bg-gray-100"> {{ formulario.name_local|title }} </a>
+            </li>
+            {% endfor %}
+          </ul>
         </div>
       </div>
-
-      {% block content %}
-      <!-- Contenido que va luego del logo e idioma dropdown -->
-      {% endblock %}
-
-      <!-- Copyright -->
-      <p class="mt-6 text-xs text-black">{% translate "COPYRIGHT © 2024 ARV SYSTEM CORP | ALL RIGHTS RESERVED." %}</p>
     </div>
+
+    {% block content %}
+    <!-- Contenido que va luego del logo e idioma dropdown -->
+    {% endblock %}
+
+    <!-- Copyright -->
+    <p class="mt-6 text-xs text-black">{% translate "COPYRIGHT © 2024 ARV SYSTEM CORP | ALL RIGHTS RESERVED." %}</p>
 
     <!-- Scripts específicos del sitio -->
     {% block scripts %} {% endblock %}
 
     <!-- Flowbite -->
     <script src="{% static 'flowbite.min.js' %}"></script>
-    <script src="{% static 'datepicker.min.js' %}"></script>
+    <!-- <script src="{% static 'datepicker.min.js' %}"></script> -->
 
     <!-- dropdown de cambio de idioma JS -->
     <script src="{% static 'js/toggle_idioma_dropdown.js' %}"></script>

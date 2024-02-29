@@ -33,11 +33,11 @@ const referencia = document.getElementById("referencia");
 /* Inicialización de expresiones regulares */
 const letrasRegex = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+$/;
 const numerosRegex = /^[0-9]+$/;
-const nombreApellidoRegex = /^[A-ZáéíóúÁÉÍÓÚüÜñÑ][a-záéíóúÁÉÍÓÚüÜñÑ]*$/;
+const nombreApellidoRegex = /^[A-Za-záéíóúÁÉÍÓÚüÜñÑ]*$/;
 const emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
 const espacioRegex = /^\s+$/;
-const nombreContactoRegex = /^[A-ZáéíóúÁÉÍÓÚüÜñÑ][a-záéíóúÁÉÍÓÚüÜñÑ]+ [A-ZáéíóúÁÉÍÓÚüÜñÑ][a-záéíóúÁÉÍÓÚüÜñÑ]+$/;
-const ciudadEstadoRegex = /^[A-ZáéíóúÁÉÍÓÚüÜñÑ][a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]*$/;
+const nombreContactoRegex = /^[A-Za-záéíóúÁÉÍÓÚüÜñÑ]+\s[A-Za-záéíóúÁÉÍÓÚüÜñÑ]+$/;
+const ciudadEstadoRegex = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]*$/;
 const longitud_max = 30;
 
 /* Función que recibe un elemento html (el input) y un mensaje a mostrar (que se trae del html como variable, para permitir la internacionalización */
@@ -111,11 +111,11 @@ function validarNombre() {
     /* Escribió más de un nombre? */
     setError(nombre, m_nombre_formato);
     return false;
-  } else if (nombre.value.trim().length < 3) {
-    /* Longitud mínima */
+  } /* else if (nombre.value.trim().length < 3) {
+    Longitud mínima 
     setError(nombre, m_longitud_min);
     return false;
-  } else if (nombre.value.trim().length > longitud_max) {
+  }*/ else if (nombre.value.trim().length > longitud_max) {
     /* Longitud máxima */
     setError(nombre, m_longitud_max);
     return false;
@@ -138,11 +138,11 @@ function validarApellido() {
     /* Escribió más de un apellido? */
     setError(apellido, m_apellido_formato);
     return false;
-  } else if (apellido.value.trim().length < 3) {
-    /* Longitud mínima */
+  } /*else if (apellido.value.trim().length < 3) {
+     Longitud mínima 
     setError(apellido, m_longitud_min);
     return false;
-  } else if (apellido.value.trim().length > longitud_max) {
+  }*/ else if (apellido.value.trim().length > longitud_max) {
     /* Longitud máxima */
     setError(apellido, m_longitud_max);
     return false;
@@ -157,7 +157,7 @@ function validarEmail() {
     /* Campo requerido */
     setError(email, m_campo_requerido);
     return false;
-  } else if (email.value.trim().length < 3 || email.value.trim().length > 30 || !emailRegex.test(email.value.trim())) {
+  } else if (/* email.value.trim().length < 3 || */ email.value.trim().length > 30 || !emailRegex.test(email.value.trim())) {
     /* Longitud mínima y máxima - Formato ejemplo@email.com */
     setError(email, m_email_formato);
     return false;
@@ -172,6 +172,8 @@ function validarFechaVacia(input) {
     /* Campo requerido */
     setError(input, m_campo_requerido);
     return false;
+  } else {
+    return true;
   }
 }
 
@@ -207,7 +209,7 @@ function validarAlergia() {
     setError(alergia, m_letras_regex);
     return false;
   } else if (alergia.value.trim().length > longitud_max) {
-    /* Longitud mínima */
+    /* Longitud máxima */
     setError(alergia, m_longitud_max);
     return false;
   } else {
@@ -235,6 +237,17 @@ function validarNombreContacto() {
   }
 }
 
+function validarDireccionSecundaria() {
+  if (direccion_secundaria.value.trim() !== "") {
+    /* La direccion_secundaria no es requerida. */
+    setSuccess(direccion_secundaria, "");
+    return true;
+  } else {
+    setSuccess(direccion_secundaria, "");
+    return true;
+  }
+}
+
 function validarCiudad() {
   if (ciudad.value.trim() === "") {
     /* Campo requerido */
@@ -244,11 +257,11 @@ function validarCiudad() {
     /* Validación del formato Ciudad */
     setError(ciudad, m_ciudad_formato);
     return false;
-  } else if (ciudad.value.trim().length < 3) {
-    /* Longitud mínima */
+  } /*else if (ciudad.value.trim().length < 3) {
+     Longitud mínima 
     setError(ciudad, m_longitud_min);
     return false;
-  } else if (ciudad.value.trim().length > longitud_max) {
+  }*/ else if (ciudad.value.trim().length > longitud_max) {
     /* Longitud máxima */
     setError(ciudad, m_longitud_max);
     return false;
@@ -267,11 +280,11 @@ function validarEstadoProvincia() {
     /* Validación del formato Ciudad */
     setError(Estado_Provincia, m_provincia_formato);
     return false;
-  } else if (Estado_Provincia.value.trim().length < 3) {
-    /* Longitud mínima */
+  } /*else if (Estado_Provincia.value.trim().length < 3) {
+     Longitud mínima 
     setError(Estado_Provincia, m_longitud_min);
     return false;
-  } else if (Estado_Provincia.value.trim().length > longitud_max) {
+  }*/ else if (Estado_Provincia.value.trim().length > longitud_max) {
     /* Longitud máxima */
     setError(Estado_Provincia, m_longitud_max);
     return false;
@@ -305,12 +318,9 @@ function validarFechaInicio() {
 
 function validarReferencia() {
   if (referencia.value.trim() === "") {
-    /* La referencia no es requerida. Se regresa a como estaba. */
-    referencia.classList.remove("border-lime-500");
-    referencia.classList.remove("border-2");
-    referencia.classList.remove("border-red");
-    referencia.classList.add("border");
-    referencia.classList.add("border-gray-300");
+    /* La referencia no es requerida. */
+    setSuccess(referencia, "");
+    return true;
   } else if (!nombreContactoRegex.test(referencia.value.trim())) {
     /* Está incorrecto el formato "Nombre Apellido"? */
     setError(referencia, m_nombre_contacto_formato);
@@ -377,7 +387,11 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* Validar Telefono1 */
-  Telefono1.addEventListener("input", function () {
+  Telefono1.addEventListener("input", function (event) {
+    // Eliminar caracteres no numéricos
+    var inputValue = event.target.value.replace(/\D/g, "");
+    // Actualizar el valor del campo
+    event.target.value = inputValue;
     validarTelefono(Telefono1);
   });
 
@@ -387,7 +401,11 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* Validar telefono_emergencia */
-  telefono_emergencia.addEventListener("input", function () {
+  telefono_emergencia.addEventListener("input", function (event) {
+    // Eliminar caracteres no numéricos
+    var inputValue = event.target.value.replace(/\D/g, "");
+    // Actualizar el valor del campo
+    event.target.value = inputValue;
     validarTelefono(telefono_emergencia);
   });
 
@@ -397,7 +415,11 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* Validar Telefono2 */
-  Telefono2.addEventListener("input", function () {
+  Telefono2.addEventListener("input", function (event) {
+    // Eliminar caracteres no numéricos
+    var inputValue = event.target.value.replace(/\D/g, "");
+    // Actualizar el valor del campo
+    event.target.value = inputValue;
     validarTelefono(Telefono2);
   });
 
@@ -411,7 +433,10 @@ document.addEventListener("DOMContentLoaded", function () {
     validarRequerido(direccion_principal);
   });
 
-  /* La dirección secundaria no es requerida */
+  /* Validar direccion_secundaria. No es requerida */
+  direccion_secundaria.addEventListener("input", function () {
+    validarDireccionSecundaria();
+  });
 
   /* Validar Ciudad */
   ciudad.addEventListener("input", function () {
@@ -463,7 +488,7 @@ document.addEventListener("DOMContentLoaded", function () {
     validarRequerido(Conociste);
   });
 
-  /* Validar referencia */
+  /* Validar referencia. No es requerida */
   referencia.addEventListener("input", function () {
     validarReferencia();
   });
@@ -476,39 +501,10 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   /* Se asigna cada función que retorna true or false a una variable de validación general.*/
-  const esFormularioValido =
-    validarNombre() &&
-    validarApellido() &&
-    validarEmail() &&
-    validarRequerido(genero) &&
-    validarRequerido(nacionalidad) &&
-    validarFechaVacia(fecha_nacimiento) &&
-    validarFechaNacimiento() &&
-    validarAlergia() &&
-    validarRequerido(id_file) &&
-    validarRequerido(cv_file) &&
-    validarRequerido(codigo1) &&
-    validarTelefono(Telefono1) &&
-    validarRequerido(codigo3) &&
-    validarTelefono(telefono_emergencia) &&
-    validarRequerido(codigo2) &&
-    validarTelefono(Telefono2) &&
-    validarNombreContacto() &&
-    validarRequerido(direccion_principal) &&
-    /* Dirección secundaria no requerida */
-    validarCiudad() &&
-    validarEstadoProvincia() &&
-    validarRequerido(Cargo1) &&
-    validarRequerido(Cargo2) &&
-    validarRequerido(turno) &&
-    validarRequerido(nivel_ingles) &&
-    validarFechaVacia(fecha_inicio) &&
-    validarFechaInicio() &&
-    validarRequerido(Transporte) &&
-    validarRequerido(Conociste) &&
-    validarReferencia();
+  const esFormularioValido = validarNombre() && validarApellido() && validarEmail() && validarRequerido(genero) && validarRequerido(nacionalidad) && validarFechaVacia(fecha_nacimiento) && validarFechaNacimiento() && validarAlergia() && validarRequerido(id_file) && validarRequerido(cv_file) && validarRequerido(codigo1) && validarTelefono(Telefono1) && validarRequerido(codigo3) && validarTelefono(telefono_emergencia) && validarRequerido(codigo2) && validarTelefono(Telefono2) && validarNombreContacto() && validarRequerido(direccion_principal) && validarDireccionSecundaria() && validarCiudad() && validarEstadoProvincia() && validarRequerido(Cargo1) && validarRequerido(Cargo2) && validarRequerido(turno) && validarRequerido(nivel_ingles) && validarFechaVacia(fecha_inicio) && validarFechaInicio() && validarRequerido(Transporte) && validarRequerido(Conociste) && validarReferencia();
 
   /* Si el formulario es válido, lo envía */
+  console.log(esFormularioValido);
   if (esFormularioValido) {
     form.submit();
   }
