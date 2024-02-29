@@ -313,6 +313,7 @@ function validarReferencia() {
     referencia.classList.remove("border-red");
     referencia.classList.add("border");
     referencia.classList.add("border-gray-300");
+    return true;
   } else if (!nombreContactoRegex.test(referencia.value.trim())) {
     /* Está incorrecto el formato "Nombre Apellido"? */
     setError(referencia, m_nombre_contacto_formato);
@@ -335,8 +336,10 @@ function validarDireccionSecundaria() {
     direccion_secundaria.classList.remove("border-red");
     direccion_secundaria.classList.add("border");
     direccion_secundaria.classList.add("border-gray-300");
+    return true;
   } else {
     setSuccess(direccion_secundaria, "");
+    return true;
   }
 }
 

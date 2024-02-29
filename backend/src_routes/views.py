@@ -66,6 +66,18 @@ def traducir_paginas(request):
 
     return render(request, 'formulario.html', {'url_para_traduccion': url_para_traduccion})
 
+def verificar_correo(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')  # Asegúrate de reemplazar 'email' con el nombre real del campo en tu formulario.
+        print("Correo electrónico:", email)
+
+        if Usuario.objects.filter(email=email).exists():
+            print("Este correo electrónico ya está registrado.")
+            return render(request, 'formulario.html', {'error': 'Este correo electrónico ya está registrado.'})
+
+    # Resto de la lógica del formulario o redirección si no hay error
+    return render(request, 'formulario.html', {})
+        
 # Formulario. Verifica que el form sea valido para despues enviarlo y envia un mensaje si se envió o no
 def formulario_view(request):
     # Variables de estado
@@ -129,22 +141,16 @@ def formulario_view(request):
 #Primera letra mayúscula a los campos de la bd.
 @receiver(pre_save, sender=Usuario)
 def normalize_fields(sender, instance, **kwargs):
-    # Verifica si el campo 'nombre' existe y no es nulo
-    print(f"Before normalization: {instance.apellido}")
-    if hasattr(instance, 'nombre') and instance.nombre and instance.apellido :
-        # Convierte el nombre a mayúsculas y luego aplica capitalización
-        print(f"Nombre before normalization: {instance.nombre}")
-        instance.nombre = capfirst(instance.nombre.lower())
-        instance.apellido = capfirst(instance.apellido.lower())
-        print(f"Ciudad after normalization: {instance.apellido}")
+    # Verifica si los campos existen y no son nulos
+    fields_to_capitalize = ['nombre', 'apellido', 'alergia', 'nombre_contacto', 'direccion_principal', 'direccion_secundaria', 'ciudad', 'Estado_Provincia', 'referencia']
 
-        print(f"Nombre after normalization: {instance.nombre}")
-    # Verifica si el campo 'ciudad' existe y no es nulo
-    
+    for field in fields_to_capitalize:
+        if hasattr(instance, field) and getattr(instance, field):
+            # Aplica capitalización a cada palabra en el campo
+            setattr(instance, field, getattr(instance, field).title())
 
 
-
-
+        
 def validar_nombre(request):
     
     nombre = request.GET.get('nombre', '')
