@@ -53,7 +53,7 @@ class Usuario(models.Model):
         ('basico', 'basico'),
         ('medio', 'medio'),('avanzado','avanzado'),('nativo','nativo')], verbose_name='Nivel de Inglés',default='nivel ingles')
     fecha_inicio = models.DateField( verbose_name='Fecha de Inicio',default='2012-12-12')
-    Transporte = models.CharField(max_length=255, choices=[('bus','bus'), ('vehiculo-propio','vehiculo-propio'),('uber','uber'),('OTRO','OTRO')],  verbose_name='Transporte Utilizado',default='transporte')
+    Transporte = models.CharField(max_length=255, choices=[('bus','bus'), ('vehiculo-propio','vehiculo-propio'),('uber','uber'),('otro','otro')],  verbose_name='Transporte Utilizado',default='transporte')
     Conociste = models.CharField(max_length=255, choices=[('referencia','referencia'),('sticker-qr','sticker-qr'),('volante','volante'),('oficina','oficina'), ('google','google'),('otro','otro')],  verbose_name='Cómo nos Conociste',default='como nos conociste')
     #no requerido
     referencia = models.CharField(max_length=255,blank=True, null=True, verbose_name='Referido por',default='referencia')

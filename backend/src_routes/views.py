@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 #from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest
 from django.db import IntegrityError
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
@@ -41,6 +41,7 @@ from django.utils.text import capfirst
 from backend.formularios.models import Usuario
 from django.core.cache import cache
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 User = get_user_model()
 
 def cerrado(request):
@@ -66,24 +67,22 @@ def traducir_paginas(request):
 
     return render(request, 'formulario.html', {'url_para_traduccion': url_para_traduccion})
 
-def verificar_correo(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')  # Asegúrate de reemplazar 'email' con el nombre real del campo en tu formulario.
-        print("Correo electrónico:", email)
+# Función para obtener los correos registrados
+def get_emails(request):
+    if request.method == 'GET':
+        emails_list = list(Usuario.objects.values_list('email', flat=True))
+        return JsonResponse(emails_list, safe=False)
+    else:
+        return JsonResponse({'error': 'Invalid request method'})
 
-        if Usuario.objects.filter(email=email).exists():
-            print("Este correo electrónico ya está registrado.")
-            return render(request, 'formulario.html', {'error': 'Este correo electrónico ya está registrado.'})
-
-    # Resto de la lógica del formulario o redirección si no hay error
-    return render(request, 'formulario.html', {})
-        
 # Formulario. Verifica que el form sea valido para despues enviarlo y envia un mensaje si se envió o no
 def formulario_view(request):
     # Variables de estado
     form_activo = True
     enviado_correctamente = False
     politicas_aceptadas = False
+
+    # Variables que necesitan inicialización
     politicas_aceptadas_uuid = None
 
     # Fetch a la BD. Párrafos de la tabla Politicas
@@ -96,25 +95,31 @@ def formulario_view(request):
     else: 
         # Si no existe, genera un valor random para asignar a la cookie
         politicas_aceptadas_uuid = uuid.uuid4()
-    
+
     # Verificar enviado_correctamente
     if request.method == 'POST' and form_activo:
         form = UsuarioForm(request.POST, request.FILES)
-        print(request.POST) 
+        #print(request.POST)
+        
         if form.is_valid():
-            form.save()
-            #messages.success(request, 'El formulario se envió satisfactoriamente.')
-            enviado_correctamente = True
-            #return render(request, 'exito.html')
+            # Obtiene el valor del campo email
+            email_value = request.POST.get('email')
+
+            # Verifica si el correo ya está registrado
+            is_email_registrado = Usuario.objects.filter(email=email_value).exists()
+
+            if not is_email_registrado:
+                # El correo no está registrado, guarda el formulario.
+                form.save()
+                enviado_correctamente = True
         else:
             # Imprimir errores del formulario en la consola del servidor
             print(form.errors)
             messages.error(request, 'Hubo un error en el formulario. Por favor, verifica los campos.')
-       
     else:
         form = UsuarioForm()
 
-    return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente, 'politicas_table':politicas_table, 'politicas_aceptadas':politicas_aceptadas, 'politicas_aceptadas_uuid':politicas_aceptadas_uuid})
+    return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente, 'politicas_table':politicas_table, 'politicas_aceptadas':politicas_aceptadas, 'politicas_aceptadas_uuid':politicas_aceptadas_uuid, 'is_email_registrado':is_email_registrado})
 
 #prueba
 # def prueba(request):
@@ -322,8 +327,6 @@ def activar_cuenta(request):
             return redirect('src_routes:activacion_aviso')
         except User.DoesNotExist:
             return render(request, 'activacion.html', {'error': 'No se encontró ninguna cuenta asociada a este correo electrónico'})
-
-        
 
 def activars(request):
     return render(request, 'activacion_aviso.html')   

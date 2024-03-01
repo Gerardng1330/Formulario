@@ -14,6 +14,7 @@ urlpatterns = [
     #path('exito/', views.exito, name='pagina_exito'),
     path('cerrado/', views.cerrado, name='pagina_cerrado}'),
     path('prueba/', views.prueba_page, name='pagina_prueba'),
+    path('obtener_emails/', views.get_emails, name='get_emails'),
 
 
 # Login views

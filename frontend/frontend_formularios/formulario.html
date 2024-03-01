@@ -423,7 +423,6 @@
   const form_container = document.querySelector("#form_container");
   /* Traemos el valor random desde views.py */
   var politicas_aceptadas_uuid = "{{ politicas_aceptadas_uuid }}";
-  console.log(politicas_aceptadas_uuid);
   body.classList.add("overflow-hidden");
   form_container.classList.add("blur-sm");
 </script>
@@ -508,5 +507,6 @@
   const m_ciudad_formato = "{% blocktrans %}Ingrese una ciudad con formato válido 'Ciudad'{% endblocktrans %}";
   const m_provincia_formato = "{% blocktrans %}Ingrese una provincia con formato válido 'Provincia'{% endblocktrans %}";
   const m_fecha_inicio = "{% blocktrans %}Ingrese una fecha de inicio válida{% endblocktrans %}";
+  const m_correo_registrado = "{% blocktrans %}Este correo ya se encuentra registrado{% endblocktrans %}";
 </script>
 {% endblock %}

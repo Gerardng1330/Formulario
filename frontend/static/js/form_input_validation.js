@@ -152,18 +152,44 @@ function validarApellido() {
   }
 }
 
-function validarEmail() {
-  if (email.value.trim() === "") {
-    /* Campo requerido */
-    setError(email, m_campo_requerido);
-    return false;
-  } else if (/* email.value.trim().length < 3 || */ email.value.trim().length > 30 || !emailRegex.test(email.value.trim())) {
-    /* Longitud mínima y máxima - Formato ejemplo@email.com */
-    setError(email, m_email_formato);
-    return false;
-  } else {
-    setSuccess(email, "");
-    return true;
+async function validarEmail() {
+  /* Obtener el csrftoken */
+  const csrftoken = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("csrftoken="))
+    .split("=")[1];
+
+  try {
+    // Petición AJAX usando fetch
+    const response = await fetch("/obtener_emails/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrftoken, // Don't forget to include the CSRF token
+      },
+    });
+
+    // Supongamos que 'jsonListaCorreos' es tu lista en formato JSON
+    let emails_list = await response.json();
+
+    // Validaciones
+    if (email.value.trim() === "") {
+      /* Campo requerido */
+      setError(email, m_campo_requerido);
+      return false;
+    } else if (emails_list.includes(email.value.trim())) {
+      setError(email, m_correo_registrado);
+      return false;
+    } else if (/* email.value.trim().length < 3 || */ email.value.trim().length > 30 || !emailRegex.test(email.value.trim())) {
+      /* Longitud mínima y máxima - Formato ejemplo@email.com */
+      setError(email, m_email_formato);
+      return false;
+    } else {
+      setSuccess(email, "");
+      return true;
+    }
+  } catch (error) {
+    console.error("Error fetching registered emails:", error);
   }
 }
 
@@ -503,8 +529,7 @@ form.addEventListener("submit", (e) => {
   /* Se asigna cada función que retorna true or false a una variable de validación general.*/
   const esFormularioValido = validarNombre() && validarApellido() && validarEmail() && validarRequerido(genero) && validarRequerido(nacionalidad) && validarFechaVacia(fecha_nacimiento) && validarFechaNacimiento() && validarAlergia() && validarRequerido(id_file) && validarRequerido(cv_file) && validarRequerido(codigo1) && validarTelefono(Telefono1) && validarRequerido(codigo3) && validarTelefono(telefono_emergencia) && validarRequerido(codigo2) && validarTelefono(Telefono2) && validarNombreContacto() && validarRequerido(direccion_principal) && validarDireccionSecundaria() && validarCiudad() && validarEstadoProvincia() && validarRequerido(Cargo1) && validarRequerido(Cargo2) && validarRequerido(turno) && validarRequerido(nivel_ingles) && validarFechaVacia(fecha_inicio) && validarFechaInicio() && validarRequerido(Transporte) && validarRequerido(Conociste) && validarReferencia();
 
-  /* Si el formulario es válido, lo envía */
-  console.log(esFormularioValido);
+  /* Si el correo no está repetido y el resto del form es válido, mándalo a la bd */
   if (esFormularioValido) {
     form.submit();
   }
