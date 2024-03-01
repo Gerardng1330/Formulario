@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 #from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm
 from django.contrib.auth.models import User
+import time
 from django.http import HttpResponse
 from django.db import IntegrityError
 from django.core.exceptions import ValidationError
@@ -113,7 +114,6 @@ def formulario_view(request):
        
     else:
         form = UsuarioForm()
-
     return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente, 'politicas_table':politicas_table, 'politicas_aceptadas':politicas_aceptadas, 'politicas_aceptadas_uuid':politicas_aceptadas_uuid})
 
 #prueba
@@ -253,7 +253,6 @@ def registro(request):
             user.save()
             # Envía un correo electrónico de activación al usuario con el token generado.
             enviar_correo(request.POST['Correo'], token)  # Corregir aquí, pasando el destinatario y el token
-            
             # Redirige al usuario a la página de activación.
             return redirect('src_routes:activacion_aviso')
         except IntegrityError:
@@ -262,22 +261,23 @@ def registro(request):
 # Esta vista valida el token de activación proporcionado por el usuario.
 def validar_token(request, token):
     # Busca al usuario con el token proporcionado en la base de datos.
-    user = User.objects.get(token_user=token)
     try:
+        user = User.objects.get(token_user=token)
+
         if user.email_confirmed == True:
-            return render (request,'registro_existoso.html',{'email_confirmed':user.email_confirmed,'error': f'Este Token ya ha sido utilizado.'})
-        try:
-                # Si el token coincide, marca el correo electrónico como confirmado y redirige al usuario a la página de registro exitoso.
-            if token == user.token_user:
-                user.email_confirmed = True
-                user.save()
-                return redirect('src_routes:registro_exitoso')
-        except User.DoesNotExist:
-                return render(request, 'activacion_aviso.html', {'error': 'Usuario no encontrado'})
-        except Exception as e:
-                return render(request, 'activacion_aviso.html', {'error': f'Error al validar el token: {e}'})
+            return render (request,'registro_existoso.html',{'email_confirmed':user.email_confirmed,'error': f'Esta cuenta ya ha sido activada.'})
+           # Si el token coincide, marca el correo electrónico como confirmado y redirige al usuario a la página de registro exitoso.
+        if token == user.token_user:
+            user.email_confirmed = True
+            user.save()
+            return redirect('src_routes:registro_exitoso')
+        else:
+            return render(request, 'activacion_aviso.html', {'error': 'Usuario no encontrado'})
+    except User.DoesNotExist:
+        print(f'paso aqui caducao')
+        return render (request,'registro_existoso.html', {'noexiste':User.DoesNotExist,'error': 'Este Token ha caducado'})
     except Exception as e:
-            return render(request, 'activacion_aviso.html', {'error': f'Error al validar el token: {e}'}) 
+        return render(request, 'activacion_aviso.html', {'error': f'Error al validar el token: {e}'}) 
 
  # Esta vista renderiza la plantilla 'activacion.html'.
 
@@ -321,7 +321,19 @@ def activar_cuenta(request):
         
 
 def activars(request):
-    return render(request, 'activacion_aviso.html')   
+    if request.method == 'GET':
+        return render(request, 'activacion_aviso.html')
+    elif request.method == 'POST':
+    # zi no hay una llamada reciente, o si han pasado más de 60 segundos, continúa con la vista normalmente
+        cache.set('activar_cuenta_ultima_llamada', timezone.now(), timeout=60)
+        ultima_llamada = cache.get('activar_cuenta_ultima_llamada')
+        if ultima_llamada is not None:
+            tiempo_transcurrido = timezone.now() - ultima_llamada
+            if tiempo_transcurrido.total_seconds() < 60:
+                tiempo_restante = 60 - tiempo_transcurrido.total_seconds()
+                return render(request, 'activacion_aviso.html', {'error': f'Solamente se puede enviar el token una vez por minuto. Espere {int(tiempo_restante)} segundos antes de intentarlo de nuevo.'})
+        cache.set('activar_cuenta_ultima_llamada', timezone.now(), timeout=60)        
+    return render(request, 'activacion_aviso.html')
 
 def signout (request):
     logout(request)
