@@ -16,11 +16,15 @@ from django.urls import reverse
 
 #panel de django
 class UsuarioInfo(admin.ModelAdmin):
+    #muestra los campos en el panel
     list_display = ("nombre", "apellido", "email", "fecha_nacimiento", "nacionalidad", "Telefono1", "Cargo1","cv_file","id_file")
+    # los campos de busqueda
     search_fields = ("nombre", "nacionalidad")
+    #filtro 
     list_filter = ("nombre", "fecha_nacimiento",)
+    #que aparezca la fecha con su jerarquia
     date_hierarchy = "fecha_nacimiento"
-
+    
     actions = ['download_pdf']
 
     
