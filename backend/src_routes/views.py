@@ -3,7 +3,6 @@ from django.utils.translation import get_language, activate, gettext
 from django.shortcuts import render, redirect
 from backend.formularios.forms import UsuarioForm
 from django.contrib import messages
-from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 #from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm
 from django.contrib.auth.models import User
@@ -41,6 +40,9 @@ from django.utils.text import capfirst
 from backend.formularios.models import Usuario
 from django.core.cache import cache
 from django.utils import timezone
+from django.urls import reverse, reverse_lazy
+from django.shortcuts import resolve_url
+from django.shortcuts import get_object_or_404
 User = get_user_model()
 
 def cerrado(request):
@@ -54,17 +56,35 @@ def render_formulario(request):
     return render(request,'formulario.html')
 
 #Funcion para traducir las paginas
-def traducir_paginas(request):
-    #verifica el path para hacer la traducir la pagina correspondidad
+def traducir(request):
     current_path = request.path
-    if current_path == '/formulario_enviado/':
-        url_para_traduccion = '/formulario_enviado/'
+    url_para_traduccion = 'url_para_traduccion'  # Asigna la URL por defecto
+
+    if current_path == '/es/formulario_enviado':
+        print('entro')
+        url_para_traduccion = 'envio_formulario'
+    elif current_path == '/en/formulario_enviado':
+        print('entro')
+        url_para_traduccion = 'envio_formulario'
     elif current_path == '/prueba/':
-        url_para_traduccion = '/prueba/'
+        print('prueba')
+        url_para_traduccion = '/url_para_traduccion'
+    elif current_path == '/cerrado/':
+        url_para_traduccion = '/pagina_cerrado'
     else:
-        url_para_traduccion = '/'  # Otra opción por defecto
+        print(url_para_traduccion)
+        
 
     return render(request, 'formulario.html', {'url_para_traduccion': url_para_traduccion})
+
+
+def aver(request):
+    aver_var='formulario_enviado'
+    return aver
+
+def confimarcion(request):
+    variable= 'hola'
+    return variable
 
 def verificar_correo(request):
     if request.method == 'POST':
@@ -77,10 +97,14 @@ def verificar_correo(request):
 
     # Resto de la lógica del formulario o redirección si no hay error
     return render(request, 'formulario.html', {})
+
         
 # Formulario. Verifica que el form sea valido para despues enviarlo y envia un mensaje si se envió o no
 def formulario_view(request):
     # Variables de estado
+    current_path = request.path
+    url_para_traduccion = 'url_para_traduccion'
+    #aver(request)
     form_activo = True
     enviado_correctamente = False
     politicas_aceptadas = False
@@ -149,14 +173,6 @@ def normalize_fields(sender, instance, **kwargs):
             # Aplica capitalización a cada palabra en el campo
             setattr(instance, field, getattr(instance, field).title())
 
-
-        
-def validar_nombre(request):
-    
-    nombre = request.GET.get('nombre', '')
-    if len(nombre) < 3:
-        return JsonResponse({'error': 'El nombre debe tener al menos 3 caracteress.'})
-    return JsonResponse({'success': True})
 
 
 def formacion(request):

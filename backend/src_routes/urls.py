@@ -6,14 +6,21 @@ from django.conf.urls.static import static
 
 app_name = 'src_routes'
 
+
+
 urlpatterns = [
 #Formularios
     path('', views.formulario_view, name='ver_formulario'),
+    path('url_para_traduccion/', views.traducir, name='traducir_paginas'),
     #path('formulario/', views.render_formulario, name='ver_formulario'),
     path('formulario_enviado/', views.formulario_view, name='envio_formulario'),#prueba
     #path('exito/', views.exito, name='pagina_exito'),
     path('cerrado/', views.cerrado, name='pagina_cerrado}'),
     path('prueba/', views.prueba_page, name='pagina_prueba'),
+    #path('download-cv/<int:pk>/', views.download_cv_file_view, name='app_label_usuario_download_cv'),
+
+
+    
 
 
 # Login views
@@ -24,12 +31,17 @@ urlpatterns = [
     path('form/', views.formacion,name='form'),
     
 #Recuperacion de usuario
- path('recuperar/', views.recuperar_pass,name='recuperar'),    
+    path('recuperar/', views.recuperar_pass,name='recuperar'),    
     path('activacion/', views.activar_cuenta, name='activacion'),
     path('activacion_aviso/', views.activars, name='activacion_aviso'),
     path('activar-cuenta/<str:token>/', views.validar_token, name='activar_cuenta'),
     path('registro_exitoso/', views.succefully, name='registro_exitoso'),
 ]
+
+#ruta para descargar el cv 
+urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
 
 if settings.DEBUG:
     #No hacer esto en producción. Esto es solo para el manejo local de archivos estáticos.

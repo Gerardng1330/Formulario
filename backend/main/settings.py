@@ -46,6 +46,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [ BASE_DIR.parent / "frontend" /  "frontend_formularios",
+                 BASE_DIR / "frontend" /  "templates",
                  BASE_DIR.parent / "frontend" /  "frontend_auth",
                  BASE_DIR.parent / "frontend" /  "custom_views"],
         'APP_DIRS': True,
@@ -133,3 +134,8 @@ EMAIL_HOST_USER = 'noreply@arvcloud.com'
 EMAIL_HOST_PASSWORD = 'Jda108?jjadpa300' 
 
 AUTH_USER_MODEL = "auth_users.User"
+
+#ruta para descargar los cv
+
+MEDIA_ROOT = os.path.join(BASE_DIR,"media")
+MEDIA_URL = "/media/"

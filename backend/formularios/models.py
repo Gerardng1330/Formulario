@@ -31,8 +31,8 @@ class Usuario(models.Model):
         ('Otro', 'Otro')], verbose_name='Nacionalidad',default='507')
     fecha_nacimiento = models.DateField(verbose_name='Fecha de Nacimiento',default='2012-12-12')
     alergia = models.TextField(verbose_name='Alergia o Discapacidad',default='alergia')
-    id_file = models.FileField(upload_to='archivos/',  verbose_name='Identificación/Pasaporte',default='id-file')
-    cv_file = models.FileField(upload_to='archivos/', verbose_name='Hoja de Vida',default='cv-file')
+    id_file = models.FileField(verbose_name='Identificación/Pasaporte',default='id-file',upload_to="media/id_usuarios")
+    cv_file = models.FileField(verbose_name='Hoja de Vida',default='cv-file',upload_to = "media/cv_usuarios/")
     codigo1= models.CharField(max_length=20, choices=[('507','507'),('1','1')],verbose_name='Codigo1',default='codigo1')
     Telefono1 = models.IntegerField(verbose_name='Teléfono 1',default='telefono1')
     codigo2= models.CharField(max_length=20,choices=[('507','507'),('1','1')], verbose_name='Codigo2',default='codigo2')
@@ -53,7 +53,7 @@ class Usuario(models.Model):
         ('basico', 'basico'),
         ('medio', 'medio'),('avanzado','avanzado'),('nativo','nativo')], verbose_name='Nivel de Inglés',default='nivel ingles')
     fecha_inicio = models.DateField( verbose_name='Fecha de Inicio',default='2012-12-12')
-    Transporte = models.CharField(max_length=255, choices=[('bus','bus'), ('vehiculo-propio','vehiculo-propio'),('uber','uber'),('OTRO','OTRO')],  verbose_name='Transporte Utilizado',default='transporte')
+    Transporte = models.CharField(max_length=255, choices=[('bus','bus'), ('vehiculo-propio','vehiculo-propio'),('uber','uber'),('otro','otro')],  verbose_name='Transporte Utilizado',default='transporte')
     Conociste = models.CharField(max_length=255, choices=[('referencia','referencia'),('sticker-qr','sticker-qr'),('volante','volante'),('oficina','oficina'), ('google','google'),('otro','otro')],  verbose_name='Cómo nos Conociste',default='como nos conociste')
     #no requerido
     referencia = models.CharField(max_length=255,blank=True, null=True, verbose_name='Referido por',default='referencia')
