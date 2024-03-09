@@ -14,7 +14,7 @@
     <link rel="icon" type="image/x-icon" href="{% static 'img/f2f-favicon.svg' %}" />
   </head>
 
-  <body id="body" class="flex min-h-screen w-full flex-col items-center justify-between gap-5 bg-gradient-to-bl from-indigo-100 via-offwhite to-rose-100 p-14 font-kumbh_regular">
+  <body id="body" class="flex min-h-screen w-full flex-col items-center justify-between gap-5 bg-gradient-to-bl from-indigo-100 via-offwhite to-rose-100 px-14 pb-6 pt-10 font-kumbh_regular">
     <!-- contenedor barra superior (logo, idioma)-->
     <div class="z-20 flex h-fit w-full items-start justify-between">
       <!-- logo f2f -->
@@ -51,7 +51,7 @@
             <!--obtener el idioma que esta, mostrar los disponibles y tenerlo en una lista-->
             {% get_available_languages as LANGUAGES %} {% get_language_info_list for LANGUAGES as languages %} {% for formulario in languages %}
             <li>
-              <a href="/{{ formulario.code }}/prueba" class="block px-4 py-2 hover:bg-gray-100"> {{ formulario.name_local|title }} </a>
+              <a href="/{{ formulario.code }}" class="block px-4 py-2 hover:bg-gray-100"> {{ formulario.name_local|title }} </a>
             </li>
             {% endfor %}
           </ul>
@@ -64,7 +64,7 @@
     {% endblock %}
 
     <!-- Copyright -->
-    <p class="mt-6 text-xs text-black">{% translate "COPYRIGHT © 2024 ARV SYSTEM CORP | ALL RIGHTS RESERVED." %}</p>
+    <p id="copyright" class="mt-6 text-xs text-black">{% translate "COPYRIGHT © 2024 ARV SYSTEM CORP | ALL RIGHTS RESERVED." %}</p>
 
     <!-- Scripts específicos del sitio -->
     {% block scripts %} {% endblock %}

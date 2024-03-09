@@ -84,6 +84,7 @@ def formulario_view(request):
 
     # Variables que necesitan inicialización
     politicas_aceptadas_uuid = None
+    is_email_registrado = None
 
     # Fetch a la BD. Párrafos de la tabla Politicas
     politicas_table = Politicas.objects.values('parrafo')
@@ -337,3 +338,9 @@ def signout (request):
         
 def succefully(request):
     return render (request, 'registro_existoso.html') 
+
+def ayuda_view(request):
+    # pathname de la URL sin la parte del idioma /en/ o /es/
+    pathname = request.path[4:]
+    print(pathname)
+    return render(request, 'ayuda.html', {'pathname': pathname})
