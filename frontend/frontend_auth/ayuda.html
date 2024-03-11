@@ -1,161 +1,288 @@
-{% extends "base.html" %} {% load static %} {% load i18n %}
+{% extends "base_sidebar.html" %} {% load static %} {% load i18n %}
 <!-- title del sitio -->
 {% block title %} Ayuda {% endblock %}
 <!-- Descripción del sitio -->
 {% block desc %}Pantallas de ayuda al aplicante. Preautenticación. Face-to-face learning center.{% endblock %}
-<!-- Contenido del sitio -->
+<!-- Opciones del sidebar -->
+{% block sidebar %}
+<div class="h-fit w-full space-y-2">
+  <!-- No puedo cambiar mi contraseña -->
+  <li>
+    <a href="{% url 'src_routes:ayuda_contrasena' %}" id="btn_contrasena" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition duration-75">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z" />
+      </svg>
+      <span class="ms-3 text-xs">{% blocktrans %}No puedo cambiar mi contraseña{% endblocktrans %}</span>
+    </a>
+  </li>
+  <!-- Condiciones y políticas -->
+  <li>
+    <span class="flex items-center p-1 text-xs text-gray-400">{% blocktrans %}CONDICIONES Y POLÍTICAS{% endblocktrans %}</span>
+  </li>
+  <!-- Protección de datos -->
+  <li>
+    <a href="{% url 'src_routes:proteccion_datos' %}" id="btn_proteccion" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition duration-75">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M7.864 4.243A7.5 7.5 0 0 1 19.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 0 0 4.5 10.5a7.464 7.464 0 0 1-1.15 3.993m1.989 3.559A11.209 11.209 0 0 0 8.25 10.5a3.75 3.75 0 1 1 7.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 0 1-3.6 9.75m6.633-4.596a18.666 18.666 0 0 1-2.485 5.33" />
+      </svg>
+      <span class="ms-3 text-xs">{% blocktrans %}Protección de datos{% endblocktrans %}</span>
+    </a>
+  </li>
+  <!-- Actualizaciones de la política de privacidad -->
+  <li>
+    <a href="{% url 'src_routes:politica_actualizacion' %}" id="btn_act_politicas" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition duration-75">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+      </svg>
+      <span class="ms-3 text-xs">{% blocktrans %}Actualización de la política{% endblocktrans %}</span>
+    </a>
+  </li>
+  <!-- Actualizaciones de los términos de servicios -->
+  <li>
+    <a href="{% url 'src_routes:terminos_actualizacion' %}" id="btn_act_terminos" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition duration-75">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+      </svg>
+      <span class="ms-3 text-xs">{% blocktrans %}Actualización de los términos{% endblocktrans %}</span>
+    </a>
+  </li>
+  <!-- Eliminación de cuentas inactivas -->
+  <li>
+    <a href="{% url 'src_routes:cuentas_inactivas' %}" id="btn_eliminacion" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition duration-75">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M22 10.5h-6m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM4 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 10.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
+      </svg>
+      <span class="ms-3 text-xs">{% blocktrans %}Cuentas inactivas{% endblocktrans %}</span>
+    </a>
+  </li>
+  <!-- Cuanto tiempo guarda la aplicación tu información -->
+  <li>
+    <a href="{% url 'src_routes:tiempo_almacenamiento' %}" id="btn_tiempo" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition duration-75">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+      </svg>
+      <span class="ms-3 text-xs">{% blocktrans %}Tiempo de almacenamiento{% endblocktrans %}</span>
+    </a>
+  </li>
+  <!-- Solicitar una copia de tus datos -->
+  <li>
+    <a href="{% url 'src_routes:copia_datos' %}" id="btn_copia" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mb-1 h-5 w-5 transition duration-75">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15M9 12l3 3m0 0 3-3m-3 3V2.25" />
+      </svg>
+      <span class="ms-3 text-xs">{% blocktrans %}Solicitar una copia de tus datos{% endblocktrans %}</span>
+    </a>
+  </li>
+  <!-- Términos y políticas adicionales -->
+  <li>
+    <span class="flex items-center p-1 text-xs text-gray-400">{% blocktrans %}TÉRMINOS Y POLÍTICAS ADICIONALES{% endblocktrans %}</span>
+  </li>
+  <!-- Política de derecho de autor -->
+  <li>
+    <a href="{% url 'src_routes:derechos_autor' %}" id="btn_derechos_autor" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition duration-75">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5A3.375 3.375 0 0 0 6.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 0 0-9-9Z" />
+      </svg>
+      <span class="ms-3 text-xs">{% blocktrans %}Política de derecho de autor{% endblocktrans %}</span>
+    </a>
+  </li>
+  <!-- Termino de los servicios de pago -->
+  <li>
+    <a href="{% url 'src_routes:servicios_de_pago' %}" id="btn_servicios_pago" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition duration-75">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
+      </svg>
+      <span class="ms-3 text-xs">{% blocktrans %}Términos de los servicios de pago{% endblocktrans %}</span>
+    </a>
+  </li>
+  <!-- Empresas relacionadas -->
+  <li>
+    <a href="{% url 'src_routes:empresas_relacionadas' %}" id="btn_empresas_rel" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition duration-75">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+      </svg>
+      <span class="ms-3 text-xs">{% blocktrans %}Empresas relacionadas{% endblocktrans %}</span>
+    </a>
+  </li>
+  <!-- Política de reembolso -->
+  <li>
+    <a href="{% url 'src_routes:reembolso' %}" id="btn_reembolso" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition duration-75">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+      </svg>
+      <span class="ms-3 text-xs">{% blocktrans %}Política de reembolso{% endblocktrans %}</span>
+    </a>
+  </li>
+</div>
+<!-- Ir a inicio -->
+<li>
+  <a href="{% url 'src_routes:inicio' %}" id="btn_inicio" class="flex items-center justify-center rounded-lg bg-blue p-1.5 font-kumbh_bold text-white transition ease-in-out hover:scale-y-105 hover:bg-hoverblue focus:ring-2 focus:ring-sky">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-1 h-4 w-4 transition duration-75">
+      <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+    </svg>
+    <span class="ms-2 text-xs">{% blocktrans %}IR A INICIO{% endblocktrans %}</span>
+  </a>
+</li>
+{% endblock %}
+<!-- Contenido del sitio, al lado del sidebar -->
 {% block content %}
-<div id="ayuda_container" class="z-10 h-full w-full pl-40">
-  <aside id="default-sidebar" class="fixed left-0 top-0 z-40 h-screen w-80 -translate-x-full transition-transform sm:translate-x-0" aria-label="Sidebar">
-    <div class="h-full overflow-y-auto border border-gray-200 bg-gray-300 bg-opacity-30 px-6 pb-6 pt-28 text-blue shadow-sm">
-      <ul class="flex h-full flex-col justify-between space-y-2 font-medium">
-        <div class="h-fit w-full space-y-2">
-          <!-- No puedo cambiar mi contraseña -->
-          <li>
-            <a href="{% url 'src_routes:ayuda_contrasena' %}" id="btn_contrasena" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition duration-75">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z" />
-              </svg>
-              <span class="ms-3 text-xs">{% blocktrans %}No puedo cambiar mi contraseña{% endblocktrans %}</span>
-            </a>
-          </li>
-          <!-- Condiciones y políticas -->
-          <li>
-            <span class="flex items-center p-1 text-xs text-gray-400">{% blocktrans %}CONDICIONES Y POLÍTICAS{% endblocktrans %}</span>
-          </li>
-          <!-- Protección de datos -->
-          <li>
-            <a href="{% url 'src_routes:proteccion_datos' %}" id="btn_proteccion" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition duration-75">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M7.864 4.243A7.5 7.5 0 0 1 19.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 0 0 4.5 10.5a7.464 7.464 0 0 1-1.15 3.993m1.989 3.559A11.209 11.209 0 0 0 8.25 10.5a3.75 3.75 0 1 1 7.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 0 1-3.6 9.75m6.633-4.596a18.666 18.666 0 0 1-2.485 5.33" />
-              </svg>
-              <span class="ms-3 text-xs">{% blocktrans %}Protección de datos{% endblocktrans %}</span>
-            </a>
-          </li>
-          <!-- Actualizaciones de la política de privacidad -->
-          <li>
-            <a href="{% url 'src_routes:politica_actualizacion' %}" id="btn_act_politicas" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition duration-75">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
-              </svg>
-              <span class="ms-3 text-xs">{% blocktrans %}Actualización de la política{% endblocktrans %}</span>
-            </a>
-          </li>
-          <!-- Actualizaciones de los términos de servicios -->
-          <li>
-            <a href="{% url 'src_routes:terminos_actualizacion' %}" id="btn_act_terminos" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition duration-75">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
-              </svg>
-              <span class="ms-3 text-xs">{% blocktrans %}Actualización de los términos{% endblocktrans %}</span>
-            </a>
-          </li>
-          <!-- Eliminación de cuentas inactivas -->
-          <li>
-            <a href="{% url 'src_routes:cuentas_inactivas' %}" id="btn_eliminacion" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition duration-75">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M22 10.5h-6m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM4 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 10.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
-              </svg>
-              <span class="ms-3 text-xs">{% blocktrans %}Cuentas inactivas{% endblocktrans %}</span>
-            </a>
-          </li>
-          <!-- Cuanto tiempo guarda la aplicación tu información -->
-          <li>
-            <a href="{% url 'src_routes:tiempo_almacenamiento' %}" id="btn_tiempo" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition duration-75">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-              </svg>
-              <span class="ms-3 text-xs">{% blocktrans %}Tiempo de almacenamiento{% endblocktrans %}</span>
-            </a>
-          </li>
-          <!-- Solicitar una copia de tus datos -->
-          <li>
-            <a href="{% url 'src_routes:copia_datos' %}" id="btn_copia" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mb-1 h-5 w-5 transition duration-75">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15M9 12l3 3m0 0 3-3m-3 3V2.25" />
-              </svg>
-              <span class="ms-3 text-xs">{% blocktrans %}Solicitar una copia de tus datos{% endblocktrans %}</span>
-            </a>
-          </li>
-          <!-- Términos y políticas adicionales -->
-          <li>
-            <span class="flex items-center p-1 text-xs text-gray-400">{% blocktrans %}TÉRMINOS Y POLÍTICAS ADICIONALES{% endblocktrans %}</span>
-          </li>
-          <!-- Política de derecho de autor -->
-          <li>
-            <a href="{% url 'src_routes:derechos_autor' %}" id="btn_derechos_autor" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition duration-75">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5A3.375 3.375 0 0 0 6.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 0 0-9-9Z" />
-              </svg>
-              <span class="ms-3 text-xs">{% blocktrans %}Política de derecho de autor{% endblocktrans %}</span>
-            </a>
-          </li>
-          <!-- Termino de los servicios de pago -->
-          <li>
-            <a href="{% url 'src_routes:servicios_de_pago' %}" id="btn_servicios_pago" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition duration-75">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
-              </svg>
-              <span class="ms-3 text-xs">{% blocktrans %}Términos de los servicios de pago{% endblocktrans %}</span>
-            </a>
-          </li>
-          <!-- Empresas relacionadas -->
-          <li>
-            <a href="{% url 'src_routes:empresas_relacionadas' %}" id="btn_empresas_rel" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition duration-75">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
-              </svg>
-              <span class="ms-3 text-xs">{% blocktrans %}Empresas relacionadas{% endblocktrans %}</span>
-            </a>
-          </li>
-          <!-- Política de reembolso -->
-          <li>
-            <a href="{% url 'src_routes:reembolso' %}" id="btn_reembolso" class="sidebar_button flex items-center rounded-lg p-1.5 font-kumbh_bold hover:bg-gray-100 hover:bg-opacity-50">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 transition duration-75">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
-              </svg>
-              <span class="ms-3 text-xs">{% blocktrans %}Política de reembolso{% endblocktrans %}</span>
-            </a>
-          </li>
-        </div>
-        <!-- Ir a inicio -->
+<!-- Contenedor de idioma y contenido de políticas -->
+<div class="flex h-full max-h-full w-full flex-col gap-10">
+  <!-- contenedor idioma dropdown -->
+  <div class="relative flex w-fit max-w-fit flex-col gap-2 self-end">
+    <!-- idiomas dropdown button -->
+    <button id="buttonIdiomaDropdown" class="flex w-fit items-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-gray-100" type="button" onclick="toggleIdiomaDropdown()">
+      <span class="w-5">
+        <!-- Espaciado para el icono a la izquierda -->
+        <!-- ícono mundo -->
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="{1.5}" stroke="currentColor" className="w-6 h-6 text-gray-500">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+        </svg>
+      </span>
+
+      <!-- Texto del botón -->
+      {% blocktrans %}Change language{% endblocktrans %}
+
+      <span class="w-5">
+        <!-- Espaciado para el icono a la derecha -->
+        <!-- ícono flecha hacia abajo -->
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="{1.5}" stroke="currentColor" className="w-6 h-6">
+          <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+        </svg>
+      </span>
+    </button>
+
+    <!-- idiomas dropdown menu -->
+    <div id="dropdownIdiomas" class="absolute top-12 z-10 hidden w-full items-center justify-center divide-y rounded-lg bg-white text-center shadow">
+      <ul class="py-2 text-sm" aria-labelledby="dropdownDefaultButton">
+        {% get_current_language as LANGUAGE_CODE %}
+        <!--obtener el idioma que esta, mostrar los disponibles y tenerlo en una lista-->
+        {% get_available_languages as LANGUAGES %} {% get_language_info_list for LANGUAGES as languages %} {% for formulario in languages %}
         <li>
-          <a href="{% url 'src_routes:inicio' %}" id="btn_inicio" class="flex items-center justify-center rounded-lg bg-blue p-1.5 font-kumbh_bold text-white transition ease-in-out hover:scale-y-105 hover:bg-hoverblue focus:ring-2 focus:ring-sky">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-1 h-4 w-4 transition duration-75">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-            </svg>
-            <span class="ms-2 text-xs">{% blocktrans %}IR A INICIO{% endblocktrans %}</span>
-          </a>
+          <a href="/{{ formulario.code }}" class="block px-4 py-2 hover:bg-gray-100"> {{ formulario.name_local|title }} </a>
         </li>
+        {% endfor %}
       </ul>
     </div>
-  </aside>
-  <!-- Contenedor de cada opción de políticas -->
-  <div class="flex h-full w-full items-center justify-center">
-    <!-- Renderización condicional -->
-    {% if pathname == "ayuda_contrasena/" %}
+  </div>
+  <!-- Contenido de políticas y privacidad -->
+  <div class="flex h-full max-h-full w-full flex-col items-center justify-center overflow-hidden">
+    <!-- RENDERIZACIÓN CONDICIONAL -->
     <!-- No puedo cambiar mi contraseña -->
-    <div class="flex h-1/3 w-1/2 min-w-min flex-col gap-3 rounded-2xl border border-gray-200 bg-white px-11 py-8 shadow-sm">
-      <!-- ícono de advertencia -->
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="mb-2 h-12 w-12 animate-pulse text-red">
+    {% if pathname == "ayuda_contrasena/" %}
+    <div class="flex h-fit w-1/2 flex-col justify-center gap-3 rounded-2xl border border-gray-200 bg-white px-11 py-8 shadow-sm">
+      <!-- ícono de contraseña -->
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="mb-2 h-12 w-12 animate-pulse self-center text-red">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z" />
       </svg>
 
       <h1 class="px-1 font-kumbh_bold text-3xl">{% blocktrans %}NO PUEDO CAMBIAR MI CONTRASEÑA{% endblocktrans %}</h1>
       <p class="px-1 text-justify text-sm">{% blocktrans %}¡Comunícate con nosotros al correo de ayuda! Confirma tu identidad. Envíanos tu usuario y documento de identidad personal.{% endblocktrans %}</p>
+
       <!-- Botón de copiar correo -->
       <button id="copiar_correo_button" name="copiar_correo_button" type="button" class="mt-2 flex w-full items-center justify-center rounded-lg border border-gray-300 bg-blue px-5 py-2.5 text-center font-kumbh_bold text-sm text-white shadow-sm transition ease-in-out hover:scale-y-105 hover:bg-hoverblue focus:ring-2 focus:ring-sky">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
+        <!-- Before copy -->
+        <svg id="svg_before_copy" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5A3.375 3.375 0 0 0 6.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 0 0-9-9Z" />
         </svg>
-        <span class="ms-2 text-xs">{% blocktrans %}SUPPORT@ARVCLOUD.COM{% endblocktrans %}</span>
+        <span id="span_before_copy" class="ms-2 text-xs">{% blocktrans %}SUPPORT@ARVCLOUD.COM{% endblocktrans %}</span>
+        <!-- After copy -->
+        <svg id="svg_after_copy" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hidden h-6 w-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0 1 18 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3 1.5 1.5 3-3.75" />
+        </svg>
+        <span id="span_after_copy" class="ms-2 hidden text-xs">{% blocktrans %}COPIADO AL PORTAPAPELES{% endblocktrans %}</span>
       </button>
     </div>
     {% endif %}
+    <!-- Protección de datos -->
+    {% if pathname == "proteccion_datos/" %}
+    <div class="text-ms flex h-full w-full max-w-full flex-col overflow-y-scroll rounded-2xl border border-gray-200 bg-white px-11 py-8 text-justify leading-relaxed shadow-sm">
+      <h1 class="mb-5 font-kumbh_bold text-3xl">{% blocktrans %}NO PUEDO CAMBIAR MI CONTRASEÑA{% endblocktrans %}</h1>
+      {% for parrafo in politicas_table|slice:"4:20" %} {% if forloop.counter == 1 or forloop.counter == 4 or forloop.counter == 9 %} <b>{{ parrafo.parrafo }}</b><br />
+      {% else %} {{ parrafo.parrafo }}<br /><br />
+      {% endif %} {% endfor %}
+    </div>
+    {% endif %}
+    <!-- politica_actualizacion -->
+    {% if pathname == "politica_actualizacion/" %}
+    <div class="text-ms h-full w-full max-w-full flex-col overflow-y-scroll rounded-2xl border border-gray-200 bg-white px-11 py-8 text-justify leading-relaxed shadow-sm">
+      {% for parrafo in politicas_table|slice:"4:20" %} {% if forloop.counter == 1 or forloop.counter == 4 or forloop.counter == 9 %} <b>{{ parrafo.parrafo }}</b><br /><br />
+      {% else %} {{ parrafo.parrafo }}<br /><br />
+      {% endif %} {% endfor %}
+    </div>
+    {% endif %}
+    <!-- terminos_actualizacion -->
+    {% if pathname == "terminos_actualizacion/" %}
+    <div class="text-ms h-full w-full max-w-full flex-col overflow-y-scroll rounded-2xl border border-gray-200 bg-white px-11 py-8 text-justify leading-relaxed shadow-sm">
+      {% for parrafo in politicas_table|slice:"4:20" %} {% if forloop.counter == 1 or forloop.counter == 4 or forloop.counter == 9 %} <b>{{ parrafo.parrafo }}</b><br /><br />
+      {% else %} {{ parrafo.parrafo }}<br /><br />
+      {% endif %} {% endfor %}
+    </div>
+    {% endif %}
+    <!-- cuentas_inactivas -->
+    {% if pathname == "cuentas_inactivas/" %}
+    <div class="text-ms h-full w-full max-w-full flex-col overflow-y-scroll rounded-2xl border border-gray-200 bg-white px-11 py-8 text-justify leading-relaxed shadow-sm">
+      {% for parrafo in politicas_table|slice:"4:20" %} {% if forloop.counter == 1 or forloop.counter == 4 or forloop.counter == 9 %} <b>{{ parrafo.parrafo }}</b><br /><br />
+      {% else %} {{ parrafo.parrafo }}<br /><br />
+      {% endif %} {% endfor %}
+    </div>
+    {% endif %}
+    <!-- tiempo_almacenamiento -->
+    {% if pathname == "tiempo_almacenamiento/" %}
+    <div class="text-ms h-full w-full max-w-full flex-col overflow-y-scroll rounded-2xl border border-gray-200 bg-white px-11 py-8 text-justify leading-relaxed shadow-sm">
+      {% for parrafo in politicas_table|slice:"4:20" %} {% if forloop.counter == 1 or forloop.counter == 4 or forloop.counter == 9 %} <b>{{ parrafo.parrafo }}</b><br /><br />
+      {% else %} {{ parrafo.parrafo }}<br /><br />
+      {% endif %} {% endfor %}
+    </div>
+    {% endif %}
+    <!-- copia_datos -->
+    {% if pathname == "copia_datos/" %}
+    <div class="text-ms h-full w-full max-w-full flex-col overflow-y-scroll rounded-2xl border border-gray-200 bg-white px-11 py-8 text-justify leading-relaxed shadow-sm">
+      {% for parrafo in politicas_table|slice:"4:20" %} {% if forloop.counter == 1 or forloop.counter == 4 or forloop.counter == 9 %} <b>{{ parrafo.parrafo }}</b><br /><br />
+      {% else %} {{ parrafo.parrafo }}<br /><br />
+      {% endif %} {% endfor %}
+    </div>
+    {% endif %}
+    <!-- derechos_autor -->
+    {% if pathname == "derechos_autor/" %}
+    <div class="text-ms h-full w-full max-w-full flex-col overflow-y-scroll rounded-2xl border border-gray-200 bg-white px-11 py-8 text-justify leading-relaxed shadow-sm">
+      {% for parrafo in politicas_table|slice:"4:20" %} {% if forloop.counter == 1 or forloop.counter == 4 or forloop.counter == 9 %} <b>{{ parrafo.parrafo }}</b><br /><br />
+      {% else %} {{ parrafo.parrafo }}<br /><br />
+      {% endif %} {% endfor %}
+    </div>
+    {% endif %}
+    <!-- servicios_de_pago -->
+    {% if pathname == "servicios_de_pago/" %}
+    <div class="text-ms h-full w-full max-w-full flex-col overflow-y-scroll rounded-2xl border border-gray-200 bg-white px-11 py-8 text-justify leading-relaxed shadow-sm">
+      {% for parrafo in politicas_table|slice:"4:20" %} {% if forloop.counter == 1 or forloop.counter == 4 or forloop.counter == 9 %} <b>{{ parrafo.parrafo }}</b><br /><br />
+      {% else %} {{ parrafo.parrafo }}<br /><br />
+      {% endif %} {% endfor %}
+    </div>
+    {% endif %}
+    <!-- empresas_relacionadas -->
+    {% if pathname == "empresas_relacionadas/" %}
+    <div class="text-ms h-full w-full max-w-full flex-col overflow-y-scroll rounded-2xl border border-gray-200 bg-white px-11 py-8 text-justify leading-relaxed shadow-sm">
+      {% for parrafo in politicas_table|slice:"4:20" %} {% if forloop.counter == 1 or forloop.counter == 4 or forloop.counter == 9 %} <b>{{ parrafo.parrafo }}</b><br /><br />
+      {% else %} {{ parrafo.parrafo }}<br /><br />
+      {% endif %} {% endfor %}
+    </div>
+    {% endif %}
+    <!-- reembolso -->
+    {% if pathname == "reembolso/" %}
+    <div class="text-ms h-full w-full max-w-full flex-col overflow-y-scroll rounded-2xl border border-gray-200 bg-white px-11 py-8 text-justify leading-relaxed shadow-sm">
+      {% for parrafo in politicas_table|slice:"4:20" %} {% if forloop.counter == 1 or forloop.counter == 4 or forloop.counter == 9 %} <b>{{ parrafo.parrafo }}</b><br /><br />
+      {% else %} {{ parrafo.parrafo }}<br /><br />
+      {% endif %} {% endfor %}
+    </div>
+    {% endif %}
   </div>
+  <!-- Copyright -->
+  <p id="copyright" class="self-center text-xs text-black">{% blocktrans %}COPYRIGHT © 2024 ARV SYSTEM CORP | ALL RIGHTS RESERVED.{% endblocktrans %}</p>
 </div>
 {% endblock %}
+
 <!-- Scripts del sitio -->
 {% block scripts %}
 <script src="{% static 'js/ayuda.js' %}"></script>
+<script src="{% static 'js/toggle_idioma_dropdown.js' %}"></script>
 {% endblock %}

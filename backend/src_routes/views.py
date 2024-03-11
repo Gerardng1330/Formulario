@@ -342,5 +342,6 @@ def succefully(request):
 def ayuda_view(request):
     # pathname de la URL sin la parte del idioma /en/ o /es/
     pathname = request.path[4:]
-    print(pathname)
-    return render(request, 'ayuda.html', {'pathname': pathname})
+    # Fetch a la BD. Párrafos de la tabla Politicas
+    politicas_table = Politicas.objects.values('parrafo')
+    return render(request, 'ayuda.html', {'pathname': pathname, 'politicas_table':politicas_table})

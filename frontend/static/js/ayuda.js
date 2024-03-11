@@ -1,4 +1,4 @@
-/* Referencias de todos los botones */
+/* Referencias */
 /* const btn_contrasena = document.getElementById("btn_contrasena");
 const btn_proteccion = document.getElementById("btn_proteccion");
 const btn_act_politicas = document.getElementById("btn_act_politicas");
@@ -11,6 +11,13 @@ const btn_servicios_pago = document.getElementById("btn_servicios_pago");
 const btn_empresas_rel = document.getElementById("btn_empresas_rel");
 const btn_reembolso = document.getElementById("btn_reembolso");
 const btn_inicio = document.getElementById("btn_inicio"); */
+const copyright = document.getElementById("copyright");
+const copiar_correo_button = document.getElementById("copiar_correo_button");
+const svg_before_copy = document.getElementById("svg_before_copy");
+const span_before_copy = document.getElementById("span_before_copy");
+const svg_after_copy = document.getElementById("svg_after_copy");
+const span_after_copy = document.getElementById("span_after_copy");
+const body = document.querySelector("#body");
 
 /* Refencia de la página activa */
 const active_page = window.location.pathname.substring(4);
@@ -37,5 +44,53 @@ const sidebarButtons = document.querySelectorAll(".sidebar_button").forEach((lin
 });
 
 /* Centrar mensaje de copyright solo en las políticas (por el descuadre del sidebar) */
-const copyright = document.getElementById("copyright");
-copyright.classList.add("pl-40");
+/* copyright.classList.add("pl-40"); */
+
+/* Que el body no se pueda scrollear */
+/* body.classList.add("overflow-hidden"); */
+
+/* Copiar correo de arv a clipboard al hacer click */
+copiar_correo_button.addEventListener("click", function () {
+  /* Text to be copied */
+  var text_to_copy = "support@arvcloud.com";
+
+  /* Create a temporary textarea element to perform the copy command */
+  var textarea = document.createElement("textarea");
+  textarea.value = text_to_copy;
+  document.body.appendChild(textarea);
+
+  /* Select the text in the textarea */
+  textarea.select();
+  textarea.setSelectionRange(0, 99999); // For mobile devices
+
+  /* Execute the copy command */
+  document.execCommand("copy");
+
+  /* Quitar estilos de before */
+  svg_before_copy.classList.add("hidden");
+  span_before_copy.classList.add("hidden");
+  copiar_correo_button.classList.remove("bg-blue");
+  copiar_correo_button.classList.remove("hover:bg-hoverblue");
+
+  /* Poner estilos de after */
+  svg_after_copy.classList.remove("hidden");
+  span_after_copy.classList.remove("hidden");
+  copiar_correo_button.classList.add("bg-sky");
+
+  /* Volver a como estaba luego de unos segundos */
+  setTimeout(function () {
+    /* Poner estilos de before */
+    svg_before_copy.classList.remove("hidden");
+    span_before_copy.classList.remove("hidden");
+    copiar_correo_button.classList.add("bg-blue");
+    copiar_correo_button.classList.add("hover:bg-hoverblue");
+
+    /* Quitar estilos de after */
+    svg_after_copy.classList.add("hidden");
+    span_after_copy.classList.add("hidden");
+    copiar_correo_button.classList.remove("bg-sky");
+  }, 2500);
+
+  /* Remove the temporary textarea */
+  document.body.removeChild(textarea);
+});

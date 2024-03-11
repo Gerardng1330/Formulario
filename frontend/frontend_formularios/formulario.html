@@ -8,15 +8,15 @@
 <!-- Contenedor del mensaje de éxito -->
 <div class="flex h-full w-full items-center justify-center">
   <!-- Aviso mensaje de éxito -->
-  <div class="flex h-1/3 w-1/3 flex-col items-center justify-center rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-    <!-- ícono de éxito -->
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="mb-4 h-1/4 w-1/4 animate-pulse text-sky">
+  <div class="flex h-1/3 w-1/3 min-w-min flex-col gap-1 rounded-2xl border border-gray-200 bg-white px-11 py-8 shadow-sm">
+    <!-- ícono de check -->
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="mb-2 h-12 w-12 animate-pulse self-center text-sky">
       <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
     </svg>
 
     <!-- Texto -->
-    <h1 class="font-kumbh_bold text-lg">{% translate "FORMULARIO ENVIADO CON ÉXITO" %}</h1>
-    <p class="mb-4 text-sm">{% translate "Gracias por tu tiempo, ¡estaremos en contacto!" %}</p>
+    <h1 class="font-kumbh_bold text-3xl">{% blocktrans %}FORMULARIO ENVIADO CON ÉXITO{% endblocktrans %}</h1>
+    <p class="text-justify text-sm">{% blocktrans %}Gracias por su tiempo, estaremos en contacto{% endblocktrans %}</p>
   </div>
 </div>
 {% else %}
@@ -463,7 +463,7 @@
       </div>
       <!-- Modal footer -->
       <div class="flex flex-grow-[1] items-center justify-center rounded-b border-t border-gray-200 p-4">
-        <button id="aceptar_politicas_button" name="aceptar_politicas_button" type="button" class="w-full rounded-lg border border-gray-300 bg-blue px-5 py-2.5 text-center font-kumbh_bold text-sm text-white shadow-sm transition ease-in-out hover:scale-y-105 hover:bg-hoverblue focus:ring-2 focus:ring-sky">ACEPTO LAS POLÍTICAS</button>
+        <button id="aceptar_politicas_button" name="aceptar_politicas_button" type="button" class="w-full rounded-lg border border-gray-300 bg-blue px-5 py-2.5 text-center font-kumbh_bold text-sm text-white shadow-sm transition ease-in-out hover:scale-y-105 hover:bg-hoverblue focus:ring-2 focus:ring-sky">{% blocktrans %}ACEPTO LAS POLÍTICAS{% endblocktrans %}</button>
       </div>
     </div>
   </div>
@@ -472,15 +472,15 @@
 <!-- Contenedor del mensaje de advertencia -->
 <div class="flex h-full w-full items-center justify-center">
   <!-- Aviso mensaje de advertencia -->
-  <div class="flex h-1/3 w-1/3 flex-col items-center justify-center rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+  <div class="flex h-1/3 w-1/3 min-w-min flex-col gap-1 rounded-2xl border border-gray-200 bg-white px-11 py-8 shadow-sm">
     <!-- ícono de advertencia -->
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="mb-4 h-1/4 w-1/4 animate-pulse text-red">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="mb-2 h-12 w-12 animate-pulse self-center text-red">
       <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
     </svg>
 
     <!-- Texto -->
-    <h1 class="font-kumbh_bold text-lg">{% translate "ESTE FORMULARIO ESTÁ INACTIVO" %}</h1>
-    <p class="mb-4 text-sm">{% translate "Gracias por su interés, ¡Inténtelo más tarde!" %}</p>
+    <h1 class="font-kumbh_bold text-3xl">{% blocktrans %}ESTE FORMULARIO ESTÁ INACTIVO{% endblocktrans %}</h1>
+    <p class="text-justify text-sm">{% blocktrans %}Gracias por su interés, ¡Inténtelo más tarde!{% endblocktrans %}</p>
   </div>
 </div>
 {% endif %} {% endblock %}
