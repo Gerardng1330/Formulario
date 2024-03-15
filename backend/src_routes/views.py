@@ -107,7 +107,7 @@ def verificar_correo(request):
     return render(request, 'formulario.html', {})
 
 #prueba (olvidenlo)
-def cambio_idioma_view(request):
+""" def cambio_idioma_view(request):
     # Maneja la solicitud POST para cambiar de idioma
     if request.method == 'POST':
         # Lógica para cambiar el idioma según la solicitud POST
@@ -122,7 +122,7 @@ def cambio_idioma_view(request):
     datos_formulario = obtener_datos_formulario_prellenados_segun_idioma(request.session.get('idioma'))
 
     # Renderiza la página con los datos del formulario prellenados
-    return render(request, 'formulario.html', {'form': datos_formulario})
+    return render(request, 'formulario.html', {'form': datos_formulario}) """
 
         
 # Formulario. Verifica que el form sea valido para despues enviarlo y envia un mensaje si se envió o no
