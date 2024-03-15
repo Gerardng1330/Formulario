@@ -161,8 +161,7 @@ def formulario_view(request):
     # Verificar enviado_correctamente
     if request.method == 'POST' and form_activo:
         form = UsuarioForm(request.POST, request.FILES)
-        #print(request.POST)
-        
+        print(request.POST)
         print(form.is_valid())
         if form.is_valid():
             # Obtiene el valor del campo email
@@ -175,17 +174,26 @@ def formulario_view(request):
                 # El correo no está registrado, guarda el formulario.
                 form.save()
                 enviado_correctamente = True
+                url_para_traduccion = 'formulario_enviado'  # Asigna la URL por defecto
+            
         else:
             # Si el formulario no es válido, imprime los errores
             print(form.errors)
             messages.error(request, 'Hubo un error en el formulario. Por favor, verifica los campos.')
+    elif url_para_traduccion == 'formulario_enviado':
+        print('aqui si')
+        url_para_traduccion ='formulario_enviado'
+        enviado_correctamente= True
     else:
         print('aqui no es')
         print(url_para_traduccion)
         # Si no es una solicitud POST o el formulario no está activo,
         form = UsuarioForm()
+        """ if enviado_correctamente: """
+        #enviado_correctamente = True
+        url_para_traduccion = 'formulario_enviado'
 
-    return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente, 'politicas_table':politicas_table, 'politicas_aceptadas':politicas_aceptadas, 'politicas_aceptadas_uuid':politicas_aceptadas_uuid, 'is_email_registrado':is_email_registrado})
+    return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente, 'politicas_table':politicas_table, 'politicas_aceptadas':politicas_aceptadas, 'politicas_aceptadas_uuid':politicas_aceptadas_uuid, 'is_email_registrado':is_email_registrado, 'url_para_traduccion': url_para_traduccion})
 
 #prueba
 # def prueba(request):
