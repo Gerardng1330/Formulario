@@ -3,6 +3,7 @@ from . import views
 """ Para servir archivos estáticos en desarrollo """
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 app_name = 'src_routes'
 
@@ -23,12 +24,19 @@ urlpatterns = [
     path('logout/',views.signout, name='logout'),
     path('form/', views.formacion,name='form'),
     
-#Recuperacion de usuario
- path('recuperar/', views.recuperar_pass,name='recuperar'),    
+#Recuperacion de usuario/activacion de Token
+    path('recuperar/', views.recuperar_pass,name='recuperar'),    
     path('activacion/', views.activar_cuenta, name='activacion'),
     path('activacion_aviso/', views.activars, name='activacion_aviso'),
     path('activar-cuenta/<str:token>/', views.validar_token, name='activar_cuenta'),
     path('registro_exitoso/', views.succefully, name='registro_exitoso'),
+    #Recuperacion de contraseña
+    path('reset_password/', auth_views.PasswordResetView.as_view(template_name='recuperar.html'), name='password_reset'),
+    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+
+    
 ]
 
 if settings.DEBUG:

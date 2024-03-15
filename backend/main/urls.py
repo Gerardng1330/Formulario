@@ -13,7 +13,7 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    path(_('adminpaneldjango/'), admin.site.urls),
+    path(_('adminpaneldjango/'), admin.site.urls,name='admin_panel'),
     path('', include('backend.src_routes.urls'), name='src_urls'),
 )
 
