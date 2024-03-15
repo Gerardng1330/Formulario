@@ -46,7 +46,7 @@ from django.shortcuts import get_object_or_404
 User = get_user_model()
 
 def cerrado(request):
-    return render(request, 'cerrado.html')
+    return render(request, 'pruebaPagina.html')
 
 def prueba_page(request):
     return render(request,'pruebaPagina.html')
@@ -55,6 +55,13 @@ def prueba_page(request):
 def render_formulario(request):
     return render(request,'formulario.html')
 
+def cambiar_idioma(request):
+    if 'lang' in request.GET:
+        language = request.GET['lang']
+        activate(language)  # Activar el idioma seleccionado
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False})
+
 #Funcion para traducir las paginas
 def traducir(request):
     current_path = request.path
@@ -62,15 +69,16 @@ def traducir(request):
 
     if current_path == '/es/formulario_enviado':
         print('entro')
-        url_para_traduccion = 'envio_formulario'
+        url_para_traduccion = 'formulario_enviado/'
     elif current_path == '/en/formulario_enviado':
         print('entro')
-        url_para_traduccion = 'envio_formulario'
-    elif current_path == '/prueba/':
-        print('prueba')
-        url_para_traduccion = '/url_para_traduccion'
-    elif current_path == '/cerrado/':
-        url_para_traduccion = '/pagina_cerrado'
+        url_para_traduccion = 'formulario_enviado/'
+    elif current_path == '/en/url_para_traduccion/':
+        print('entro a la pagina')
+        url_para_traduccion = 'url_para_traduccion'
+    elif current_path == '/es/url_para_traduccion/':
+        print('entro a la pagina')
+        url_para_traduccion = 'formulario_enviado/'
     else:
         print(url_para_traduccion)
         
@@ -98,13 +106,30 @@ def verificar_correo(request):
     # Resto de la lógica del formulario o redirección si no hay error
     return render(request, 'formulario.html', {})
 
+#prueba (olvidenlo)
+def cambio_idioma_view(request):
+    # Maneja la solicitud POST para cambiar de idioma
+    if request.method == 'POST':
+        # Lógica para cambiar el idioma según la solicitud POST
+        nuevo_idioma = request.POST.get('idioma')  # Obtener el idioma seleccionado de la solicitud POST
+        request.session['idioma'] = nuevo_idioma  # Actualizar el idioma en la sesión del usuario u otra forma de persistencia de datos
+
+        # Obtener los datos del formulario (si es necesario)
+        # Esto dependerá de cómo manejes los datos del formulario en tu aplicación
+
+    # Obtén los datos del formulario prellenados según el idioma seleccionado
+    # Esto también dependerá de cómo manejes los datos del formulario en tu aplicación
+    datos_formulario = obtener_datos_formulario_prellenados_segun_idioma(request.session.get('idioma'))
+
+    # Renderiza la página con los datos del formulario prellenados
+    return render(request, 'formulario.html', {'form': datos_formulario})
+
         
 # Formulario. Verifica que el form sea valido para despues enviarlo y envia un mensaje si se envió o no
 def formulario_view(request):
+    url_para_traduccion = ''  # Asigna la URL por defecto
+    
     # Variables de estado
-    current_path = request.path
-    url_para_traduccion = 'url_para_traduccion'
-    #aver(request)
     form_activo = True
     enviado_correctamente = False
     politicas_aceptadas = False
@@ -125,20 +150,41 @@ def formulario_view(request):
     if request.method == 'POST' and form_activo:
         form = UsuarioForm(request.POST, request.FILES)
         print(request.POST) 
+        print(form.is_valid())
         if form.is_valid():
             form.save()
-            #messages.success(request, 'El formulario se envió satisfactoriamente.')
             enviado_correctamente = True
-            #return render(request, 'exito.html')
+            url_para_traduccion = 'formulario_enviado'  # Asigna la URL por defecto
+            
         else:
-            # Imprimir errores del formulario en la consola del servidor
+            # Si el formulario no es válido, imprime los errores
             print(form.errors)
-            messages.error(request, 'Hubo un error en el formulario. Por favor, verifica los campos.')
-       
-    else:
-        form = UsuarioForm()
+            messages.error(request, 'Hubo un error en el formulario. Por favor, verifica los campos.')    
 
-    return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente, 'politicas_table':politicas_table, 'politicas_aceptadas':politicas_aceptadas, 'politicas_aceptadas_uuid':politicas_aceptadas_uuid})
+    elif url_para_traduccion == 'formulario_enviado':
+
+        print('aqui si')
+        url_para_traduccion ='formulario_enviado'
+        enviado_correctamente= True
+    else:
+        print('aqui no es')
+        print(url_para_traduccion)
+        # Si no es una solicitud POST o el formulario no está activo,
+        form = UsuarioForm()
+        """ if enviado_correctamente: """
+        #enviado_correctamente = True
+        url_para_traduccion = 'formulario_enviado'
+        
+
+    return render(request, 'formulario.html', {
+        'form': form,
+        'form_activo': form_activo,
+        'enviado_correctamente': enviado_correctamente,
+        'politicas_table': politicas_table,
+        'politicas_aceptadas': politicas_aceptadas,
+        'politicas_aceptadas_uuid': politicas_aceptadas_uuid,
+        'url_para_traduccion': url_para_traduccion
+    })
 
 #prueba
 # def prueba(request):

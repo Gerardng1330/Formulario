@@ -10,17 +10,12 @@ app_name = 'src_routes'
 
 urlpatterns = [
 #Formularios
-    path('', views.formulario_view, name='ver_formulario'),
-    path('url_para_traduccion/', views.traducir, name='traducir_paginas'),
-    #path('formulario/', views.render_formulario, name='ver_formulario'),
-    path('formulario_enviado/', views.formulario_view, name='envio_formulario'),#prueba
-    #path('exito/', views.exito, name='pagina_exito'),
-    path('cerrado/', views.cerrado, name='pagina_cerrado}'),
+    path('', views.formulario_view,name='ver_formulario'),
+    path('formulario_enviado/', views.formulario_view, name='envio_formulario'),
+    path('cerrado/', views.cerrado, name='pagina_cerrado'),
     path('prueba/', views.prueba_page, name='pagina_prueba'),
-    #path('download-cv/<int:pk>/', views.download_cv_file_view, name='app_label_usuario_download_cv'),
+    path('url_para_traduccion/', views.traducir, name='url_para_traduccion'),
 
-
-    
 
 
 # Login views

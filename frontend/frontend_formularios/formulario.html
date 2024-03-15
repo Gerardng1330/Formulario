@@ -15,8 +15,8 @@
     </svg>
 
     <!-- Texto -->
-    <h1 class="font-kumbh_bold text-lg">{% translate "FORMULARIO ENVIADO CON ÉXITO" %}</h1>
-    <p class="mb-4 text-sm">{% translate "Gracias por tu tiempo, ¡estaremos en contacto!" %}</p>
+    <h1 class="font-kumbh_bold text-lg">{% translate "FORM SUBMITTED SUCCESSFULLY" %}</h1>
+    <p class="mb-4 text-sm">{% translate "Thank you for your time, we'll stay in touch!" %}</p>
   </div>
 </div>
 {% else %}
@@ -493,20 +493,47 @@
 <script type="module" src="{% static 'js/aceptar_politicas_modal.js' %}"></script>
 <script defer src="{% static 'js/form_input_validation.js' %}"></script>
 <script>
-  const m_campo_requerido = "{% blocktrans %}Campo requerido.{% endblocktrans %}";
-  const m_longitud_min = "{% blocktrans %}Debe tener mínimo 3 caracteres{% endblocktrans %}";
-  const m_longitud_max = "{% blocktrans %}Máximo de caracteres alcanzado.{% endblocktrans %}";
-  const m_nombre_formato = '{% blocktrans %}Ingrese su primer "Nombre" con formato válido.{% endblocktrans %}';
-  const m_apellido_formato = '{% blocktrans %}Ingrese su primer "Apellido" con formato válido.{% endblocktrans %}';
-  const m_email_formato = "{% blocktrans %}Ingrese un correo con formato válido.{% endblocktrans %}";
-  const m_edad_minima = "{% blocktrans %}La edad mínima permitida es 18 años.{% endblocktrans %}";
-  const m_fecha_futura = "{% blocktrans %}Ingrese una fecha de nacimiento válida.{% endblocktrans %}";
-  const m_letras_regex = "{% blocktrans %}Ingrese solo texto.{% endblocktrans %}";
-  const m_telefono_regex = "{% blocktrans %}Ingrese solo números.{% endblocktrans %}";
-  const m_telefono_formato = "{% blocktrans %}Ingrese un número de teléfono válido.{% endblocktrans %}";
-  const m_nombre_contacto_formato = "{% blocktrans %}Ingrese un nombre con formato válido 'Nombre Apellido'{% endblocktrans %}";
-  const m_ciudad_formato = "{% blocktrans %}Ingrese una ciudad con formato válido 'Ciudad'{% endblocktrans %}";
-  const m_provincia_formato = "{% blocktrans %}Ingrese una provincia con formato válido 'Provincia'{% endblocktrans %}";
-  const m_fecha_inicio = "{% blocktrans %}Ingrese una fecha de inicio válida{% endblocktrans %}";
+  const m_campo_requerido = "{% blocktrans %}Required field.{% endblocktrans %}";
+  const m_longitud_min = "{% blocktrans %}It must have a minimum of 3 characters{% endblocktrans %}";
+  const m_longitud_max = "{% blocktrans %}Maximum characters reached.{% endblocktrans %}";
+  const m_nombre_formato = '{% blocktrans %}Please enter your first NAME with a valid format.{% endblocktrans %}';
+  const m_apellido_formato = '{% blocktrans %}Please enter your LAST NAME with a valid format{% endblocktrans %}';
+  const m_email_formato = "{% blocktrans %}Please enter a valid email address.{% endblocktrans %}";
+  const m_edad_minima = "{% blocktrans %}The minimum allowed age is 18 years.{% endblocktrans %}";
+  const m_fecha_futura = "{% blocktrans %}Please enter a valid date of birth.{% endblocktrans %}";
+  const m_letras_regex = "{% blocktrans %}Please enter text only.{% endblocktrans %}";
+  const m_telefono_regex = "{% blocktrans %}Please enter only numbers.{% endblocktrans %}";
+  const m_telefono_formato = "{% blocktrans %}Please enter a valid phone number.{% endblocktrans %}";
+  const m_nombre_contacto_formato = "{% blocktrans %}Please enter a valid name in the format 'First Name Last Name'.{% endblocktrans %}";
+  const m_ciudad_formato = "{% blocktrans %}Please enter a valid city in the format 'City'{% endblocktrans %}";
+  const m_provincia_formato = "{% blocktrans %}Please enter a valid province in the format 'Province'.{% endblocktrans %}";
+  const m_fecha_inicio = "{% blocktrans %}Please enter a valid start date.{% endblocktrans %}";
+</script>
+
+<script>
+    // Obtén todos los elementos <a> dentro del menú desplegable de idiomas
+  var itemsIdiomas = document.querySelectorAll('#dropdownIdiomas a');
+
+  // Adjunta el evento de clic a cada elemento <a>
+  itemsIdiomas.forEach(function(item) {
+      item.addEventListener('click', function(event) {
+          // Evitar que el enlace se abra
+          event.preventDefault();
+
+          // Envía los datos del formulario al cambiar de idioma
+          var formulario = document.getElementById('form');
+          var datosFormulario = new FormData(formulario);
+          var idiomaSeleccionado = this.getAttribute('href').split('/')[1];
+
+          // Realiza una solicitud POST al servidor con los datos del formulario y el idioma seleccionado
+          fetch('/formulario_enviado/', {
+              method: 'POST',
+              body: datosFormulario
+          }).then(function(response) {
+              // Redirige a la nueva página con el idioma seleccionado
+              window.location.href = '/formulario_idioma/?idioma=' + idiomaSeleccionado;
+          });
+      });
+  });
 </script>
 {% endblock %}

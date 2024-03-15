@@ -170,7 +170,7 @@ msgstr[1] ""
 msgid "Ensure that there are no more than %(max)s decimal place."
 msgid_plural "Ensure that there are no more than %(max)s decimal places."
 msgstr[0] ""
-msgstr[1] ""
+msgstr[1] "FORMULARIO ENVIADO CON ÉXITO"
 
 #: .\venv\Lib\site-packages\django\core\validators.py:492
 #, python-format
@@ -456,31 +456,31 @@ msgstr "Por favor, ingrese un número de teléfono válido de 7 dígitos"
 
 #: .\venv\Lib\site-packages\django\db\models\fields\related.py:1292
 #, python-format
-msgid "%(from)s-%(to)s relationship"
-msgstr ""
+msgid "FORM SUBMITTED SUCCESSFULLY"
+msgstr "FORMULARIO ENVIADO CON ÉXITO"
 
 #: .\venv\Lib\site-packages\django\db\models\fields\related.py:1294
 #, python-format
-msgid "%(from)s-%(to)s relationships"
-msgstr ""
+msgid "Thank you for your time, we'll stay in touch!"
+msgstr "Gracias por tu tiempo, ¡estaremos en contacto!"
 
 #: .\venv\Lib\site-packages\django\db\models\fields\related.py:1342
-msgid "Many-to-many relationship"
-msgstr ""
+msgid "Required field."
+msgstr "Campo requerido."
 
 #. Translators: If found as last label character, these punctuation
 #. characters will prevent the default label_suffix to be appended to the label
 #: .\venv\Lib\site-packages\django\forms\boundfield.py:185
-msgid ":?.!"
-msgstr ""
+msgid "It must have a minimum of 3 characters"
+msgstr "Debe tener mínimo 3 caracteres"
 
 #: .\venv\Lib\site-packages\django\forms\fields.py:95
-msgid "This field is required."
-msgstr ""
+msgid "Maximum characters reached."
+msgstr "Máximo de caracteres alcanzado."
 
 #: .\venv\Lib\site-packages\django\forms\fields.py:304
-msgid "Enter a whole number."
-msgstr ""
+msgid "Please enter your first NAME with a valid format."
+msgstr "Ingrese su primer NOMBRE con formato válido."
 
 #: .\venv\Lib\site-packages\django\forms\fields.py:475
 #: .\venv\Lib\site-packages\django\forms\fields.py:1252
@@ -489,33 +489,33 @@ msgstr "Fecha"
 
 #: .\venv\Lib\site-packages\django\forms\fields.py:498
 #: .\venv\Lib\site-packages\django\forms\fields.py:1253
-msgid "Enter a valid time."
-msgstr ""
+msgid "Please enter your LAST NAME with a valid format"
+msgstr "Ingrese su primer APELLIDO con formato válido."
 
 #: .\venv\Lib\site-packages\django\forms\fields.py:525
-msgid "Enter a valid date/time."
-msgstr ""
+msgid "Please enter a valid email address."
+msgstr "Ingrese un correo con formato válido."
 
 #: .\venv\Lib\site-packages\django\forms\fields.py:559
-msgid "Enter a valid duration."
-msgstr ""
+msgid "The minimum allowed age is 18 years."
+msgstr "La edad mínima permitida es 18 años."
 
 #: .\venv\Lib\site-packages\django\forms\fields.py:560
 #, python-brace-format
-msgid "The number of days must be between {min_days} and {max_days}."
-msgstr ""
+msgid "Please enter a valid date of birth."
+msgstr "Ingrese una fecha de nacimiento válida."
 
 #: .\venv\Lib\site-packages\django\forms\fields.py:629
-msgid "No file was submitted. Check the encoding type on the form."
-msgstr ""
+msgid "Please enter text only."
+msgstr "Ingrese solo texto."
 
 #: .\venv\Lib\site-packages\django\forms\fields.py:630
-msgid "No file was submitted."
-msgstr ""
+msgid "Please enter only numbers."
+msgstr "Ingrese solo números."
 
 #: .\venv\Lib\site-packages\django\forms\fields.py:631
-msgid "The submitted file is empty."
-msgstr ""
+msgid "Please enter a valid phone number."
+msgstr "Ingrese un número de teléfono válido."
 
 #: .\venv\Lib\site-packages\django\forms\fields.py:633
 #, python-format
@@ -526,8 +526,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: .\venv\Lib\site-packages\django\forms\fields.py:638
-msgid "Please either submit a file or check the clear checkbox, not both."
-msgstr ""
+msgid "Please enter a valid name in the format 'First Name Last Name'."
+msgstr "Ingrese un nombre con formato válido 'Nombre Apellido'"
 
 #: .\venv\Lib\site-packages\django\forms\fields.py:702
 msgid ""
@@ -545,20 +545,20 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\forms\fields.py:962
 #: .\venv\Lib\site-packages\django\forms\fields.py:1081
 #: .\venv\Lib\site-packages\django\forms\models.py:1579
-msgid "Enter a list of values."
-msgstr ""
+msgid "Please enter a valid city in the format 'City'"
+msgstr "Ingrese una ciudad con formato válido 'Ciudad'"
 
 #: .\venv\Lib\site-packages\django\forms\fields.py:1082
-msgid "Enter a complete value."
-msgstr ""
+msgid "Please enter a valid province in the format 'Province'"
+msgstr "Ingrese una provincia con formato válido 'Provincia'"
 
 #: .\venv\Lib\site-packages\django\forms\fields.py:1321
 msgid "Enter a valid UUID."
-msgstr ""
+msgstr "Ingrese una fecha de inicio válida"
 
 #: .\venv\Lib\site-packages\django\forms\fields.py:1351
-msgid "Enter a valid JSON."
-msgstr ""
+msgid "Please enter a valid start date."
+msgstr "Ingrese una fecha de inicio válida"
 
 #. Translators: This is the default suffix added to form field labels
 #: .\venv\Lib\site-packages\django\forms\forms.py:94

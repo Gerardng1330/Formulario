@@ -28,13 +28,13 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  # Agregado para internacionalización
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #Middlewares del proyecto
+    # Middlewares del proyecto
     "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
@@ -45,10 +45,13 @@ ROOT_URLCONF = 'backend.main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ BASE_DIR.parent / "frontend" /  "frontend_formularios",
-                 BASE_DIR / "frontend" /  "templates",
-                 BASE_DIR.parent / "frontend" /  "frontend_auth",
-                 BASE_DIR.parent / "frontend" /  "custom_views"],
+        'DIRS': [
+            BASE_DIR.parent / "frontend" /  "frontend_formularios",
+            os.path.join(BASE_DIR / "frontend" /  "templates"),  
+            os.path.join(BASE_DIR, 'templates/'),
+            BASE_DIR.parent / "frontend" /  "frontend_auth",
+            BASE_DIR.parent / "frontend" /  "custom_views"
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -89,6 +92,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
+#Internacionalización
+LANGUAGES = (
+    ('en', _('English')),
+    ('es', _('Spanish')),
+)
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -108,11 +117,7 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = BASE_DIR / "development-cdn" / "static" #Dónde queremos guardar los archivos
 
-#Internacionalización
-LANGUAGES = (
-    ('en', _('English')),
-    ('es', _('Spanish')),
-)
+
 
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale/'),

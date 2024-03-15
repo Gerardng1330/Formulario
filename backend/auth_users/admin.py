@@ -12,6 +12,7 @@ from reportlab.platypus import Table, TableStyle,SimpleDocTemplate
 from reportlab.lib import colors
 from django.utils.html import format_html
 from django.urls import reverse
+from reportlab.lib.pagesizes import legal
 
 
 #panel de django
@@ -34,7 +35,7 @@ class UsuarioInfo(admin.ModelAdmin):
         response = HttpResponse(content_type='application/pdf')
         response['Content-Disposition'] = f'attachment; filename={model_name}.pdf'
 
-        pdf = SimpleDocTemplate(response, pagesize=landscape(letter))
+        pdf = SimpleDocTemplate(response, pagesize=landscape(legal))
         elements = []
 
         header = [self.model._meta.get_field(field).verbose_name for field in self.list_display]
