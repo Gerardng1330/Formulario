@@ -3,7 +3,6 @@ from django.utils.translation import get_language, activate, gettext
 from django.shortcuts import render, redirect
 from backend.formularios.forms import UsuarioForm
 from django.contrib import messages
-from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 #from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm
 from django.contrib.auth.models import User
@@ -41,11 +40,14 @@ from django.utils.text import capfirst
 from backend.formularios.models import Usuario
 from django.core.cache import cache
 from django.utils import timezone
+from django.urls import reverse, reverse_lazy
+from django.shortcuts import resolve_url
+from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 User = get_user_model()
 
 def cerrado(request):
-    return render(request, 'cerrado.html')
+    return render(request, 'pruebaPagina.html')
 
 def prueba_page(request):
     return render(request,'pruebaPagina.html')
@@ -54,19 +56,76 @@ def prueba_page(request):
 def render_formulario(request):
     return render(request,'formulario.html')
 
+def cambiar_idioma(request):
+    if 'lang' in request.GET:
+        language = request.GET['lang']
+        activate(language)  # Activar el idioma seleccionado
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False})
+
 #Funcion para traducir las paginas
-def traducir_paginas(request):
-    #verifica el path para hacer la traducir la pagina correspondidad
+def traducir(request):
     current_path = request.path
-    if current_path == '/formulario_enviado/':
-        url_para_traduccion = '/formulario_enviado/'
-    elif current_path == '/prueba/':
-        url_para_traduccion = '/prueba/'
+    url_para_traduccion = 'url_para_traduccion'  # Asigna la URL por defecto
+
+    if current_path == '/es/formulario_enviado':
+        print('entro')
+        url_para_traduccion = 'formulario_enviado/'
+    elif current_path == '/en/formulario_enviado':
+        print('entro')
+        url_para_traduccion = 'formulario_enviado/'
+    elif current_path == '/en/url_para_traduccion/':
+        print('entro a la pagina')
+        url_para_traduccion = 'url_para_traduccion'
+    elif current_path == '/es/url_para_traduccion/':
+        print('entro a la pagina')
+        url_para_traduccion = 'formulario_enviado/'
     else:
-        url_para_traduccion = '/'  # Otra opción por defecto
+        print(url_para_traduccion)
+        
 
     return render(request, 'formulario.html', {'url_para_traduccion': url_para_traduccion})
 
+
+def aver(request):
+    aver_var='formulario_enviado'
+    return aver
+
+def confimarcion(request):
+    variable= 'hola'
+    return variable
+
+def verificar_correo(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')  # Asegúrate de reemplazar 'email' con el nombre real del campo en tu formulario.
+        print("Correo electrónico:", email)
+
+        if Usuario.objects.filter(email=email).exists():
+            print("Este correo electrónico ya está registrado.")
+            return render(request, 'formulario.html', {'error': 'Este correo electrónico ya está registrado.'})
+
+    # Resto de la lógica del formulario o redirección si no hay error
+    return render(request, 'formulario.html', {})
+
+#prueba (olvidenlo)
+""" def cambio_idioma_view(request):
+    # Maneja la solicitud POST para cambiar de idioma
+    if request.method == 'POST':
+        # Lógica para cambiar el idioma según la solicitud POST
+        nuevo_idioma = request.POST.get('idioma')  # Obtener el idioma seleccionado de la solicitud POST
+        request.session['idioma'] = nuevo_idioma  # Actualizar el idioma en la sesión del usuario u otra forma de persistencia de datos
+
+        # Obtener los datos del formulario (si es necesario)
+        # Esto dependerá de cómo manejes los datos del formulario en tu aplicación
+
+    # Obtén los datos del formulario prellenados según el idioma seleccionado
+    # Esto también dependerá de cómo manejes los datos del formulario en tu aplicación
+    datos_formulario = obtener_datos_formulario_prellenados_segun_idioma(request.session.get('idioma'))
+
+    # Renderiza la página con los datos del formulario prellenados
+    return render(request, 'formulario.html', {'form': datos_formulario}) """
+
+        
 # Función para obtener los correos registrados
 def get_emails(request):
     if request.method == 'GET':
@@ -77,6 +136,8 @@ def get_emails(request):
 
 # Formulario. Verifica que el form sea valido para despues enviarlo y envia un mensaje si se envió o no
 def formulario_view(request):
+    url_para_traduccion = ''  # Asigna la URL por defecto
+    
     # Variables de estado
     form_activo = True
     enviado_correctamente = False
@@ -102,6 +163,7 @@ def formulario_view(request):
         form = UsuarioForm(request.POST, request.FILES)
         #print(request.POST)
         
+        print(form.is_valid())
         if form.is_valid():
             # Obtiene el valor del campo email
             email_value = request.POST.get('email')
@@ -114,10 +176,13 @@ def formulario_view(request):
                 form.save()
                 enviado_correctamente = True
         else:
-            # Imprimir errores del formulario en la consola del servidor
+            # Si el formulario no es válido, imprime los errores
             print(form.errors)
             messages.error(request, 'Hubo un error en el formulario. Por favor, verifica los campos.')
     else:
+        print('aqui no es')
+        print(url_para_traduccion)
+        # Si no es una solicitud POST o el formulario no está activo,
         form = UsuarioForm()
 
     return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente, 'politicas_table':politicas_table, 'politicas_aceptadas':politicas_aceptadas, 'politicas_aceptadas_uuid':politicas_aceptadas_uuid, 'is_email_registrado':is_email_registrado})
@@ -155,14 +220,6 @@ def normalize_fields(sender, instance, **kwargs):
             # Aplica capitalización a cada palabra en el campo
             setattr(instance, field, getattr(instance, field).title())
 
-
-        
-def validar_nombre(request):
-    
-    nombre = request.GET.get('nombre', '')
-    if len(nombre) < 3:
-        return JsonResponse({'error': 'El nombre debe tener al menos 3 caracteress.'})
-    return JsonResponse({'success': True})
 
 
 def formacion(request):

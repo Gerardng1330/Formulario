@@ -28,13 +28,13 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  # Agregado para internacionalización
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #Middlewares del proyecto
+    # Middlewares del proyecto
     "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
@@ -86,6 +86,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
+#Internacionalización
+LANGUAGES = (
+    ('en', _('English')),
+    ('es', _('Spanish')),
+)
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -105,11 +111,7 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = BASE_DIR / "development-cdn" / "static" #Dónde queremos guardar los archivos
 
-#Internacionalización
-LANGUAGES = (
-    ('en', _('English')),
-    ('es', _('Spanish')),
-)
+
 
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale/'),
@@ -131,3 +133,8 @@ EMAIL_HOST_USER = 'noreply@arvcloud.com'
 EMAIL_HOST_PASSWORD = 'Jda108?jjadpa300' 
 
 AUTH_USER_MODEL = "auth_users.User"
+
+#ruta para descargar los cv
+
+MEDIA_ROOT = os.path.join(BASE_DIR,"media")
+MEDIA_URL = "/media/"
