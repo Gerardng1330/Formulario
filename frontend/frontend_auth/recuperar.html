@@ -7,9 +7,7 @@
             <h1 class="h3 mb-3 fw-normal text-center">Recuperar Contraseña</h1>
               <div class="mb-3 d-grid gap-2 col-6 mx-auto">
                 <label for="exampleInputEmail1" class="form-label">Ingresa tu correo electrónico. Se te enviara un enlace para que vuelvas a acceder a tu cuenta</label>
-                <!--<input name="Correo" value="" type="text" class="form-control" placeholder="Correo electrónico" aria-label="Correo" aria-describedby="addon-wrapping">-->
-                {{form}}
-                {{error}}
+                <input name="Correo" value="" type="text" class="form-control" placeholder="Correo electrónico" aria-label="Correo" aria-describedby="addon-wrapping">{{error}}
               </div>
               <div class="d-grid gap-2 col-6 mx-auto">
                 <button  name="Send email" type="submit" class="btn btn-primary">Listo</button><br>
@@ -19,7 +17,3 @@
                 </div> 
     </form>
 {% endblock %}
-<form method="POST">
-  {% csrf_token %}
-  
-  <input type="Submit">
