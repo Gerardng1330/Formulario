@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./frontend/**/*.{html,js}", "./node_modules/flowbite/**/*.js"],
+  content: ["./**/*.{html,js}", "./node_modules/flowbite/**/*.js"],
   theme: {
     extend: {
       colors: {
@@ -11,6 +11,7 @@ module.exports = {
         blue: "#1D2269",
         hoverblue: "#000986",
         sky: "#0596FF",
+        hoversky: "#057AFF",
       },
       fontFamily: {
         kumbh_regular: ["kumbh_regular", "sans-serif"],

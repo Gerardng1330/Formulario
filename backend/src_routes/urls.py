@@ -16,7 +16,6 @@ urlpatterns = [
     path('prueba/', views.prueba_page, name='pagina_prueba'),
     path('obtener_emails/', views.get_emails, name='get_emails'),
 
-
     # Login views
     path('home/', views.home,name='home'),
     path('inicio/', views.inicio_sesion,name='inicio'),

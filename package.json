@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build:css": "tailwindcss -i frontend/static/css/tailwind-input.css -o frontend/static/css/tailwind-output.css --watch",
+    "build:css": "tailwindcss -i static/css/tailwind-input.css -o static/css/tailwind-output.css --watch",
     "dev": "npm-run-all --parallel build:css start:server",
     "start:server": "python manage.py runserver"
   },
