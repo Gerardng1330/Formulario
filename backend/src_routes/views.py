@@ -237,7 +237,7 @@ def inicio_sesion(request):#Funcion de inicio de sesion
             return redirect('admin:index')
 def home(request):
     return render (request, 'home.html')  
- 
+''' 
 def recuperar_pass(request):
     # Funcion para recuperar la contraseña
     # Nos aseguramos de que el usuario siempre tenga que iniciar sesion o la sesion no este iniciada
@@ -252,7 +252,7 @@ def recuperar_pass(request):
         if user is None:
             return render(request, 'recuperar.html',{
                     'error': 'Este Correo electrónico no es válido'
-                })
+                })'''
 
 def generar_token():
     # Funcion para generar un token
@@ -401,3 +401,6 @@ def ayuda_view(request):
     # Fetch a la BD. Párrafos de la tabla Politicas
     politicas_table = Politicas.objects.values('parrafo')
     return render(request, 'ayuda.html', {'pathname': pathname, 'politicas_table':politicas_table})
+
+def password_reset_request(request):
+    return render(request, 'recuperar.html')
