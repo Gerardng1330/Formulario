@@ -1,6 +1,7 @@
 from django import forms
 from .models import User
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm,PasswordResetForm
+
 
     
 # Define un formulario basado en el modelo `Usuario`
@@ -22,3 +23,6 @@ class PasswordChangingForm(PasswordChangeForm):
             'new_password1',
             'new_password2',
         ]
+        
+class reset_password_form(PasswordResetForm):
+    Correo = forms.EmailField(required=True, label='Correo', widget=forms.EmailInput(attrs={'placeholder': 'ejemplo@ejemplo.com'}))
