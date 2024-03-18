@@ -1,0 +1,41 @@
+{% load static %} {% load i18n %}
+<!doctype html>
+<html lang="en" class="min-h-screen w-full !scroll-smooth">
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Descripción de la pantalla -->
+    <meta name="description" content="{% block desc %}{% endblock %}" />
+    <!-- Conexión con el CSS -->
+    <link rel="stylesheet" href="{% static 'css/tailwind-output.css' %}" />
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'img/f2f-favicon.svg' %}" />
+  </head>
+
+  <body id="body" class="flex min-h-screen w-full flex-row overflow-hidden bg-gradient-to-bl from-indigo-100 via-offwhite to-rose-100 font-kumbh_regular">
+    <!-- Sidebar -->
+    <div id="sidebar" class="flex h-screen w-80 min-w-80 flex-col gap-8 overflow-y-auto border border-gray-200 bg-gray-300 bg-opacity-30 px-6 pb-6 pt-10 text-blue shadow-sm" aria-label="sidebar">
+      <!-- logo f2f -->
+      <img class="h-12 pr-3" src="{% static 'img/f2f-logo.svg' %}" alt="" />
+      <ul class="flex h-full flex-col justify-between space-y-2 font-medium">
+        {% block sidebar %}
+        <!-- Opciones del sidebar -->
+        {% endblock %}
+      </ul>
+    </div>
+    <!-- Contenido del sitio (Al lado del sidebar) -->
+    <div class="flex h-screen max-h-screen w-full flex-col gap-5 pb-7 pl-8 pr-[73px] pt-10">
+      {% block content %}
+      <!-- Contenido que va luego del logo e idioma dropdown -->
+      {% endblock %}
+    </div>
+
+    <!-- Scripts específicos del sitio -->
+    {% block scripts %} {% endblock %}
+
+    <!-- Flowbite -->
+    <script src="{% static 'flowbite.min.js' %}"></script>
+  </body>
+</html>

@@ -8,7 +8,7 @@ SECRET_KEY = 'o4azh=5b&5_50o$fr1h8v!^1o96*)%rri9d-wjo5icb2_!ip6d'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -45,13 +45,7 @@ ROOT_URLCONF = 'backend.main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            BASE_DIR.parent / "frontend" /  "frontend_formularios",
-            os.path.join(BASE_DIR / "frontend" /  "templates"),  
-            os.path.join(BASE_DIR, 'templates/'),
-            BASE_DIR.parent / "frontend" /  "frontend_auth",
-            BASE_DIR.parent / "frontend" /  "custom_views"
-        ],
+        'DIRS': [ BASE_DIR.parent / "templates" ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -108,10 +102,10 @@ USE_TZ = True
 
 #Control de archivos estáticos (CSS, imágenes, JavaScript)
 #https://docs.djangoproject.com/en/5.0/howto/static-files/
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR.parent / "frontend" / "static",
+    BASE_DIR.parent / "static",
     BASE_DIR.parent / "node_modules" / "flowbite" / "dist"
 ]
 
