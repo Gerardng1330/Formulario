@@ -152,6 +152,7 @@ def formulario_view(request):
     # Variables que necesitan inicialización
     politicas_aceptadas_uuid = None
     is_email_registrado = None
+    datos_formulario = {}  # Inicializa datos_formulario como un diccionario vacío
 
     # Fetch a la BD. Párrafos de la tabla Politicas
     politicas_table = Politicas.objects.values('parrafo')
@@ -166,9 +167,16 @@ def formulario_view(request):
 
     # Verificar enviado_correctamente
     if request.method == 'POST' and form_activo:
+        nombre = request.POST.get('nombre')
+        print(nombre)  
         form = UsuarioForm(request.POST, request.FILES)
-        print(request.POST)
-        print(form.is_valid())
+        
+        datos_formulario = {
+            'nombre': nombre,
+        }
+        # Almacenar los datos del formulario en la sesión
+        request.session['datos_formulario'] = datos_formulario
+
         if form.is_valid():
             # Obtiene el valor del campo email
             email_value = request.POST.get('email')
@@ -186,10 +194,11 @@ def formulario_view(request):
             # Si el formulario no es válido, imprime los errores
             print(form.errors)
             messages.error(request, 'Hubo un error en el formulario. Por favor, verifica los campos.')
-    elif url_para_traduccion == 'formulario_enviado':
-        print('aqui si')
-        url_para_traduccion ='formulario_enviado'
-        enviado_correctamente= True
+    elif url_para_traduccion == 'formulario_enviado': # mejor verifica si es post 
+        datos_formulario = request.session.get('datos_formulario', {})
+        if datos_formulario:
+            enviado_correctamente = True
+        url_para_traduccion = 'formulario_enviado'
     else:
         print('aqui no es')
         print(url_para_traduccion)
@@ -197,9 +206,9 @@ def formulario_view(request):
         form = UsuarioForm()
         """ if enviado_correctamente: """
         #enviado_correctamente = True
-        url_para_traduccion = 'formulario_enviado'
+       
 
-    return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente, 'politicas_table':politicas_table, 'politicas_aceptadas':politicas_aceptadas, 'politicas_aceptadas_uuid':politicas_aceptadas_uuid, 'is_email_registrado':is_email_registrado, 'url_para_traduccion': url_para_traduccion})
+    return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente, 'politicas_table':politicas_table, 'politicas_aceptadas':politicas_aceptadas, 'politicas_aceptadas_uuid':politicas_aceptadas_uuid, 'is_email_registrado':is_email_registrado, 'url_para_traduccion': url_para_traduccion,'datos_formulario':datos_formulario})
 
 #Primera letra mayúscula a los campos de la bd.
 @receiver(pre_save, sender=Usuario)
@@ -221,16 +230,17 @@ def formacion(request):
 
 #Login
 def inicio_sesion(request):#Funcion de inicio de sesion
+    url_para_traduccion = 'inicio/'
     if request.user.is_authenticated:#nos aseguramos de que el usuario siempre tenga que iniciar sesion o la sesion no este iniciada
         logout(request)
         
     if request.method == 'GET':
-        return render(request, 'inicio.html')
+        return render(request, 'inicio.html',{'url_para_traduccion':url_para_traduccion})
     else:
         user = authenticate(request, username=request.POST['Usuario'],password=request.POST['Contraseña'])
         if user is None:
             return render(request, 'inicio.html',{
-                    'error': 'Nombre de usuario o contraseña incorrectos'
+                    'error': 'Nombre de usuario o contraseña incorrectos','url_para_traduccion':url_para_traduccion
                 })
         else:
             login(request, user)

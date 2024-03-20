@@ -562,13 +562,13 @@ msgstr "Ingrese una fecha de inicio válida"
 
 #. Translators: This is the default suffix added to form field labels
 #: .\venv\Lib\site-packages\django\forms\forms.py:94
-msgid ":"
-msgstr ""
+msgid "ENTER YOUR ACCOUNT"
+msgstr "INGRESE A SU CUENTA"
 
 #: .\venv\Lib\site-packages\django\forms\forms.py:231
 #, python-format
-msgid "(Hidden field %(name)s) %(error)s"
-msgstr ""
+msgid "User"
+msgstr "Usuario"
 
 #: .\venv\Lib\site-packages\django\forms\formsets.py:61
 #, python-format
@@ -593,22 +593,22 @@ msgstr[1] ""
 
 #: .\venv\Lib\site-packages\django\forms\formsets.py:484
 #: .\venv\Lib\site-packages\django\forms\formsets.py:491
-msgid "Order"
-msgstr ""
+msgid "Password"
+msgstr "Contraseña"
 
 #: .\venv\Lib\site-packages\django\forms\formsets.py:499
-msgid "Delete"
-msgstr ""
+msgid "I FORGOT MY PASSWORD"
+msgstr "OLVIDÉ MI CONTRASEÑA"
 
 #: .\venv\Lib\site-packages\django\forms\models.py:895
 #, python-format
-msgid "Please correct the duplicate data for %(field)s."
-msgstr ""
+msgid "LOGIN"
+msgstr "INGRESAR"
 
 #: .\venv\Lib\site-packages\django\forms\models.py:900
 #, python-format
-msgid "Please correct the duplicate data for %(field)s, which must be unique."
-msgstr ""
+msgid "YOU DO NOT HAVE AN ACCOUNT? "
+msgstr "¿NO TIENES UNA CUENTA? "
 
 #: .\venv\Lib\site-packages\django\forms\models.py:907
 #, python-format
@@ -618,12 +618,12 @@ msgid ""
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\forms\models.py:916
-msgid "Please correct the duplicate values below."
-msgstr ""
+msgid "SIGN UP"
+msgstr "REGÍSTRATE"
 
 #: .\venv\Lib\site-packages\django\forms\models.py:1353
-msgid "The inline value did not match the parent instance."
-msgstr ""
+msgid "Invalid username or password"
+msgstr "Nombre de usuario o contraseña incorrectos"
 
 #: .\venv\Lib\site-packages\django\forms\models.py:1444
 msgid "Select a valid choice. That choice is not one of the available choices."

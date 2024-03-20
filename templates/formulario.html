@@ -46,7 +46,7 @@
         <div class="flex h-full w-full gap-4">
           <!-- Nombre -->
           <div class="input_control flex w-full flex-col gap-2">
-            <input type="text" id="nombre" name="nombre" # aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}First name{% endblocktrans %}" !! />
+            <input type="text" id="nombre" name="nombre"  value="{{ datos_formulario.nombre }}" aria-describedby="helper-text-explanation" class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}First name{% endblocktrans %}" !! />
             <span class="message ml-1 hidden text-sm">Mensaje</span>
           </div>
 
@@ -508,31 +508,5 @@
   const m_provincia_formato = "{% blocktrans %}Please enter a valid province in the format 'Province'.{% endblocktrans %}";
   const m_fecha_inicio = "{% blocktrans %}Please enter a valid start date.{% endblocktrans %}";
   const m_correo_registrado = "{% blocktrans %}This email is already registered{% endblocktrans %}";
-</script>
-<script>
-  // Obtén todos los elementos <a> dentro del menú desplegable de idiomas
-  var itemsIdiomas = document.querySelectorAll("#dropdownIdiomas a");
-
-  // Adjunta el evento de clic a cada elemento <a>
-  itemsIdiomas.forEach(function (item) {
-    item.addEventListener("click", function (event) {
-      // Evitar que el enlace se abra
-      event.preventDefault();
-
-      // Envía los datos del formulario al cambiar de idioma
-      var formulario = document.getElementById("form");
-      var datosFormulario = new FormData(formulario);
-      var idiomaSeleccionado = this.getAttribute("href").split("/")[1];
-
-      // Realiza una solicitud POST al servidor con los datos del formulario y el idioma seleccionado
-      fetch("/formulario_enviado/", {
-        method: "POST",
-        body: datosFormulario,
-      }).then(function (response) {
-        // Redirige a la nueva página con el idioma seleccionado
-        window.location.href = "/formulario_idioma/?idioma=" + idiomaSeleccionado;
-      });
-    });
-  });
 </script>
 {% endblock %}
