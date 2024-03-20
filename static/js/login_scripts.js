@@ -19,6 +19,13 @@ showing_pass_icon.addEventListener("click", function () {
   showing_pass_icon.classList.add("hidden");
 });
 
+/* Transición para mostrar alerta */
+if (alerta_message !== "") {
+  alerta.classList.remove("opacity-0");
+  alerta.classList.add("opacity-100");
+  alerta.classList.remove("translate-y-2");
+}
+
 /* Antes de enviar el formulario el type ha de ser password */
 login_form.addEventListener("submit", (e) => {
   // Previene el envío predeterminado
@@ -30,10 +37,3 @@ login_form.addEventListener("submit", (e) => {
   /* Envía el formulario a backend */
   login_form.submit();
 });
-
-/* Transición para mostrar alerta */
-if (alerta_message !== "") {
-  alerta.classList.remove("opacity-0");
-  alerta.classList.add("opacity-100");
-  alerta.classList.remove("translate-y-2");
-}

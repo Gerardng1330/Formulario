@@ -98,29 +98,29 @@ function validarTelefono(input) {
   }
 }
 
-function validarNombre() {
-  if (nombre.value.trim() === "") {
+function validarNombre(input) {
+  if (input.value.trim() === "") {
     /* Campo requerido */
-    setError(nombre, m_campo_requerido);
+    setError(input, m_campo_requerido);
     return false;
-  } else if (!nombreApellidoRegex.test(nombre.value.trim())) {
+  } else if (!nombreApellidoRegex.test(input.value.trim())) {
     /* Inicia con mayúscula? */
-    setError(nombre, m_nombre_formato);
+    setError(input, m_nombre_formato);
     return false;
-  } else if (espacioRegex.test(nombre.value.trim())) {
+  } else if (espacioRegex.test(input.value.trim())) {
     /* Escribió más de un nombre? */
-    setError(nombre, m_nombre_formato);
+    setError(input, m_nombre_formato);
     return false;
   } /* else if (nombre.value.trim().length < 3) {
     Longitud mínima 
     setError(nombre, m_longitud_min);
     return false;
-  }*/ else if (nombre.value.trim().length > longitud_max) {
+  }*/ else if (input.value.trim().length > longitud_max) {
     /* Longitud máxima */
-    setError(nombre, m_longitud_max);
+    setError(input, m_longitud_max);
     return false;
   } else {
-    setSuccess(nombre, "");
+    setSuccess(input, "");
     return true;
   }
 }
@@ -365,7 +365,7 @@ function validarReferencia() {
 document.addEventListener("DOMContentLoaded", function () {
   /* Validar nombre */
   nombre.addEventListener("input", function () {
-    validarNombre();
+    validarNombre(nombre);
   });
 
   /* Validar apellido */
