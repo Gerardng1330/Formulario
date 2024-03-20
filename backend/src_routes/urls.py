@@ -24,7 +24,6 @@ urlpatterns = [
     path('form/', views.formacion,name='form'),
     
     #Activacion de Token
-    path('recuperar/', views.recuperar_pass,name='recuperar'),    
     path('activacion/', views.activar_cuenta, name='activacion'),
     path('activacion_aviso/', views.activars, name='activacion_aviso'),
     path('activar-cuenta/<str:token>/', views.validar_token, name='activar_cuenta'),
@@ -44,7 +43,7 @@ urlpatterns = [
     path('reembolso/', views.ayuda_view , name='reembolso'),
 
     #Recuperacion de contraseña
-    path('reset_password/', auth_views.PasswordResetView.as_view(template_name='recuperar.html'), name='password_reset'),
+    path('reset_password/',views.password_reset_request, name='password_reset'),
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),

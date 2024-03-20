@@ -403,4 +403,7 @@ def ayuda_view(request):
     return render(request, 'ayuda.html', {'pathname': pathname, 'politicas_table':politicas_table})
 
 def password_reset_request(request):
-    return render(request, 'recuperar.html')
+    context = { 
+        
+    }
+    return render(request, 'recuperar.html',context)
