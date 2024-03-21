@@ -160,18 +160,93 @@ function validarContraseña(input) {
     /* Ingresó algún espacio? */
     setError(input, m_contrasena_space);
     return false;
-  } else if (input.value.trim().length >= 8) {
-    /* 8+ caracteres */
-    eight_char.classList.remove("text-gray-400");
-    eight_char.classList.add("text-lime-500");
-  } else if (input.value.trim().length >= 8) {
-    /* Si todo del formato se cumple al mismo tiempo: */
+  } else {
+    /* Si no está vacío o tiene algún espacio, revisa el formato de seguridad */
+    /* inicialización de variables de verificación */
+    var v_eight_char = false,
+      v_numbers = false,
+      v_numbers = false,
+      v_lower = false,
+      v_upper = false,
+      v_special = false;
+    /* Más de 8 caracteres? */
+    if (input.value.trim().length >= 8) {
+      eight_char.classList.remove("text-gray-400");
+      eight_char.classList.add("text-lime-500");
+      v_eight_char = true;
+    } else {
+      eight_char.classList.add("text-gray-400");
+      eight_char.classList.remove("text-lime-500");
+      v_eight_char = false;
+    }
+    /* Contiene números? */
+    var regex = /\d/;
+    if (regex.test(input.value.trim())) {
+      numbers.classList.remove("text-gray-400");
+      numbers.classList.add("text-lime-500");
+      v_numbers = true;
+    } else {
+      numbers.classList.add("text-gray-400");
+      numbers.classList.remove("text-lime-500");
+      v_numbers = false;
+    }
+    /* Contiene lower case? */
+    var regex = /[a-z]/;
+    if (regex.test(input.value.trim())) {
+      lower.classList.remove("text-gray-400");
+      lower.classList.add("text-lime-500");
+      v_lower = true;
+    } else {
+      lower.classList.add("text-gray-400");
+      lower.classList.remove("text-lime-500");
+      v_lower = false;
+    }
+    /* Contiene upper case? */
+    var regex = /[A-Z]/;
+    if (regex.test(input.value.trim())) {
+      upper.classList.remove("text-gray-400");
+      upper.classList.add("text-lime-500");
+      v_upper = true;
+    } else {
+      upper.classList.add("text-gray-400");
+      upper.classList.remove("text-lime-500");
+      v_upper = false;
+    }
+    /* Contiene caracteres especiales? */
+    var regex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+    if (regex.test(input.value.trim())) {
+      special.classList.remove("text-gray-400");
+      special.classList.add("text-lime-500");
+      v_special = true;
+    } else {
+      special.classList.add("text-gray-400");
+      special.classList.remove("text-lime-500");
+      v_special = false;
+    }
+
+    /* Si verif es true significa que todo se cumple */
+    if (v_eight_char == true && v_numbers == true && v_lower == true && v_upper == true && v_special == true) {
+      setSuccess(input, "");
+      return true;
+    } else {
+      setError(input, m_contrasena_formato);
+      return false;
+    }
+  }
+}
+
+function validarContraseña1(input) {
+  if (input.value.trim() === "") {
+    /* Campo requerido */
+    setError(input, m_campo_requerido);
+    return false;
+  } else if (input.value.trim() !== Contraseña.value.trim()) {
+    /* Las contraseñas no son iguales? */
+    setError(input, m_contrasena_match);
+    return false;
+  } else {
     setSuccess(input, "");
     return true;
-  } else {
-    /* Si no se cumple nada de las validaciones de formato: */
-    setError(input, m_contrasena_formato);
-    return false;
   }
 }
 
@@ -211,4 +286,24 @@ document.addEventListener("DOMContentLoaded", function () {
     pass_security_container.classList.remove("opacity-100");
     pass_security_container.classList.add("opacity-0");
   });
+
+  /* Validar repetir contraseña (Contraseña1) */
+  Contraseña1.addEventListener("input", function () {
+    validarContraseña1(Contraseña1);
+  });
+});
+
+/* Previene que el form se envíe antes de validar los inputs.
+Se ejecuta cuando se da click al botón SUBMIT */
+registro_form.addEventListener("submit", (e) => {
+  // Previene el envío predeterminado
+  e.preventDefault();
+
+  /* Se asigna cada función que retorna true or false a una variable de validación general.*/
+  const esFormularioValido = validarNombreApellido(Nombre) && validarNombreApellido(Apellido) && validarUsuario(Usuario) && validarEmail() && validarContraseña(Contraseña) && validarContraseña1(Contraseña1);
+
+  /* Si el correo no está repetido y el resto del form es válido, mándalo a la bd */
+  if (esFormularioValido) {
+    registro_form.submit();
+  }
 });
