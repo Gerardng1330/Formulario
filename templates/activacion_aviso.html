@@ -18,12 +18,8 @@
   <p class="justify-start text-sm">Te hemos enviado un correo electrónico con instrucciones para configurar tu contraseña, si existe una cuenta con el correo electrónico que ingresaste. Deberías recibirlo en breve.</p>
   <p class="justify-start text-sm">Si no recibes un correo electrónico, por favor asegúrate de haber ingresado la dirección con la que te registraste y verifica tu carpeta de correo no deseado.</p>
 
-  <!-- Barra de tiempo -->
-  <div id="timer_container" class="mt-3 flex h-3 w-full items-center justify-start rounded-lg bg-gray-200 px-2 align-middle opacity-100 transition duration-100 ease-in-out">
-    <div id="timer_bar" class="flex h-1 w-1 rounded-lg bg-sky transition duration-[10000] ease-in-out"></div>
-  </div>
   <!-- Botón Reenviar token -->
-  <button id="resend_token_button" class="w-full rounded-lg bg-blue px-5 py-2.5 text-center font-kumbh_bold text-sm font-medium text-white shadow-sm transition ease-in-out hover:scale-y-105 hover:bg-hoverblue focus:outline-none focus:ring-4" href="{%url 'src_routes:activacion'%}">{% blocktrans %}REENVIAR TOKEN{% endblocktrans %}</button>
+  <a id="resend_token_button" class="mt-3 w-full rounded-lg bg-blue px-5 py-2.5 text-center font-kumbh_bold text-sm font-medium text-white shadow-sm transition ease-in-out hover:scale-y-105 hover:bg-hoverblue focus:outline-none focus:ring-4" href="{% url 'src_routes:activacion' %}">{% blocktrans %}REENVIAR TOKEN{% endblocktrans %}</a>
   <div class="flex w-full flex-row gap-2">
     <!-- Botón inicio -->
     <a class="w-1/2 flex-nowrap text-nowrap rounded-lg bg-sky px-5 py-1.5 text-center text-xs font-medium text-white shadow-sm transition ease-in-out hover:scale-y-105 hover:bg-hoversky focus:outline-none focus:ring-4" href="{%url 'src_routes:inicio'%}">{% blocktrans %}INICIO{% endblocktrans %}</a>
@@ -36,5 +32,4 @@
 <!-- Scripts del sitio -->
 {% block scripts %}
 <script src="{% static 'js/toggle_idioma_dropdown.js' %}"></script>
-<script src="{% static 'js/timer.js' %}"></script>
 {% endblock %}

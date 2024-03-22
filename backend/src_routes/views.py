@@ -50,6 +50,7 @@ from django.urls import reverse, reverse_lazy
 from django.shortcuts import resolve_url
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
+from django.apps import apps
 User = get_user_model()
 
 def cerrado(request):
@@ -135,7 +136,10 @@ def verificar_correo(request):
 # Función para obtener los correos registrados
 def get_emails(request):
     if request.method == 'GET':
-        emails_list = list(Usuario.objects.values_list('email', flat=True))
+        app_name = request.GET.get('app')  # Obtener el nombre del modelo de la solicitud
+        model_name = request.GET.get('model')  # Obtener el nombre del modelo de la solicitud
+        model = apps.get_model(app_label=app_name, model_name=model_name) #Obtener el modelo con nombres de modelo y app
+        emails_list = list(model.objects.values_list('email', flat=True)) #Busca la lista de emails en el la app y modelo que se le envió
         return JsonResponse(emails_list, safe=False)
     else:
         return JsonResponse({'error': 'Invalid request method'})

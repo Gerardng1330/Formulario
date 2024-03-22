@@ -110,7 +110,7 @@ function validarUsuario(input) {
   }
 }
 
-async function validarEmail() {
+async function validarEmail(input) {
   /* Obtener el csrftoken */
   const csrftoken = document.cookie
     .split("; ")
@@ -118,8 +118,11 @@ async function validarEmail() {
     .split("=")[1];
 
   try {
-    // Petición AJAX usando fetch
-    const response = await fetch("/obtener_emails/", {
+    // Petición AJAX usando fetch, se manda el url da la vista temporal y el model que se quiere usar
+    const modelName = "User"; // Nombre del modelo
+    const appName = "auth_users"; //Nombre de la aplicación donde está el modelo
+    const url = `/obtener_emails/?model=${modelName}&app=${appName}`;
+    const response = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -131,19 +134,19 @@ async function validarEmail() {
     let emails_list = await response.json();
 
     // Validaciones
-    if (Correo.value.trim() === "") {
+    if (input.value.trim() === "") {
       /* Campo requerido */
-      setError(Correo, m_campo_requerido);
+      setError(input, m_campo_requerido);
       return false;
-    } else if (emails_list.includes(Correo.value.trim())) {
-      setError(Correo, m_correo_registrado);
+    } else if (emails_list.includes(input.value.trim())) {
+      setError(input, m_correo_registrado);
       return false;
-    } else if (Correo.value.trim().length > 30 || !emailRegex.test(Correo.value.trim())) {
-      /* Longitud mínima y máxima - Formato ejemplo@email.com */
-      setError(Correo, m_email_formato);
+    } else if (input.value.trim().length > 30 || !emailRegex.test(input.value.trim())) {
+      /* Longitud máxima - Formato ejemplo@email.com */
+      setError(input, m_email_formato);
       return false;
     } else {
-      setSuccess(Correo, "");
+      setSuccess(input, "");
       return true;
     }
   } catch (error) {
@@ -269,7 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* Validar email */
   Correo.addEventListener("input", function () {
-    validarEmail();
+    validarEmail(Correo);
   });
 
   /* Validar contraseña */
@@ -300,7 +303,7 @@ registro_form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   /* Se asigna cada función que retorna true or false a una variable de validación general.*/
-  const esFormularioValido = validarNombreApellido(Nombre) && validarNombreApellido(Apellido) && validarUsuario(Usuario) && validarEmail() && validarContraseña(Contraseña) && validarContraseña1(Contraseña1);
+  const esFormularioValido = validarNombreApellido(Nombre) && validarNombreApellido(Apellido) && validarUsuario(Usuario) && validarEmail(Correo) && validarContraseña(Contraseña) && validarContraseña1(Contraseña1);
 
   /* Si el correo no está repetido y el resto del form es válido, mándalo a la bd */
   if (esFormularioValido) {
