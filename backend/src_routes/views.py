@@ -397,7 +397,7 @@ def signout (request):
     return redirect('src_routes:inicio')
         
 def succefully(request):
-    return render (request, 'registro_existoso.html') 
+    return render (request, 'registro_exitoso.html') 
 
 def ayuda_view(request):
     # pathname de la URL sin la parte del idioma /en/ o /es/

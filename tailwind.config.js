@@ -17,6 +17,15 @@ module.exports = {
         kumbh_regular: ["kumbh_regular", "sans-serif"],
         kumbh_bold: ["kumbh_bold", "sans-serif"],
       },
+      keyframes: {
+        timer: {
+          from: { width: "100%" },
+          to: { width: "0%" },
+        },
+      },
+      animation: {
+        timer: "timer 5s ease-in-out forwards", // Define the animation name and duration
+      },
     },
   },
   plugins: [require("flowbite/plugin")],
