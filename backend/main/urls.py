@@ -18,6 +18,7 @@ from django.views.i18n import set_language
 urlpatterns = [
     path('', include('django.conf.urls.i18n')),
     path("__reload__/", include("django_browser_reload.urls"), name='browser_reload'),
+    path('/adminpaneldjango', include('admin_modernize.urls')), #Admin panel UI package urls
 ]
 
 urlpatterns += i18n_patterns(
