@@ -42,11 +42,12 @@ urlpatterns = [
     path('empresas_relacionadas/', views.ayuda_view , name='empresas_relacionadas'),
     path('reembolso/', views.ayuda_view , name='reembolso'),
 
-    #Recuperacion de contraseña
-    path('reset_password/',views.password_reset_request, name='password_reset'),
-    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    #Recuperacion de contraseña    
+    path('reset_password/',views.password_reset_request, name='password_reset'),#pantalla donde se ingresa el email para reestablecer request for a password  reset
+    path('recuperar_aviso/', views.recuperar_aviso_view, name='recuperar_aviso'),#pantalla de correo enviado
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),#pantalla donde se cambia las contraseñas
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='contra_cambiada.html'), name='password_reset_complete'),#pantalla de suscefully
+    
 ]
 
 #ruta para descargar el cv 

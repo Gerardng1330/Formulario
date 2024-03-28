@@ -5,7 +5,10 @@
   <h1 class="h3 fw-normal mb-3 text-center">Recuperar Contraseña</h1>
   <div class="d-grid col-6 mx-auto mb-3 gap-2">
     <label for="exampleInputEmail1" class="form-label">Ingresa tu correo electrónico. Se te enviara un enlace para que vuelvas a acceder a tu cuenta</label>
-    <input name="email" value="" type="text" class="form-control" placeholder="Correo electrónico" aria-label="Correo" aria-describedby="addon-wrapping" />{{error}}
+    <div class="h-fit w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky">
+      {{ password_form }} 
+    </div>
+    <!--<input name="Correo" value="" type="text" class="form-control" placeholder="Correo electrónico" aria-label="Correo" aria-describedby="addon-wrapping" />-->{{error}}
   </div>
   <div class="d-grid col-6 mx-auto gap-2"><button type="submit" class="btn btn-primary">Listo</button><br /></div>
   <div class="d-flex justify-content-between col-6 mx-auto mb-3">

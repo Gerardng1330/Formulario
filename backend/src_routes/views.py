@@ -21,6 +21,11 @@ from django.conf import settings
 from django.views.decorators.csrf import csrf_protect
 import random
 from django.http import JsonResponse
+from django.template.loader import render_to_string
+from django.db.models.query_utils import Q
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.forms import PasswordResetForm
+from django.utils.encoding import force_bytes   
 import smtplib
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth import get_user_model
@@ -29,7 +34,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
-from django.core.mail import send_mail
+from django.core.mail import send_mail,BadHeaderError
 import datetime
 from django.shortcuts import render, redirect
 from django.core.validators import validate_email
@@ -403,7 +408,41 @@ def ayuda_view(request):
     return render(request, 'ayuda.html', {'pathname': pathname, 'politicas_table':politicas_table})
 
 def password_reset_request(request):
+    if request.method == 'POST':
+        password_form = PasswordResetForm(request.POST)
+        if password_form.is_valid():
+            data = password_form.cleaned_data['email']
+            user_email = User.objects.filter(Q(email=data))
+            if user_email.exists():
+                for user in user_email:
+                    subject = "Recuperacion de Contraseña"
+                    email_template= 'mensaje_envio.html'
+                    parameters = {
+                        'email': user.email,
+                        'domain': '127.0.0.1:8000',
+                        'site_name': 'F2F',
+                        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                        'token': default_token_generator.make_token(user),
+                        'protocol': 'http',
+                    }
+                    email= render_to_string(email_template,parameters)
+                    try:
+                        send_mail(subject, email, 'noreply@arvcloud.com', [user.email], fail_silently=False)
+                        print(f'paso por aqui')
+                        return redirect('src_routes:recuperar_aviso')
+                    except Exception as e:
+                        print("Error al enviar el correo electrónico:", e)
+                        return HttpResponse('Error al enviar el correo electrónico: {}'.format(e))
+            else:
+               return render(request, 'recuperar.html', {'error': 'No se encontró ninguna cuenta asociada a este correo electrónico'})
+
+    else:
+        password_form = PasswordResetForm()
     context = { 
-        
+        'password_form': password_form,
+            
     }
     return render(request, 'recuperar.html',context)
+
+def recuperar_aviso_view(request):
+    return render (request, 'recuperar_aviso.html')

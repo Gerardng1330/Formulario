@@ -1,0 +1,9 @@
+{% autoescape off %}
+Hola {{ user.email }},
+
+Hemos recibido una solicitud de cambio de contraseña para tu cuenta.
+Por favor, haz clic en el siguiente enlace para restablecer tu contraseña:
+{{ protocol }}://{{ domain }}{% url 'src_routes:password_reset_confirm' uidb64=uid token=token %}
+Si hay un error o no solicitaste este cambio, por favor ignóralo.
+Este correo electrónico ha sido generado automáticamente, por lo que no podemos responder a los mensajes enviados a esta dirección de correo electrónico.
+{% endautoescape %}
