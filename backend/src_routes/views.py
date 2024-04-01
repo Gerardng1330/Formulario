@@ -157,6 +157,15 @@ def formulario_view(request):
     # Fetch a la BD. Párrafos de la tabla Politicas
     politicas_table = Politicas.objects.values('parrafo')
 
+    nombre = request.POST.get('nombre')
+    Apellido = request.POST.get('Apellido')
+    print(nombre)  
+
+    datos_formulario = {
+        'nombre': nombre,
+        'Apellido': Apellido,
+    }
+
     # Verifica si 'politicas_aceptadas_cookie' existe
     if 'pltc' in request.COOKIES:
         # Quita el modal de políticas y no lo vuelve a mostrar (ver formulario.html)

@@ -7,6 +7,8 @@ from django.utils import timezone
 def generar_token():
     return uuid.uuid4().hex  # Genera un token UUID único
 
+
+
 class User(AbstractUser):
     email_confirmed = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
