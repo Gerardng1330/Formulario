@@ -1287,11 +1287,6 @@ input:checked + .toggle-bg {
   margin-right: 3.5rem;
 }
 
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .my-10 {
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;
