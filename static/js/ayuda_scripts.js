@@ -43,12 +43,6 @@ const sidebarButtons = document.querySelectorAll(".sidebar_button").forEach((lin
   }
 });
 
-/* Centrar mensaje de copyright solo en las políticas (por el descuadre del sidebar) */
-/* copyright.classList.add("pl-40"); */
-
-/* Que el body no se pueda scrollear */
-/* body.classList.add("overflow-hidden"); */
-
 /* Copiar correo de arv a clipboard al hacer click */
 copiar_correo_button.addEventListener("click", function () {
   /* Text to be copied */

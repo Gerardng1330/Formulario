@@ -11,6 +11,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
+    'admin_modernize.apps.AdminModernizeConfig', #Admin panel UI package
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

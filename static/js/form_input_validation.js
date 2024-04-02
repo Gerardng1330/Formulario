@@ -98,29 +98,29 @@ function validarTelefono(input) {
   }
 }
 
-function validarNombre() {
-  if (nombre.value.trim() === "") {
+function validarNombre(input) {
+  if (input.value.trim() === "") {
     /* Campo requerido */
-    setError(nombre, m_campo_requerido);
+    setError(input, m_campo_requerido);
     return false;
-  } else if (!nombreApellidoRegex.test(nombre.value.trim())) {
+  } else if (!nombreApellidoRegex.test(input.value.trim())) {
     /* Inicia con mayúscula? */
-    setError(nombre, m_nombre_formato);
+    setError(input, m_nombre_formato);
     return false;
-  } else if (espacioRegex.test(nombre.value.trim())) {
+  } else if (espacioRegex.test(input.value.trim())) {
     /* Escribió más de un nombre? */
-    setError(nombre, m_nombre_formato);
+    setError(input, m_nombre_formato);
     return false;
   } /* else if (nombre.value.trim().length < 3) {
     Longitud mínima 
     setError(nombre, m_longitud_min);
     return false;
-  }*/ else if (nombre.value.trim().length > longitud_max) {
+  }*/ else if (input.value.trim().length > longitud_max) {
     /* Longitud máxima */
-    setError(nombre, m_longitud_max);
+    setError(input, m_longitud_max);
     return false;
   } else {
-    setSuccess(nombre, "");
+    setSuccess(input, "");
     return true;
   }
 }
@@ -152,7 +152,7 @@ function validarApellido() {
   }
 }
 
-async function validarEmail() {
+async function validarEmail(input) {
   /* Obtener el csrftoken */
   const csrftoken = document.cookie
     .split("; ")
@@ -160,8 +160,11 @@ async function validarEmail() {
     .split("=")[1];
 
   try {
-    // Petición AJAX usando fetch
-    const response = await fetch("/obtener_emails/", {
+    // Petición AJAX usando fetch, se manda el url da la vista temporal y el model que se quiere usar
+    const modelName = "Usuario"; // Nombre del modelo
+    const appName = "formularios"; //Nombre de la aplicación donde está el modelo
+    const url = `/obtener_emails/?model=${modelName}&app=${appName}`;
+    const response = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -173,19 +176,19 @@ async function validarEmail() {
     let emails_list = await response.json();
 
     // Validaciones
-    if (email.value.trim() === "") {
+    if (input.value.trim() === "") {
       /* Campo requerido */
-      setError(email, m_campo_requerido);
+      setError(input, m_campo_requerido);
       return false;
-    } else if (emails_list.includes(email.value.trim())) {
-      setError(email, m_correo_registrado);
+    } else if (emails_list.includes(input.value.trim())) {
+      setError(input, m_correo_registrado);
       return false;
-    } else if (/* email.value.trim().length < 3 || */ email.value.trim().length > 30 || !emailRegex.test(email.value.trim())) {
-      /* Longitud mínima y máxima - Formato ejemplo@email.com */
-      setError(email, m_email_formato);
+    } else if (input.value.trim().length > 30 || !emailRegex.test(input.value.trim())) {
+      /* Longitud máxima - Formato ejemplo@email.com */
+      setError(input, m_email_formato);
       return false;
     } else {
-      setSuccess(email, "");
+      setSuccess(input, "");
       return true;
     }
   } catch (error) {
@@ -365,7 +368,7 @@ function validarReferencia() {
 document.addEventListener("DOMContentLoaded", function () {
   /* Validar nombre */
   nombre.addEventListener("input", function () {
-    validarNombre();
+    validarNombre(nombre);
   });
 
   /* Validar apellido */
@@ -375,7 +378,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* Validar email */
   email.addEventListener("input", function () {
-    validarEmail();
+    validarEmail(email);
   });
 
   /* Validar género */
@@ -527,7 +530,7 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   /* Se asigna cada función que retorna true or false a una variable de validación general.*/
-  const esFormularioValido = validarNombre() && validarApellido() && validarEmail() && validarRequerido(genero) && validarRequerido(nacionalidad) && validarFechaVacia(fecha_nacimiento) && validarFechaNacimiento() && validarAlergia() && validarRequerido(id_file) && validarRequerido(cv_file) && validarRequerido(codigo1) && validarTelefono(Telefono1) && validarRequerido(codigo3) && validarTelefono(telefono_emergencia) && validarRequerido(codigo2) && validarTelefono(Telefono2) && validarNombreContacto() && validarRequerido(direccion_principal) && validarDireccionSecundaria() && validarCiudad() && validarEstadoProvincia() && validarRequerido(Cargo1) && validarRequerido(Cargo2) && validarRequerido(turno) && validarRequerido(nivel_ingles) && validarFechaVacia(fecha_inicio) && validarFechaInicio() && validarRequerido(Transporte) && validarRequerido(Conociste) && validarReferencia();
+  const esFormularioValido = validarNombre() && validarApellido() && validarEmail(email) && validarRequerido(genero) && validarRequerido(nacionalidad) && validarFechaVacia(fecha_nacimiento) && validarFechaNacimiento() && validarAlergia() && validarRequerido(id_file) && validarRequerido(cv_file) && validarRequerido(codigo1) && validarTelefono(Telefono1) && validarRequerido(codigo3) && validarTelefono(telefono_emergencia) && validarRequerido(codigo2) && validarTelefono(Telefono2) && validarNombreContacto() && validarRequerido(direccion_principal) && validarDireccionSecundaria() && validarCiudad() && validarEstadoProvincia() && validarRequerido(Cargo1) && validarRequerido(Cargo2) && validarRequerido(turno) && validarRequerido(nivel_ingles) && validarFechaVacia(fecha_inicio) && validarFechaInicio() && validarRequerido(Transporte) && validarRequerido(Conociste) && validarReferencia();
 
   /* Si el correo no está repetido y el resto del form es válido, mándalo a la bd */
   if (esFormularioValido) {
