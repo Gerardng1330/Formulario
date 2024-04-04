@@ -1,0 +1,21 @@
+{% extends 'gk_lyouts/base.html' %}
+{% block title %}Email enviado{% endblock title %} 
+{% block desc %}Se ha enviado correctamente el email de verificacion{% endblock desc %}
+
+{% block content %}
+<div class="container">
+  <h1>Enviado el codigo.</h1>
+
+  <form class="form">
+
+  {% csrf_token %}
+
+  <div class="form-control">
+    <p>Te hemos enviado un correo electrónico con instrucciones para configurar tu contraseña, si existe una cuenta con el correo electrónico que ingresaste. Deberías recibirlo en breve.</p>
+    <p>Si no recibes un correo electrónico, por favor asegúrate de haber ingresado la dirección con la que te registraste y verifica tu carpeta de correo no deseado.</p>
+  </div>
+
+  <a class='form-btn' href="{% url 'login' %}">Ok!</a>
+  </div>
+  </form>
+{% endblock content%}

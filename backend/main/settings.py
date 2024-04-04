@@ -20,9 +20,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'backend.formularios',
     'backend.auth_users',
+    'backend.src_routes',
     'django_browser_reload',
-    
-     
+    'widget_tweaks' #customize django form inputs
 ]
 
 
@@ -132,6 +132,7 @@ EMAIL_USE_TLS = True
 EMAIL_SSL_VERIFICATION = False
 EMAIL_HOST_USER = 'noreply@arvcloud.com'
 EMAIL_HOST_PASSWORD = 'Jda108?jjadpa300' 
+DEFAULT_FROM_EMAIL = 'noreply@arvcloud.com'
 
 AUTH_USER_MODEL = "auth_users.User"
 

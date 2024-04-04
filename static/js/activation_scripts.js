@@ -1,5 +1,5 @@
 /* Referencias */
-const resend_token_button = document.getElementById("resend_token_button");
+const send_button = document.getElementById("send_button");
 const timer_container = document.getElementById("timer_container");
 const timer_bar = document.getElementById("timer_bar");
 const alerta = document.getElementById("alerta");
@@ -12,13 +12,13 @@ document.addEventListener("DOMContentLoaded", function () {
     timer_container.classList.remove("opacity-100");
     timer_container.classList.add("opacity-0");
 
-    resend_token_button.classList.remove("bg-gray-200");
-    resend_token_button.classList.add("bg-blue");
+    send_button.classList.remove("bg-gray-200");
+    send_button.classList.add("bg-blue");
 
-    resend_token_button.classList.remove("text-gray-400");
-    resend_token_button.classList.add("text-white");
+    send_button.classList.remove("text-gray-400");
+    send_button.classList.add("text-white");
 
-    resend_token_button.classList.remove("pointer-events-none");
+    send_button.classList.remove("pointer-events-none");
   }, 5000);
 });
 

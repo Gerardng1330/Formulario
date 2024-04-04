@@ -1,19 +1,4 @@
 /* Referencias */
-const registro_form = document.getElementById("registro_form");
-const Nombre = document.getElementById("Nombre");
-const Apellido = document.getElementById("Apellido");
-const Usuario = document.getElementById("Usuario");
-const Correo = document.getElementById("Correo");
-const Contraseña = document.getElementById("Contraseña");
-const Contraseña1 = document.getElementById("Contraseña1");
-const hidden_pass_icon = document.getElementById("hidden_pass_icon");
-const showing_pass_icon = document.getElementById("showing_pass_icon");
-const eight_char = document.getElementById("eight_char");
-const numbers = document.getElementById("numbers");
-const lower = document.getElementById("lower");
-const upper = document.getElementById("upper");
-const special = document.getElementById("special");
-const pass_security_container = document.getElementById("pass_security_container");
 
 /* Inicialización de expresiones regulares */
 const letrasRegex = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+$/;
@@ -24,14 +9,13 @@ const espacioRegex = / /;
 const nombreContactoRegex = /^[A-Za-záéíóúÁÉÍÓÚüÜñÑ]+\s[A-Za-záéíóúÁÉÍÓÚüÜñÑ]+$/;
 const ciudadEstadoRegex = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]*$/;
 const longitud_max = 30;
-const eight_char_regex =
-  /* toggle para mostrar contraseña */
-  hidden_pass_icon.addEventListener("click", function () {
-    Contraseña.type = "text";
-    Contraseña1.type = "text";
-    hidden_pass_icon.classList.add("hidden");
-    showing_pass_icon.classList.remove("hidden");
-  });
+/* toggle para mostrar contraseña */
+hidden_pass_icon.addEventListener("click", function () {
+  Contraseña.type = "text";
+  Contraseña1.type = "text";
+  hidden_pass_icon.classList.add("hidden");
+  showing_pass_icon.classList.remove("hidden");
+});
 
 showing_pass_icon.addEventListener("click", function () {
   Contraseña.type = "password";
@@ -68,28 +52,6 @@ function setSuccess(element, message) {
 }
 
 /* Validation functions */
-function validarNombreApellido(input) {
-  if (input.value.trim() === "") {
-    /* Campo requerido */
-    setError(input, m_campo_requerido);
-    return false;
-  } else if (!nombreApellidoRegex.test(input.value.trim())) {
-    /* Inicia con mayúscula? */
-    setError(input, m_nombre_formato);
-    return false;
-  } else if (espacioRegex.test(input.value.trim())) {
-    /* Escribió más de un nombre? */
-    setError(input, m_nombre_formato);
-    return false;
-  } else if (input.value.trim().length > longitud_max) {
-    /* Longitud máxima */
-    setError(input, m_longitud_max);
-    return false;
-  } else {
-    setSuccess(input, "");
-    return true;
-  }
-}
 
 function validarUsuario(input) {
   if (input.value.trim() === "") {
@@ -252,61 +214,3 @@ function validarContraseña1(input) {
     return true;
   }
 }
-
-/* Validaciones por campo en tiempo real*/
-document.addEventListener("DOMContentLoaded", function () {
-  /* Validar nombre */
-  Nombre.addEventListener("input", function () {
-    validarNombreApellido(Nombre);
-  });
-
-  /* Validar apellido */
-  Apellido.addEventListener("input", function () {
-    validarNombreApellido(Apellido);
-  });
-
-  /* Validar usuario */
-  Usuario.addEventListener("input", function () {
-    validarUsuario(Usuario);
-  });
-
-  /* Validar email */
-  Correo.addEventListener("input", function () {
-    validarEmail(Correo);
-  });
-
-  /* Validar contraseña */
-  Contraseña.addEventListener("input", function () {
-    validarContraseña(Contraseña);
-  });
-
-  Contraseña.addEventListener("focus", function () {
-    pass_security_container.classList.remove("opacity-0");
-    pass_security_container.classList.add("opacity-100");
-  });
-
-  Contraseña.addEventListener("blur", function () {
-    pass_security_container.classList.remove("opacity-100");
-    pass_security_container.classList.add("opacity-0");
-  });
-
-  /* Validar repetir contraseña (Contraseña1) */
-  Contraseña1.addEventListener("input", function () {
-    validarContraseña1(Contraseña1);
-  });
-});
-
-/* Previene que el form se envíe antes de validar los inputs.
-Se ejecuta cuando se da click al botón SUBMIT */
-registro_form.addEventListener("submit", (e) => {
-  // Previene el envío predeterminado
-  e.preventDefault();
-
-  /* Se asigna cada función que retorna true or false a una variable de validación general.*/
-  const esFormularioValido = validarNombreApellido(Nombre) && validarNombreApellido(Apellido) && validarUsuario(Usuario) && validarEmail(Correo) && validarContraseña(Contraseña) && validarContraseña1(Contraseña1);
-
-  /* Si el correo no está repetido y el resto del form es válido, mándalo a la bd */
-  if (esFormularioValido) {
-    registro_form.submit();
-  }
-});

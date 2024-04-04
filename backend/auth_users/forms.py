@@ -1,7 +1,6 @@
 from django import forms
-
-from django.contrib.auth.forms import PasswordChangeForm,PasswordResetForm,SetPasswordForm
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
 User = get_user_model()
 
     
@@ -14,23 +13,17 @@ class UserForm(forms.ModelForm):
         # Especifica que se deben incluir todos los campos del modelo en el formulario
         fields = '__all__'
 
-class PasswordChangingForm(PasswordChangeForm):
-    class Meta:
-        # Indica que el modelo asociado con este formulario es la clase `Usuario`
-        model = User
-        # Especifica que se deben incluir todos los campos del modelo en el formulario
-        fields = [
-            'old_password',
-            'new_password_1',
-            'new_password_2',
-        ]
-        
+# Enviar email para restablecer contraseña
 class reset_password_form(PasswordResetForm):
-    email = forms.EmailField(required=True, label='Correo', widget=forms.EmailInput(attrs={'placeholder': 'ejemplo@ejemplo.com'}))
-
-""" # Enviar email para restablecer contraseña
-class reset_password_form(PasswordResetForm):
-    email = forms.EmailField(required=True, label='Email', widget=forms.EmailInput(attrs={'placeholder': 'ejemplo@ejemplo.com'})) """
+    email = forms.EmailField(
+        required=True,
+        label='Email',
+        widget=forms.EmailInput(
+            attrs={
+                'placeholder': 'ejemplo@ejemplo.com'
+            }
+        )
+    )
 
 # cambiar la contraseña
 class change_password_form(SetPasswordForm):

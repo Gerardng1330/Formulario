@@ -45,7 +45,7 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.utils.text import capfirst
 from backend.formularios.models import Usuario
-from backend.auth_users.forms import  PasswordChangingForm
+#from backend.auth_users.forms import  PasswordChangingForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
@@ -341,9 +341,9 @@ def validar_token(request, token):
             return render(request, 'activacion_aviso.html', {'error': 'Usuario no encontrado'})
     except User.DoesNotExist:
         print(f'paso aqui caducao')
-        return render (request,'registro_existoso.html', {'noexiste':User.DoesNotExist,'error': 'Este Token ha caducado'})
+        return render (request,'registro_exitoso.html', {'noexiste':User.DoesNotExist,'error': 'Este Token ha caducado'})
     except Exception as e:
-        return render(request, 'activacion_aviso.html', {'error': f'Error al validar el token: {e}'}) 
+        return render(request, 'registro_exitoso.html', {'error': f'Error al validar el token: {e}'}) 
 
  # Esta vista renderiza la plantilla 'activacion.html'.
 
@@ -413,7 +413,7 @@ def ayuda_view(request):
     politicas_table = Politicas.objects.values('parrafo')
     return render(request, 'ayuda.html', {'pathname': pathname, 'politicas_table':politicas_table})
 
-def password_reset_request(request):
+#def password_reset_request(request):
     if request.method == 'POST':
         password_form = PasswordResetForm(request.POST)
         if password_form.is_valid():

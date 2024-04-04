@@ -1,0 +1,15 @@
+{% extends 'gk_lyouts/base.html' %} {% block title %}Contraseña restablecida{% endblock title %} {% block desc %}Se ha restablecido la contraseña{% endblock desc %} {% block content %}
+<div class="container">
+  <h1>Se ha restablecido la contraseña</h1>
+
+  <form class="form">
+    {% csrf_token %}
+
+    <div class="form-control">
+      <p>Tu contraseña ha sido establecida. Puedes proceder a iniciar sesión ahora.</p>
+    </div>
+
+    <a class="form-btn" href="{% url 'login' %}">Ok!</a>
+  </form>
+</div>
+{% endblock content%}

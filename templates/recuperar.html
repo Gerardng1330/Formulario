@@ -1,6 +1,6 @@
-{% extends "base_custom.html" %} {% load static %} {% load i18n %}
+{% extends "base_custom.html" %} {% load widget_tweaks %} {% load static %} {% load i18n %}
 <!-- title del sitio -->
-{% block title %}{% blocktrans %}Recuperar contraseña{% endblocktrans %}{% endblock %}
+{% block title %}Recuperar contraseña{% endblock %}
 <!-- Descripción del sitio -->
 {% block desc %}Pantalla envío de correo de recuperación de contraseña. Preautenticación. Face-to-face learning center.{% endblock %}
 <!-- Contenido del sitio -->
@@ -11,7 +11,7 @@
   <!-- Título -->
   <h1 class="text-center font-kumbh_bold text-xl text-blue">{% blocktrans %}RECUPERACIÓN DE CONTRASEÑA{% endblocktrans %}</h1>
   <!-- Párrafos -->
-  <p class="mb-2 justify-start text-sm">{% blocktrans %}Ingresa un correo electrónico al que tengas acceso. Se te enviará un enlace para que vuelvas a acceder a tu cuenta.{% endblocktrans %}</p>
+  <p class="mb-2 justify-start text-sm">Ingresa un correo electrónico al que tengas acceso. Se te enviará un enlace para que vuelvas a acceder a tu cuenta.</p>
   <!-- Form -->
   <form method="post" autocomplete="off">
     <!--esto sirve para que autenticar que el formulario es nuestro y no fue abierto de otro lado-->
@@ -19,11 +19,16 @@
     <!-- Label e input -->
     <label for="Correo" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Correo{% endblocktrans %}</label>
     <div class="input_control flex w-full flex-col gap-2">
-      {{ password_form }}
+      <!-- input -->
+      {% render_field form.email type="email" id="Correo" name="Correo" aria-describedby="helper-text-explanation" class="w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="example@email.com" autocomplete="off" %}
       <span class="message ml-1 hidden text-sm">Mensaje</span>
     </div>
-    <!-- Botón Enviar correo -->
-    <button type="submit" id="send_mail_button" class="mt-2 w-full rounded-lg bg-blue px-5 py-2.5 text-center font-kumbh_bold text-sm font-medium text-white shadow-sm transition ease-in-out hover:scale-y-105 hover:bg-hoverblue focus:outline-none focus:ring-4">{% blocktrans %}ENVIAR CORREO{% endblocktrans %}</button>
+    <!-- Barra de tiempo -->
+    <div id="timer_container" class="mt-4 flex h-3 w-full items-center justify-start rounded-lg bg-gray-200 px-2 align-middle opacity-100 transition ease-in-out">
+      <div id="timer_bar" class="flex h-1 w-full animate-timer rounded-lg bg-sky"></div>
+    </div>
+    <!-- Botón Enviar -->
+    <button type="submit" id="send_button" class="pointer-events-none mt-2 w-full rounded-lg bg-gray-200 px-5 py-2.5 text-center font-kumbh_bold text-sm font-medium text-gray-400 shadow-sm transition ease-in-out hover:scale-y-105 hover:bg-hoverblue focus:outline-none focus:ring-4">{% blocktrans %}ENVIAR{% endblocktrans %}</button>
   </form>
   <!-- Botones secundarios -->
   <div class="flex w-full flex-row gap-2">
@@ -34,9 +39,9 @@
       </svg>
     </a>
     <!-- Botón No puedo cambiar mi contraseña -->
-    <a class="w-full flex-nowrap text-nowrap rounded-lg bg-sky px-5 py-1.5 text-center text-xs font-medium text-white shadow-sm transition ease-in-out hover:scale-y-105 hover:bg-hoversky focus:outline-none focus:ring-4" href="{%url 'src_routes:cuentas_inactivas'%}">{% blocktrans %}AYUDA{% endblocktrans %}</a>
+    <a class="w-full flex-nowrap text-nowrap rounded-lg bg-sky px-5 py-1.5 text-center text-xs font-medium text-white shadow-sm transition ease-in-out hover:scale-y-105 hover:bg-hoversky focus:outline-none focus:ring-4" href="{%url 'src_routes:ayuda_contrasena'%}">{% blocktrans %}AYUDA{% endblocktrans %}</a>
     <!-- Botón condiciones y políticas -->
-    <a class="w-full flex-nowrap text-nowrap rounded-lg bg-sky px-5 py-1.5 text-center text-xs font-medium text-white shadow-sm transition ease-in-out hover:scale-y-105 hover:bg-hoversky focus:outline-none focus:ring-4" href="{%url 'src_routes:cuentas_inactivas'%}">{% blocktrans %}CONDICIONES Y POLÍTICAS{% endblocktrans %}</a>
+    <a class="w-full flex-nowrap text-nowrap rounded-lg bg-sky px-5 py-1.5 text-center text-xs font-medium text-white shadow-sm transition ease-in-out hover:scale-y-105 hover:bg-hoversky focus:outline-none focus:ring-4" href="{%url 'src_routes:proteccion_datos'%}">{% blocktrans %}CONDICIONES Y POLÍTICAS{% endblocktrans %}</a>
   </div>
 </div>
 <!-- Alerta -->
@@ -44,7 +49,7 @@
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-5 w-5 self-center">
     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
   </svg>
-  <span id="alerta_message" class="message text-sm">{% blocktrans %}{{error}}{% endblocktrans %}</span>
+  <span id="alerta_message" class="message text-sm">{% blocktrans %}{{form.error}}{% endblocktrans %}</span>
 </div>
 {% endblock %}
 
@@ -52,4 +57,5 @@
 {% block scripts %}
 <script src="{% static 'js/toggle_idioma_dropdown.js' %}"></script>
 <script src="{% static 'js/recuperar_scripts.js' %}"></script>
+<script src="{% static 'js/activation_scripts.js' %}"></script>
 {% endblock %}

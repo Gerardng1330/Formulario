@@ -1,9 +1,10 @@
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
+from backend.auth_users.forms import change_password_form
 """ Para servir archivos estáticos en desarrollo """
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib.auth import views as auth_views
 
 app_name = 'src_routes'
 
@@ -41,13 +42,12 @@ urlpatterns = [
     path('servicios_de_pago/', views.ayuda_view , name='servicios_de_pago'),
     path('empresas_relacionadas/', views.ayuda_view , name='empresas_relacionadas'),
     path('reembolso/', views.ayuda_view , name='reembolso'),
-
-    #Recuperacion de contraseña    
-    path('reset_password/',views.password_reset_request, name='password_reset'),#pantalla donde se ingresa el email para reestablecer request for a password  reset
-    path('recuperar_aviso/', views.recuperar_aviso_view, name='recuperar_aviso'),#pantalla de correo enviado
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),#pantalla donde se cambia las contraseñas
-    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='contra_cambiada.html'), name='password_reset_complete'),#pantalla de suscefully
     
+    # forgot password views
+    path('recuperar/', auth_views.PasswordResetView.as_view(html_email_template_name='mail_template.html', template_name = 'recuperar.html'), name='recuperar'), #pantalla donde se ingresa el email para reestablecer contraseña
+    #pantalla de correo enviado está en templates/accounts/password_reset_done.html
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),#pantalla donde se cambia las contraseñas
+    #pantalla de contraseña cambiana con éxito está en templates/accounts/password_reset_complete.html
 ]
 
 #ruta para descargar el cv 

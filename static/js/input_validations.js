@@ -1,5 +1,5 @@
-/* Referencias de todos los elementos e inputs del form */
-const form = document.getElementById("form");
+/* ReferenciaS a los elementos */
+const aplicantes_form = document.getElementById("aplicantes_form");
 const nombre = document.getElementById("nombre");
 const apellido = document.getElementById("apellido");
 const email = document.getElementById("email");
@@ -20,7 +20,6 @@ const direccion_principal = document.getElementById("direccion_principal");
 const direccion_secundaria = document.getElementById("direccion_secundaria");
 const ciudad = document.getElementById("ciudad");
 const Estado_Provincia = document.getElementById("Estado_Provincia");
-/* const codigo_postal = document.getElementById("codigo_postal"); */
 const Cargo1 = document.getElementById("Cargo1");
 const Cargo2 = document.getElementById("Cargo2");
 const turno = document.getElementById("turno");
@@ -29,6 +28,16 @@ const fecha_inicio = document.getElementById("fecha_inicio");
 const Transporte = document.getElementById("Transporte");
 const Conociste = document.getElementById("Conociste");
 const referencia = document.getElementById("referencia");
+
+const registro_form = document.getElementById("registro_form");
+const usuario = document.getElementById("usuario");
+/* hidden_pass_icon, showing_pass_icon, Contraseña and Contraseña1 declaration in show_hide_password.js */
+const eight_char = document.getElementById("eight_char");
+const numbers = document.getElementById("numbers");
+const lower = document.getElementById("lower");
+const upper = document.getElementById("upper");
+const special = document.getElementById("special");
+const pass_security_container = document.getElementById("pass_security_container");
 
 /* Inicialización de expresiones regulares */
 const letrasRegex = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+$/;
@@ -152,6 +161,30 @@ function validarApellido() {
   }
 }
 
+function validarNombreApellido(input) {
+  if (input.value.trim() === "") {
+    /* Campo requerido */
+    setError(input, m_campo_requerido);
+    return false;
+  } else if (!nombreApellidoRegex.test(input.value.trim())) {
+    /* Inicia con mayúscula? */
+    setError(input, m_nombre_formato);
+    return false;
+  } else if (espacioRegex.test(input.value.trim())) {
+    /* Escribió más de un nombre? */
+    setError(input, m_nombre_formato);
+    return false;
+  } else if (input.value.trim().length > longitud_max) {
+    /* Longitud máxima */
+    setError(input, m_longitud_max);
+    return false;
+  } else {
+    setSuccess(input, "");
+    return true;
+  }
+}
+
+/* Valida el input de email, incluído correo ya registrado */
 async function validarEmail(input) {
   /* Obtener el csrftoken */
   const csrftoken = document.cookie
@@ -193,6 +226,22 @@ async function validarEmail(input) {
     }
   } catch (error) {
     console.error("Error fetching registered emails:", error);
+  }
+}
+
+/* Valida el input de email. Sin correo ya registrado */
+function validarFormatoEmail(input) {
+  if (input.value.trim() === "") {
+    /* Campo requerido */
+    setError(input, m_campo_requerido);
+    return false;
+  } else if (input.value.trim().length > 30 || !emailRegex.test(input.value.trim())) {
+    /* Longitud máxima - Formato ejemplo@email.com */
+    setError(input, m_email_formato);
+    return false;
+  } else {
+    setSuccess(input, "");
+    return true;
   }
 }
 
@@ -364,7 +413,106 @@ function validarReferencia() {
   }
 }
 
-/* Validaciones por campo en tiempo real*/
+function validarContraseña(input) {
+  if (input.value.trim() === "") {
+    /* Campo requerido */
+    setError(input, m_campo_requerido);
+    return false;
+  } else if (espacioRegex.test(input.value.trim())) {
+    /* Ingresó algún espacio? */
+    setError(input, m_contrasena_space);
+    return false;
+  } else {
+    /* Si no está vacío o tiene algún espacio, revisa el formato de seguridad */
+    /* inicialización de variables de verificación */
+    var v_eight_char = false,
+      v_numbers = false,
+      v_numbers = false,
+      v_lower = false,
+      v_upper = false,
+      v_special = false;
+    /* Más de 8 caracteres? */
+    if (input.value.trim().length >= 8) {
+      eight_char.classList.remove("text-gray-400");
+      eight_char.classList.add("text-lime-500");
+      v_eight_char = true;
+    } else {
+      eight_char.classList.add("text-gray-400");
+      eight_char.classList.remove("text-lime-500");
+      v_eight_char = false;
+    }
+    /* Contiene números? */
+    var regex = /\d/;
+    if (regex.test(input.value.trim())) {
+      numbers.classList.remove("text-gray-400");
+      numbers.classList.add("text-lime-500");
+      v_numbers = true;
+    } else {
+      numbers.classList.add("text-gray-400");
+      numbers.classList.remove("text-lime-500");
+      v_numbers = false;
+    }
+    /* Contiene lower case? */
+    var regex = /[a-z]/;
+    if (regex.test(input.value.trim())) {
+      lower.classList.remove("text-gray-400");
+      lower.classList.add("text-lime-500");
+      v_lower = true;
+    } else {
+      lower.classList.add("text-gray-400");
+      lower.classList.remove("text-lime-500");
+      v_lower = false;
+    }
+    /* Contiene upper case? */
+    var regex = /[A-Z]/;
+    if (regex.test(input.value.trim())) {
+      upper.classList.remove("text-gray-400");
+      upper.classList.add("text-lime-500");
+      v_upper = true;
+    } else {
+      upper.classList.add("text-gray-400");
+      upper.classList.remove("text-lime-500");
+      v_upper = false;
+    }
+    /* Contiene caracteres especiales? */
+    var regex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+    if (regex.test(input.value.trim())) {
+      special.classList.remove("text-gray-400");
+      special.classList.add("text-lime-500");
+      v_special = true;
+    } else {
+      special.classList.add("text-gray-400");
+      special.classList.remove("text-lime-500");
+      v_special = false;
+    }
+
+    /* Si verif es true significa que todo se cumple */
+    if (v_eight_char == true && v_numbers == true && v_lower == true && v_upper == true && v_special == true) {
+      setSuccess(input, "");
+      return true;
+    } else {
+      setError(input, m_contrasena_formato);
+      return false;
+    }
+  }
+}
+
+function validarContraseña1(input) {
+  if (input.value.trim() === "") {
+    /* Campo requerido */
+    setError(input, m_campo_requerido);
+    return false;
+  } else if (input.value.trim() !== Contraseña.value.trim()) {
+    /* Las contraseñas no son iguales? */
+    setError(input, m_contrasena_match);
+    return false;
+  } else {
+    setSuccess(input, "");
+    return true;
+  }
+}
+
+/* Validaciones en tiempo real de APLICANTES_FORM en formulario.html */
 document.addEventListener("DOMContentLoaded", function () {
   /* Validar nombre */
   nombre.addEventListener("input", function () {
@@ -523,17 +671,77 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-/* Previene que el form se envíe antes de validar los inputs.
-Se ejecuta cuando se da click al botón APLICAR AHORA */
-form.addEventListener("submit", (e) => {
-  // Previene el envío predeterminado
-  e.preventDefault();
+/* Si APLICANTES_FORM está presente: Validaciones a los inputs de APLICANTES_FORM en formulario.html al presionar submit. Previene submit con datos erróneos. */
+if (aplicantes_form) {
+  aplicantes_form.addEventListener("submit", (e) => {
+    // Previene el envío predeterminado
+    e.preventDefault();
 
-  /* Se asigna cada función que retorna true or false a una variable de validación general.*/
-  const esFormularioValido = validarNombre() && validarApellido() && validarEmail(email) && validarRequerido(genero) && validarRequerido(nacionalidad) && validarFechaVacia(fecha_nacimiento) && validarFechaNacimiento() && validarAlergia() && validarRequerido(id_file) && validarRequerido(cv_file) && validarRequerido(codigo1) && validarTelefono(Telefono1) && validarRequerido(codigo3) && validarTelefono(telefono_emergencia) && validarRequerido(codigo2) && validarTelefono(Telefono2) && validarNombreContacto() && validarRequerido(direccion_principal) && validarDireccionSecundaria() && validarCiudad() && validarEstadoProvincia() && validarRequerido(Cargo1) && validarRequerido(Cargo2) && validarRequerido(turno) && validarRequerido(nivel_ingles) && validarFechaVacia(fecha_inicio) && validarFechaInicio() && validarRequerido(Transporte) && validarRequerido(Conociste) && validarReferencia();
+    /* Se asigna cada función que retorna true or false a una variable de validación general.*/
+    const esFormularioValido = validarNombre(nombre) && validarApellido() && validarEmail(email) && validarRequerido(genero) && validarRequerido(nacionalidad) && validarFechaVacia(fecha_nacimiento) && validarFechaNacimiento() && validarAlergia() && validarRequerido(id_file) && validarRequerido(cv_file) && validarRequerido(codigo1) && validarTelefono(Telefono1) && validarRequerido(codigo3) && validarTelefono(telefono_emergencia) && validarRequerido(codigo2) && validarTelefono(Telefono2) && validarNombreContacto() && validarRequerido(direccion_principal) && validarDireccionSecundaria() && validarCiudad() && validarEstadoProvincia() && validarRequerido(Cargo1) && validarRequerido(Cargo2) && validarRequerido(turno) && validarRequerido(nivel_ingles) && validarFechaVacia(fecha_inicio) && validarFechaInicio() && validarRequerido(Transporte) && validarRequerido(Conociste) && validarReferencia();
 
-  /* Si el correo no está repetido y el resto del form es válido, mándalo a la bd */
-  if (esFormularioValido) {
-    form.submit();
-  }
+    /* Si el correo no está repetido y el resto del form es válido, mándalo a la bd */
+    if (esFormularioValido) {
+      aplicantes_form.submit();
+    }
+  });
+}
+
+/* Validaciones en tiempo real de REGISTRO_FORM en registro.html */
+document.addEventListener("DOMContentLoaded", function () {
+  /* Validar nombre */
+  nombre.addEventListener("input", function () {
+    validarNombreApellido(nombre);
+  });
+
+  /* Validar apellido */
+  apellido.addEventListener("input", function () {
+    validarNombreApellido(apellido);
+  });
+
+  /* Validar usuario */
+  usuario.addEventListener("input", function () {
+    validarUsuario(usuario);
+  });
+
+  /* Validar email */
+  email.addEventListener("input", function () {
+    validarEmail(email);
+  });
+
+  /* Validar contraseña */
+  Contraseña.addEventListener("input", function () {
+    validarContraseña(Contraseña);
+  });
+
+  Contraseña.addEventListener("focus", function () {
+    pass_security_container.classList.remove("opacity-0");
+    pass_security_container.classList.add("opacity-100");
+  });
+
+  Contraseña.addEventListener("blur", function () {
+    pass_security_container.classList.remove("opacity-100");
+    pass_security_container.classList.add("opacity-0");
+  });
+
+  /* Validar repetir contraseña (Contraseña1) */
+  Contraseña1.addEventListener("input", function () {
+    validarContraseña1(Contraseña1);
+  });
 });
+
+/* Si REGISTRO_FORM está presente: Validaciones a los inputs de REGISTRO_FORM en registro.html al presionar submit. Previene submit con datos erróneos. */
+if (registro_form) {
+  registro_form.addEventListener("submit", (e) => {
+    // Previene el envío predeterminado
+    e.preventDefault();
+
+    /* Se asigna cada función que retorna true or false a una variable de validación general.*/
+    const esFormularioValido = validarNombreApellido(nombre) && validarNombreApellido(apellido) && validarUsuario(usuario) && validarEmail(email) && validarContraseña(Contraseña) && validarContraseña1(Contraseña1);
+
+    /* Si el correo no está repetido y el resto del form es válido, mándalo a la bd */
+    if (esFormularioValido) {
+      registro_form.submit();
+    }
+  });
+}

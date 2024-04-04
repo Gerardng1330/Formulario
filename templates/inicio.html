@@ -19,7 +19,7 @@
     <!-- Label contraseña y botón olvidé mi contraseña -->
     <div class="mb-1 ml-1 flex h-fit w-full flex-row justify-between">
       <label for="Contraseña" class="flex h-fit w-fit text-base">{% blocktrans %}Contraseña{% endblocktrans %}</label>
-      <a class="flex w-fit flex-nowrap self-center text-xs text-gray-500 hover:text-sky hover:underline" href="{% url 'src_routes:password_reset' %}">{% blocktrans %}OLVIDÉ MI CONTRASEÑA{% endblocktrans %}</a>
+      <a class="flex w-fit flex-nowrap self-center text-xs text-gray-500 hover:text-sky hover:underline" href="{% url 'src_routes:recuperar' %}">{% blocktrans %}OLVIDÉ MI CONTRASEÑA{% endblocktrans %}</a>
     </div>
     <!-- Input contraseña e ícono mostrar contraseña -->
     <div class="relative mb-5">
@@ -54,5 +54,6 @@
 <!-- Scripts del sitio -->
 {% block scripts %}
 <script src="{% static 'js/toggle_idioma_dropdown.js' %}"></script>
-<script src="{% static 'js/login_scripts.js' %}"></script>
+<script src="{% static 'js/show_hide_password.js' %}"></script>
+<script src="{% static 'js/alertas_transition.js' %}"></script>
 {% endblock %}
