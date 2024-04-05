@@ -2,8 +2,6 @@
 const send_button = document.getElementById("send_button");
 const timer_container = document.getElementById("timer_container");
 const timer_bar = document.getElementById("timer_bar");
-const alerta = document.getElementById("alerta");
-const alerta_message = document.getElementById("alerta_message").innerText;
 
 /* Al cargar el sitio, automaticamente se activa el timer y desactiva el botón.*/
 document.addEventListener("DOMContentLoaded", function () {
@@ -21,10 +19,3 @@ document.addEventListener("DOMContentLoaded", function () {
     send_button.classList.remove("pointer-events-none");
   }, 5000);
 });
-
-/* Transición para mostrar alerta */
-if (alerta_message !== "") {
-  alerta.classList.remove("opacity-0");
-  alerta.classList.add("opacity-100");
-  alerta.classList.remove("translate-y-2");
-}

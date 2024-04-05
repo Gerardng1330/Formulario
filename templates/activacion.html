@@ -13,13 +13,13 @@
   <!-- Párrafos -->
   <p class="mb-2 justify-start text-sm">Ingresa un correo electrónico al que tengas acceso. Se te enviará un token para que puedas activar tu cuenta.</p>
   <!-- Form -->
-  <form method="post" autocomplete="off">
+  <form method="post" autocomplete="off" id="correo_activacion_form">
     <!--esto sirve para que autenticar que el formulario es nuestro y no fue abierto de otro lado-->
     {% csrf_token %}
     <!-- Label e input -->
     <label for="Correo" class="text-md mb-1 ml-1 flex h-fit w-full">{% blocktrans %}Correo{% endblocktrans %}</label>
     <div class="input_control flex w-full flex-col gap-2">
-      <input type="email" id="Correo" name="Correo" # aria-describedby="helper-text-explanation" class="w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}example@email.com{% endblocktrans %}" !! autocomplete="off" />
+      <input type="email" id="email" name="Correo" # aria-describedby="helper-text-explanation" class="w-full rounded-lg border border-gray-300 bg-white p-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-sky focus:ring-sky" placeholder="{% blocktrans %}example@email.com{% endblocktrans %}" !! autocomplete="off" />
       <span class="message ml-1 hidden text-sm">Mensaje</span>
     </div>
     <!-- Barra de tiempo -->
@@ -49,5 +49,14 @@
 <!-- Scripts del sitio -->
 {% block scripts %}
 <script src="{% static 'js/toggle_idioma_dropdown.js' %}"></script>
-<script src="{% static 'js/activation_scripts.js' %}"></script>
+<script src="{% static 'js/input_validations.js' %}"></script>
+<script src="{% static 'js/timer.js' %}"></script>
+<script src="{% static 'js/alertas_transition.js' %}"></script>
+<script>
+  /* scripts requeridos explícitamente para su traducción */
+  const m_campo_requerido = "{% blocktrans %}Required field.{% endblocktrans %}";
+  const m_longitud_max = "{% blocktrans %}Maximum characters reached.{% endblocktrans %}";
+  const m_email_formato = "{% blocktrans %}Please enter a valid email address.{% endblocktrans %}";
+  const m_letras_regex = "{% blocktrans %}Please enter text only.{% endblocktrans %}";
+</script>
 {% endblock %}

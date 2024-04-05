@@ -6,6 +6,7 @@ const showing_pass_icon = document.getElementById("showing_pass_icon");
 const Contraseña = document.getElementById("Contraseña");
 const Contraseña1 = document.getElementById("Contraseña1");
 const login_form = document.getElementById("login_form");
+registro_form = document.getElementById("registro_form");
 
 /* Al darle click al ícono, se hace el toggle */
 /* toggle para mostrar contraseña */

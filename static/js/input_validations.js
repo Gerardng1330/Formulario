@@ -39,6 +39,9 @@ const upper = document.getElementById("upper");
 const special = document.getElementById("special");
 const pass_security_container = document.getElementById("pass_security_container");
 
+const correo_recuperar_form = document.getElementById("correo_recuperar_form");
+const correo_activacion_form = document.getElementById("correo_activacion_form");
+
 /* Inicialización de expresiones regulares */
 const letrasRegex = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+$/;
 const numerosRegex = /^[0-9]+$/;
@@ -185,7 +188,7 @@ function validarNombreApellido(input) {
 }
 
 /* Valida el input de email, incluído correo ya registrado */
-async function validarEmail(input) {
+async function validarEmail(input, model, app) {
   /* Obtener el csrftoken */
   const csrftoken = document.cookie
     .split("; ")
@@ -194,8 +197,8 @@ async function validarEmail(input) {
 
   try {
     // Petición AJAX usando fetch, se manda el url da la vista temporal y el model que se quiere usar
-    const modelName = "Usuario"; // Nombre del modelo
-    const appName = "formularios"; //Nombre de la aplicación donde está el modelo
+    const modelName = model; // Nombre del modelo
+    const appName = app; //Nombre de la aplicación donde está el modelo
     const url = `/obtener_emails/?model=${modelName}&app=${appName}`;
     const response = await fetch(url, {
       method: "GET",
@@ -512,173 +515,174 @@ function validarContraseña1(input) {
   }
 }
 
-/* Validaciones en tiempo real de APLICANTES_FORM en formulario.html */
-document.addEventListener("DOMContentLoaded", function () {
-  /* Validar nombre */
-  nombre.addEventListener("input", function () {
-    validarNombre(nombre);
-  });
-
-  /* Validar apellido */
-  apellido.addEventListener("input", function () {
-    validarApellido();
-  });
-
-  /* Validar email */
-  email.addEventListener("input", function () {
-    validarEmail(email);
-  });
-
-  /* Validar género */
-  genero.addEventListener("click", function () {
-    validarRequerido(genero);
-  });
-
-  /* Validar nacionalidad */
-  nacionalidad.addEventListener("click", function () {
-    validarRequerido(nacionalidad);
-  });
-
-  /* Validar fecha_nacimiento */
-  /* Si das click y no ingresas nada (vas a otro campo) */
-  fecha_nacimiento.addEventListener("blur", function () {
-    validarFechaVacia(fecha_nacimiento);
-  });
-  /* Si los valores del input cambian */
-  fecha_nacimiento.addEventListener("input", function () {
-    validarFechaNacimiento();
-  });
-
-  /* Validar discapacidad / alergia */
-  alergia.addEventListener("input", function () {
-    validarAlergia();
-  });
-
-  /* id_file se valida al mandar el formulario */
-
-  /* cv_file se valida al mandar el formulario */
-
-  /* Validar codigo1 */
-  codigo1.addEventListener("click", function () {
-    validarRequerido(codigo1);
-  });
-
-  /* Validar Telefono1 */
-  Telefono1.addEventListener("input", function (event) {
-    // Eliminar caracteres no numéricos
-    var inputValue = event.target.value.replace(/\D/g, "");
-    // Actualizar el valor del campo
-    event.target.value = inputValue;
-    validarTelefono(Telefono1);
-  });
-
-  /* Validar codigo3 */
-  codigo3.addEventListener("click", function () {
-    validarRequerido(codigo3);
-  });
-
-  /* Validar telefono_emergencia */
-  telefono_emergencia.addEventListener("input", function (event) {
-    // Eliminar caracteres no numéricos
-    var inputValue = event.target.value.replace(/\D/g, "");
-    // Actualizar el valor del campo
-    event.target.value = inputValue;
-    validarTelefono(telefono_emergencia);
-  });
-
-  /* Validar codigo2 */
-  codigo2.addEventListener("click", function () {
-    validarRequerido(codigo2);
-  });
-
-  /* Validar Telefono2 */
-  Telefono2.addEventListener("input", function (event) {
-    // Eliminar caracteres no numéricos
-    var inputValue = event.target.value.replace(/\D/g, "");
-    // Actualizar el valor del campo
-    event.target.value = inputValue;
-    validarTelefono(Telefono2);
-  });
-
-  /* Validar nombre_contacto */
-  nombre_contacto.addEventListener("input", function () {
-    validarNombreContacto();
-  });
-
-  /* Validar direccion_principal */
-  direccion_principal.addEventListener("input", function () {
-    validarRequerido(direccion_principal);
-  });
-
-  /* Validar direccion_secundaria. No es requerida */
-  direccion_secundaria.addEventListener("input", function () {
-    validarDireccionSecundaria();
-  });
-
-  /* Validar Ciudad */
-  ciudad.addEventListener("input", function () {
-    validarCiudad();
-  });
-
-  /* Validar Estado / Provincia */
-  Estado_Provincia.addEventListener("input", function () {
-    validarEstadoProvincia();
-  });
-
-  /* Validar Cargo1 */
-  Cargo1.addEventListener("click", function () {
-    validarRequerido(Cargo1);
-  });
-
-  /* Validar Cargo2 */
-  Cargo2.addEventListener("click", function () {
-    validarRequerido(Cargo2);
-  });
-
-  /* Validar turno */
-  turno.addEventListener("click", function () {
-    validarRequerido(turno);
-  });
-
-  /* Validar nivel_ingles */
-  nivel_ingles.addEventListener("click", function () {
-    validarRequerido(nivel_ingles);
-  });
-
-  /* Validar fecha_inicio */
-  /* Si das click y no ingresas nada (vas a otro campo) */
-  fecha_inicio.addEventListener("blur", function () {
-    validarFechaVacia(fecha_inicio);
-  });
-  /* Si los valores del input cambian */
-  fecha_inicio.addEventListener("input", function () {
-    validarFechaInicio();
-  });
-
-  /* Validar transporte */
-  Transporte.addEventListener("click", function () {
-    validarRequerido(Transporte);
-  });
-
-  /* Validar Conociste */
-  Conociste.addEventListener("click", function () {
-    validarRequerido(Conociste);
-  });
-
-  /* Validar referencia. No es requerida */
-  referencia.addEventListener("input", function () {
-    validarReferencia();
-  });
-});
-
-/* Si APLICANTES_FORM está presente: Validaciones a los inputs de APLICANTES_FORM en formulario.html al presionar submit. Previene submit con datos erróneos. */
+/* Si APLICANTES_FORM está presente*/
 if (aplicantes_form) {
+  /* Validaciones en tiempo real de APLICANTES_FORM en formulario.html  */
+  document.addEventListener("DOMContentLoaded", function () {
+    /* Validar nombre */
+    nombre.addEventListener("input", function () {
+      validarNombre(nombre);
+    });
+
+    /* Validar apellido */
+    apellido.addEventListener("input", function () {
+      validarApellido();
+    });
+
+    /* Validar email */
+    email.addEventListener("input", function () {
+      validarEmail(email, "Usuario", "formularios");
+    });
+
+    /* Validar género */
+    genero.addEventListener("click", function () {
+      validarRequerido(genero);
+    });
+
+    /* Validar nacionalidad */
+    nacionalidad.addEventListener("click", function () {
+      validarRequerido(nacionalidad);
+    });
+
+    /* Validar fecha_nacimiento */
+    /* Si das click y no ingresas nada (vas a otro campo) */
+    fecha_nacimiento.addEventListener("blur", function () {
+      validarFechaVacia(fecha_nacimiento);
+    });
+    /* Si los valores del input cambian */
+    fecha_nacimiento.addEventListener("input", function () {
+      validarFechaNacimiento();
+    });
+
+    /* Validar discapacidad / alergia */
+    alergia.addEventListener("input", function () {
+      validarAlergia();
+    });
+
+    /* id_file se valida al mandar el formulario */
+
+    /* cv_file se valida al mandar el formulario */
+
+    /* Validar codigo1 */
+    codigo1.addEventListener("click", function () {
+      validarRequerido(codigo1);
+    });
+
+    /* Validar Telefono1 */
+    Telefono1.addEventListener("input", function (event) {
+      // Eliminar caracteres no numéricos
+      var inputValue = event.target.value.replace(/\D/g, "");
+      // Actualizar el valor del campo
+      event.target.value = inputValue;
+      validarTelefono(Telefono1);
+    });
+
+    /* Validar codigo3 */
+    codigo3.addEventListener("click", function () {
+      validarRequerido(codigo3);
+    });
+
+    /* Validar telefono_emergencia */
+    telefono_emergencia.addEventListener("input", function (event) {
+      // Eliminar caracteres no numéricos
+      var inputValue = event.target.value.replace(/\D/g, "");
+      // Actualizar el valor del campo
+      event.target.value = inputValue;
+      validarTelefono(telefono_emergencia);
+    });
+
+    /* Validar codigo2 */
+    codigo2.addEventListener("click", function () {
+      validarRequerido(codigo2);
+    });
+
+    /* Validar Telefono2 */
+    Telefono2.addEventListener("input", function (event) {
+      // Eliminar caracteres no numéricos
+      var inputValue = event.target.value.replace(/\D/g, "");
+      // Actualizar el valor del campo
+      event.target.value = inputValue;
+      validarTelefono(Telefono2);
+    });
+
+    /* Validar nombre_contacto */
+    nombre_contacto.addEventListener("input", function () {
+      validarNombreContacto();
+    });
+
+    /* Validar direccion_principal */
+    direccion_principal.addEventListener("input", function () {
+      validarRequerido(direccion_principal);
+    });
+
+    /* Validar direccion_secundaria. No es requerida */
+    direccion_secundaria.addEventListener("input", function () {
+      validarDireccionSecundaria();
+    });
+
+    /* Validar Ciudad */
+    ciudad.addEventListener("input", function () {
+      validarCiudad();
+    });
+
+    /* Validar Estado / Provincia */
+    Estado_Provincia.addEventListener("input", function () {
+      validarEstadoProvincia();
+    });
+
+    /* Validar Cargo1 */
+    Cargo1.addEventListener("click", function () {
+      validarRequerido(Cargo1);
+    });
+
+    /* Validar Cargo2 */
+    Cargo2.addEventListener("click", function () {
+      validarRequerido(Cargo2);
+    });
+
+    /* Validar turno */
+    turno.addEventListener("click", function () {
+      validarRequerido(turno);
+    });
+
+    /* Validar nivel_ingles */
+    nivel_ingles.addEventListener("click", function () {
+      validarRequerido(nivel_ingles);
+    });
+
+    /* Validar fecha_inicio */
+    /* Si das click y no ingresas nada (vas a otro campo) */
+    fecha_inicio.addEventListener("blur", function () {
+      validarFechaVacia(fecha_inicio);
+    });
+    /* Si los valores del input cambian */
+    fecha_inicio.addEventListener("input", function () {
+      validarFechaInicio();
+    });
+
+    /* Validar transporte */
+    Transporte.addEventListener("click", function () {
+      validarRequerido(Transporte);
+    });
+
+    /* Validar Conociste */
+    Conociste.addEventListener("click", function () {
+      validarRequerido(Conociste);
+    });
+
+    /* Validar referencia. No es requerida */
+    referencia.addEventListener("input", function () {
+      validarReferencia();
+    });
+  });
+
+  /*Validaciones a los inputs de APLICANTES_FORM en formulario.html al presionar submit. Previene submit con datos erróneos. */
   aplicantes_form.addEventListener("submit", (e) => {
     // Previene el envío predeterminado
     e.preventDefault();
 
     /* Se asigna cada función que retorna true or false a una variable de validación general.*/
-    const esFormularioValido = validarNombre(nombre) && validarApellido() && validarEmail(email) && validarRequerido(genero) && validarRequerido(nacionalidad) && validarFechaVacia(fecha_nacimiento) && validarFechaNacimiento() && validarAlergia() && validarRequerido(id_file) && validarRequerido(cv_file) && validarRequerido(codigo1) && validarTelefono(Telefono1) && validarRequerido(codigo3) && validarTelefono(telefono_emergencia) && validarRequerido(codigo2) && validarTelefono(Telefono2) && validarNombreContacto() && validarRequerido(direccion_principal) && validarDireccionSecundaria() && validarCiudad() && validarEstadoProvincia() && validarRequerido(Cargo1) && validarRequerido(Cargo2) && validarRequerido(turno) && validarRequerido(nivel_ingles) && validarFechaVacia(fecha_inicio) && validarFechaInicio() && validarRequerido(Transporte) && validarRequerido(Conociste) && validarReferencia();
+    const esFormularioValido = validarNombre(nombre) && validarApellido() && validarEmail(email, "Usuario", "formularios") && validarRequerido(genero) && validarRequerido(nacionalidad) && validarFechaVacia(fecha_nacimiento) && validarFechaNacimiento() && validarAlergia() && validarRequerido(id_file) && validarRequerido(cv_file) && validarRequerido(codigo1) && validarTelefono(Telefono1) && validarRequerido(codigo3) && validarTelefono(telefono_emergencia) && validarRequerido(codigo2) && validarTelefono(Telefono2) && validarNombreContacto() && validarRequerido(direccion_principal) && validarDireccionSecundaria() && validarCiudad() && validarEstadoProvincia() && validarRequerido(Cargo1) && validarRequerido(Cargo2) && validarRequerido(turno) && validarRequerido(nivel_ingles) && validarFechaVacia(fecha_inicio) && validarFechaInicio() && validarRequerido(Transporte) && validarRequerido(Conociste) && validarReferencia();
 
     /* Si el correo no está repetido y el resto del form es válido, mándalo a la bd */
     if (esFormularioValido) {
@@ -687,61 +691,156 @@ if (aplicantes_form) {
   });
 }
 
-/* Validaciones en tiempo real de REGISTRO_FORM en registro.html */
-document.addEventListener("DOMContentLoaded", function () {
-  /* Validar nombre */
-  nombre.addEventListener("input", function () {
-    validarNombreApellido(nombre);
-  });
-
-  /* Validar apellido */
-  apellido.addEventListener("input", function () {
-    validarNombreApellido(apellido);
-  });
-
-  /* Validar usuario */
-  usuario.addEventListener("input", function () {
-    validarUsuario(usuario);
-  });
-
-  /* Validar email */
-  email.addEventListener("input", function () {
-    validarEmail(email);
-  });
-
-  /* Validar contraseña */
-  Contraseña.addEventListener("input", function () {
-    validarContraseña(Contraseña);
-  });
-
-  Contraseña.addEventListener("focus", function () {
-    pass_security_container.classList.remove("opacity-0");
-    pass_security_container.classList.add("opacity-100");
-  });
-
-  Contraseña.addEventListener("blur", function () {
-    pass_security_container.classList.remove("opacity-100");
-    pass_security_container.classList.add("opacity-0");
-  });
-
-  /* Validar repetir contraseña (Contraseña1) */
-  Contraseña1.addEventListener("input", function () {
-    validarContraseña1(Contraseña1);
-  });
-});
-
-/* Si REGISTRO_FORM está presente: Validaciones a los inputs de REGISTRO_FORM en registro.html al presionar submit. Previene submit con datos erróneos. */
+/* Si REGISTRO_FORM está presente */
 if (registro_form) {
+  /* Validaciones en tiempo real de REGISTRO_FORM en registro.html  */
+  document.addEventListener("DOMContentLoaded", function () {
+    /* Validar nombre */
+    nombre.addEventListener("input", function () {
+      validarNombreApellido(nombre);
+    });
+
+    /* Validar apellido */
+    apellido.addEventListener("input", function () {
+      validarNombreApellido(apellido);
+    });
+
+    /* Validar usuario */
+    usuario.addEventListener("input", function () {
+      validarUsuario(usuario);
+    });
+
+    /* Validar email */
+    email.addEventListener("input", function () {
+      validarEmail(email, "User", "auth_users");
+    });
+
+    /* Validar contraseña */
+    Contraseña.addEventListener("input", function () {
+      validarContraseña(Contraseña);
+    });
+
+    Contraseña.addEventListener("focus", function () {
+      pass_security_container.classList.remove("opacity-0");
+      pass_security_container.classList.add("opacity-100");
+    });
+
+    Contraseña.addEventListener("blur", function () {
+      pass_security_container.classList.remove("opacity-100");
+      pass_security_container.classList.add("opacity-0");
+    });
+
+    /* Validar repetir contraseña (Contraseña1) */
+    Contraseña1.addEventListener("input", function () {
+      validarContraseña1(Contraseña1);
+    });
+  });
+
+  /*Validaciones a los inputs de REGISTRO_FORM en registro.html al presionar submit. Previene submit con datos erróneos. */
   registro_form.addEventListener("submit", (e) => {
     // Previene el envío predeterminado
     e.preventDefault();
 
     /* Se asigna cada función que retorna true or false a una variable de validación general.*/
-    const esFormularioValido = validarNombreApellido(nombre) && validarNombreApellido(apellido) && validarUsuario(usuario) && validarEmail(email) && validarContraseña(Contraseña) && validarContraseña1(Contraseña1);
+    const esFormularioValido = validarNombreApellido(nombre) && validarNombreApellido(apellido) && validarUsuario(usuario) && validarEmail(email, "User", "auth_users") && validarContraseña(Contraseña) && validarContraseña1(Contraseña1);
 
     /* Si el correo no está repetido y el resto del form es válido, mándalo a la bd */
     if (esFormularioValido) {
       registro_form.submit();
+    }
+  });
+}
+
+/* Si CORREO_RECUPERAR_FORM está presente */
+if (correo_recuperar_form) {
+  /*Validaciones en tiempo real de CORREO_RECUPERAR_FORM en formulario.html */
+  document.addEventListener("DOMContentLoaded", function () {
+    /* Validar email */
+    email.addEventListener("input", function () {
+      validarFormatoEmail(email);
+    });
+  });
+
+  /*Validaciones a los inputs de CORREO_RECUPERAR_FORM en recuperar.html al presionar submit. Previene submit con datos erróneos. */
+  if (correo_recuperar_form) {
+    correo_recuperar_form.addEventListener("submit", (e) => {
+      // Previene el envío predeterminado
+      e.preventDefault();
+
+      /* Se asigna cada función que retorna true or false a una variable de validación general.*/
+      const esFormularioValido = validarFormatoEmail(email);
+
+      /* Si el correo no está repetido y el resto del form es válido, mándalo a la bd */
+      if (esFormularioValido) {
+        correo_recuperar_form.submit();
+      }
+    });
+  }
+}
+
+/* Si CORREO_ACTIVACION_FORM está presente */
+if (correo_activacion_form) {
+  /*Validaciones en tiempo real de CORREO_ACTIVACION_FORM en activacion.html */
+  document.addEventListener("DOMContentLoaded", function () {
+    /* Validar email */
+    email.addEventListener("input", function () {
+      validarFormatoEmail(email);
+    });
+  });
+
+  /*Validaciones a los inputs de CORREO_ACTIVACION_FORM en activacion.html al presionar submit. Previene submit con datos erróneos. */
+  if (correo_activacion_form) {
+    correo_activacion_form.addEventListener("submit", (e) => {
+      // Previene el envío predeterminado
+      e.preventDefault();
+
+      /* Se asigna cada función que retorna true or false a una variable de validación general.*/
+      const esFormularioValido = validarFormatoEmail(email);
+
+      /* Si el correo no está repetido y el resto del form es válido, mándalo a la bd */
+      if (esFormularioValido) {
+        correo_activacion_form.submit();
+      }
+    });
+  }
+}
+
+/* Si password_reset_form está presente */
+if (password_reset_form) {
+  /* Validaciones en tiempo real de password_reset_form en password_reset_confirm.html  */
+  document.addEventListener("DOMContentLoaded", function () {
+    /* Validar contraseña */
+    Contraseña.addEventListener("input", function () {
+      validarContraseña(Contraseña);
+    });
+
+    Contraseña.addEventListener("focus", function () {
+      pass_security_container.classList.remove("opacity-0");
+      pass_security_container.classList.add("opacity-100");
+    });
+
+    Contraseña.addEventListener("blur", function () {
+      pass_security_container.classList.remove("opacity-100");
+      pass_security_container.classList.add("opacity-0");
+    });
+
+    /* Validar repetir contraseña (Contraseña1) */
+    Contraseña1.addEventListener("input", function () {
+      validarContraseña1(Contraseña1);
+    });
+  });
+
+  /*Validaciones a los inputs de password_reset_form en password_reset_confirm.html al presionar submit. Previene submit con datos erróneos. */
+  password_reset_form.addEventListener("submit", (e) => {
+    // Previene el envío predeterminado
+    e.preventDefault();
+
+    /* Se asigna cada función que retorna true or false a una variable de validación general.*/
+    const esFormularioValido = validarContraseña(Contraseña) && validarContraseña1(Contraseña1);
+
+    /* Si el correo no está repetido y el resto del form es válido, mándalo a la bd */
+    if (esFormularioValido) {
+      password_reset_form.submit();
     }
   });
 }

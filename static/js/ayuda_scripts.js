@@ -44,47 +44,49 @@ const sidebarButtons = document.querySelectorAll(".sidebar_button").forEach((lin
 });
 
 /* Copiar correo de arv a clipboard al hacer click */
-copiar_correo_button.addEventListener("click", function () {
-  /* Text to be copied */
-  var text_to_copy = "support@arvcloud.com";
+if (copiar_correo_button) {
+  copiar_correo_button.addEventListener("click", function () {
+    /* Text to be copied */
+    var text_to_copy = "support@arvcloud.com";
 
-  /* Create a temporary textarea element to perform the copy command */
-  var textarea = document.createElement("textarea");
-  textarea.value = text_to_copy;
-  document.body.appendChild(textarea);
+    /* Create a temporary textarea element to perform the copy command */
+    var textarea = document.createElement("textarea");
+    textarea.value = text_to_copy;
+    document.body.appendChild(textarea);
 
-  /* Select the text in the textarea */
-  textarea.select();
-  textarea.setSelectionRange(0, 99999); // For mobile devices
+    /* Select the text in the textarea */
+    textarea.select();
+    textarea.setSelectionRange(0, 99999); // For mobile devices
 
-  /* Execute the copy command */
-  document.execCommand("copy");
+    /* Execute the copy command */
+    document.execCommand("copy");
 
-  /* Quitar estilos de before */
-  svg_before_copy.classList.add("hidden");
-  span_before_copy.classList.add("hidden");
-  copiar_correo_button.classList.remove("bg-blue");
-  copiar_correo_button.classList.remove("hover:bg-hoverblue");
+    /* Quitar estilos de before */
+    svg_before_copy.classList.add("hidden");
+    span_before_copy.classList.add("hidden");
+    copiar_correo_button.classList.remove("bg-blue");
+    copiar_correo_button.classList.remove("hover:bg-hoverblue");
 
-  /* Poner estilos de after */
-  svg_after_copy.classList.remove("hidden");
-  span_after_copy.classList.remove("hidden");
-  copiar_correo_button.classList.add("bg-sky");
+    /* Poner estilos de after */
+    svg_after_copy.classList.remove("hidden");
+    span_after_copy.classList.remove("hidden");
+    copiar_correo_button.classList.add("bg-sky");
 
-  /* Volver a como estaba luego de unos segundos */
-  setTimeout(function () {
-    /* Poner estilos de before */
-    svg_before_copy.classList.remove("hidden");
-    span_before_copy.classList.remove("hidden");
-    copiar_correo_button.classList.add("bg-blue");
-    copiar_correo_button.classList.add("hover:bg-hoverblue");
+    /* Volver a como estaba luego de unos segundos */
+    setTimeout(function () {
+      /* Poner estilos de before */
+      svg_before_copy.classList.remove("hidden");
+      span_before_copy.classList.remove("hidden");
+      copiar_correo_button.classList.add("bg-blue");
+      copiar_correo_button.classList.add("hover:bg-hoverblue");
 
-    /* Quitar estilos de after */
-    svg_after_copy.classList.add("hidden");
-    span_after_copy.classList.add("hidden");
-    copiar_correo_button.classList.remove("bg-sky");
-  }, 2500);
+      /* Quitar estilos de after */
+      svg_after_copy.classList.add("hidden");
+      span_after_copy.classList.add("hidden");
+      copiar_correo_button.classList.remove("bg-sky");
+    }, 2500);
 
-  /* Remove the temporary textarea */
-  document.body.removeChild(textarea);
-});
+    /* Remove the temporary textarea */
+    document.body.removeChild(textarea);
+  });
+}

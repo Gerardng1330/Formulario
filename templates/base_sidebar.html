@@ -18,7 +18,7 @@
     <!-- Sidebar -->
     <div id="sidebar" class="flex h-screen w-80 min-w-80 flex-col gap-8 overflow-y-auto border border-gray-200 bg-gray-300 bg-opacity-30 px-6 pb-6 pt-10 text-blue shadow-sm" aria-label="sidebar">
       <!-- logo f2f -->
-      <img class="h-12 pr-3" src="{% static 'img/f2f-logo.svg' %}" alt="" />
+      <a href="{%url 'src_routes:inicio'%}" class="h-12 cursor-pointer"><img class="h-full pl-[2rem]" src="{% static 'img/f2f-logo.svg' %}" alt="" /></a>
       <ul class="flex h-full flex-col justify-between space-y-2 font-medium">
         {% block sidebar %}
         <!-- Opciones del sidebar -->
