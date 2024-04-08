@@ -15,6 +15,7 @@ from django.urls import reverse
 from reportlab.lib.pagesizes import legal
 
 
+
 #panel de django
 class UsuarioInfo(admin.ModelAdmin):
     #muestra los campos en el panel
@@ -25,6 +26,8 @@ class UsuarioInfo(admin.ModelAdmin):
     list_filter = ("nombre", "fecha_nacimiento",)
     #que aparezca la fecha con su jerarquia
     date_hierarchy = "fecha_nacimiento"
+
+    #admin.site.register(MyModel)
     
     actions = ['download_pdf']
 

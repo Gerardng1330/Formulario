@@ -4,22 +4,8 @@
 <!-- Descripción del sitio -->
 {% block desc %}Formulario de aplicantes de face-to-face learning center.{% endblock %}
 <!-- Contenido del sitio -->
-{% block content %} {% if form_activo %} {% if enviado_correctamente %}
-<!-- Contenedor del mensaje de éxito -->
-<div class="flex h-full w-full items-center justify-center self-center">
-  <!-- Aviso mensaje de éxito -->
-  <div class="flex h-1/3 w-1/3 min-w-min flex-col gap-1 rounded-2xl border border-gray-200 bg-white px-11 py-8 shadow-sm">
-    <!-- ícono de check -->
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="mb-2 h-12 w-12 animate-pulse self-center text-sky">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-    </svg>
+{% block content %} {% if form_activo %} 
 
-    <!-- Texto -->
-    <h1 class="font-kumbh_bold text-3xl">{% blocktrans %}FORMULARIO ENVIADO CON ÉXITO{% endblocktrans %}</h1>
-    <p class="text-justify text-sm">{% blocktrans %}Gracias por su tiempo, estaremos en contacto{% endblocktrans %}</p>
-  </div>
-</div>
-{% else %}
 <!-- Contenedor del formulario -->
 <div id="form_container" class="flex h-full w-1/2 flex-col items-center justify-start gap-2 self-center">
   <!-- Título del formulario -->
@@ -440,7 +426,7 @@
     </div>
   </div>
 </div>
-{% endif %} {% endif %} {% else %}
+{% endif %} {% else %}
 <!-- Contenedor del mensaje de advertencia -->
 <div class="flex h-full w-full items-center justify-center">
   <!-- Aviso mensaje de advertencia -->
@@ -451,8 +437,8 @@
     </svg>
 
     <!-- Texto -->
-    <h1 class="font-kumbh_bold text-3xl">{% blocktrans %}ESTE FORMULARIO ESTÁ INACTIVO{% endblocktrans %}</h1>
-    <p class="text-justify text-sm">{% blocktrans %}Gracias por su interés, ¡Inténtelo más tarde!{% endblocktrans %}</p>
+    <h1 class="font-kumbh_bold text-3xl">{% blocktrans %}THIS FORM IS INACTIVE{% endblocktrans %}</h1>
+    <p class="text-justify text-sm">{% blocktrans %}Thank you for your interest, please try again later!{% endblocktrans %}</p>
   </div>
 </div>
 {% endif %} {% endblock %}
