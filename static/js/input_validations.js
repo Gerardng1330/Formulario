@@ -41,6 +41,7 @@ const pass_security_container = document.getElementById("pass_security_container
 
 const correo_recuperar_form = document.getElementById("correo_recuperar_form");
 const correo_activacion_form = document.getElementById("correo_activacion_form");
+const password_reset_form = document.getElementById("password_reset_form");
 
 /* Inicialización de expresiones regulares */
 const letrasRegex = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+$/;
@@ -412,6 +413,25 @@ function validarReferencia() {
     return false;
   } else {
     setSuccess(referencia, "");
+    return true;
+  }
+}
+
+function validarUsuario(input) {
+  if (input.value.trim() === "") {
+    /* Campo requerido */
+    setError(input, m_campo_requerido);
+    return false;
+  } else if (espacioRegex.test(input.value.trim())) {
+    /* Ingresó algún espacio? */
+    setError(input, m_usuario_formato);
+    return false;
+  } else if (input.value.trim().length > longitud_max) {
+    /* Longitud máxima */
+    setError(input, m_longitud_max);
+    return false;
+  } else {
+    setSuccess(input, "");
     return true;
   }
 }
