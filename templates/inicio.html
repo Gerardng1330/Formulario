@@ -47,13 +47,15 @@
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-5 w-5">
     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
   </svg>
-  <span class="message text-sm">{% blocktrans %}Invalid username or password{% endblocktrans %}</span>
+  {% trans error as translated_error %}
+  <span id="alerta_message" class="message text-sm">{{ translated_error }}</span>
 </div>
 {% endblock %}
 
 <!-- Scripts del sitio -->
 {% block scripts %}
 <script src="{% static 'js/toggle_idioma_dropdown.js' %}"></script>
+<script src="{% static 'js/input_validations.js' %}"></script>
 <script src="{% static 'js/show_hide_password.js' %}"></script>
 <script src="{% static 'js/alertas_transition.js' %}"></script>
 {% endblock %}

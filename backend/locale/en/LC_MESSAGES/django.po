@@ -1,0 +1,685 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-08 11:32-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\backend\main\settings.py:92
+msgid "English"
+msgstr ""
+
+#: .\backend\main\settings.py:93
+msgid "Spanish"
+msgstr ""
+
+#: .\backend\main\urls.py:25
+msgid "adminpaneldjango/"
+msgstr ""
+
+#: .\templates\accounts\password_reset_complete.html:29
+msgid "CONTRASEÑA CAMBIADA CON ÉXITO"
+msgstr ""
+
+#: .\templates\accounts\password_reset_complete.html:30
+#: .\templates\accounts\password_reset_done.html:22 .\templates\ayuda.html:123
+#: .\templates\recuperar_aviso.html:22 .\templates\registro_exitoso.html:30
+msgid "IR A INICIO"
+msgstr ""
+
+#: .\templates\accounts\password_reset_done.html:12
+#: .\templates\recuperar_aviso.html:12
+msgid "CORREO DE RECUPERACIÓN ENVIADO"
+msgstr ""
+
+#: .\templates\accounts\password_reset_done.html:25
+#: .\templates\recuperar_aviso.html:25
+msgid "VOLVER A INTENTAR"
+msgstr ""
+
+#: .\templates\accounts\password_reset_done.html:27
+#: .\templates\activacion.html:37 .\templates\activacion_aviso.html:27
+#: .\templates\ayuda.html:20 .\templates\recuperar.html:44
+#: .\templates\recuperar_aviso.html:27 .\templates\recuperar_form.html:69
+#: .\templates\registration\password_reset_confirm.html:72
+#: .\templates\registration\reset_password.html:69
+msgid "CONDICIONES Y POLÍTICAS"
+msgstr ""
+
+#: .\templates\activacion.html:12
+msgid "ACTIVACIÓN DE CUENTA"
+msgstr ""
+
+#: .\templates\activacion.html:20 .\templates\recuperar.html:20
+msgid "Correo"
+msgstr ""
+
+#: .\templates\activacion.html:22 .\templates\formulario.html:53
+#: .\templates\registro.html:54
+msgid "example@email.com"
+msgstr ""
+
+#: .\templates\activacion.html:30
+msgid "ENVIAR TOKEN"
+msgstr ""
+
+#: .\templates\activacion.html:35 .\templates\activacion_aviso.html:25
+#: .\templates\recuperar_form.html:67
+#: .\templates\registration\password_reset_confirm.html:70
+#: .\templates\registration\reset_password.html:67
+msgid "INICIO"
+msgstr ""
+
+#: .\templates\activacion.html:45 .\templates\registro.html:117
+#, python-format
+msgid "%(error)s"
+msgstr ""
+
+#: .\templates\activacion.html:57 .\templates\formulario.html:453
+#: .\templates\recuperar.html:63 .\templates\recuperar_form.html:112
+#: .\templates\registration\password_reset_confirm.html:102
+#: .\templates\registration\reset_password.html:112
+#: .\templates\registro.html:130
+msgid "Required field."
+msgstr ""
+
+#: .\templates\activacion.html:58 .\templates\formulario.html:455
+#: .\templates\recuperar.html:64 .\templates\recuperar_form.html:113
+#: .\templates\registration\password_reset_confirm.html:103
+#: .\templates\registration\reset_password.html:113
+#: .\templates\registro.html:131
+msgid "Maximum characters reached."
+msgstr ""
+
+#: .\templates\activacion.html:59 .\templates\formulario.html:458
+#: .\templates\recuperar.html:65 .\templates\recuperar_form.html:116
+#: .\templates\registration\reset_password.html:116
+#: .\templates\registro.html:134
+msgid "Please enter a valid email address."
+msgstr ""
+
+#: .\templates\activacion.html:60 .\templates\formulario.html:461
+#: .\templates\recuperar.html:66 .\templates\recuperar_form.html:117
+#: .\templates\registration\reset_password.html:117
+#: .\templates\registro.html:135
+msgid "Please enter text only."
+msgstr ""
+
+#: .\templates\activacion_aviso.html:12
+msgid "CORREO DE ACTIVACIÓN ENVIADO"
+msgstr ""
+
+#: .\templates\activacion_aviso.html:22
+msgid "REENVIAR TOKEN"
+msgstr ""
+
+#: .\templates\ayuda.html:15
+msgid "No puedo cambiar mi contraseña"
+msgstr ""
+
+#: .\templates\ayuda.html:28
+msgid "Protección de datos"
+msgstr ""
+
+#: .\templates\ayuda.html:37
+msgid "Actualización de la política"
+msgstr ""
+
+#: .\templates\ayuda.html:46
+msgid "Actualización de los términos"
+msgstr ""
+
+#: .\templates\ayuda.html:55
+msgid "Cuentas inactivas"
+msgstr ""
+
+#: .\templates\ayuda.html:64
+msgid "Tiempo de almacenamiento"
+msgstr ""
+
+#: .\templates\ayuda.html:73
+msgid "Solicitar una copia de tus datos"
+msgstr ""
+
+#: .\templates\ayuda.html:78
+msgid "TÉRMINOS Y POLÍTICAS ADICIONALES"
+msgstr ""
+
+#: .\templates\ayuda.html:86
+msgid "Política de derecho de autor"
+msgstr ""
+
+#: .\templates\ayuda.html:95
+msgid "Términos de los servicios de pago"
+msgstr ""
+
+#: .\templates\ayuda.html:104
+msgid "Empresas relacionadas"
+msgstr ""
+
+#: .\templates\ayuda.html:113
+msgid "Política de reembolso"
+msgstr ""
+
+#: .\templates\ayuda.html:144 .\templates\base_custom.html:36
+msgid "Change language"
+msgstr ""
+
+#: .\templates\ayuda.html:179 .\templates\ayuda.html:200
+msgid "NO PUEDO CAMBIAR MI CONTRASEÑA"
+msgstr ""
+
+#: .\templates\ayuda.html:180
+msgid ""
+"¡Comunícate con nosotros al correo de ayuda! Confirma tu identidad. Envíanos "
+"tu usuario y documento de identidad personal."
+msgstr ""
+
+#: .\templates\ayuda.html:188
+msgid "SUPPORT@ARVCLOUD.COM"
+msgstr ""
+
+#: .\templates\ayuda.html:193
+msgid "COPIADO AL PORTAPAPELES"
+msgstr ""
+
+#: .\templates\ayuda.html:280 .\templates\base_custom.html:69
+#: .\templates\exito.html:41
+msgid "COPYRIGHT © 2024 ARV SYSTEM CORP | ALL RIGHTS RESERVED."
+msgstr ""
+
+#: .\templates\exito.html:5
+msgid "Form"
+msgstr ""
+
+#: .\templates\exito.html:34
+msgid "FORM SUBMITTED SUCCESSFULLY"
+msgstr ""
+
+#: .\templates\exito.html:35
+msgid "Thank you for your time, we'll stay in touch!"
+msgstr ""
+
+#: .\templates\formulario.html:12
+msgid "APPLICANT FORM"
+msgstr ""
+
+#: .\templates\formulario.html:29 .\templates\pruebaPagina.html:39
+#: .\templates\registro.html:21
+msgid "Name"
+msgstr ""
+
+#: .\templates\formulario.html:35 .\templates\registro.html:27
+msgid "First name"
+msgstr ""
+
+#: .\templates\formulario.html:41 .\templates\registro.html:33
+msgid "Last name"
+msgstr ""
+
+#: .\templates\formulario.html:51 .\templates\registro.html:52
+msgid "Email"
+msgstr ""
+
+#: .\templates\formulario.html:60
+msgid "Gender"
+msgstr ""
+
+#: .\templates\formulario.html:63 .\templates\formulario.html:80
+#: .\templates\formulario.html:275 .\templates\formulario.html:290
+#: .\templates\formulario.html:317 .\templates\formulario.html:335
+msgid "Select"
+msgstr ""
+
+#: .\templates\formulario.html:64
+msgid "Male"
+msgstr ""
+
+#: .\templates\formulario.html:65
+msgid "Female"
+msgstr ""
+
+#: .\templates\formulario.html:66 .\templates\formulario.html:96
+#: .\templates\formulario.html:321 .\templates\formulario.html:341
+msgid "Other"
+msgstr ""
+
+#: .\templates\formulario.html:77
+msgid "Nationality"
+msgstr ""
+
+#: .\templates\formulario.html:105
+msgid "Birthdate"
+msgstr ""
+
+#: .\templates\formulario.html:116
+msgid "Do you have any allergies or disabilities?"
+msgstr ""
+
+#: .\templates\formulario.html:118
+msgid "Specify"
+msgstr ""
+
+#: .\templates\formulario.html:128
+msgid "ID"
+msgstr ""
+
+#: .\templates\formulario.html:130 .\templates\formulario.html:137
+msgid ".pdf archives only"
+msgstr ""
+
+#: .\templates\formulario.html:135
+msgid "Resume"
+msgstr ""
+
+#: .\templates\formulario.html:147
+msgid "Phone numbers"
+msgstr ""
+
+#: .\templates\formulario.html:151 .\templates\formulario.html:170
+#: .\templates\formulario.html:190
+msgid "Code"
+msgstr ""
+
+#: .\templates\formulario.html:166
+msgid "Emergency contact"
+msgstr ""
+
+#: .\templates\formulario.html:204
+msgid "Contact's first and last name"
+msgstr ""
+
+#: .\templates\formulario.html:211
+msgid "Address"
+msgstr ""
+
+#: .\templates\formulario.html:213
+msgid "Main address"
+msgstr ""
+
+#: .\templates\formulario.html:220
+msgid "Second address"
+msgstr ""
+
+#: .\templates\formulario.html:228
+msgid "City"
+msgstr ""
+
+#: .\templates\formulario.html:234
+msgid "State/Province"
+msgstr ""
+
+#: .\templates\formulario.html:244 .\templates\formulario.html:249
+#: .\templates\formulario.html:259
+msgid "Desired position"
+msgstr ""
+
+#: .\templates\formulario.html:250 .\templates\formulario.html:260
+msgid "Cleaning"
+msgstr ""
+
+#: .\templates\formulario.html:251 .\templates\formulario.html:261
+msgid "General maintenance"
+msgstr ""
+
+#: .\templates\formulario.html:252 .\templates\formulario.html:262
+msgid "Kitchen assistant"
+msgstr ""
+
+#: .\templates\formulario.html:253 .\templates\formulario.html:263
+msgid "Receptionist"
+msgstr ""
+
+#: .\templates\formulario.html:272
+msgid "Desired shift"
+msgstr ""
+
+#: .\templates\formulario.html:276
+msgid "Morning"
+msgstr ""
+
+#: .\templates\formulario.html:277
+msgid "Afternoon"
+msgstr ""
+
+#: .\templates\formulario.html:278
+msgid "Night"
+msgstr ""
+
+#: .\templates\formulario.html:279
+msgid "Overnight"
+msgstr ""
+
+#: .\templates\formulario.html:287
+msgid "English level"
+msgstr ""
+
+#: .\templates\formulario.html:291
+msgid "Null"
+msgstr ""
+
+#: .\templates\formulario.html:292
+msgid "Basic"
+msgstr ""
+
+#: .\templates\formulario.html:293
+msgid "Intermediate"
+msgstr ""
+
+#: .\templates\formulario.html:294
+msgid "Advanced"
+msgstr ""
+
+#: .\templates\formulario.html:295
+msgid "Native"
+msgstr ""
+
+#: .\templates\formulario.html:304
+msgid "When can you start?"
+msgstr ""
+
+#: .\templates\formulario.html:314
+msgid "What transportation method do you use?"
+msgstr ""
+
+#: .\templates\formulario.html:318
+msgid "Bus"
+msgstr ""
+
+#: .\templates\formulario.html:319
+msgid "Own vehicle"
+msgstr ""
+
+#: .\templates\formulario.html:320
+msgid "Uber"
+msgstr ""
+
+#: .\templates\formulario.html:332
+msgid "How did you hear about us?"
+msgstr ""
+
+#: .\templates\formulario.html:336
+msgid "Reference from an acquaintance"
+msgstr ""
+
+#: .\templates\formulario.html:337
+msgid "Sticker with QR"
+msgstr ""
+
+#: .\templates\formulario.html:338
+msgid "Flyer"
+msgstr ""
+
+#: .\templates\formulario.html:339
+msgid "Office"
+msgstr ""
+
+#: .\templates\formulario.html:340
+msgid "Google"
+msgstr ""
+
+#: .\templates\formulario.html:349
+msgid "Referred by (If it applies)"
+msgstr ""
+
+#: .\templates\formulario.html:351
+msgid "Reference"
+msgstr ""
+
+#: .\templates\formulario.html:358
+msgid "APPLY NOW"
+msgstr ""
+
+#: .\templates\formulario.html:395
+msgid "POLÍTICAS DE SEGURIDAD"
+msgstr ""
+
+#: .\templates\formulario.html:406
+msgid "ACUERDO LABORAL"
+msgstr ""
+
+#: .\templates\formulario.html:424
+msgid "ACEPTO LAS POLÍTICAS"
+msgstr ""
+
+#: .\templates\formulario.html:440
+msgid "THIS FORM IS INACTIVE"
+msgstr ""
+
+#: .\templates\formulario.html:441
+msgid "Thank you for your interest, please try again later!"
+msgstr ""
+
+#: .\templates\formulario.html:454
+msgid "It must have a minimum of 3 characters"
+msgstr ""
+
+#: .\templates\formulario.html:456
+msgid "Please enter your first NAME with a valid format."
+msgstr ""
+
+#: .\templates\formulario.html:457 .\templates\recuperar_form.html:115
+#: .\templates\registration\reset_password.html:115
+#: .\templates\registro.html:133
+msgid "Please enter your LAST NAME with a valid format"
+msgstr ""
+
+#: .\templates\formulario.html:459
+msgid "The minimum allowed age is 18 years."
+msgstr ""
+
+#: .\templates\formulario.html:460
+msgid "Please enter a valid date of birth."
+msgstr ""
+
+#: .\templates\formulario.html:462
+msgid "Please enter only numbers."
+msgstr ""
+
+#: .\templates\formulario.html:463
+msgid "Please enter a valid phone number."
+msgstr ""
+
+#: .\templates\formulario.html:464
+msgid "Please enter a valid name in the format 'First Name Last Name'."
+msgstr ""
+
+#: .\templates\formulario.html:465
+msgid "Please enter a valid city in the format 'City'"
+msgstr ""
+
+#: .\templates\formulario.html:466
+msgid "Please enter a valid province in the format 'Province'."
+msgstr ""
+
+#: .\templates\formulario.html:467
+msgid "Please enter a valid start date."
+msgstr ""
+
+#: .\templates\formulario.html:468 .\templates\recuperar_form.html:118
+#: .\templates\registration\reset_password.html:118
+#: .\templates\registro.html:136
+msgid "This email is already registered"
+msgstr ""
+
+#: .\templates\inicio.html:11
+msgid "ENTER YOUR ACCOUNT"
+msgstr ""
+
+#: .\templates\inicio.html:17 .\templates\inicio.html:18
+msgid "User"
+msgstr ""
+
+#: .\templates\inicio.html:21 .\templates\inicio.html:26
+#: .\templates\recuperar_form.html:21
+#: .\templates\registration\password_reset_confirm.html:24
+#: .\templates\registration\reset_password.html:21 .\templates\registro.html:65
+#: .\templates\registro.html:81
+msgid "Password"
+msgstr ""
+
+#: .\templates\inicio.html:22
+msgid "I FORGOT MY PASSWORD"
+msgstr ""
+
+#: .\templates\inicio.html:40
+msgid "LOGIN"
+msgstr ""
+
+#: .\templates\inicio.html:43
+msgid "YOU DO NOT HAVE AN ACCOUNT? "
+msgstr ""
+
+#: .\templates\inicio.html:43
+msgid "SIGN UP"
+msgstr ""
+
+#: .\templates\inicio.html:50
+msgid "Invalid username or password"
+msgstr ""
+
+#: .\templates\recuperar.html:12
+msgid "RECUPERACIÓN DE CONTRASEÑA"
+msgstr ""
+
+#: .\templates\recuperar.html:31
+msgid "ENVIAR"
+msgstr ""
+
+#: .\templates\recuperar.html:42
+msgid "AYUDA"
+msgstr ""
+
+#: .\templates\recuperar.html:52
+#: .\templates\registration\password_reset_confirm.html:80
+#, python-format
+msgid "%(form.errors)s"
+msgstr ""
+
+#: .\templates\recuperar_form.html:11
+#: .\templates\registration\password_reset_confirm.html:12
+#: .\templates\registration\reset_password.html:11
+msgid "INGRESA LA NUEVA CONTRASEÑA"
+msgstr ""
+
+#: .\templates\recuperar_form.html:114
+#: .\templates\registration\reset_password.html:114
+#: .\templates\registro.html:132
+msgid "Please enter your FIRST NAME with a valid format."
+msgstr ""
+
+#: .\templates\recuperar_form.html:119
+#: .\templates\registration\reset_password.html:119
+#: .\templates\registro.html:137
+msgid "Please enter a valid username format"
+msgstr ""
+
+#: .\templates\recuperar_form.html:120
+#: .\templates\registration\password_reset_confirm.html:104
+#: .\templates\registration\reset_password.html:120
+#: .\templates\registro.html:138
+msgid ""
+"Should contain 8+ characters, such as: numbers, lowercase, uppercase and "
+"special symbols"
+msgstr ""
+
+#: .\templates\recuperar_form.html:121
+#: .\templates\registration\password_reset_confirm.html:105
+#: .\templates\registration\reset_password.html:121
+#: .\templates\registro.html:139
+msgid "Must not contain spaces"
+msgstr ""
+
+#: .\templates\recuperar_form.html:122
+#: .\templates\registration\password_reset_confirm.html:106
+#: .\templates\registration\reset_password.html:122
+#: .\templates\registro.html:140
+msgid "Passwords do not match"
+msgstr ""
+
+#: .\templates\registration\contra_cambiada.html:3
+#: .\templates\registration\logged_out.html:2
+#: .\templates\registration\password_reset_form.html:7
+msgid "Home"
+msgstr ""
+
+#: .\templates\registration\contra_cambiada.html:4
+#: .\templates\registration\password_reset_form.html:8
+msgid "Password reset"
+msgstr ""
+
+#: .\templates\registration\contra_cambiada.html:8
+msgid "Your password has been set. You may go ahead and log in now."
+msgstr ""
+
+#: .\templates\registration\contra_cambiada.html:10
+msgid "Log in"
+msgstr ""
+
+#: .\templates\registration\logged_out.html:5
+msgid "Thanks for spending some quality time with the web site today."
+msgstr ""
+
+#: .\templates\registration\logged_out.html:8
+msgid "Log in again"
+msgstr ""
+
+#: .\templates\registration\password_reset_confirm.html:66
+msgid "CHANGE MY PASSWORD"
+msgstr ""
+
+#: .\templates\registration\password_reset_confirm.html:90
+msgid "INVALID LINK"
+msgstr ""
+
+#: .\templates\registration\password_reset_confirm.html:91
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used. Please request a new password reset."
+msgstr ""
+
+#: .\templates\registration\password_reset_form.html:14
+msgid ""
+"Forgotten your password? Enter your email address below, and we’ll email "
+"instructions for setting a new one."
+msgstr ""
+
+#: .\templates\registration\password_reset_form.html:21
+msgid "Email address:"
+msgstr ""
+
+#: .\templates\registration\password_reset_form.html:27
+msgid "Reset my password"
+msgstr ""
+
+#: .\templates\registro.html:12
+msgid "CREATE AN ACCOUNT"
+msgstr ""
+
+#: .\templates\registro.html:43 .\templates\registro.html:45
+msgid "Username"
+msgstr ""
+
+#: .\templates\registro.html:100
+msgid "Repeat password"
+msgstr ""
+
+#: .\templates\registro.html:110
+msgid "¿DO YOU HAVE AN ACCOUNT? <b>LOG IN</b>"
+msgstr ""
+
+#: .\templates\registro_exitoso.html:29
+msgid "CUENTA ACTIVADA CON ÉXITO"
+msgstr ""
