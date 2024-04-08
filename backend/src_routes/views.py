@@ -209,6 +209,7 @@ def formulario_view(request):
                 form.save()
                 enviado_correctamente = True
                 url_para_traduccion = 'formulario_enviado'  # Asigna la URL por defecto
+                return render(request,'exito.html')
             
         else:
             # Si el formulario no es válido, imprime los errores
@@ -368,10 +369,12 @@ def validar_token(request, token):
 
 
 def activar_cuenta(request):
+    url_para_traduccion = 'activacion'  # Asigna la URL por defecto
     if request.user.is_authenticated:
         logout(request)
     if request.method == 'GET':
-        return render(request, 'activacion.html')
+        url_para_traduccion = 'activacion'  # Asigna la URL por defecto
+        return render(request, 'activacion.html',{'url_para_traduccion':url_para_traduccion})
     elif request.method == 'POST':
         # Verifica si la función se ha llamado recientemente
         ultima_llamada = cache.get('activar_cuenta_ultima_llamada')
@@ -401,7 +404,7 @@ def activar_cuenta(request):
             # Redirige a la página de aviso de reenvío de token
             return redirect('src_routes:activacion_aviso')
         except User.DoesNotExist:
-            return render(request, 'activacion.html', {'error': 'No se encontró ninguna cuenta asociada a este correo electrónico'})
+            return render(request, 'activacion.html', {'url_para_traduccion':url_para_traduccion,'error': 'No se encontró ninguna cuenta asociada a este correo electrónico'})
 
 def activars(request):
     if request.method == 'GET':

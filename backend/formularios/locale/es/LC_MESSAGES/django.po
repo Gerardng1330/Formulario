@@ -626,13 +626,13 @@ msgid "Invalid username or password"
 msgstr "Nombre de usuario o contraseña incorrectos"
 
 #: .\venv\Lib\site-packages\django\forms\models.py:1444
-msgid "Select a valid choice. That choice is not one of the available choices."
-msgstr ""
+msgid "THIS FORM IS INACTIVE"
+msgstr "ESTE FORMULARIO ESTÁ INACTIVO"
 
 #: .\venv\Lib\site-packages\django\forms\models.py:1583
 #, python-format
-msgid "“%(pk)s” is not a valid value."
-msgstr ""
+msgid "Thank you for your interest, please try again later!"
+msgstr "Gracias por su interés, ¡Inténtelo más tarde!"
 
 #: .\venv\Lib\site-packages\django\forms\utils.py:227
 #, python-format
