@@ -121,24 +121,6 @@ def verificar_correo(request):
     # Resto de la lógica del formulario o redirección si no hay error
     return render(request, 'formulario.html', {})
 
-#prueba (olvidenlo)
-""" def cambio_idioma_view(request):
-    # Maneja la solicitud POST para cambiar de idioma
-    if request.method == 'POST':
-        # Lógica para cambiar el idioma según la solicitud POST
-        nuevo_idioma = request.POST.get('idioma')  # Obtener el idioma seleccionado de la solicitud POST
-        request.session['idioma'] = nuevo_idioma  # Actualizar el idioma en la sesión del usuario u otra forma de persistencia de datos
-
-        # Obtener los datos del formulario (si es necesario)
-        # Esto dependerá de cómo manejes los datos del formulario en tu aplicación
-
-    # Obtén los datos del formulario prellenados según el idioma seleccionado
-    # Esto también dependerá de cómo manejes los datos del formulario en tu aplicación
-    datos_formulario = obtener_datos_formulario_prellenados_segun_idioma(request.session.get('idioma'))
-
-    # Renderiza la página con los datos del formulario prellenados
-    return render(request, 'formulario.html', {'form': datos_formulario}) """
-
         
 # Función para obtener los correos registrados
 def get_emails(request):
