@@ -287,13 +287,15 @@ def enviar_correo(destinatario, token):
         
 # Esta vista maneja el registro de usuarios.
 def registro(request):
+    url_para_traduccion = 'registro'  # Asigna la URL por defecto
+    
     # Verifica si el usuario está autenticado y lo desconecta si es así.
     if request.user.is_authenticated:
         logout(request)
     # Si la solicitud es GET, renderiza la plantilla 'registro.html'.
     # Si es POST, intenta registrar al usuario con los datos proporcionados.
     if request.method == 'GET':
-        return render(request, 'registro.html')
+        return render(request, 'registro.html',{'url_para_traduccion':url_para_traduccion})
     elif request.method == 'POST':
         # Comprueba si las contraseñas coinciden.
         if request.POST['Contraseña'] != request.POST['Contraseña1']:
@@ -411,11 +413,12 @@ def succefully(request):
     return render (request, 'registro_exitoso.html') 
 
 def ayuda_view(request):
+    url_para_traduccion = 'ayuda_contrasena'
     # pathname de la URL sin la parte del idioma /en/ o /es/
     pathname = request.path[4:]
     # Fetch a la BD. Párrafos de la tabla Politicas
     politicas_table = Politicas.objects.values('parrafo')
-    return render(request, 'ayuda.html', {'pathname': pathname, 'politicas_table':politicas_table})
+    return render(request, 'ayuda.html', {'pathname': pathname, 'politicas_table':politicas_table,'url_para_traduccion':url_para_traduccion})
 
 #def password_reset_request(request):
     if request.method == 'POST':
