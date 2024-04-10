@@ -650,12 +650,12 @@ msgid "SUBMIT"
 msgstr "ENVIAR"
 
 #: .\venv\Lib\site-packages\django\forms\widgets.py:459
-msgid "DO YOU HAVE AN ACCOUNT?"
-msgstr "¿TIENE USTED UNA CUENTA?"
+msgid "DO YOU HAVE AN ACCOUNT? "
+msgstr "¿TIENE USTED UNA CUENTA? "
 
 #: .\venv\Lib\site-packages\django\forms\widgets.py:796
 msgid "LOG IN"
-msgstr "INICIAR SECCIÓN"
+msgstr "INICIAR SESIÓN"
 
 #: .\venv\Lib\site-packages\django\forms\widgets.py:797
 msgid "I can't change my password"
@@ -744,8 +744,8 @@ msgid "Repeat password"
 msgstr "Repita la contraseña"
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:11
-msgid "idk"
-msgstr ""
+msgid "CREATE AN ACCOUNT"
+msgstr "CREA UNA CUENTA"
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:12
 msgid "Please enter your FIRST NAME with a valid format."
