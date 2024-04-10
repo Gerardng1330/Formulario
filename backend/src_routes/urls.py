@@ -47,7 +47,7 @@ urlpatterns = [
     path('recuperar/', auth_views.PasswordResetView.as_view(html_email_template_name='mail_template.html', template_name = 'recuperar.html'), name='recuperar'), #pantalla donde se ingresa el email para reestablecer contraseña
     #pantalla de correo enviado está en templates/accounts/password_reset_done.html
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),#pantalla donde se cambia las contraseñas
-    #pantalla de contraseña cambiana con éxito está en templates/accounts/password_reset_complete.html
+    #pantalla de contraseña cambiada con éxito está en templates/accounts/password_reset_complete.html
 ]
 
 #ruta para descargar el cv 
