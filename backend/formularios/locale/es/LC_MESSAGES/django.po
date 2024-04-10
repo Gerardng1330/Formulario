@@ -642,33 +642,33 @@ msgid ""
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\forms\widgets.py:457
-msgid "Clear"
-msgstr ""
+msgid "Username"
+msgstr "Usuario"
 
 #: .\venv\Lib\site-packages\django\forms\widgets.py:458
-msgid "Currently"
-msgstr ""
+msgid "SUBMIT"
+msgstr "ENVIAR"
 
 #: .\venv\Lib\site-packages\django\forms\widgets.py:459
-msgid "Change"
-msgstr ""
+msgid "DO YOU HAVE AN ACCOUNT?"
+msgstr "¿TIENE USTED UNA CUENTA?"
 
 #: .\venv\Lib\site-packages\django\forms\widgets.py:796
-msgid "Unknown"
-msgstr ""
+msgid "LOG IN"
+msgstr "INICIAR SECCIÓN"
 
 #: .\venv\Lib\site-packages\django\forms\widgets.py:797
-msgid "Yes"
-msgstr ""
+msgid "I can't change my password"
+msgstr "No puedo cambiar mi contraseña"
 
 #: .\venv\Lib\site-packages\django\forms\widgets.py:798
-msgid "No"
-msgstr ""
+msgid "CONDITIONS AND POLICIES"
+msgstr "CONDICIONES Y POLÍTICAS"
 
 #. Translators: Please do not add spaces around commas.
 #: .\venv\Lib\site-packages\django\template\defaultfilters.py:875
-msgid "yes,no,maybe"
-msgstr ""
+msgid "Data Protection"
+msgstr "Protección de datos"
 
 #: .\venv\Lib\site-packages\django\template\defaultfilters.py:905
 #: .\venv\Lib\site-packages\django\template\defaultfilters.py:922
@@ -680,100 +680,100 @@ msgstr[1] ""
 
 #: .\venv\Lib\site-packages\django\template\defaultfilters.py:924
 #, python-format
-msgid "%s KB"
-msgstr ""
+msgid "Policy update"
+msgstr "Actualización de la política"
 
 #: .\venv\Lib\site-packages\django\template\defaultfilters.py:926
 #, python-format
-msgid "%s MB"
-msgstr ""
+msgid "Terms update"
+msgstr "Actualización de los términos"
 
 #: .\venv\Lib\site-packages\django\template\defaultfilters.py:928
 #, python-format
-msgid "%s GB"
-msgstr ""
+msgid "Inactive accounts"
+msgstr "Cuentas inactivas"
 
 #: .\venv\Lib\site-packages\django\template\defaultfilters.py:930
 #, python-format
-msgid "%s TB"
-msgstr ""
+msgid "Storage time"
+msgstr "Tiempo de almacenamiento"
 
 #: .\venv\Lib\site-packages\django\template\defaultfilters.py:932
 #, python-format
-msgid "%s PB"
-msgstr ""
+msgid "Request a copy of your data"
+msgstr "Solicitar una copia de tus datos"
 
 #: .\venv\Lib\site-packages\django\utils\dateformat.py:73
-msgid "p.m."
-msgstr ""
+msgid "ADDITIONAL TERMS AND POLICIES"
+msgstr "TÉRMINOS Y POLÍTICAS ADICIONALES"
 
 #: .\venv\Lib\site-packages\django\utils\dateformat.py:74
-msgid "a.m."
-msgstr ""
+msgid "Copyright Policy"
+msgstr "Política de derecho de autor"
 
 #: .\venv\Lib\site-packages\django\utils\dateformat.py:79
-msgid "PM"
-msgstr ""
+msgid "Payment Services Terms"
+msgstr "Términos de los servicios de pago"
 
 #: .\venv\Lib\site-packages\django\utils\dateformat.py:80
-msgid "AM"
-msgstr ""
+msgid "Related companies"
+msgstr "Empresas relacionadas"
 
 #: .\venv\Lib\site-packages\django\utils\dateformat.py:152
-msgid "Night"
-msgstr "En la noche"
+msgid "Refund policy"
+msgstr "Política de reembolso"
 
 #: .\venv\Lib\site-packages\django\utils\dateformat.py:154
-msgid "Overnight"
-msgstr "Madrugada"
+msgid "GO TO HOME"
+msgstr "IR A INICIO"
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:7
-msgid "Monday"
-msgstr ""
+msgid "I CAN'T CHANGE MY PASSWORD"
+msgstr "NO PUEDO CAMBIAR MI CONTRASEÑA"
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:8
-msgid "Tuesday"
-msgstr ""
+msgid "Contact us at the help email! Confirm your identity. Send us your username and personal identification document."
+msgstr "¡Comunícate con nosotros al correo de ayuda! Confirma tu identidad. Envíanos tu usuario y documento de identidad personal."
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:9
-msgid "Wednesday"
-msgstr ""
+msgid "COPIED TO CLIPBOARD"
+msgstr "COPIADO AL PORTAPAPELES"
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:10
-msgid "Thursday"
-msgstr ""
+msgid "Repeat password"
+msgstr "Repita la contraseña"
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:11
-msgid "Friday"
+msgid "idk"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:12
-msgid "Saturday"
-msgstr ""
+msgid "Please enter your FIRST NAME with a valid format."
+msgstr "Por favor ingrese su NOMBRE con un formato válido."
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:13
-msgid "Sunday"
+msgid "mnk"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:16
-msgid "Mon"
-msgstr ""
+msgid "This email is already registered"
+msgstr "Este correo electrónico ya está registrado"
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:17
-msgid "Tue"
-msgstr ""
+msgid "Please enter a valid username format"
+msgstr "Por favor ingrese un formato de nombre de usuario válido"
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:18
-msgid "Wed"
-msgstr ""
+msgid "Should contain 8+ characters, such as: numbers, lowercase, uppercase and special symbols"
+msgstr "Debe contener más de 8 caracteres, como números, minúsculas, mayúsculas y símbolos especiales."
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:19
-msgid "Thu"
-msgstr ""
+msgid "Must not contain spaces"
+msgstr "No debe contener espacios"
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:20
-msgid "Fri"
-msgstr ""
+msgid "Passwords do not match"
+msgstr "Las contraseñas no coinciden"
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:21
 msgid "Sat"

@@ -56,9 +56,16 @@ from django.shortcuts import resolve_url
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.apps import apps
+#-----------
+from django.shortcuts import render
+from urllib.parse import urlparse
+
 """ from django import forms
 from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm, AuthenticationForm """
 User = get_user_model()
+#clases y funciones de django por defecto
+
+#cierre
 
 def cerrado(request):
     return render(request, 'pruebaPagina.html')
@@ -243,7 +250,7 @@ def inicio_sesion(request):#Funcion de inicio de sesion
         user = authenticate(request, username=request.POST['Usuario'],password=request.POST['Contraseña'])
         if user is None:
             return render(request, 'inicio.html',{
-                    'error': 'Nombre de usuario o contraseña incorrectos','url_para_traduccion':url_para_traduccion
+                    'error': 'Invalid username or password','url_para_traduccion':url_para_traduccion
                 })
         else:
             login(request, user)
@@ -287,13 +294,15 @@ def enviar_correo(destinatario, token):
         
 # Esta vista maneja el registro de usuarios.
 def registro(request):
+    url_para_traduccion = 'registro'  # Asigna la URL por defecto
+    
     # Verifica si el usuario está autenticado y lo desconecta si es así.
     if request.user.is_authenticated:
         logout(request)
     # Si la solicitud es GET, renderiza la plantilla 'registro.html'.
     # Si es POST, intenta registrar al usuario con los datos proporcionados.
     if request.method == 'GET':
-        return render(request, 'registro.html')
+        return render(request, 'registro.html',{'url_para_traduccion':url_para_traduccion})
     elif request.method == 'POST':
         # Comprueba si las contraseñas coinciden.
         if request.POST['Contraseña'] != request.POST['Contraseña1']:
@@ -328,6 +337,12 @@ def registro(request):
         
 # Esta vista valida el token de activación proporcionado por el usuario.
 def validar_token(request, token):
+    url = request.build_absolute_uri()
+    parsed_url = urlparse(url)
+    path_parts = parsed_url.path.split('/')  # Dividir la ruta en partes usando '/'
+
+    # Obtener la última parte de la ruta sin la barra inicial
+    url_para_traduccion = path_parts[2]
     # Busca al usuario con el token proporcionado en la base de datos.
     try:
         user = User.objects.get(token_user=token)
@@ -343,9 +358,9 @@ def validar_token(request, token):
             return render(request, 'activacion_aviso.html', {'error': 'Usuario no encontrado'})
     except User.DoesNotExist:
         print(f'paso aqui caducao')
-        return render (request,'registro_exitoso.html', {'noexiste':User.DoesNotExist,'error': 'Este Token ha caducado'})
+        return render (request,'registro_exitoso.html', {'url_para_traduccion':url_para_traduccion,'noexiste':User.DoesNotExist,'error': 'Este Token ha caducado'})
     except Exception as e:
-        return render(request, 'registro_exitoso.html', {'error': f'Error al validar el token: {e}'}) 
+        return render(request, 'registro_exitoso.html', {'url_para_traduccion':url_para_traduccion,'error': f'Error al validar el token: {e}'}) 
 
  # Esta vista renderiza la plantilla 'activacion.html'.
 
@@ -389,8 +404,9 @@ def activar_cuenta(request):
             return render(request, 'activacion.html', {'url_para_traduccion':url_para_traduccion,'error': 'No se encontró ninguna cuenta asociada a este correo electrónico'})
 
 def activars(request):
+    url_para_traduccion ='activacion_aviso'
     if request.method == 'GET':
-        return render(request, 'activacion_aviso.html')
+        return render(request, 'activacion_aviso.html',{'url_para_traduccion':url_para_traduccion})
     elif request.method == 'POST':
     # zi no hay una llamada reciente, o si han pasado más de 60 segundos, continúa con la vista normalmente
         cache.set('activar_cuenta_ultima_llamada', timezone.now(), timeout=60)
@@ -408,14 +424,19 @@ def signout (request):
     return redirect('src_routes:inicio')
         
 def succefully(request):
-    return render (request, 'registro_exitoso.html') 
+    url_para_traduccion='registro_exitoso'
+    return render (request, 'registro_exitoso.html',{'url_para_traduccion':url_para_traduccion})
 
 def ayuda_view(request):
-    # pathname de la URL sin la parte del idioma /en/ o /es/
+    url = request.build_absolute_uri()
+    parsed_url = urlparse(url)
+    path_parts = parsed_url.path.split('/')  # Dividir la ruta en partes usando '/'
+
+    # Obtener la última parte de la ruta sin la barra inicial
+    url_para_traduccion = path_parts[2]  # Acceder a la parte que necesitas
     pathname = request.path[4:]
-    # Fetch a la BD. Párrafos de la tabla Politicas
     politicas_table = Politicas.objects.values('parrafo')
-    return render(request, 'ayuda.html', {'pathname': pathname, 'politicas_table':politicas_table})
+    return render(request, 'ayuda.html', {'pathname': pathname,'url_para_traduccion': url_para_traduccion, 'politicas_table': politicas_table})
 
 #def password_reset_request(request):
     if request.method == 'POST':
@@ -457,4 +478,5 @@ def ayuda_view(request):
 
 
 def recuperar_aviso_view(request):
-    return render (request, 'recuperar_aviso.html')
+    url_para_traduccion = 'adminpaneldjango/accounts/password-reset-done/'
+    return render (request, 'recuperar_aviso.html',{'url_para_traduccion':url_para_traduccion})

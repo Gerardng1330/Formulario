@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'o4azh=5b&5_50o$fr1h8v!^1o96*)%rri9d-wjo5icb2_!ip6d'
