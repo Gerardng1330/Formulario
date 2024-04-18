@@ -18,11 +18,11 @@ from django.views.i18n import set_language
 urlpatterns = [
     path('', include('django.conf.urls.i18n')),
     path("__reload__/", include("django_browser_reload.urls"), name='browser_reload'), # Browser reload
-    path('adminpaneldjango/', include('admin_modernize.urls')), # URLs del theme modernize para el panel de administración
+    path('panel/', include('admin_modernize.urls')), # URLs del theme modernize para el panel de administración
 ]
 
 urlpatterns += i18n_patterns(
-    path(_('adminpaneldjango/'), admin.site.urls,name='admin_panel'),
+    path(_('panel/'), admin.site.urls,name='admin_panel'),
     path('', include('backend.src_routes.urls'), name='src_urls'),
     path('i18n/', set_language, name='set_language'),
 )

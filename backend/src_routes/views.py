@@ -348,7 +348,7 @@ def validar_token(request, token):
         user = User.objects.get(token_user=token)
 
         if user.email_confirmed == True:
-            return render (request,'registro_existoso.html',{'url_para_traduccion':url_para_traduccion,'email_confirmed':user.email_confirmed,'error': f'Esta cuenta ya ha sido activada.'})
+            return render (request,'registro_exitoso.html',{'email_confirmed':user.email_confirmed,'error': f'Esta cuenta ya ha sido activada.'})
            # Si el token coincide, marca el correo electrónico como confirmado y redirige al usuario a la página de registro exitoso.
         if token == user.token_user:
             user.email_confirmed = True
