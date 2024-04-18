@@ -27,7 +27,7 @@ msgid "Contact's first and last name"
 msgstr "Primer nombre y apellido del contacto"
 
 #: .\venv\Lib\site-packages\django\contrib\messages\apps.py:16
-msgid "Forms"
+msgid "Form"
 msgstr "Formulario"
 
 #: .\venv\Lib\site-packages\django\contrib\sitemaps\apps.py:8
@@ -776,20 +776,20 @@ msgid "Passwords do not match"
 msgstr "Las contraseñas no coinciden"
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:21
-msgid "Sat"
-msgstr ""
+msgid "Home"
+msgstr "Inicio"
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:22
-msgid "Sun"
-msgstr ""
+msgid "Register"
+msgstr "Registro"
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:25
-msgid "January"
-msgstr ""
+msgid "Help"
+msgstr "Ayuda"
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:26
-msgid "February"
-msgstr ""
+msgid "COPYRIGHT © 2024 ARV SYSTEM CORP | ALL RIGHTS RESERVED."
+msgstr "DERECHOS DE AUTOR © 2024 ARV SYSTEM CORP | RESERVADOS TODOS LOS DERECHOS."
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:27
 msgid "March"
