@@ -1,0 +1,312 @@
+{% load i18n static admin_modernize %}
+<aside class="left-sidebar border-gray-200 bg-gray-300 bg-opacity-30 text-blue shadow-sm">
+  <!-- Sidebar scroll-->
+  <div>
+    <!-- Logo and x container -->
+    <div class="brand-logo d-flex align-items-center justify-center align-middle">
+      <!-- Logo -->
+      <a class="logo-img text-nowrap">
+        <img src="{% static 'img/f2f-logo.svg' %}" width="180" alt="" class="mt-4" />
+      </a>
+      <!-- x -->
+      <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+        <i class="ti ti-x fs-8"></i>
+      </div>
+    </div>
+    <!-- Sidebar navigation-->
+    <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+      <ul id="sidebarnav">
+        <!-- Opciones si es admin -->
+        {% if request.user.is_authenticated and request.user.is_superuser %}
+        <!-- Title: Formulario F2F -->
+        <li class="nav-small-cap mt-4">
+          <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+          <span class="hide-menu">{% blocktrans %}Formulario F2F{% endblocktrans %}</span>
+        </li>
+        <!-- Respuestas -->
+        {% admin_get_menu as app_list %} {% if app_list %} {% for app in app_list %} {% if app.has_perms and not app.pinned %}
+        <li class="sidebar-item">
+          {% if app.models %}
+          <ul>
+            {% for model in app.models %} {% if "formularios/usuario/" in model.url %}
+            <li class="sidebar-item">
+              <a class="sidebar-link group mt-1 h-8 rounded-lg transition ease-in-out hover:bg-sky hover:bg-opacity-10 hover:text-sky" href="{{ model.url }}">
+                <!-- ícono -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 transition ease-in-out group-hover:text-sky">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" />
+                </svg>
+                <!-- título -->
+                Respuestas
+              </a>
+            </li>
+            {% endif %} {% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+        {% endif %} {% endfor %} {% endif %}
+        <!-- Ir al formulario -->
+        <li class="sidebar-item group mt-1 h-8 cursor-pointer rounded-lg transition ease-in-out hover:bg-sky hover:bg-opacity-5">
+          <a class="sidebar-link h-full" href="/" aria-expanded="false">
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 transition ease-in-out group-hover:text-sky">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m7.875 14.25 1.214 1.942a2.25 2.25 0 0 0 1.908 1.058h2.006c.776 0 1.497-.4 1.908-1.058l1.214-1.942M2.41 9h4.636a2.25 2.25 0 0 1 1.872 1.002l.164.246a2.25 2.25 0 0 0 1.872 1.002h2.092a2.25 2.25 0 0 0 1.872-1.002l.164-.246A2.25 2.25 0 0 1 16.954 9h4.636M2.41 9a2.25 2.25 0 0 0-.16.832V12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 12V9.832c0-.287-.055-.57-.16-.832M2.41 9a2.25 2.25 0 0 1 .382-.632l3.285-3.832a2.25 2.25 0 0 1 1.708-.786h8.43c.657 0 1.281.287 1.709.786l3.284 3.832c.163.19.291.404.382.632M4.5 20.25h15A2.25 2.25 0 0 0 21.75 18v-2.625c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125V18a2.25 2.25 0 0 0 2.25 2.25Z" />
+              </svg>
+            </span>
+            <span class="hide-menu transition ease-in-out group-hover:text-sky">{% blocktrans %}Ir al formulario{% endblocktrans %}</span>
+          </a>
+        </li>
+        <!-- Title: Estado del formulario -->
+        <li class="nav-small-cap mt-4">
+          <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+          <span class="hide-menu">{% blocktrans %}Estado del formulario{% endblocktrans %}</span>
+        </li>
+        <!-- Activo Toggle -->
+        <li class="sidebar-item group mt-1 h-8 cursor-pointer rounded-lg transition ease-in-out hover:bg-sky hover:bg-opacity-5">
+          <div class="sidebar-link flex h-full justify-between" href="{% url 'src_routes:inicio' %}" aria-expanded="false">
+            <div class="flex flex-row">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="h-6 w-6 transition ease-in-out group-hover:text-sky">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
+                </svg>
+              </span>
+              <span class="hide-menu ml-3 cursor-default transition ease-in-out group-hover:text-sky">{% blocktrans %}Activo{% endblocktrans %}</span>
+            </div>
+            <!-- Toggle -->
+            <label class="inline-flex cursor-pointer items-center">
+              <input type="checkbox" value="" class="peer sr-only" checked />
+              <div class="peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 peer relative h-5 w-9 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-[2px] after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 dark:border-gray-600 dark:bg-gray-700 rtl:peer-checked:after:-translate-x-full"></div>
+            </label>
+          </div>
+        </li>
+        <!-- Title: Descargar respuestas -->
+        <li class="nav-small-cap mt-4">
+          <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+          <span class="hide-menu">{% blocktrans %}Descargar respuestas{% endblocktrans %}</span>
+        </li>
+        <!-- Descargar PDF -->
+        <li class="sidebar-item group h-8 transition ease-in-out hover:scale-y-105">
+          <a class="sidebar-link h-full bg-rose-600 transition ease-in-out group-hover:bg-rose-700" href="download-pdf/" aria-expanded="false">
+            <span>
+              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.503 13.002a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 1 0v-.5H8.5a1.5 1.5 0 0 0 0-3h-.997Zm.997 2h-.497v-1H8.5a.5.5 0 1 1 0 1ZM14.998 13.501a.5.5 0 0 1 .5-.499h1.505a.5.5 0 1 1 0 1h-1.006l-.001 1.002h1.007a.5.5 0 0 1 0 1h-1.007l.002.497a.5.5 0 0 1-1 .002l-.003-.998v-.002l.003-2.002ZM11.5 13.002a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h.498a2 2 0 0 0 0-4H11.5Zm.5 3v-2a1 1 0 0 1 0 2Z" fill="#ffffff" />
+                <path d="M20 20v-1.164c.591-.281 1-.884 1-1.582V12.75c0-.698-.409-1.3-1-1.582v-1.34a2 2 0 0 0-.586-1.414l-5.829-5.828a.491.491 0 0 0-.049-.04.63.63 0 0 1-.036-.03 2.072 2.072 0 0 0-.219-.18.652.652 0 0 0-.08-.044l-.048-.024-.05-.029c-.054-.031-.109-.063-.166-.087a1.977 1.977 0 0 0-.624-.138c-.02-.001-.04-.004-.059-.007A.605.605 0 0 0 12.172 2H6a2 2 0 0 0-2 2v7.168c-.591.281-1 .884-1 1.582v4.504c0 .698.409 1.3 1 1.582V20a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2Zm-2 .5H6a.5.5 0 0 1-.5-.5v-.996h13V20a.5.5 0 0 1-.5.5Zm.5-10.5v1h-13V4a.5.5 0 0 1 .5-.5h6V8a2 2 0 0 0 2 2h4.5Zm-1.122-1.5H14a.5.5 0 0 1-.5-.5V4.621L17.378 8.5Zm-12.628 4h14.5a.25.25 0 0 1 .25.25v4.504a.25.25 0 0 1-.25.25H4.75a.25.25 0 0 1-.25-.25V12.75a.25.25 0 0 1 .25-.25Z" fill="#ffffff" />
+              </svg>
+            </span>
+            <span class="hide-menu text-white">{% blocktrans %}PDF{% endblocktrans %}</span>
+          </a>
+        </li>
+        <!-- Descargar Excel -->
+        <li class="sidebar-item group mt-1 h-8 transition ease-in-out hover:scale-y-105">
+          <a class="sidebar-link h-full bg-green-600 transition ease-in-out group-hover:bg-green-700" href="download-pdf/" aria-expanded="false">
+            <span>
+              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.75 11.5h6.5c.966 0 1.75.784 1.75 1.75v4A1.75 1.75 0 0 1 15.25 19h-6.5A1.75 1.75 0 0 1 7 17.25v-4c0-.966.784-1.75 1.75-1.75Zm-.25 1.75v1.25H10V13H8.75a.25.25 0 0 0-.25.25Zm0 2.75v1.25c0 .138.112.25.25.25H10V16H8.5Zm3 0v1.5h3.75a.25.25 0 0 0 .25-.25V16h-4Zm4-1.5v-1.25a.25.25 0 0 0-.25-.25H11.5v1.5h4ZM13.585 2.586a.491.491 0 0 0-.049-.04.63.63 0 0 1-.036-.03 2.072 2.072 0 0 0-.219-.18.652.652 0 0 0-.08-.044l-.048-.024-.05-.029c-.054-.031-.109-.063-.166-.087a1.977 1.977 0 0 0-.624-.138c-.02-.001-.04-.004-.059-.007A.605.605 0 0 0 12.172 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9.828a2 2 0 0 0-.586-1.414l-5.829-5.828ZM18 20.5H6a.5.5 0 0 1-.5-.5V4a.5.5 0 0 1 .5-.5h6V8a2 2 0 0 0 2 2h4.5v10a.5.5 0 0 1-.5.5Zm-.622-12H14a.5.5 0 0 1-.5-.5V4.621L17.378 8.5Z" fill="#ffffff" /></svg>
+            </span>
+            <span class="hide-menu text-white">{% blocktrans %}Excel{% endblocktrans %}</span>
+          </a>
+        </li>
+        <!-- Title: Usuarios -->
+        <li class="nav-small-cap mt-4">
+          <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+          <span class="hide-menu">{% blocktrans %}Usuarios{% endblocktrans %}</span>
+        </li>
+        <!-- Usuarios -->
+        {% admin_get_menu as app_list %} {% if app_list %} {% for app in app_list %} {% if app.has_perms and not app.pinned %}
+        <li class="sidebar-item">
+          {% if app.models %}
+          <ul>
+            {% for model in app.models %} {% if "auth_users/user/" in model.url %}
+            <li class="sidebar-item">
+              <a class="sidebar-link group mt-1 h-8 rounded-lg transition ease-in-out hover:bg-sky hover:bg-opacity-10 hover:text-sky" href="{{ model.url }}">
+                <!-- ícono -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                </svg>
+                <!-- título -->
+                Usuarios
+              </a>
+            </li>
+            {% endif %} {% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+        {% endif %} {% endfor %} {% endif %}
+        <!-- Modo claro / oscuro -->
+        <li class="sidebar-item group mt-1 h-8 cursor-pointer rounded-lg transition ease-in-out hover:bg-sky hover:bg-opacity-10 hover:text-sky">
+          <a class="sidebar-link h-full" aria-expanded="false">
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 transition ease-in-out hover:text-sky">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+              </svg>
+            </span>
+            <span class="hide-menu transition ease-in-out hover:text-sky">{% blocktrans %}Modo claro{% endblocktrans %}</span>
+          </a>
+        </li>
+        <!-- Idioma -->
+        <li class="sidebar-item group mt-1 flex h-8 flex-row items-center rounded-lg px-2.5 py-1.5 align-middle hover:bg-sky hover:bg-opacity-10">
+          <span class="h-full">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 transition ease-in-out group-hover:text-sky">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m6.115 5.19.319 1.913A6 6 0 0 0 8.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 0 0 2.288-4.042 1.087 1.087 0 0 0-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 0 1-.98-.314l-.295-.295a1.125 1.125 0 0 1 0-1.591l.13-.132a1.125 1.125 0 0 1 1.3-.21l.603.302a.809.809 0 0 0 1.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 0 0 1.528-1.732l.146-.292M6.115 5.19A9 9 0 1 0 17.18 4.64M6.115 5.19A8.965 8.965 0 0 1 12 3c1.929 0 3.716.607 5.18 1.64" />
+            </svg>
+          </span>
+          <form class="language-form w-full" id="languageForm" method="post" action="{% url 'set_language' %}">
+            {% csrf_token %}
+            <select class="language-select ml-1 w-full cursor-pointer border-none bg-transparent text-sm transition ease-in-out group-hover:text-sky" name="language" id="language" onchange="changeLanguage(this.value)">
+              {% get_current_language as LANGUAGE_CODE %} {% get_available_languages as LANGUAGES %} {% for lang_code, lang_name in LANGUAGES %} {% if lang_code == LANGUAGE_CODE %}
+              <option value="{{ lang_code }}" selected>{{ lang_name }}</option>
+              {% else %}
+              <option value="{{ lang_code }}">{{ lang_name }}</option>
+              {% endif %} {% endfor %}
+            </select>
+          </form>
+        </li>
+        <!-- Soporte -->
+        <li class="sidebar-item group mt-1 h-8 cursor-pointer rounded-lg transition ease-in-out hover:bg-sky hover:bg-opacity-5">
+          <a class="sidebar-link h-full" aria-expanded="false">
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 transition ease-in-out group-hover:text-sky">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+              </svg>
+            </span>
+            <span class="hide-menu transition ease-in-out group-hover:text-sky">{% blocktrans %}Soporte{% endblocktrans %}</span>
+          </a>
+        </li>
+        <!-- Políticas -->
+        {% admin_get_menu as app_list %} {% if app_list %} {% for app in app_list %} {% if app.has_perms and not app.pinned %}
+        <li class="sidebar-item mt-1">
+          {% if app.models %}
+          <ul>
+            {% for model in app.models %} {% if "formularios/politicas/" in model.url %}
+            <li class="sidebar-item">
+              <a class="sidebar-link group mt-1 h-8 rounded-lg transition ease-in-out hover:bg-sky hover:bg-opacity-10 hover:text-sky" href="{{ model.url }}">
+                <!-- ícono -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+                </svg>
+                <!-- título -->
+                Políticas
+              </a>
+            </li>
+            {% endif %} {% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+        {% endif %} {% endfor %} {% endif %}
+        <!-- Permisos -->
+        {% admin_get_menu as app_list %} {% if app_list %} {% for app in app_list %} {% if app.has_perms and not app.pinned %}
+        <li class="sidebar-item mt-1">
+          {% if app.models %}
+          <ul>
+            {% for model in app.models %} {% if "auth/group/" in model.url %}
+            <li class="sidebar-item">
+              <a class="sidebar-link group mt-1 h-8 rounded-lg transition ease-in-out hover:bg-sky hover:bg-opacity-10 hover:text-sky" href="{{ model.url }}">
+                <!-- ícono -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 transition ease-in-out group-hover:text-sky">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                </svg>
+                <!-- título -->
+                Permisos
+              </a>
+            </li>
+            {% endif %} {% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+        {% endif %} {% endfor %} {% endif %}
+        <!-- Log out -->
+        <li class="sidebar-item group mt-1 h-8 transition ease-in-out hover:scale-y-105">
+          <a class="sidebar-link h-full bg-blue transition ease-in-out group-hover:bg-hoverblue" href="{% url 'src_routes:inicio' %}" aria-expanded="false">
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-white">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
+              </svg>
+            </span>
+            <span class="hide-menu text-white">{% blocktrans %}Log Out{% endblocktrans %}</span>
+          </a>
+        </li>
+        {% endif %}
+
+        <!-- Opciones si es empleado o gerente -->
+        {% if request.user.is_authenticated and not request.user.is_superuser %}
+        <li class="nav-small-cap">
+          <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+          <span class="hide-menu">UI COMPONENTS</span>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{% url 'ui-button' %}" aria-expanded="false">
+            <span>
+              <i class="ti ti-article"></i>
+            </span>
+            <span class="hide-menu">Buttons</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{% url 'ui-alert' %}" aria-expanded="false">
+            <span>
+              <i class="ti ti-alert-circle"></i>
+            </span>
+            <span class="hide-menu">Alerts</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{% url 'ui-card' %}" aria-expanded="false">
+            <span>
+              <i class="ti ti-cards"></i>
+            </span>
+            <span class="hide-menu">Card</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{% url 'ui-form' %}" aria-expanded="false">
+            <span>
+              <i class="ti ti-file-description"></i>
+            </span>
+            <span class="hide-menu">Forms</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{% url 'ui-typography' %}" aria-expanded="false">
+            <span>
+              <i class="ti ti-typography"></i>
+            </span>
+            <span class="hide-menu">Typography</span>
+          </a>
+        </li>
+        <li class="nav-small-cap">
+          <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+          <span class="hide-menu">EXTRA</span>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{% url 'icon-tabler' %}" aria-expanded="false">
+            <span>
+              <i class="ti ti-mood-happy"></i>
+            </span>
+            <span class="hide-menu">Icons</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{% url 'sample-page' %}" aria-expanded="false">
+            <span>
+              <i class="ti ti-aperture"></i>
+            </span>
+            <span class="hide-menu">Sample Page</span>
+          </a>
+        </li>
+        <li class="nav-small-cap">
+          <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+          <span class="hide-menu">AUTH</span>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{% url 'logout' %}" aria-expanded="false">
+            <span>
+              <i class="ti ti-logout"></i>
+            </span>
+            <span class="hide-menu">Logout</span>
+          </a>
+        </li>
+      </ul>
+      {% endif %}
+    </nav>
+    <!-- End Sidebar navigation -->
+  </div>
+  <!-- End Sidebar scroll-->
+</aside>
