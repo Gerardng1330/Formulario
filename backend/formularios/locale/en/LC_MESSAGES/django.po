@@ -19,25 +19,25 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: .\backend\main\settings.py:112
-msgid "English"
-msgstr ""
+msgid "Teléfono 1"
+msgstr "Cellphone 1"
 
 #: .\backend\main\settings.py:113
-msgid "Spanish"
-msgstr ""
+msgid "Nombre"
+msgstr "Name"
 
 #: .\backend\main\urls.py:16
-msgid "adminpaneldjango/"
-msgstr ""
+msgid "Apellido"
+msgstr "Last Name"
 
 #: .\frontend\custom_views\custom_admin\404.html:4
 #: .\frontend\custom_views\custom_admin\404.html:8
-msgid "Page not found"
-msgstr ""
+msgid "Correo Electrónico"
+msgstr "Email"
 
 #: .\frontend\custom_views\custom_admin\404.html:10
-msgid "We’re sorry, but the requested page could not be found."
-msgstr ""
+msgid "Fecha de Nacimiento"
+msgstr "Birthdate"
 
 #: .\frontend\custom_views\custom_admin\500.html:6
 #: .\frontend\custom_views\custom_admin\app_index.html:10
@@ -60,16 +60,16 @@ msgid "Home"
 msgstr ""
 
 #: .\frontend\custom_views\custom_admin\500.html:7
-msgid "Server error"
-msgstr ""
+msgid "Nacionalidad"
+msgstr "Nacionality"
 
 #: .\frontend\custom_views\custom_admin\500.html:11
-msgid "Server error (500)"
-msgstr ""
+msgid "Cargo Deseado 1"
+msgstr "Desired position 1"
 
 #: .\frontend\custom_views\custom_admin\500.html:14
-msgid "Server Error <em>(500)</em>"
-msgstr ""
+msgid "Hoja de Vida"
+msgstr "CV"
 
 #: .\frontend\custom_views\custom_admin\500.html:15
 msgid ""
@@ -78,8 +78,8 @@ msgid ""
 msgstr ""
 
 #: .\frontend\custom_views\custom_admin\actions.html:8
-msgid "Run the selected action"
-msgstr ""
+msgid "Identificación/Pasaporte"
+msgstr "ID/Passport"
 
 #: .\frontend\custom_views\custom_admin\actions.html:8
 msgid "Go"

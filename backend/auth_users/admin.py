@@ -1,39 +1,27 @@
-# admin.py
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import User
 from backend.formularios.models import Usuario
 from django.http import HttpResponse
-
 from django.urls import path
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import letter,landscape
-from reportlab.platypus import Table, TableStyle,SimpleDocTemplate
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import Table, TableStyle
 from reportlab.lib import colors
-from django.utils.html import format_html
-from django.urls import reverse
-from reportlab.lib.pagesizes import legal
+from reportlab.platypus import Paragraph
+from django.utils.translation import gettext_lazy as _
+from reportlab.platypus import SimpleDocTemplate
+from reportlab.lib.pagesizes import letter, landscape, legal
 
 
-
-#panel de django
 class UsuarioInfo(admin.ModelAdmin):
-    #muestra los campos en el panel
     list_display = ("nombre", "apellido", "email", "fecha_nacimiento", "nacionalidad", "Telefono1", "Cargo1","cv_file","id_file")
-    # los campos de busqueda
     search_fields = ("nombre", "nacionalidad")
-    #filtro 
     list_filter = ("nombre", "fecha_nacimiento",)
-    #que aparezca la fecha con su jerarquia
     date_hierarchy = "fecha_nacimiento"
 
-    #admin.site.register(MyModel)
-    
     actions = ['download_pdf']
 
-    
-    #descargar la informacion de los usuarios
-    def download_pdf(self, request, queryset):
+    def download_pdf_dropdown(self, request, queryset):
         model_name = self.model.__name__
         response = HttpResponse(content_type='application/pdf')
         response['Content-Disposition'] = f'attachment; filename={model_name}.pdf'
@@ -63,20 +51,42 @@ class UsuarioInfo(admin.ModelAdmin):
         pdf.build(elements)
         return response
 
-    def get_urls(self):
+    def get_urls_dropdown(self):
         urls = super().get_urls()
         return [
-            path('download-pdf/', self.admin_site.admin_view(self.download_pdf), name='app_label_usuario_download_pdf')
+            path('download-pdf-dropdown/', self.admin_site.admin_view(self.download_pdf_dropdown), name='app_label_usuario_download_pdf_dropdown')
         ] + urls
+    
+    def download_pdf(self, request):
+        queryset = self.get_queryset(request)
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename=Usuario.pdf'
 
+        doc = SimpleDocTemplate(response, pagesize=landscape(legal))
+        elements = []
 
+        data = [["nombre", "apellido", "email", "fecha_nacimiento", "nacionalidad", "Telefono1", "Cargo1","cv_file","id_file"]]
+        for usuario in queryset:
+            data.append([usuario.nombre, usuario.apellido,usuario.email,usuario.fecha_nacimiento,usuario.nacionalidad,usuario.Telefono1,usuario.Cargo1,usuario.cv_file,usuario.id_file])
 
+        usuario_table = Table(data)
+        usuario_table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+        ]))
+        elements.append(usuario_table)
 
-# Registramps el modelo de usuario personalizado
+        doc.build(elements)
+        return response
+
+    def get_urls(self):
+        urls = super().get_urls()
+        custom_urls = [
+            path('download-pdf/', self.admin_site.admin_view(self.download_pdf), name='formularios_usuario_download_pdf')
+        ]
+        return custom_urls + urls
+
 admin.site.register(User, UserAdmin)
-admin.site.register(Usuario,UsuarioInfo)
-
-
-
-
+admin.site.register(Usuario, UsuarioInfo)
 

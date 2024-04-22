@@ -12,10 +12,7 @@ urlpatterns = [
     #Formularios
     path('', views.formulario_view,name='ver_formulario'),
     path('formulario_enviado/', views.formulario_view, name='envio_formulario'),
-    path('cerrado/', views.cerrado, name='pagina_cerrado'),
-    path('prueba/', views.prueba_page, name='pagina_prueba'),
     path('obtener_emails/', views.get_emails, name='get_emails'),    
-    path('url_para_traduccion/', views.traducir, name='url_para_traduccion'),
 
     # Login views
     path('home/', views.home,name='home'),

@@ -230,7 +230,7 @@ msgstr "Asistente de cocina"
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:140
 #, python-format
 msgid "Nationality"
-msgstr "Nacionalidad"
+msgstr "nacionalidad"
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:179
 #, python-format
@@ -752,8 +752,8 @@ msgid "Please enter your FIRST NAME with a valid format."
 msgstr "Por favor ingrese su NOMBRE con un formato válido."
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:13
-msgid "mnk"
-msgstr ""
+msgid "Teléfono 1"
+msgstr "Cellphone 1"
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:16
 msgid "This email is already registered"
@@ -792,15 +792,15 @@ msgid "COPYRIGHT © 2024 ARV SYSTEM CORP | ALL RIGHTS RESERVED."
 msgstr "DERECHOS DE AUTOR © 2024 ARV SYSTEM CORP | RESERVADOS TODOS LOS DERECHOS."
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:27
-msgid "March"
-msgstr ""
+msgid "Answers"
+msgstr "Respuestas"
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:28
-msgid "April"
-msgstr ""
+msgid "Go to form"
+msgstr "Ir al formulario"
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:29
-msgid "May"
+msgid "Name"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:30
@@ -1107,8 +1107,8 @@ msgid ""
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\views\csrf.py:66
-msgid "Name"
-msgstr "Nombre"
+msgid "dew"
+msgstr "dw"
 
 #: .\venv\Lib\site-packages\django\views\generic\dates.py:44
 msgid "No year specified"

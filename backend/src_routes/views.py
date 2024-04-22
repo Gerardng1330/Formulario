@@ -63,58 +63,8 @@ from urllib.parse import urlparse
 """ from django import forms
 from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm, AuthenticationForm """
 User = get_user_model()
-#clases y funciones de django por defecto
-
-#cierre
-
-def cerrado(request):
-    return render(request, 'pruebaPagina.html')
-
-def prueba_page(request):
-    return render(request,'pruebaPagina.html')
-
-#Renderizar el formulario.html(prueba)
-def render_formulario(request):
-    return render(request,'formulario.html')
-
-def cambiar_idioma(request):
-    if 'lang' in request.GET:
-        language = request.GET['lang']
-        activate(language)  # Activar el idioma seleccionado
-        return JsonResponse({'success': True})
-    return JsonResponse({'success': False})
 
 #Funcion para traducir las paginas
-def traducir(request):
-    current_path = request.path
-    url_para_traduccion = 'url_para_traduccion'  # Asigna la URL por defecto
-
-    if current_path == '/es/formulario_enviado':
-        print('entro')
-        url_para_traduccion = 'formulario_enviado/'
-    elif current_path == '/en/formulario_enviado':
-        print('entro')
-        url_para_traduccion = 'formulario_enviado/'
-    elif current_path == '/en/url_para_traduccion/':
-        print('entro a la pagina')
-        url_para_traduccion = 'url_para_traduccion'
-    elif current_path == '/es/url_para_traduccion/':
-        print('entro a la pagina')
-        url_para_traduccion = 'formulario_enviado/'
-    else:
-        print(url_para_traduccion)
-        
-
-    return render(request, 'formulario.html', {'url_para_traduccion': url_para_traduccion})
-
-
-def aver(request):
-    aver_var='formulario_enviado'
-    return aver
-
-def confimarcion(request):
-    variable= 'hola'
-    return variable
 
 def verificar_correo(request):
     if request.method == 'POST':
@@ -156,15 +106,6 @@ def formulario_view(request):
 
     # Fetch a la BD. Párrafos de la tabla Politicas
     politicas_table = Politicas.objects.values('parrafo')
-
-    nombre = request.POST.get('nombre')
-    Apellido = request.POST.get('Apellido')
-    print(nombre)  
-
-    datos_formulario = {
-        'nombre': nombre,
-        'Apellido': Apellido,
-    }
 
     # Verifica si 'politicas_aceptadas_cookie' existe
     if 'pltc' in request.COOKIES:
@@ -210,14 +151,7 @@ def formulario_view(request):
             enviado_correctamente = True
         url_para_traduccion = 'formulario_enviado'
     else:
-        print('aqui no es')
-        print(url_para_traduccion)
-        # Si no es una solicitud POST o el formulario no está activo,
         form = UsuarioForm()
-        """ if enviado_correctamente: """
-        #enviado_correctamente = True
-       
-
     return render(request, 'formulario.html', {'form': form,'form_activo':form_activo,'enviado_correctamente':enviado_correctamente, 'politicas_table':politicas_table, 'politicas_aceptadas':politicas_aceptadas, 'politicas_aceptadas_uuid':politicas_aceptadas_uuid, 'is_email_registrado':is_email_registrado, 'url_para_traduccion': url_para_traduccion,'datos_formulario':datos_formulario})
 
 #Primera letra mayúscula a los campos de la bd.
@@ -230,7 +164,8 @@ def normalize_fields(sender, instance, **kwargs):
         if hasattr(instance, field) and getattr(instance, field):
             # Aplica capitalización a cada palabra en el campo
             setattr(instance, field, getattr(instance, field).title())
-
+            
+#----------------------------fin de formulario -----------------------------------------------
 
 
 def formacion(request):
