@@ -11,22 +11,25 @@ from reportlab.platypus import Paragraph
 from django.utils.translation import gettext_lazy as _
 from reportlab.platypus import SimpleDocTemplate
 from reportlab.lib.pagesizes import letter, landscape, legal
+from reportlab.lib.units import inch
 
 
 class UsuarioInfo(admin.ModelAdmin):
-    list_display = ("nombre", "apellido", "email", "fecha_nacimiento", "nacionalidad", "Telefono1", "Cargo1","cv_file","id_file")
+    list_display = [field.name for field in Usuario._meta.get_fields()]
     search_fields = ("nombre", "nacionalidad")
     list_filter = ("nombre", "fecha_nacimiento",)
     date_hierarchy = "fecha_nacimiento"
 
-    actions = ['download_pdf']
+    actions = ['download_pdf_dropdown']
 
     def download_pdf_dropdown(self, request, queryset):
         model_name = self.model.__name__
         response = HttpResponse(content_type='application/pdf')
         response['Content-Disposition'] = f'attachment; filename={model_name}.pdf'
 
-        pdf = SimpleDocTemplate(response, pagesize=landscape(legal))
+        width, height = 40 * inch, 8.5 * inch  # Tamaño carta horizontal (11x8.5 pulgadas)
+        pdf = SimpleDocTemplate(response, pagesize=(width, height))
+        
         elements = []
 
         header = [self.model._meta.get_field(field).verbose_name for field in self.list_display]

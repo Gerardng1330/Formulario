@@ -23,8 +23,8 @@ msgid "Teléfono 1"
 msgstr "Cellphone 1"
 
 #: .\backend\main\settings.py:113
-msgid "Nombre"
-msgstr "Name"
+msgid "de"
+msgstr "e"
 
 #: .\backend\main\urls.py:16
 msgid "Apellido"
